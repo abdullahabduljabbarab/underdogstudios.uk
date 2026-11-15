@@ -21,7 +21,7 @@
 <link rel="icon" type="image/png" href="media/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,800;1,800;1,900&family=Barlow:wght@400;500;600&family=Bungee&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,800;1,800;1,900&family=Barlow:wght@400;500;600&family=Bungee&family=IBM+Plex+Mono:wght@500&family=Permanent+Marker&display=swap">
 <style>
 /* Layout: the game's own world. Night-navy streets, the italic SHADY SHIPPING logotype, the parcel colours from the game (cyan legal, purple illegal, gold hot) and the job-card yellow. A slim studio bar on top links back home. */
 :root {
@@ -304,6 +304,144 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Images cannot be dragged out or right-clicked open */
 img, video { -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
+
+/* Case UDS-26 carries on: the evidence on the Kingpin's actual business */
+.ev-tag { position: absolute; right: clamp(14px, 4vw, 56px); top: clamp(18px, 4vw, 44px); z-index: 3; width: 230px; display: grid; gap: 3px; padding: 26px 16px 14px; background: #E9D3A0; color: #2a2010; transform: rotate(5deg); box-shadow: 6px 8px 0 rgba(0,0,0,.45); clip-path: polygon(14% 0, 86% 0, 100% 12%, 100% 100%, 0 100%, 0 12%); }
+.ev-tag .hole { position: absolute; left: 50%; top: 8px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: #121010; box-shadow: 0 0 0 3px #c9ad74; }
+.ev-tag b { font: 800 22px/1 var(--logo); text-transform: uppercase; letter-spacing: .04em; color: #8E1018; }
+.ev-tag span { font: 500 12px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .1em; }
+.ev-tag em { font: 400 15px/1.2 "Permanent Marker", "Comic Sans MS", cursive; font-style: normal; color: #B11C26; margin-top: 6px; transform: rotate(-3deg); }
+.docket { position: relative; width: min(560px, calc(100% - 32px)); margin: 6px auto 0; padding: 16px 20px 14px; background: #F7F4EC; color: #1d1a16; transform: rotate(-1.5deg); box-shadow: 8px 10px 0 rgba(0,0,0,.45); border-top: 10px solid #B11C26; }
+.docket .dk-top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; border-bottom: 2px solid #1d1a16; padding-bottom: 8px; }
+.docket .dk-top b { font: 900 italic 24px/1 var(--logo); text-transform: uppercase; }
+.docket .dk-top span { font: 500 11px/1.2 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: #6b645a; text-align: right; }
+.docket dl { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 6px 12px; margin: 12px 0; }
+.docket dt { font: 500 11px/1.6 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #6b645a; }
+.docket dd { margin: 0; font: 400 18px/1.3 "Permanent Marker", "Comic Sans MS", cursive; color: #1E3F8F; }
+.docket .dk-foot { display: flex; justify-content: space-between; align-items: end; gap: 12px; border-top: 1px dashed #8a8378; padding-top: 10px; }
+.docket .barcode { width: 190px; height: 40px; background: repeating-linear-gradient(90deg, #1d1a16 0 2px, transparent 2px 4px, #1d1a16 4px 7px, transparent 7px 9px, #1d1a16 9px 10px, transparent 10px 13px); }
+.docket .dk-sig { font: 500 12px/1 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: #6b645a; }
+.docket .dk-sig i { font: 400 26px/1 "Permanent Marker", "Comic Sans MS", cursive; color: #1E5BD6; text-transform: none; margin-left: 4px; }
+.docket .dk-stamp { position: absolute; right: 18px; top: 56px; border: 3px solid #B11C26; color: #B11C26; padding: 5px 9px 3px; font: 800 18px/1 var(--logo); text-transform: uppercase; letter-spacing: .06em; transform: rotate(-12deg); opacity: .8; }
+.spec { padding-bottom: 46px; }
+.side { position: relative; }
+.flyer, .wposter { position: absolute; right: 14px; top: 14px; z-index: 3; width: 210px; display: grid; gap: 5px; padding: 14px 14px 12px; box-shadow: 6px 8px 0 rgba(0,0,0,.5); }
+.flyer { background: #F3D54E; color: #2a2410; transform: rotate(4deg); padding-bottom: 0; }
+.flyer b { font: 900 italic 24px/.95 var(--logo); text-transform: uppercase; }
+.flyer span { font: 600 13px/1.3 var(--body); }
+.flyer .fourth, .wposter .fourth { font: 400 14px/1.2 "Permanent Marker", "Comic Sans MS", cursive; color: #B11C26; transform: rotate(-2deg); margin-top: 2px; }
+.flyer .tabs { display: flex; margin: 6px -14px 0; border-top: 2px dashed rgba(42,36,16,.5); }
+.flyer .tabs i { flex: 1; font: 500 9px/1 var(--mono); font-style: normal; writing-mode: vertical-rl; transform: rotate(180deg); padding: 6px 0; text-align: center; border-left: 1px dashed rgba(42,36,16,.4); height: 54px; }
+.flyer .tabs i:first-child { border-left: 0; }
+.wposter { background: #EADDC0; color: #2a2010; transform: rotate(-4deg); text-align: center; border: 3px solid #2a2010; }
+.wposter b { font: 900 34px/.9 var(--logo); text-transform: uppercase; letter-spacing: .06em; color: #8E1018; }
+.wposter .w-what { font: 800 italic 18px/1 var(--logo); text-transform: uppercase; border-bottom: 2px solid #2a2010; padding-bottom: 5px; margin-bottom: 2px; }
+.wposter span { font: 600 13px/1.3 var(--body); }
+.wposter .w-reward { font: 800 14px/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+.feat .dnote, .dnote { margin: 14px 0 0; max-width: 34ch; font: 400 17px/1.25 "Permanent Marker", "Comic Sans MS", cursive; color: #FF5A63; transform: rotate(-2deg); text-shadow: 0 1px 0 rgba(0,0,0,.5); }
+.feat .dnote.big, .dnote.big { font-size: 26px; color: #F3D54E; margin-top: 18px; }
+.dnote.big + .dnote { margin-top: 4px; }
+.foot .case-open, .case-open { flex-basis: 100%; margin: 10px 0 0; font: 400 15px/1.35 "Permanent Marker", "Comic Sans MS", cursive; color: #FF5A63; }
+@media (max-width: 900px) {
+  .ev-tag { width: 170px; padding: 22px 12px 10px; right: 10px; top: 10px; }
+  .ev-tag b { font-size: 17px; } .ev-tag em { font-size: 13px; }
+  .flyer, .wposter { width: 170px; right: 8px; top: 8px; transform-origin: top right; }
+  .flyer { transform: rotate(4deg) scale(.9); } .wposter { transform: rotate(-4deg) scale(.9); }
+  .docket dl { grid-template-columns: 84px minmax(0, 1fr); }
+  .docket .dk-stamp { top: auto; bottom: 64px; right: 12px; font-size: 14px; }
+  .docket .barcode { width: 130px; }
+}
+
+/* the flyer and the poster hang beside the heading, off the photos */
+.sides .wrap { position: relative; }
+.side-notes { position: absolute; right: 0; top: -22px; display: flex; gap: 26px; align-items: flex-start; }
+.side-notes .flyer, .side-notes .wposter { position: relative; right: auto; top: auto; }
+@media (max-width: 1100px) { .side-notes { position: static; justify-content: center; flex-wrap: wrap; margin-top: 22px; } }
+@media (max-width: 900px) { .side-notes .flyer { transform: rotate(3deg); } .side-notes .wposter { transform: rotate(-3deg); } }
+
+/* ===== Case UDS-26 props, in the game's own neon night style ===== */
+.round, .wanted, .feats, .log, .sides { position: relative; }
+.glow-bg { background: radial-gradient(ellipse at 12% 0%, rgba(255,63,164,.16), transparent 50%), radial-gradient(ellipse at 88% 100%, rgba(58,114,255,.22), transparent 55%), var(--night); }
+
+/* ROUND: the in-game yellow job card, clipped to the board */
+.round { background: radial-gradient(ellipse at 12% 0%, rgba(255,63,164,.16), transparent 50%), radial-gradient(ellipse at 88% 100%, rgba(58,114,255,.22), transparent 55%), var(--night); padding: 70px 0 60px; }
+.round .wrap { position: relative; max-width: 1080px; margin: 0 auto; padding: 46px clamp(18px, 3vw, 44px) 40px; color: #121010; border-radius: 6px; transform: rotate(-.5deg);
+  background: radial-gradient(rgba(18,16,16,.13) 1.1px, transparent 1.5px) 0 0 / 6px 6px, var(--hot);
+  box-shadow: 0 0 0 4px #121010, 10px 12px 0 4px #121010, 0 0 60px rgba(255,194,26,.35); }
+.round .wrap::before { content: ""; position: absolute; left: 50%; top: -26px; width: 190px; height: 48px; margin-left: -95px; border-radius: 10px 10px 6px 6px; background: linear-gradient(#D9DDE2, #8E959C); box-shadow: 0 4px 0 rgba(0,0,0,.35), inset 0 -6px 0 rgba(0,0,0,.15); }
+.round .wrap::after { content: ""; position: absolute; left: 50%; top: -12px; width: 60px; height: 18px; margin-left: -30px; border-radius: 9px; background: #4b5259; }
+.sheet-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 18px; border-bottom: 3px solid #121010; padding-bottom: 10px; margin-bottom: 24px; font: 400 13px/1.3 var(--ui); letter-spacing: .04em; color: #121010; }
+.sheet-head b { font-weight: 400; }
+.sheet-head i { font: 400 15px/1 "Permanent Marker", "Comic Sans MS", cursive; color: #B11C26; }
+.round .kick { color: #121010; }
+.round h2 { color: #121010; } .round h2 i { color: var(--pink); -webkit-text-stroke: 2px #121010; }
+.round .steps { gap: 18px; }
+.round .step { background: #121010; border: 0; border-top: 6px solid var(--c); padding: 20px 18px 22px; color: var(--text); box-shadow: 6px 6px 0 rgba(18,16,16,.35); }
+.round .step::after { content: "\2713"; position: absolute; right: 12px; top: 14px; width: 28px; height: 28px; display: grid; place-items: center; border: 2px solid var(--c); font: 400 20px/1 "Permanent Marker", "Comic Sans MS", cursive; color: var(--c); }
+.round .step + .step::before { left: -16px; top: 40px; border-left-color: #121010; border-left-width: 12px; border-top-width: 9px; border-bottom-width: 9px; }
+.round .step .num { color: var(--c); }
+.round .step h3 { color: #fff; } .round .step p { color: #D9DCE6; }
+.round .cops-win { background: #121010; color: #EEF2FF; border-left: 6px solid var(--legal); }
+.round .cops-win b { color: var(--legal); }
+
+/* WANTED: parcel tags in each cargo colour, on a neon-lit shelf */
+.wanted { background: radial-gradient(ellipse at 80% 0%, rgba(166,91,255,.2), transparent 50%), var(--night); }
+.wanted .tier { position: relative; background: #0F1C4D; border: 2px solid var(--c); border-top: 8px solid var(--c); box-shadow: 0 0 34px -8px var(--c), 8px 10px 0 rgba(0,0,0,.4); }
+.wanted .tier::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 40px; margin-left: -20px; background: var(--c); opacity: .12; pointer-events: none; z-index: 1; }
+.wanted .tier img { width: calc(100% - 32px); margin: 16px 16px 0; border: 6px solid #EEF2FF; position: relative; z-index: 2; transform: rotate(-1.2deg); box-shadow: 4px 5px 0 rgba(0,0,0,.4); }
+.wanted .tier .body { position: relative; z-index: 2; }
+.wanted .tier .name { display: inline-block; justify-self: start; border: 3px solid var(--c); padding: 6px 12px 4px; transform: rotate(-4deg); background: #040817; }
+.wanted .tier .cops { justify-self: start; background: var(--c); color: #040817; padding: 6px 10px; }
+.wanted .tiers { padding-bottom: 0; border-bottom: 6px solid var(--pink); box-shadow: 0 10px 30px -6px rgba(255,63,164,.7); }
+
+/* SIDES: the courier's pink underglow versus the police light bar */
+.sides { background: radial-gradient(ellipse at 20% 100%, rgba(255,63,164,.2), transparent 50%), radial-gradient(ellipse at 80% 100%, rgba(58,114,255,.25), transparent 50%), var(--deep); }
+.sides .side.van { background: #0F1C4D; border: 2px solid var(--pink); box-shadow: 0 22px 50px -12px rgba(255,63,164,.65), 8px 10px 0 rgba(0,0,0,.45); }
+.sides .side.cop { background: #0F1C4D; border: 2px solid var(--legal); border-top: 8px solid; border-image: linear-gradient(90deg, #ff3b3b 0 50%, #3A72FF 50% 100%) 1; box-shadow: 0 22px 50px -12px rgba(58,114,255,.7), 8px 10px 0 rgba(0,0,0,.45); }
+
+/* FEATURES: evidence pinned to a night-time case board */
+.feats { background: linear-gradient(rgba(59,86,173,.14) 1px, transparent 1px) 0 0 / 44px 44px, linear-gradient(90deg, rgba(59,86,173,.14) 1px, transparent 1px) 0 0 / 44px 44px, radial-gradient(ellipse at 50% 0%, rgba(255,63,164,.12), transparent 60%), var(--night); counter-reset: exhibit; }
+.feats .feat { counter-increment: exhibit; }
+.feats .feat .media { border: 10px solid #EEF2FF; border-bottom-width: 36px; box-shadow: 0 0 40px -10px var(--fc), 10px 12px 0 rgba(0,0,0,.45); transform: rotate(-1.5deg); overflow: visible; }
+.feats .feat:nth-of-type(even) .media { transform: rotate(1.5deg); box-shadow: 0 0 40px -10px var(--fc), -10px 12px 0 rgba(0,0,0,.45); }
+.feats .feat .media::before { content: "Exhibit 0" counter(exhibit); position: absolute; left: 0; right: 0; bottom: -29px; z-index: 3; text-align: center; font: 400 15px/1 var(--ui); color: #121010; }
+.feats .feat .media::after { content: ""; inset: auto; left: 50%; top: -16px; width: 22px; height: 22px; margin-left: -11px; border-radius: 50%; z-index: 4; box-shadow: 0 0 12px var(--pink), 2px 4px 0 rgba(0,0,0,.4); background: radial-gradient(circle at 35% 32%, #ffb3d6 0 18%, var(--pink) 50%, #8a0f52 100%); }
+.feats .feat > div:last-child { background: rgba(15,28,77,.92); border-left: 6px solid var(--fc); padding: 24px 24px 20px; box-shadow: 8px 10px 0 rgba(0,0,0,.35); }
+
+/* DEVLOG: a surveillance monitor */
+.log { background: repeating-linear-gradient(0deg, rgba(124,255,155,.03) 0 2px, transparent 2px 4px), radial-gradient(ellipse at 50% 0%, rgba(124,255,155,.08), transparent 60%), #050a14; counter-reset: entry; }
+.log .kick { color: #7CFF9B; }
+.log h2 i { color: #7CFF9B; }
+.log-head { margin: 14px 0 0; font: 500 14px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: #8fd8a3; border-left: 4px solid #7CFF9B; padding-left: 12px; }
+.log .post { counter-increment: entry; background: #0B1424; border: 1px solid rgba(124,255,155,.35); box-shadow: 0 0 26px -12px #7CFF9B, 6px 8px 0 rgba(0,0,0,.5); }
+.log .post:hover { border-color: #7CFF9B; }
+.log .post .pic::after { content: "CAM 0" counter(entry) " \00B7 REC"; position: absolute; left: 8px; top: 8px; font: 500 11px/1 var(--mono); letter-spacing: .12em; color: #7CFF9B; background: rgba(0,0,0,.6); padding: 4px 6px; }
+.log .post .pic::before { content: ""; position: absolute; right: 10px; top: 10px; width: 10px; height: 10px; border-radius: 50%; background: #ff3b3b; z-index: 2; box-shadow: 0 0 8px #ff3b3b; }
+.log .post .date { color: #7CFF9B; }
+.log .post .date::before { content: "Entry " counter(entry) " \00B7 "; color: #8fa39a; }
+.log::before { background: repeating-linear-gradient(-45deg, #7CFF9B 0 18px, #050a14 18px 36px); }
+
+/* THEN AND NOW: the dates as station letterboards */
+.then .compare .tag { font-family: var(--mono); letter-spacing: .14em; text-transform: uppercase; background: #121010; color: #fff; border: 2px solid #fff; padding: 8px 12px; }
+.then .compare .t-now { color: var(--hot); border-color: var(--hot); }
+
+/* WIKI: the dossier, in Shady Shipping blue */
+.wiki { padding: 80px 0; background: radial-gradient(ellipse at 0% 0%, rgba(255,63,164,.25), transparent 50%), var(--blue); }
+.wiki .wrap { position: relative; max-width: 1180px; margin: 0 auto; background: #0B1638; border: 3px solid #121010; border-radius: 0 8px 8px 8px; box-shadow: 10px 12px 0 #121010, 0 0 50px rgba(0,0,0,.25); padding: 52px clamp(18px, 3vw, 44px) 44px; }
+.dossier-tab { position: absolute; left: -3px; top: -36px; height: 36px; padding: 10px 20px 0; border: 3px solid #121010; border-bottom: 0; border-radius: 8px 8px 0 0; background: var(--hot); font: 400 13px/1.2 var(--ui); color: #121010; white-space: nowrap; max-width: calc(100% + 6px); overflow: hidden; text-overflow: ellipsis; }
+.dossier-tab i { font: 400 14px/1 "Permanent Marker", "Comic Sans MS", cursive; color: #B11C26; }
+.wiki .kick { color: var(--hot); }
+.wiki h2 i { color: var(--pink); }
+.wiki .btn { background: var(--hot); border-color: var(--hot); color: #121010; }
+.wiki .chapters a { background: #17286A; border: 2px solid var(--line); border-left: 6px solid var(--hot); }
+.wiki .chapters a:nth-child(3n+2) { border-left-color: var(--legal); } .wiki .chapters a:nth-child(3n) { border-left-color: var(--pink); }
+
+@media (max-width: 900px) {
+  .round, .wiki { padding: 56px 12px 40px; }
+  .round .wrap { transform: none; }
+  .feats .feat .media, .feats .feat:nth-of-type(even) .media { transform: none; }
+  .dossier-tab { font-size: 10px; }
+}
 </style>
 <script>
 // Open at the top unless the link asks for a section: hide the page until it is there, and jump without smooth scrolling
@@ -328,6 +466,7 @@ if (!location.hash) {
   <section class="hero" aria-label="Shady Shipping">
     <img class="still" src="media/hero.jpg" alt="">
     <video src="media/hero.mp4" poster="media/hero.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+    <div class="ev-tag on-scroll pop" aria-label="Case UDS-26, exhibit 12: the operation"><span class="hole" aria-hidden="true"></span><b>Case UDS-26</b><span>Exhibit 12: the operation</span><em>Yes, you&rsquo;re looking at evidence. Don&rsquo;t touch anything.</em></div>
     <div class="wrap">
       <span class="kick">PC · Now in development · Underdog Studios</span>
       <h1>Shady <i>Shipping</i></h1>
@@ -345,11 +484,24 @@ if (!location.hash) {
       <div class="cell on-scroll slam" style="--c: var(--legal)"><b class="big">UE5</b><span class="lab">Unreal Engine 5</span></div>
       <div class="cell on-scroll slam" style="--c: var(--illegal)"><b class="big arc">Arcade</b><span class="lab">Driving, built for chases</span></div>
     </div>
+    <div class="docket on-scroll pop" role="group" aria-label="Parcel docket">
+      <div class="dk-top"><b>Shady Shipping Co.</b><span>Consignment note &middot; No. 000404</span></div>
+      <dl>
+        <dt>From</dt><dd>K. (deceased?)</dd>
+        <dt>To</dt><dd>You. Yes, you, reading this.</dd>
+        <dt>Return to</dt><dd>Somewhere sunny</dd>
+        <dt>Contents</dt><dd>Do not ask</dd>
+        <dt>Handling</dt><dd>No questions asked</dd>
+      </dl>
+      <div class="dk-foot"><span class="barcode" aria-hidden="true"></span><span class="dk-sig">Signed: <i>I.</i></span></div>
+      <span class="dk-stamp" aria-hidden="true">Fragile (egos)</span>
+    </div>
   </section>
 
 
   <section class="round" id="round" aria-label="How a round plays">
     <div class="wrap">
+      <div class="sheet-head" aria-hidden="true"><b>Shady Shipping Co. &middot; Driver job sheet</b><span>Shift: tonight &middot; Driver: <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> <i>(previous driver unavailable)</i></span></div>
       <span class="kick on-scroll pop">For the courier</span>
       <h2 class="on-scroll skid">How a <i>round</i> plays</h2>
       <ol class="steps">
@@ -379,6 +531,7 @@ if (!location.hash) {
     <div class="wrap">
       <span class="kick">Pick a side</span>
       <h2 class="on-scroll skid">Courier <i>or</i> cop</h2>
+      <div class="side-notes"><div class="flyer" role="note" aria-label="Hiring flyer"><b>Now hiring drivers</b><span>No licence? No problem.</span><span>Previous driver no longer available <i>(presumed on holiday)</i>.</span><span class="fourth">Reading this? You might be hired. The wheel in the lobby decides. (It&rsquo;s rigged. Ask I.)</span><span class="tabs" aria-hidden="true"><i>ask for I.</i><i>ask for I.</i><i>ask for I.</i><i>ask for I.</i></span></div><div class="wposter" role="note" aria-label="Wanted poster"><b>Wanted</b><span class="w-what">One courier van</span><span>Last seen: on fire.</span><span>Then seen again: not on fire.</span><span class="w-reward">Reward: our respect</span><span class="fourth">Seen it? Don&rsquo;t call it in. It&rsquo;s literally in our game.</span></div></div>
       <div class="split">
         <div class="side van on-scroll pop">
           <img src="media/garage-van.jpg" alt="The courier van in the chop shop garage">
@@ -416,12 +569,12 @@ if (!location.hash) {
 
       <div class="feat">
         <div class="media on-scroll pop"><img src="media/ss-damage.jpg" alt="A battered van smoking from the bonnet, covered in soot and scrapes"></div>
-        <div><span class="n">02</span><h3>Crash it, dent it, wreck it</h3><p>Every car is a real physics car, and the bodywork crumples where you hit it. Dents land exactly where the impact was, so no two wrecks look the same.</p><ul><li>Real-time dents on the body and bumpers</li><li>Bumpers hang off, then fall off</li><li>Smoke turns black, then the engine catches fire</li><li>Every screen sees the same damage online</li></ul></div>
+        <div><span class="n">02</span><h3>Crash it, dent it, wreck it</h3><p>Every car is a real physics car, and the bodywork crumples where you hit it. Dents land exactly where the impact was, so no two wrecks look the same.</p><ul><li>Real-time dents on the body and bumpers</li><li>Bumpers hang off, then fall off</li><li>Smoke turns black, then the engine catches fire</li><li>Every screen sees the same damage online</li></ul><p class="dnote">Same fire as the Kingpin&rsquo;s van. The devs insist this is a coincidence.</p></div>
       </div>
 
       <div class="feat">
         <div class="media on-scroll pop"><img src="media/ss-dropin.jpg" alt="Picking a drop zone from above"></div>
-        <div><span class="n">03</span><h3>The drop-in</h3><p>Get caught and a Shady Shipping cargo flyer lifts your van out. Pick one of three drop zones from the sky and land fresh with a new job.</p><ul><li>Zones away from the cops and exits</li><li>The police get a warning just before you land</li></ul></div>
+        <div><span class="n">03</span><h3>The drop-in</h3><p>Get caught and a Shady Shipping cargo flyer lifts your van out. Pick one of three drop zones from the sky and land fresh with a new job.</p><ul><li>Zones away from the cops and exits</li><li>The police get a warning just before you land</li></ul><p class="dnote big">So THAT&rsquo;S how he got out.</p><p class="dnote">&hellip;hang on. Did the devs just put the escape plan on their own website?</p></div>
       </div>
 
       <div class="feat">
@@ -431,7 +584,7 @@ if (!location.hash) {
 
       <div class="feat">
         <div class="media on-scroll pop"><img src="media/ss-liveries.jpg" alt="Liveries for the van and the police car"></div>
-        <div><span class="n">05</span><h3>Make it yours</h3><p>Two team garages: the courier's chop shop and the police fleet bay. Paint every part, fit body kits and pick a livery.</p><ul><li>Over a hundred items</li><li>Buy once, keep for good</li><li>Looks only. Money never buys a win.</li></ul></div>
+        <div><span class="n">05</span><h3>Make it yours</h3><p>Two team garages: the courier's chop shop and the police fleet bay. Paint every part, fit body kits and pick a livery.</p><ul><li>Over a hundred items</li><li>Buy once, keep for good</li><li>Looks only. Money never buys a win.</li></ul><p class="dnote">Unlike the Kingpin&rsquo;s lawyers.</p></div>
       </div>
     </div>
   </section>
@@ -440,6 +593,7 @@ if (!location.hash) {
     <div class="wrap">
       <span class="kick">Devlog</span>
       <h2 class="on-scroll skid">From the <i>build</i></h2>
+      <p class="log-head">Surveillance log &middot; Subject: the build &middot; Officer on duty: still awake, somehow</p>
       <div class="posts">
         <article class="post on-scroll pop"><div class="pic"><img src="media/busted.jpg" alt=""></div><div class="body"><span class="date">10 Nov 2026</span><h3>Arrests and three strikes</h3><p>Playtesters said the police gained nothing when the van stopped, so we gave them a way to box it in.</p></div></article>
         <article class="post on-scroll pop"><div class="pic"><img src="media/ss-smoke2.jpg" alt=""></div><div class="body"><span class="date">9 Nov 2026</span><h3>Drone, EMP and ability feel</h3><p>New police tools, plus shakes and rumble so every ability lands with a thump.</p></div></article>
@@ -476,7 +630,8 @@ if (!location.hash) {
   <section class="wiki" id="wiki" aria-label="Design wiki">
     <div class="wrap">
       <div>
-        <span class="kick" style="color:#fff">Go deeper</span>
+        <span class="dossier-tab" aria-hidden="true">Dossier &middot; Shady Shipping &middot; Do not read <i>(too late)</i></span>
+        <span class="kick">Go deeper</span>
         <h2>The design <i>wiki</i></h2>
         <p>Every system, every ability, the city and the research behind it, with the numbers straight from our tuning sheet.</p>
         <a class="btn" href="wiki/index.html">Open the wiki</a>
@@ -491,6 +646,7 @@ if (!location.hash) {
     <a href="index.html">← Back to Underdog Studios</a>
     <a href="presskit.html">Press kit</a>
     <small>Shady Shipping · In development · © 2026 Underdog Studios</small>
+    <p class="case-open">Case UDS-26: still open. You scrolled all the way down here, which legally makes you a witness. Assessors: please mark the game, not the crime.</p>
   </div>
 </footer>
 
