@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shady Shipping</title>
+<meta name="description" content="Shady Shipping: an online driving game where one player runs dodgy parcels and everyone else is the police. By Underdog Studios.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://underdogstudios.uk/shadyshipping.html">
+<meta property="og:title" content="Shady Shipping">
+<meta property="og:description" content="One van. Up to four cops. The dodgier the parcel, the more they know. An online driving game by Underdog Studios.">
+<meta property="og:image" content="https://underdogstudios.uk/media/og-ss.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="media/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,800;1,800;1,900&family=Barlow:wght@400;500;600&family=Bungee&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: the game's own world. Night-navy streets, the italic SHADY SHIPPING logotype, the parcel colours from the game (cyan legal, purple illegal, gold hot) and the job-card yellow. A slim studio bar on top links back home. */
+:root {
+  --night: #0B1638;      /* the city at night */
+  --deep: #040817;       /* deeper bands */
+  --panel: #17286A;      /* raised cards */
+  --line: #3B56AD;       /* borders */
+  --text: #EEF2FF;
+  --mute: #B6C1E6;
+  --blue: #3A72FF;       /* SHADY SHIPPING blue */
+  --pink: #FF3FA4;       /* underglow and the arrest ring */
+  --legal: #36D6FF;      /* legal parcel */
+  --illegal: #A65BFF;    /* illegal parcel */
+  --hot: #FFC21A;        /* hot parcel, job-card yellow */
+  --stock: #ECE6D8;      /* the studio's paper, for the top bar */
+  --ink: #121010;
+  --logo: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow", "Segoe UI", Arial, sans-serif;
+  --ui: "Bungee", Impact, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--night); color: var(--text); font: 400 18px/1.6 var(--body); cursor: crosshair; }
+a, button { cursor: pointer; }
+img, video { max-width: 100%; display: block; }
+img, video, figure { cursor: default; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h2 { font: 900 italic clamp(52px, 7vw, 100px)/.86 var(--logo); text-transform: uppercase; }
+h2 i { color: var(--blue); font-style: italic; }
+.kick { display: block; font: 400 15px/1 var(--ui); letter-spacing: .04em; color: var(--hot); margin-bottom: 16px; }
+:focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+
+/* Studio bar */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--stock); }
+.studio { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--stock); color: var(--ink); border-bottom: 4px solid var(--ink); }
+.studio .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 10px; }
+.studio a.home { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 800 18px/1 "Barlow Condensed", sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.studio a.home img { width: 34px; height: 34px; border-radius: 8px; }
+.studio nav { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; }
+.studio nav a { font: 800 17px/1 "Barlow Condensed", sans-serif; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; white-space: nowrap; padding: 4px 0; border-bottom: 3px solid transparent; }
+.studio nav a:hover { border-color: #B11C26; color: #B11C26; }
+@media (max-width: 760px) { .studio .wrap { flex-wrap: wrap; row-gap: 6px; } .studio nav { width: 100%; } }
+
+/* Hero */
+.hero { position: relative; min-height: clamp(560px, 82vh, 860px); display: flex; align-items: end; overflow: hidden; }
+.hero video, .hero .still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--night) 0%, rgba(11,22,56,.55) 40%, rgba(11,22,56,.12) 75%, rgba(11,22,56,.55) 100%), linear-gradient(90deg, rgba(4,8,23,.85), transparent 65%); }
+.hero .wrap { position: relative; z-index: 2; width: 100%; padding-block: 64px 56px; }
+.hero h1 { font: 900 italic clamp(80px, 13vw, 190px)/.82 var(--logo); text-transform: uppercase; letter-spacing: -.01em; }
+.hero h1 i { color: var(--blue); }
+.hero .tag { font: 500 clamp(22px, 2.6vw, 32px)/1.25 var(--logo); max-width: 30ch; color: #D9DCE6; margin: 18px 0 26px; }
+.hero .tag b { color: var(--hot); font-weight: 800; }
+.acts { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { font: 600 15px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; padding: 15px 22px; border: 2px solid rgba(238,242,255,.6); color: #fff; background: transparent; display: inline-flex; align-items: center; gap: 10px; transition: transform .12s ease, background .15s ease; }
+.btn.go { background: var(--pink); border-color: var(--pink); }
+.btn.go::before { content: ""; border-left: 11px solid #fff; border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+.btn:hover { transform: translate(-2px, -2px); }
+.btn:active { transform: translate(2px, 2px); }
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.facts span { font: 500 13px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; padding: 8px 10px; border: 1px solid var(--line); background: rgba(4,8,23,.65); color: var(--mute); }
+
+/* Wanted level */
+.wanted .wrap { padding-block: 96px; }
+.wanted .lede { max-width: 56ch; color: var(--mute); margin: 18px 0 0; font-size: 19px; }
+.tiers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 44px; }
+@media (max-width: 860px) { .tiers { grid-template-columns: 1fr; } }
+.tier { background: var(--panel); border: 1px solid var(--line); border-top: 6px solid var(--c); display: flex; flex-direction: column; }
+.tier img { aspect-ratio: 16 / 9; object-fit: cover; width: 100%; }
+.tier .body { padding: 20px 20px 24px; display: grid; gap: 10px; }
+.tier .name { font: 400 26px/1 var(--ui); color: var(--c); }
+.tier .pay { font: 500 13px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.tier p { margin: 0; color: #D9DCE6; }
+.tier .cops { font: 800 19px/1.2 var(--logo); text-transform: uppercase; letter-spacing: .04em; }
+
+/* Pick a side */
+.sides { background: var(--deep); border-block: 1px solid var(--line); }
+.sides .wrap { padding-block: 96px; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 44px; }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+.side { background: var(--panel); border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; }
+.side img { aspect-ratio: 16 / 9; object-fit: cover; width: 100%; }
+.side .body { padding: 24px 24px 28px; display: grid; gap: 14px; }
+.side h3 { font: 900 italic 54px/.9 var(--logo); text-transform: uppercase; }
+.side.van h3 { color: var(--hot); } .side.cop h3 { color: var(--legal); }
+.side .goal { font: 600 18px/1.4 var(--body); }
+.side .win { font: 500 14px/1.5 var(--mono); color: var(--mute); }
+.side .win b { color: var(--text); font-weight: 500; }
+.abil { display: flex; flex-wrap: wrap; gap: 8px; }
+.abil span { font: 400 14px/1 var(--ui); padding: 9px 11px 8px; border: 2px solid currentColor; }
+.side.van .abil span { color: var(--hot); } .side.cop .abil span { color: var(--legal); }
+.abil span.soon { opacity: .45; border-style: dashed; }
+.side small { color: var(--mute); font: 500 13px/1.4 var(--mono); }
+
+/* Features */
+.feats .wrap { padding-block: 96px; }
+.feat { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 40px; align-items: center; margin-top: 64px; }
+.feat:nth-of-type(even) .media { order: 2; }
+@media (max-width: 900px) { .feat { grid-template-columns: 1fr; gap: 20px; } .feat:nth-of-type(even) .media { order: 0; } }
+.feat .media { position: relative; border: 1px solid var(--line); overflow: hidden; aspect-ratio: 16 / 9; background: #000; }
+.feat .media img, .feat .media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.feat h3 { font: 900 italic clamp(40px, 4.4vw, 62px)/.9 var(--logo); text-transform: uppercase; }
+.feat .n { font: 400 15px/1 var(--ui); color: var(--pink); }
+.feat p { margin: 14px 0 0; color: #D9DCE6; max-width: 46ch; }
+.feat ul { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.feat li { padding-left: 22px; position: relative; color: var(--mute); }
+.feat li::before { content: ""; position: absolute; left: 0; top: .6em; width: 10px; height: 10px; background: var(--pink); transform: rotate(45deg); }
+
+/* Devlog */
+.log { background: var(--deep); border-top: 1px solid var(--line); }
+.log .wrap { padding-block: 96px; }
+.posts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 44px; }
+@media (max-width: 900px) { .posts { grid-template-columns: 1fr; } }
+.post { background: var(--panel); border: 1px solid var(--line); display: flex; flex-direction: column; transition: transform .18s ease, border-color .18s ease; }
+.post:hover { transform: translateY(-4px); border-color: var(--blue); }
+.post .pic { aspect-ratio: 16 / 9; overflow: hidden; position: relative; background: #000; }
+.post .pic img, .post .pic video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.post .body { padding: 18px 18px 22px; display: grid; gap: 8px; }
+.post .date { font: 500 13px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--hot); }
+.post h3 { font: 800 italic 30px/.95 var(--logo); text-transform: uppercase; }
+.post p { margin: 0; color: var(--mute); font-size: 16px; }
+
+/* Wiki */
+.wiki { background: var(--blue); color: #fff; }
+.wiki .wrap { padding-block: 88px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+@media (max-width: 900px) { .wiki .wrap { grid-template-columns: 1fr; } }
+.wiki h2 i { color: var(--hot); }
+.wiki p { margin: 16px 0 26px; font-size: 19px; max-width: 44ch; color: #E4EAFF; }
+.wiki .btn { border-color: #fff; background: #fff; color: var(--blue); font-weight: 700; }
+.chapters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.chapters a { font: 400 16px/1.1 var(--ui); color: #fff; text-decoration: none; background: rgba(6,12,34,.35); border: 2px solid rgba(255,255,255,.35); padding: 14px 14px 12px; transition: transform .12s ease, border-color .12s ease; }
+.chapters a:hover { transform: translate(-2px, -2px); border-color: #fff; }
+
+
+/* Separation: dark bands between navy ones, a hazard stripe at each band edge, brighter cards */
+.sides, .log { background: var(--deep); }
+.sides::before, .log::before, .feats::before { content: ""; display: block; height: 10px; background: repeating-linear-gradient(-45deg, var(--hot) 0 18px, var(--deep) 18px 36px); }
+.feats { background: var(--night); }
+.tier, .side, .post { box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+.sides .side, .log .post { background: #0F1C4D; }
+.tier { background: var(--panel); }
+
+
+/* Feature images: a framed shot on a coloured backdrop, each feature in its own colour */
+.feat { --fc: var(--pink); }
+.feat:nth-of-type(2) { --fc: var(--legal); }
+.feat:nth-of-type(3) { --fc: var(--illegal); }
+.feat:nth-of-type(4) { --fc: var(--hot); }
+.feat .media { border: 4px solid #EEF2FF; box-shadow: 14px 14px 0 var(--fc), 14px 14px 0 4px var(--deep); overflow: hidden; }
+.feat:nth-of-type(even) .media { box-shadow: -14px 14px 0 var(--fc), -14px 14px 0 4px var(--deep); }
+.feat .n { color: var(--fc); }
+.feat li::before { background: var(--fc); }
+.feat .media::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px rgba(0,0,0,.35); pointer-events: none; }
+
+
+.feat:nth-of-type(5) { --fc: var(--pink); }
+.shotsoon { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; font: 400 18px/1.3 var(--ui); color: var(--mute); background: repeating-linear-gradient(-45deg, #0F1C4D 0 16px, #0B1638 16px 32px); }
+
+/* Footer */
+.foot { background: var(--stock); color: var(--ink); border-top: 4px solid var(--ink); }
+.foot .wrap { padding-block: 28px 40px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.foot a { font: 800 18px/1 "Barlow Condensed", sans-serif; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; }
+.foot small { font: 500 13px/1.6 var(--mono); color: #6B645A; letter-spacing: .08em; }
+
+/* Milestone video */
+.tv { position: fixed; inset: 0; z-index: 60; background: rgba(3,6,18,.94); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.tv[hidden] { display: none; }
+.tv .box { width: min(1100px, 100%); }
+.tv .bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font: 900 italic 30px/1 var(--logo); text-transform: uppercase; }
+.tv video { width: 100%; aspect-ratio: 16 / 9; background: #000; border: 3px solid var(--blue); }
+.tv button { font: 400 15px/1 var(--ui); background: var(--hot); color: var(--ink); border: 0; padding: 10px 12px 8px; }
+
+/* Stamps and motion */
+.inklayer { position: absolute; left: 0; top: 0; width: 100%; height: 0; overflow: visible; pointer-events: none; z-index: 15; }
+.ink { position: absolute; transform: translate(-50%, -50%) rotate(var(--r)); font: 400 22px/1 var(--ui); color: var(--c); border: 3px solid var(--c); padding: 7px 10px 5px; white-space: nowrap; animation: thud .32s cubic-bezier(.2,.9,.3,1.3) backwards; }
+@keyframes thud { 0% { transform: translate(-50%, -50%) rotate(var(--r)) scale(2.2); opacity: 0; } 70% { transform: translate(-50%, -50%) rotate(var(--r)) scale(.95); opacity: 1; } 100% { transform: translate(-50%, -50%) rotate(var(--r)); } }
+@keyframes skid { 0% { transform: translateX(-60%) skewX(-16deg); opacity: 0; } 70% { transform: translateX(2%) skewX(5deg); opacity: 1; } 100% { transform: none; opacity: 1; } }
+@keyframes pop { 0% { transform: translateY(30px) scale(.95); opacity: 0; } 100% { transform: none; opacity: 1; } }
+.js .on-scroll:not(.seen) { opacity: 0; }
+.seen.skid { animation: skid .65s cubic-bezier(.2,.8,.2,1) backwards; }
+.seen.pop { animation: pop .5s cubic-bezier(.2,.9,.3,1.1) backwards; }
+.hero h1 { animation: skid .8s cubic-bezier(.2,.8,.2,1) .1s backwards; }
+
+/* At a glance: the four headline facts as a big band under the hero */
+.spec { position: relative; background: var(--deep); border-bottom: 1px solid var(--line); }
+.spec::before { content: ""; display: block; height: 10px; background: repeating-linear-gradient(-45deg, var(--hot) 0 18px, var(--deep) 18px 36px); }
+.spec .wrap { display: grid; grid-template-columns: 1fr 1.6fr 1fr 1.15fr; gap: 0; padding-block: 40px 44px; }
+.spec .cell { display: grid; align-content: center; gap: 12px; padding: 8px 26px; border-left: 2px solid var(--line); }
+.spec .cell:first-child { border-left: 0; padding-left: 0; }
+.spec .big { font: 400 clamp(54px, 6vw, 88px)/.9 var(--ui); color: var(--c); }
+.spec .big span { color: var(--text); margin: 0 .04em; }
+.spec .big.arc { font-size: clamp(36px, 3.8vw, 56px); line-height: 1.1; }
+.spec .lab { font: 800 clamp(18px, 1.7vw, 23px)/1.1 var(--logo); letter-spacing: .06em; text-transform: uppercase; color: var(--text); }
+.spec .lineup { display: flex; align-items: center; gap: 12px; min-height: clamp(54px, 6vw, 80px); }
+.spec .lineup .v { font: 400 clamp(26px, 2.6vw, 36px)/1 var(--ui); color: var(--pink); }
+.spec .lineup .cops { display: flex; gap: 6px; }
+.veh { width: clamp(48px, 4.6vw, 70px); height: auto; overflow: visible; }
+.veh path, .veh rect { fill: currentColor; }
+.veh .win { fill: var(--deep); opacity: .55; }
+.veh circle { fill: #0A0F22; stroke: currentColor; stroke-width: 2.5; }
+.veh.van { color: var(--hot); }
+.veh.cop { color: var(--legal); }
+.veh.cop .bar { fill: var(--pink); }
+.spec .cops .veh { width: clamp(34px, 3.2vw, 50px); }
+@media (max-width: 980px) {
+  .spec .wrap { grid-template-columns: 1fr 1fr; row-gap: 28px; }
+  .spec .cell { border-left: 0; padding: 0 12px 0 0; }
+  .spec .vs { grid-column: 1 / -1; order: -1; }
+  .spec .cell:last-child { grid-column: 1 / -1; }
+}
+/* A van chased by a cop along the hazard stripe, once, when the band comes into view */
+.spec .road { position: absolute; left: 0; right: 0; top: -22px; height: 30px; overflow: hidden; pointer-events: none; }
+.spec .road .veh { width: 54px; position: absolute; bottom: 0; }
+.spec .road .runner, .spec .road .chaser { position: absolute; bottom: 0; left: 0; transform: translateX(-120px); }
+.spec.go .road .runner { animation: drive 2.6s cubic-bezier(.45,.05,.55,.95) .3s forwards; }
+.spec.go .road .chaser { animation: drive 2.6s cubic-bezier(.45,.05,.55,.95) .65s forwards; }
+@keyframes drive { 0% { transform: translateX(-120px); } 100% { transform: translateX(calc(100vw + 120px)); } }
+
+/* Hero entrance and chunky hovers */
+.hero .kick { animation: pop .45s cubic-bezier(.2,.9,.3,1.2) .05s backwards; }
+.hero .tag { animation: pop .5s cubic-bezier(.2,.9,.3,1.2) .55s backwards; }
+.hero .acts { animation: pop .5s cubic-bezier(.2,.9,.3,1.2) .75s backwards; }
+@keyframes slam { 0% { transform: scale(1.5) rotate(-3deg); opacity: 0; } 65% { transform: scale(.94) rotate(1deg); opacity: 1; } 100% { transform: none; opacity: 1; } }
+.seen.slam { animation: slam .42s cubic-bezier(.2,.9,.3,1.3) backwards; }
+.seen.slam .cops .veh { animation: pop .3s cubic-bezier(.2,.9,.3,1.4) backwards; }
+.seen.slam .cops .veh:nth-child(1) { animation-delay: .55s; } .seen.slam .cops .veh:nth-child(2) { animation-delay: .7s; }
+.seen.slam .cops .veh:nth-child(3) { animation-delay: .85s; } .seen.slam .cops .veh:nth-child(4) { animation-delay: 1s; }
+.tier, .side, .post, .step { transition: transform .15s ease, box-shadow .15s ease; }
+.tier:hover, .side:hover, .post:hover, .step:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--c, var(--blue)); }
+.side.van { --c: var(--hot); } .side.cop { --c: var(--legal); } .post { --c: var(--pink); }
+.feat .media img, .feat .media video { transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.feat .media:hover img, .feat .media:hover video { transform: scale(1.05); }
+
+/* Plain what-it-is line and the round steps */
+.hero .what { font: 600 clamp(18px, 1.7vw, 22px)/1.4 var(--body); color: var(--text); max-width: 44ch; margin: 18px 0 0; animation: pop .5s cubic-bezier(.2,.9,.3,1.2) .4s backwards; }
+.hero .what + .tag { margin-top: 10px; }
+.round .wrap { padding-block: 80px 72px; }
+.steps { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 34px; counter-reset: none; }
+.step { position: relative; background: var(--panel); border: 1px solid var(--line); border-top: 6px solid var(--c); padding: 22px 20px 24px; }
+.step + .step::before { content: ""; position: absolute; left: -27px; top: 44px; border-left: 18px solid var(--hot); border-top: 13px solid transparent; border-bottom: 13px solid transparent; }
+.step .num { display: block; font: 400 64px/.9 var(--ui); color: var(--c); }
+.step h3 { font: 900 italic 34px/.95 var(--logo); text-transform: uppercase; margin: 12px 0 8px; }
+.step p { margin: 0; color: #D9DCE6; }
+.cops-win { margin: 30px 0 0; padding: 16px 20px; border-left: 6px solid var(--legal); background: rgba(54,214,255,.08); font-size: 19px; max-width: 70ch; }
+.cops-win b { color: var(--legal); font: 400 17px/1 var(--ui); margin-right: 6px; }
+.wanted { border-top: 1px solid var(--line); }
+@media (max-width: 980px) {
+  .steps { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .step + .step::before { display: none; }
+}
+@media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+
+/* Then and now */
+.then { background: var(--night); }
+.then::before { content: ""; display: block; height: 10px; background: repeating-linear-gradient(-45deg, var(--hot) 0 18px, var(--deep) 18px 36px); }
+.then .wrap { padding-block: 96px; }
+.then .lede { max-width: 56ch; color: var(--mute); margin: 18px 0 0; font-size: 19px; }
+.compare { position: relative; margin-top: 36px; aspect-ratio: 16 / 9; overflow: hidden; border: 3px solid var(--hot); box-shadow: 12px 12px 0 var(--deep); background: #000; touch-action: pan-y; user-select: none; }
+.compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.compare img.im-then { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.compare .tag { position: absolute; top: 14px; font: 400 clamp(12px, 1.4vw, 16px)/1 var(--ui); padding: 9px 11px 8px; z-index: 3; pointer-events: none; }
+.compare .t-then { left: 14px; background: var(--deep); color: var(--mute); border: 2px solid var(--mute); }
+.compare .t-now { right: 14px; background: var(--hot); color: var(--deep); }
+.compare .bar { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 4px; margin-left: -2px; background: var(--hot); z-index: 2; pointer-events: none; }
+.compare .knob { position: absolute; top: 50%; left: 50%; width: 54px; height: 54px; margin: -27px 0 0 -27px; border-radius: 50%; background: var(--hot); box-shadow: 0 0 0 4px var(--deep), 6px 6px 0 var(--deep); transition: transform .15s cubic-bezier(.2,.9,.3,1.4); }
+.compare .knob::before, .compare .knob::after { content: ""; position: absolute; top: 50%; margin-top: -8px; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+.compare .knob::before { left: 10px; border-right: 11px solid var(--deep); }
+.compare .knob::after { right: 10px; border-left: 11px solid var(--deep); }
+.compare:hover .knob, .compare.drag .knob { transform: scale(1.12); }
+.compare input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; z-index: 4; }
+.compare input:focus-visible + .bar, .compare:focus-within .knob { outline: 3px solid #fff; outline-offset: 3px; }
+.diffs { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.diffs li { background: #0F1C4D; border: 1px solid var(--line); border-top: 5px solid var(--hot); padding: 16px 16px 18px; color: #D9DCE6; }
+.diffs b { display: block; font: 400 15px/1 var(--ui); color: var(--hot); margin-bottom: 8px; }
+@media (max-width: 900px) { .diffs { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .diffs { grid-template-columns: 1fr; } .compare .knob { width: 44px; height: 44px; margin: -22px 0 0 -22px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .js .on-scroll:not(.seen) { opacity: 1; } .spec .road { display: none; } html { scroll-behavior: auto; } }
+</style>
+<script>
+// Open at the top unless the link asks for a section: hide the page until it is there, and jump without smooth scrolling
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+if (!location.hash) {
+  var de = document.documentElement; de.style.visibility = 'hidden';
+  var top0 = function () { de.style.scrollBehavior = 'auto'; window.scrollTo(0, 0); de.style.scrollBehavior = ''; de.style.visibility = ''; };
+  document.addEventListener('DOMContentLoaded', top0);
+  setTimeout(function () { de.style.visibility = ''; }, 1500);
+}
+</script>
+</head>
+<body>
+<header class="studio">
+  <div class="wrap">
+    <a class="home" href="index.html"><img src="media/logo-small.webp" alt="">Underdog Studios</a>
+    <nav aria-label="Shady Shipping"><a href="#wanted">The game</a><a href="#sides">Pick a side</a><a href="#features">Features</a><a href="#devlog">Devlog</a><a href="wiki/index.html">Design wiki</a></nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-label="Shady Shipping">
+    <img class="still" src="media/hero.jpg" alt="">
+    <video src="media/hero.mp4" poster="media/hero.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+    <div class="wrap">
+      <span class="kick">PC · Now in development · Underdog Studios</span>
+      <h1>Shady <i>Shipping</i></h1>
+      <p class="what">An online driving game. One player runs dodgy parcels, everyone else is the police.</p>
+      <p class="tag">One van. Up to four cops. <b>The dodgier the parcel, the more they know.</b></p>
+      <div class="acts"><button class="btn go" type="button" id="play">Watch Milestone 1</button><a class="btn" href="wiki/index.html">Read the design wiki</a></div>
+    </div>
+  </section>
+
+  <section class="spec" aria-label="The game at a glance">
+    <div class="road" aria-hidden="true"><span class="runner"><svg class="veh van" viewBox="0 0 64 36" aria-hidden="true"><path d="M3 6h36l11 9h9a2 2 0 0 1 2 2v10H3z"/><path class="win" d="M40 9l7 6h-7z"/><circle cx="16" cy="28" r="5.5"/><circle cx="48" cy="28" r="5.5"/></svg></span><span class="chaser"><svg class="veh cop" viewBox="0 0 64 36" aria-hidden="true"><rect class="bar" x="27" y="3" width="12" height="4" rx="1"/><path d="M3 19l9-10h30l10 10h7a2 2 0 0 1 2 2v6H3z"/><path class="win" d="M15 11h11v7H9zM29 11h12l7 7H29z"/><circle cx="16" cy="28" r="5.5"/><circle cx="48" cy="28" r="5.5"/></svg></span></div>
+    <div class="wrap">
+      <div class="cell on-scroll slam" style="--c: var(--hot)"><b class="big">2<span>–</span>5</b><span class="lab">Players online</span></div>
+      <div class="cell vs on-scroll slam" style="--c: var(--pink)"><div class="lineup"><svg class="veh van" viewBox="0 0 64 36" aria-hidden="true"><path d="M3 6h36l11 9h9a2 2 0 0 1 2 2v10H3z"/><path class="win" d="M40 9l7 6h-7z"/><circle cx="16" cy="28" r="5.5"/><circle cx="48" cy="28" r="5.5"/></svg><b class="v">VS</b><span class="cops"><svg class="veh cop" viewBox="0 0 64 36" aria-hidden="true"><rect class="bar" x="27" y="3" width="12" height="4" rx="1"/><path d="M3 19l9-10h30l10 10h7a2 2 0 0 1 2 2v6H3z"/><path class="win" d="M15 11h11v7H9zM29 11h12l7 7H29z"/><circle cx="16" cy="28" r="5.5"/><circle cx="48" cy="28" r="5.5"/></svg><svg class="veh cop" viewBox="0 0 64 36" aria-hidden="true"><rect class="bar" x="27" y="3" width="12" height="4" rx="1"/><path d="M3 19l9-10h30l10 10h7a2 2 0 0 1 2 2v6H3z"/><path class="win" d="M15 11h11v7H9zM29 11h12l7 7H29z"/><circle cx="16" cy="28" r="5.5"/><circle cx="48" cy="28" r="5.5"/></svg><svg class="veh cop" viewBox="0 0 64 36" aria-hidden="true"><rect class="bar" x="27" y="3" width="12" height="4" rx="1"/><path d="M3 19l9-10h30l10 10h7a2 2 0 0 1 2 2v6H3z"/><path class="win" d="M15 11h11v7H9zM29 11h12l7 7H29z"/><circle cx="16" cy="28" r="5.5"/><circle cx="48" cy="28" r="5.5"/></svg><svg class="veh cop" viewBox="0 0 64 36" aria-hidden="true"><rect class="bar" x="27" y="3" width="12" height="4" rx="1"/><path d="M3 19l9-10h30l10 10h7a2 2 0 0 1 2 2v6H3z"/><path class="win" d="M15 11h11v7H9zM29 11h12l7 7H29z"/><circle cx="16" cy="28" r="5.5"/><circle cx="48" cy="28" r="5.5"/></svg></span></div><span class="lab">1 courier vs 1 to 4 cops</span></div>
+      <div class="cell on-scroll slam" style="--c: var(--legal)"><b class="big">UE5</b><span class="lab">Unreal Engine 5</span></div>
+      <div class="cell on-scroll slam" style="--c: var(--illegal)"><b class="big arc">Arcade</b><span class="lab">Driving, built for chases</span></div>
+    </div>
+  </section>
+
+
+  <section class="round" id="round" aria-label="How a round plays">
+    <div class="wrap">
+      <span class="kick on-scroll pop">For the courier</span>
+      <h2 class="on-scroll skid">How a <i>round</i> plays</h2>
+      <ol class="steps">
+        <li class="step on-scroll slam" style="--c: var(--legal)"><b class="num">1</b><h3>Grab a job</h3><p>Pull into a glowing bay and load a parcel. Legal, illegal or hot: you choose the risk.</p></li>
+        <li class="step on-scroll slam" style="--c: var(--hot)"><b class="num">2</b><h3>Deliver for stars</h3><p>Every drop pays. Enough deliveries earn you a star.</p></li>
+        <li class="step on-scroll slam" style="--c: var(--illegal)"><b class="num">3</b><h3>Exits open</h3><p>Your first star opens two exits at random. Both sides see them on the radar.</p></li>
+        <li class="step on-scroll slam" style="--c: var(--pink)"><b class="num">4</b><h3>Smash out</h3><p>Hit an open exit's barrier at speed to win. More stars, bigger bonus.</p></li>
+      </ol>
+      <p class="cops-win on-scroll pop"><b>The police:</b> arrest the van or wreck it and that's a strike. Three strikes and the police win.</p>
+    </div>
+  </section>
+
+  <section class="wanted" id="wanted" aria-label="Your cargo is your wanted level">
+    <div class="wrap">
+      <span class="kick">The big idea</span>
+      <h2 class="on-scroll skid">Your cargo is your <i>wanted level</i></h2>
+      <p class="lede">One player drives a dodgy courier van and delivers parcels across the city. Everyone else is the police. What you carry decides what the cops are told about where you are.</p>
+      <div class="tiers">
+        <div class="tier on-scroll pop" style="--c: var(--legal)"><img src="media/ss-bay-legal.jpg" alt="A legal pickup bay glowing cyan"><div class="body"><span class="name">Legal</span><span class="pay">Safe · lower pay</span><p>The police get nothing. They have to find you with their own eyes.</p><span class="cops">Cops see: nothing</span></div></div>
+        <div class="tier on-scroll pop" style="--c: var(--illegal)"><img src="media/ss-bay-illegal.jpg" alt="An illegal pickup bay glowing purple"><div class="body"><span class="name">Illegal</span><span class="pay">Risky · better pay</span><p>Every few seconds the police radar shows a circle you're somewhere inside, and it shrinks the longer you carry it.</p><span class="cops">Cops see: a search circle</span></div></div>
+        <div class="tier on-scroll pop" style="--c: var(--hot)"><img src="media/ss-bay-hot.jpg" alt="A parcel going hot with a gold burst"><div class="body"><span class="name">Hot</span><span class="pay">Double pay</span><p>Jackpot money, but the cops get a blip that follows you round the city.</p><span class="cops">Cops see: a live blip</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sides" id="sides" aria-label="Pick a side">
+    <div class="wrap">
+      <span class="kick">Pick a side</span>
+      <h2 class="on-scroll skid">Courier <i>or</i> cop</h2>
+      <div class="split">
+        <div class="side van on-scroll pop">
+          <img src="media/garage-van.jpg" alt="The courier van in the chop shop garage">
+          <div class="body">
+            <h3>The courier</h3>
+            <div class="goal">Deliver dodgy parcels, earn stars, then smash through an exit to escape.</div>
+            <div class="win"><b>You win:</b> escape through an open exit after your first star.<br><b>You lose:</b> three strikes, wrecked or arrested.</div>
+            <div class="abil"><span>Nitro</span><span>Cloak</span><span>Smoke</span><span>Run-flats</span><span>Scanner</span><span class="soon">Decoy</span><span class="soon">Jammer</span><span class="soon">Oil slick</span></div>
+            <small>Pick two abilities before every round. Faded ones are coming soon.</small>
+          </div>
+        </div>
+        <div class="side cop on-scroll pop">
+          <img src="media/garage-police.jpg" alt="The police car in the fleet bay garage">
+          <div class="body">
+            <h3>The police</h3>
+            <div class="goal">Hunt the van, box it in to arrest it, or wreck it. Work as a team.</div>
+            <div class="win"><b>You win:</b> catch the van three times.<br><b>You lose:</b> the van escapes.</div>
+            <div class="abil"><span>Net</span><span>Spike strip</span><span>Lights out</span><span>Drone</span><span>EMP</span><span class="soon">Tank</span><span class="soon">Roadblock</span><span class="soon">Trace</span></div>
+            <small>Every ability has a counter on the other side.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feats" id="features" aria-label="Features">
+    <div class="wrap">
+      <span class="kick">Features</span>
+      <h2 class="on-scroll skid">What makes it <i>shady</i></h2>
+
+      <div class="feat">
+        <div class="media on-scroll pop"><img src="media/busted.jpg" alt=""><video src="media/busted.mp4" poster="media/busted.jpg" autoplay muted loop playsinline aria-label="A BUSTED stamp after an arrest"></video></div>
+        <div><span class="n">01</span><h3>Stop, and you're busted</h3><p>Slow down and an arrest ring opens round the van. A cop who stops inside it with a clear view starts the arrest. Two cops make it faster.</p><ul><li>Three strikes and the police win</li><li>An arrest seizes your parcel</li><li>Speed up to break free</li></ul></div>
+      </div>
+
+      <div class="feat">
+        <div class="media on-scroll pop"><img src="media/ss-damage.jpg" alt="A battered van smoking from the bonnet, covered in soot and scrapes"></div>
+        <div><span class="n">02</span><h3>Crash it, dent it, wreck it</h3><p>Every car is a real physics car, and the bodywork crumples where you hit it. Dents land exactly where the impact was, so no two wrecks look the same.</p><ul><li>Real-time dents on the body and bumpers</li><li>Bumpers hang off, then fall off</li><li>Smoke turns black, then the engine catches fire</li><li>Every screen sees the same damage online</li></ul></div>
+      </div>
+
+      <div class="feat">
+        <div class="media on-scroll pop"><img src="media/ss-dropin.jpg" alt="Picking a drop zone from above"></div>
+        <div><span class="n">03</span><h3>The drop-in</h3><p>Get caught and a Shady Shipping cargo flyer lifts your van out. Pick one of three drop zones from the sky and land fresh with a new job.</p><ul><li>Zones away from the cops and exits</li><li>The police get a warning just before you land</li></ul></div>
+      </div>
+
+      <div class="feat">
+        <div class="media on-scroll pop"><img src="media/boxin.jpg" alt="Two police cars blocking the road"></div>
+        <div><span class="n">04</span><h3>The cops play as a team</h3><p>A lone cop can't win alone. Block the roads, read the radar, share sightings and close the net together.</p><ul><li>A radar that only shows what your cargo gives away</li><li>Last-seen markers shared by every cop</li></ul></div>
+      </div>
+
+      <div class="feat">
+        <div class="media on-scroll pop"><img src="media/ss-liveries.jpg" alt="Liveries for the van and the police car"></div>
+        <div><span class="n">05</span><h3>Make it yours</h3><p>Two team garages: the courier's chop shop and the police fleet bay. Paint every part, fit body kits and pick a livery.</p><ul><li>Over a hundred items</li><li>Buy once, keep for good</li><li>Looks only. Money never buys a win.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="log" id="devlog" aria-label="Devlog">
+    <div class="wrap">
+      <span class="kick">Devlog</span>
+      <h2 class="on-scroll skid">From the <i>build</i></h2>
+      <div class="posts">
+        <article class="post on-scroll pop"><div class="pic"><img src="media/busted.jpg" alt=""></div><div class="body"><span class="date">10 Nov 2026</span><h3>Arrests and three strikes</h3><p>Playtesters said the police gained nothing when the van stopped, so we gave them a way to box it in.</p></div></article>
+        <article class="post on-scroll pop"><div class="pic"><img src="media/ss-smoke2.jpg" alt=""></div><div class="body"><span class="date">9 Nov 2026</span><h3>Drone, EMP and ability feel</h3><p>New police tools, plus shakes and rumble so every ability lands with a thump.</p></div></article>
+        <article class="post on-scroll pop"><div class="pic"><img src="media/ss-liveries.jpg" alt=""></div><div class="body"><span class="date">7 Nov 2026</span><h3>The van garage and liveries</h3><p>A new courier garage, three liveries a side, and paint for every part.</p></div></article>
+        <article class="post on-scroll pop"><div class="pic"><img src="media/ss-wheel.jpg" alt=""></div><div class="body"><span class="date">2 Nov 2026</span><h3>The lobby and the name wheel</h3><p>A depot to ready up in, a game-show wheel to pick the courier, and two team garages.</p></div></article>
+        <article class="post on-scroll pop"><div class="pic"><img src="media/depot.jpg" alt=""></div><div class="body"><span class="date">30 Oct 2026</span><h3>Uni playtest and fixes</h3><p>Our biggest online session so far, and the list of fixes that came out of it.</p></div></article>
+        <article class="post on-scroll pop"><div class="pic"><img src="media/ss-radar.jpg" alt=""></div><div class="body"><span class="date">27 Oct 2026</span><h3>Heat on the radar</h3><p>Search circles, live blips and sightings: how the police find the van.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="then" id="then" aria-label="Then and now">
+    <div class="wrap">
+      <span class="kick on-scroll pop">One month apart</span>
+      <h2 class="on-scroll skid">Then <i>and</i> now</h2>
+      <p class="lede on-scroll pop">The same chase-cam, a month apart. Drag the handle to see how far the game has come.</p>
+      <div class="compare on-scroll pop" style="--pos: 50%">
+        <img class="im-now" src="media/now-nov.jpg" alt="10 November: the new city in sunset pastels, the van on the arrest ring with the new HUD" width="1600" height="900">
+        <img class="im-then" src="media/then-oct.jpg" alt="10 October prototype: the old van on a wet grey road with the shift clock" width="1600" height="900">
+        <span class="tag t-then">10 Oct · Prototype</span>
+        <span class="tag t-now">10 Nov · Now</span>
+        <span class="bar" aria-hidden="true"><span class="knob"></span></span>
+        <input type="range" min="0" max="100" value="50" aria-label="Slide between the October prototype and the game now">
+      </div>
+      <ul class="diffs on-scroll pop">
+        <li><b>The city</b>The rainy prototype town became a full city district in sunset pastels.</li>
+        <li><b>The van</b>The plain van became the Shady Shipping van, with armour plates, roof gear and the company sign.</li>
+        <li><b>The rules</b>The shift clock is gone. Arrest rings and three strikes replaced it.</li>
+        <li><b>The HUD</b>One clock became a job panel, a radar, ability slots and alerts.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wiki" id="wiki" aria-label="Design wiki">
+    <div class="wrap">
+      <div>
+        <span class="kick" style="color:#fff">Go deeper</span>
+        <h2>The design <i>wiki</i></h2>
+        <p>Every system, every ability, the city and the research behind it, with the numbers straight from our tuning sheet.</p>
+        <a class="btn" href="wiki/index.html">Open the wiki</a>
+      </div>
+      <div class="chapters"><a href="wiki/round.html">The round</a><a href="wiki/heat.html">Heat</a><a href="wiki/arrests.html">Arrests</a><a href="wiki/abilities.html">Abilities</a><a href="wiki/online.html">Online play</a><a href="wiki/playtests.html">Playtests</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <a href="index.html">← Back to Underdog Studios</a>
+    <small>Shady Shipping · In development · © 2026 Underdog Studios</small>
+  </div>
+</footer>
+
+<div class="tv" id="tv" hidden role="dialog" aria-label="Shady Shipping Milestone 1 video">
+  <div class="box">
+    <div class="bar"><span>Milestone 1</span><button type="button" id="close">Close ✕</button></div>
+    <video id="vid" src="media/trailer.mp4" poster="media/trailer.jpg" controls playsinline preload="none"></video>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement; root.classList.add('js');
+  var tv = document.getElementById('tv'), vid = document.getElementById('vid');
+  document.getElementById('play').addEventListener('click', function () { tv.hidden = false; try { vid.play(); } catch (e) {} });
+  function shut() { vid.pause(); tv.hidden = true; }
+  document.getElementById('close').addEventListener('click', shut);
+  tv.addEventListener('click', function (e) { if (e.target === tv) shut(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !tv.hidden) shut(); });
+
+  var els = [].slice.call(document.querySelectorAll('.on-scroll'));
+  els.forEach(function (el) {
+    var sibs = [].slice.call(el.parentNode.children).filter(function (c) { return c.classList.contains('on-scroll'); });
+    el.style.animationDelay = (sibs.indexOf(el) * 0.12) + 's';
+  });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }); }, { threshold: 0.15 });
+    els.forEach(function (el) { io.observe(el); });
+  } else { els.forEach(function (el) { el.classList.add('seen'); }); }
+
+  var spec = document.querySelector('.spec');
+  if (spec && 'IntersectionObserver' in window) {
+    var so = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { spec.classList.add('go'); so.disconnect(); } }, { threshold: 0.4 });
+    so.observe(spec);
+  }
+
+  // Then and now slider: the range input moves the split; a small nudge when it first comes into view shows it can move
+  document.querySelectorAll('.compare').forEach(function (c) {
+    var r = c.querySelector('input');
+    function set(v) { c.style.setProperty('--pos', v + '%'); }
+    r.addEventListener('input', function () { set(r.value); });
+    r.addEventListener('pointerdown', function () { c.classList.add('drag'); });
+    window.addEventListener('pointerup', function () { c.classList.remove('drag'); });
+    if ('IntersectionObserver' in window && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      var seen = new IntersectionObserver(function (en) {
+        if (!en[0].isIntersecting) return; seen.disconnect();
+        var steps = [50, 38, 62, 50], k = 0;
+        (function go() { if (k >= steps.length) return; c.style.transition = 'none'; set(steps[k]); r.value = steps[k]; k++; setTimeout(go, 260); })();
+      }, { threshold: 0.6 });
+      seen.observe(c);
+    }
+  });
+
+  // Stamps in the game's colours
+  // A stamp only lands on empty background: never on text, pictures or cards
+  var KEEP = 'a, button, input, select, textarea, label, video, img, figure, picture, p, h1, h2, h3, h4, li, small, blockquote, time, b, strong, i, em, span, .media, .pic, .hero, .tv, .tier, .side, .post, .spec, .feat ul, .step, .cops-win';
+  function clear(x, y, w, h) {
+    var pts = [[x, y], [x - w, y - h], [x + w, y - h], [x - w, y + h], [x + w, y + h], [x - w, y], [x + w, y], [x, y - h], [x, y + h]];
+    return pts.every(function (p) { var t = document.elementFromPoint(p[0], p[1]); return !t || !t.closest(KEEP); });
+  }
+  var layer = document.createElement('div'); layer.className = 'inklayer'; document.body.appendChild(layer);
+  var marks = [['Legal', '#36D6FF'], ['Illegal', '#A65BFF'], ['Hot parcel', '#FFC21A'], ['Busted', '#FF3FA4'], ['Signed for', '#EEF2FF']], n = 0;
+  document.addEventListener('click', function (e) {
+    if (e.target.closest(KEEP) || !clear(e.clientX, e.clientY, 80, 22)) return;
+    var m = marks[n % marks.length], el = document.createElement('span');
+    el.className = 'ink'; el.textContent = m[0]; el.style.setProperty('--c', m[1]);
+    el.style.left = e.pageX + 'px'; el.style.top = e.pageY + 'px';
+    el.style.setProperty('--r', (Math.random() * 24 - 12).toFixed(1) + 'deg');
+    layer.appendChild(el); n++;
+    var all = layer.querySelectorAll('.ink'); if (all.length > 30) all[0].remove();
+  });
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+  }
+})();
+</script>
+</body>
+</html>

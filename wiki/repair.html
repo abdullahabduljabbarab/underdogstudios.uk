@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wrecks &amp; the repair garage · Shady Shipping Wiki</title>
+<meta name="description" content="Wrecks &amp; the repair garage in Shady Shipping: how it works, the numbers, and why we built it that way.">
+<link rel="icon" type="image/png" href="../media/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;1,900&family=Barlow:wght@400;500;600&family=Bungee&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Shady Shipping wiki: the game page's night colours on a parcel-sticker background, a topic list down the side, and every topic's design page behind a purple door. -TripleA */
+:root {
+  --night: #0B1638; --deep: #040817; --panel: #17286A; --line: #3B56AD;
+  --text: #EEF2FF; --mute: #B6C1E6; --blue: #3A72FF; --pink: #FF3FA4;
+  --legal: #36D6FF; --illegal: #A65BFF; --hot: #FFC21A; --stock: #ECE6D8; --ink: #121010;
+  --logo: "Barlow Condensed", "Arial Narrow", sans-serif; --body: "Barlow", "Segoe UI", sans-serif;
+  --ui: "Bungee", Impact, sans-serif; --mono: "IBM Plex Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 80px; }
+body { margin: 0; color: var(--text); font: 400 17px/1.6 var(--body); background: var(--night) url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22700%22 font-family=%22Bungee, Impact, sans-serif%22%3E%3Cg transform=%22translate(110 90) rotate(-6)%22 opacity=%22.2%22%3E%3Crect x=%22-50%22 y=%22-22%22 width=%22101%22 height=%2244%22 fill=%22none%22 stroke=%22%2336D6FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%2336D6FF%22%3ELEGAL%3C/text%3E%3C/g%3E%3Cg transform=%22translate(470 120) rotate(-18)%22 opacity=%22.2%22%3E%3Crect x=%22-66%22 y=%22-22%22 width=%22131%22 height=%2244%22 fill=%22none%22 stroke=%22%23A65BFF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23A65BFF%22%3EILLEGAL%3C/text%3E%3C/g%3E%3Cg transform=%22translate(300 300) rotate(0)%22 opacity=%22.2%22%3E%3Crect x=%22-36%22 y=%22-22%22 width=%2271%22 height=%2244%22 fill=%22none%22 stroke=%22%23FFC21A%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FFC21A%22%3EHOT%3C/text%3E%3C/g%3E%3Cg transform=%22translate(90 470) rotate(14)%22 opacity=%22.2%22%3E%3Crect x=%22-66%22 y=%22-22%22 width=%22131%22 height=%2244%22 fill=%22none%22 stroke=%22%23FF3FA4%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FF3FA4%22%3EFRAGILE%3C/text%3E%3C/g%3E%3Cg transform=%22translate(560 420) rotate(-14)%22 opacity=%22.2%22%3E%3Crect x=%22-88%22 y=%22-22%22 width=%22176%22 height=%2244%22 fill=%22none%22 stroke=%22%23EEF2FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23EEF2FF%22%3ESIGNED FOR%3C/text%3E%3C/g%3E%3Cg transform=%22translate(260 600) rotate(-5)%22 opacity=%22.2%22%3E%3Crect x=%22-148%22 y=%22-22%22 width=%22296%22 height=%2244%22 fill=%22none%22 stroke=%22%23FFC21A%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FFC21A%22%3ENO QUESTIONS ASKED%3C/text%3E%3C/g%3E%3Cg transform=%22translate(620 650) rotate(13)%22 opacity=%22.2%22%3E%3Crect x=%22-96%22 y=%22-22%22 width=%22191%22 height=%2244%22 fill=%22none%22 stroke=%22%2336D6FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%2336D6FF%22%3ETHIS WAY UP%3C/text%3E%3C/g%3E%3Cg opacity=%22.12%22%3E%3Crect x=%22380%22 y=%22230%22 width=%22230%22 height=%2234%22 fill=%22%23C9A15A%22 transform=%22rotate(-24 495 247)%22/%3E%3Crect x=%220%22 y=%22560%22 width=%22200%22 height=%2234%22 fill=%22%23C9A15A%22 transform=%22rotate(14 100 577)%22/%3E%3C/g%3E%3C/svg%3E") repeat fixed; }
+img { max-width: 100%; display: block; }
+a { color: var(--legal); }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+:focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+.wrap { max-width: 1440px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+code { font: 500 .9em var(--mono); background: rgba(255,255,255,.08); padding: 1px 5px; }
+
+/* Top bar */
+.bar { position: sticky; top: 0; z-index: 20; background: var(--stock); color: var(--ink); border-bottom: 4px solid var(--ink); }
+.bar .wrap { display: flex; align-items: center; gap: 16px; padding-block: 10px; }
+.bar a { color: var(--ink); text-decoration: none; font: 800 18px/1 var(--logo); letter-spacing: .08em; text-transform: uppercase; }
+.bar .brand { display: flex; align-items: center; gap: 10px; }
+.bar .brand img { width: 30px; height: 30px; border-radius: 7px; }
+.bar .crumb-top { font: 400 13px/1 var(--ui); background: var(--ink); color: var(--hot); padding: 6px 8px 5px; }
+.bar .studio { margin-left: auto; }
+.bar a:hover { color: #B11C26; }
+
+/* Layout */
+.wiki { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 34px; padding-block: 34px 80px; }
+.main { min-width: 0; }
+.side { position: sticky; top: 80px; align-self: start; display: grid; gap: 2px; max-height: calc(100vh - 100px); overflow-y: auto; scrollbar-width: thin; }
+.side .grp { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin: 16px 0 6px; }
+.side a { font: 800 18px/1.1 var(--logo); text-transform: uppercase; letter-spacing: .04em; color: var(--text); text-decoration: none; padding: 7px 10px; border-left: 4px solid transparent; background: rgba(4,8,23,.55); }
+.side a:hover { border-color: var(--line); }
+.side a.on { border-color: var(--pink); background: var(--panel); color: var(--hot); }
+.side a.home { font: 400 15px/1.1 var(--ui); color: var(--hot); }
+@media (max-width: 900px) {
+  .wiki { grid-template-columns: 1fr; gap: 18px; padding-top: 18px; }
+  .side { position: sticky; top: 58px; z-index: 5; display: flex; overflow-x: auto; overflow-y: hidden; max-height: none; gap: 6px; padding: 8px 0; background: var(--night); scrollbar-width: none; }
+  .side .grp { display: none; }
+  .side a { white-space: nowrap; border-left: 0; border-bottom: 4px solid transparent; }
+  .side a.on { border-color: var(--pink); }
+}
+
+/* Type */
+.kick { display: block; font: 400 14px/1 var(--ui); color: var(--hot); margin-bottom: 12px; }
+.kick.des { color: var(--illegal); }
+h1.t { font: 900 italic clamp(40px, 4.6vw, 66px)/.9 var(--logo); text-transform: uppercase; }
+h1.t.big { font-size: clamp(56px, 8vw, 110px); }
+h1.t i { color: var(--blue); font-style: italic; }
+h2.s { font: 900 italic clamp(28px, 2.8vw, 38px)/.95 var(--logo); text-transform: uppercase; margin: 34px 0 12px; }
+h3 { font: 800 21px/1.1 var(--logo); text-transform: uppercase; letter-spacing: .04em; margin: 22px 0 8px; color: var(--hot); }
+p { margin: 0 0 12px; color: #D9DCE6; }
+.lead, .lead-block p:first-child { font-size: 19px; color: var(--text); max-width: 64ch; }
+.lead-block { margin-top: 16px; }
+.crumb { font: 500 12px/1 var(--mono); color: var(--mute); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+.credits { font: 500 13px/1.5 var(--mono); color: var(--mute); }
+.credits b { color: var(--text); font-weight: 500; }
+ul.dots { margin: 8px 0 14px; padding: 0; list-style: none; display: grid; gap: 6px; }
+ul.dots li { padding-left: 22px; position: relative; color: #D9DCE6; }
+ul.dots li::before { content: ""; position: absolute; left: 0; top: .6em; width: 10px; height: 10px; background: var(--pink); transform: rotate(45deg); }
+ol.nums-list { margin: 8px 0 14px; padding-left: 22px; color: #D9DCE6; }
+
+/* Status chips */
+.status { display: inline-block; font: 500 12px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; border: 1px solid currentColor; padding: 6px 8px; margin: 14px 8px 0 0; }
+.status.built { color: var(--legal); }
+.status.wip { color: var(--hot); }
+.status.planned { color: var(--illegal); border-style: dashed; }
+
+/* Tables and figures */
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); background: rgba(4,8,23,.75); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(59,86,173,.6); vertical-align: top; }
+th { font: 500 12px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--mute); background: rgba(23,40,106,.6); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { color: var(--text); font-weight: 600; }
+tr.win td { background: rgba(255,194,26,.1); }
+tr.win td:last-child { color: var(--hot); }
+.fig { margin: 18px 0; }
+.fig .imgs { display: grid; gap: 8px; }
+.fig.multi .imgs { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.fig img { width: 100%; border: 1px solid var(--line); background: #000; }
+.fig figcaption { font: 500 13px/1.45 var(--mono); color: var(--mute); margin-top: 8px; }
+.inspo { margin: 20px 0; padding: 16px 18px 6px; border-left: 6px solid var(--hot); background: rgba(255,194,26,.07); }
+.inspo .lab { display: block; font: 400 13px/1 var(--ui); color: var(--hot); margin-bottom: 10px; }
+
+/* Home */
+.doors { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 28px; }
+.door { background: var(--panel); border: 1px solid var(--line); border-top: 8px solid var(--c); padding: 26px 24px 26px; display: grid; gap: 12px; align-content: start; text-decoration: none; color: var(--text); transition: transform .15s ease, box-shadow .15s ease; }
+.door:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--c); }
+.door .who { font: 500 13px/1 var(--mono); color: var(--mute); text-transform: uppercase; letter-spacing: .1em; }
+.door h2 { font: 900 italic clamp(38px, 4vw, 58px)/.9 var(--logo); text-transform: uppercase; color: var(--c); }
+.door p { margin: 0; }
+.door .go { font: 400 14px/1 var(--ui); color: var(--c); margin-top: 6px; }
+.index { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.ig { background: rgba(4,8,23,.75); border: 1px solid var(--line); padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.ig .grp2 { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin-bottom: 6px; }
+.ig a { font: 800 19px/1.3 var(--logo); text-transform: uppercase; color: var(--text); text-decoration: none; }
+.ig a:hover { color: var(--hot); }
+@media (max-width: 760px) { .doors { grid-template-columns: 1fr; } }
+
+/* Deep pages (one column) */
+.deep { max-width: 980px; margin-top: 16px; background: rgba(4,8,23,.82); border: 1px solid var(--line); border-top: 6px solid var(--illegal); padding: 8px 24px 20px; }
+
+/* Topic: the player page in the middle, the design page peeking out beside it */
+.topic { background: rgba(4,8,23,.9); border: 1px solid var(--line); padding: 22px 24px 26px; min-width: 0; }
+.d1 { border-top: 6px solid var(--legal); }
+.d2 { border-top: 6px solid var(--illegal); position: relative; }
+.duo { --g: 22px; position: relative; }
+.duo:not(.open) > .d1 { width: calc(50% - var(--g) / 2 + 120px); margin: 0 auto; }
+.duo:not(.open) > .d2 { position: absolute; top: 0; bottom: 0; left: calc(75% - var(--g) / 4 + 60px + 12px); width: 64px; padding: 0; overflow: hidden; border: 0; }
+.duo:not(.open) > .d2 > .d2in { display: none; }
+.duo.open { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--g); align-items: start; }
+.duo.open > .d1 { animation: slideL .55s cubic-bezier(.3,1.2,.5,1) backwards; }
+.duo.open > .d2 { animation: popIn .55s cubic-bezier(.3,1.2,.5,1) backwards; }
+.duo.instant > .d1, .duo.instant > .d2 { animation: none; }
+@keyframes slideL { 0% { transform: translateX(calc(50% + var(--g) / 2 - 60px)); } 100% { transform: none; } }
+@keyframes popIn { 0% { transform: translateX(-30%); opacity: 0; } 100% { transform: none; opacity: 1; } }
+.peek { position: absolute; left: 0; top: 0; bottom: 0; width: 64px; z-index: 2; border: 0; cursor: pointer; background: var(--illegal); color: #fff; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 22px 0 0; transition: background .15s ease, transform .15s ease; }
+.peek .pk-text { writing-mode: vertical-rl; font: 400 15px/1 var(--ui); letter-spacing: .04em; white-space: nowrap; }
+.peek .pk-arrow { border-left: 16px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+.peek:hover { background: #B877FF; transform: translateX(-4px); }
+.duo.open .peek { display: none; }
+.opener { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font: 400 15px/1 var(--ui); color: #fff; background: var(--illegal); border: 0; padding: 14px 18px 13px; cursor: pointer; box-shadow: 6px 6px 0 var(--deep); transition: transform .12s ease, box-shadow .12s ease; }
+.opener:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--deep); }
+.duo.open .opener { display: none; }
+.closer { font: 400 14px/1 var(--ui); color: var(--hot); background: transparent; border: 2px solid var(--hot); padding: 10px 14px 9px; cursor: pointer; margin-bottom: 18px; }
+.closer::before { content: ""; display: inline-block; margin-right: 10px; border-right: 10px solid var(--hot); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+@media (max-width: 1200px) {
+  .duo:not(.open) > .d1 { width: auto; margin-right: 76px; }
+  .duo:not(.open) > .d2 { left: auto; right: 0; }
+  .duo.open { grid-template-columns: 1fr; }
+  @keyframes slideL { 0% { transform: none; } 100% { transform: none; } }
+}
+@media (max-width: 640px) {
+  .duo:not(.open) > .d1 { margin-right: 0; }
+  .duo:not(.open) > .d2 { position: relative; left: auto; right: auto; width: auto; height: 64px; margin-top: 14px; }
+  .peek { right: 0; width: auto; bottom: 0; flex-direction: row; justify-content: center; padding: 0 16px; }
+  .peek .pk-text { writing-mode: horizontal-tb; }
+  .peek:hover { transform: none; }
+  .topic { padding: 18px 16px 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .duo.open > .d1, .duo.open > .d2 { animation: none; } * { transition: none !important; } }
+
+.foot { border-top: 1px solid var(--line); background: var(--deep); }
+.foot .wrap { padding-block: 22px; font: 500 13px/1.5 var(--mono); color: var(--mute); }
+main.wrap { min-height: calc(100vh - 130px); }
+
+/* Long topics: on wide screens each card is a screen-high panel with its own scroll, so opening the door shows both tops at once */
+@media (min-width: 1201px) {
+  .topic { max-height: calc(100vh - 110px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+  .duo:not(.open) > .d2 { max-height: none; }
+}
+
+/* Inspiration cards: the game's picture beside what we took from it */
+.ins-item { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 16px; align-items: start; padding: 4px 0 14px; }
+.ins-item + .ins-item { border-top: 1px dashed rgba(255,194,26,.35); padding-top: 16px; }
+.ins-item.text-only { grid-template-columns: 1fr; }
+.ins-item figure { margin: 0; }
+.ins-item img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border: 2px solid var(--hot); box-shadow: 5px 5px 0 rgba(4,8,23,.9); transform: rotate(-1.5deg); }
+.ins-item:nth-child(odd of .ins-item) img { transform: rotate(1.5deg); }
+.ins-item figcaption { font: 500 11px/1.4 var(--mono); color: var(--mute); margin-top: 8px; }
+.ins-item .txt p:last-child { margin-bottom: 0; }
+@media (max-width: 1500px) { .duo.open .ins-item { grid-template-columns: 1fr; } .duo.open .ins-item img { max-width: 360px; } }
+@media (max-width: 560px) { .ins-item { grid-template-columns: 1fr; } }
+.fig.dia img { background: #fff; padding: 10px; border: 3px solid var(--legal); box-shadow: 6px 6px 0 rgba(4,8,23,.9); }
+
+/* Wide screens: the page itself never scrolls; the side list and each card scroll on their own */
+@media (min-width: 901px) {
+  html, body { height: 100%; overflow: hidden; }
+  body { display: flex; flex-direction: column; }
+  .bar { flex: none; }
+  main.wrap { flex: 1; min-height: 0; width: 100%; }
+  .wiki { height: 100%; padding-block: 22px; box-sizing: border-box; }
+  .side { position: static; max-height: 100%; }
+  .main { height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; padding-right: 4px; }
+  .foot { display: none; }
+}
+@media (min-width: 1201px) {
+  .main:has(> .duo) { overflow: hidden; }
+  .duo { height: 100%; }
+  .duo.open { align-items: stretch; }
+  .topic { max-height: 100%; }
+  .duo.open > .topic { height: 100%; }
+}
+
+/* The door strip reads normally: a wider tab with the words across, not down */
+.duo:not(.open) > .d2 { width: 132px; }
+.peek { width: 132px; padding: 22px 12px 0; gap: 14px; justify-content: flex-start; }
+.peek .pk-text { writing-mode: horizontal-tb; white-space: normal; text-align: center; font-size: 17px; line-height: 1.15; }
+.peek .pk-arrow { order: 2; }
+@media (max-width: 1200px) {
+  .duo:not(.open) > .d1 { margin-right: 146px; }
+}
+@media (max-width: 640px) {
+  .duo:not(.open) > .d1 { margin-right: 0; }
+  .duo:not(.open) > .d2 { width: auto; }
+  .peek { width: auto; padding: 0 16px; flex-direction: row; justify-content: center; }
+  .peek .pk-arrow { order: 2; }
+}
+@media (min-width: 641px) { .peek { justify-content: center; padding: 0 12px; } }
+
+/* Under the hood: one wide card that scrolls inside itself, so its scrollbar sits on the card */
+.deep { max-width: none; margin-top: 0; padding: 24px 28px 28px; background: rgba(4,8,23,.9); }
+.deep h1.t { margin-bottom: 8px; }
+@media (min-width: 901px) {
+  .main:has(> .deep) { overflow: hidden; padding-right: 0; }
+  .deep { height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+}
+
+/* Motion: cards land, the list slides in, the door knocks once, photos lift, pictures open big */
+@keyframes land { 0% { transform: translateY(28px) scale(.97); opacity: 0; } 70% { transform: translateY(-4px) scale(1.005); opacity: 1; } 100% { transform: none; opacity: 1; } }
+@keyframes slideIn { 0% { transform: translateX(-24px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+@keyframes knock { 0%, 100% { transform: none; } 15% { transform: translateX(-12px); } 30% { transform: none; } 45% { transform: translateX(-12px); } 60% { transform: none; } }
+.duo:not(.open) > .d1, .deep, .main > .kick, .main > h1.t, .doors, .index { animation: land .5s cubic-bezier(.2,.9,.3,1.15) backwards; }
+.doors { animation-delay: .08s; } .index { animation-delay: .16s; }
+.side > * { animation: slideIn .35s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i, 0) * 28ms); }
+.duo:not(.open) > .d2 { animation: land .5s cubic-bezier(.2,.9,.3,1.15) .12s backwards; }
+.duo:not(.open) .peek { animation: knock .9s cubic-bezier(.3,1.4,.5,1) 1s 1 both; }
+.ins-item img { transition: transform .2s cubic-bezier(.2,.9,.3,1.3), box-shadow .2s ease; cursor: zoom-in; }
+.ins-item img:hover { transform: rotate(0deg) translate(-3px, -5px) scale(1.04); box-shadow: 10px 12px 0 rgba(4,8,23,.9); }
+.fig img { cursor: zoom-in; transition: transform .2s cubic-bezier(.2,.9,.3,1.3); }
+.fig img:hover { transform: translateY(-3px); }
+.zoom { position: fixed; inset: 0; z-index: 100; background: rgba(4,8,23,.92); display: grid; place-items: center; padding: 24px; cursor: zoom-out; animation: fadeIn .15s ease both; }
+.zoom img { max-width: min(1600px, 96vw); max-height: 86vh; width: auto; border: 3px solid var(--legal); box-shadow: 10px 10px 0 #000; background: #fff; animation: land .35s cubic-bezier(.2,.9,.3,1.15) both; }
+.zoom p { margin: 12px 0 0; font: 500 13px/1.4 var(--mono); color: var(--mute); text-align: center; max-width: 90ch; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .duo > *, .deep, .main > *, .side > *, .peek, .zoom, .zoom img { animation: none !important; } }
+
+/* A build-log chapter folded into a topic */
+.from-log { margin: 40px 0 6px; padding: 12px 14px; border: 2px dashed var(--line); background: rgba(23,40,106,.45); display: grid; gap: 4px; }
+.from-log span { font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.from-log b { font: 900 italic 24px/1 var(--logo); text-transform: uppercase; color: var(--hot); }
+
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="../shadyshipping.html"><img src="../media/favicon.png" alt="">Shady Shipping</a>
+    <span class="crumb-top">Wiki</span>
+    <a class="studio" href="../index.html">Underdog Studios</a>
+  </div>
+</header>
+<main class="wrap">
+  <div class="wiki">
+<nav class="side" aria-label="Wiki topics">
+<a class="home" href="index.html">Wiki home</a>
+<span class="grp">The round</span>
+<a href="round.html">The round</a>
+<a href="parcels.html">Parcels & jobs</a>
+<a href="heat.html">Heat & the radar</a>
+<a href="arrests.html">Arrests & the drop-in</a>
+<a href="money.html">Money & stars</a>
+<a href="hud.html">HUD, radar & routes</a>
+<span class="grp">On the road</span>
+<a href="vehicles.html">Driving & damage</a>
+<a href="repair.html" class="on" aria-current="page">Wrecks & the repair garage</a>
+<a href="destruction.html">Destruction</a>
+<a href="traffic.html">Traffic</a>
+<span class="grp">Your kit</span>
+<a href="abilities.html">Abilities</a>
+<a href="lobby.html">Lobby & garage</a>
+<a href="sound.html">Sound & effects</a>
+<span class="grp">Coming later</span>
+<a href="dispatcher.html">The Dispatcher</a>
+<span class="grp">Under the hood</span>
+<a href="systems.html">How it fits together</a>
+<a href="online.html">Online play</a>
+<a href="balance.html">Balance</a>
+<a href="city.html">Building the city</a>
+<a href="playtests.html">Playtests</a>
+</nav>
+    <div class="main">
+<div class="duo">
+  <article class="topic d1">
+    <div class="crumb">Wiki / How to play / Wrecks &amp; the repair garage</div>
+    <span class="kick">On the road</span>
+    <h1 class="t">Damage, wreck and repair</h1>
+    <span class="status built">Built and playtested</span>
+    <div class="lead-block"><figure class="fig"><div class="imgs"><img src="../media/wiki/repair_garage.jpg" alt="The courier pulls into an open repair garage, smoking, with the green OPEN lamp lit"></div><figcaption>The courier pulls into an open repair garage, smoking, with the green OPEN lamp lit</figcaption></figure>
+<p>Every car has health that crashes take away, damage that shows on the car itself, a wreck that ends a chase, and a garage where the van can be repaired. Damage is how the police win a chase by force, and the garage is the van's way back, so both had to be fair, readable from a distance and the same on every screen.</p></div>
+    
+    <h2 class="s">Everything in the build</h2><div class="tbl"><table><thead><tr><th>Feature</th><th>What it does for play</th></tr></thead><tbody><tr><td>Health (HP)</td><td>Both cars start with HP from the tuning sheet; only the server changes it</td></tr><tr><td>Crash damage</td><td>HP lost depends on the speed a crash knocks off the car</td></tr><tr><td>Damage cap</td><td>One crash never takes more than 20 HP</td></tr><tr><td>Dents and bumpers</td><td>The body dents where each hit lands; bumpers hang, then fall off</td></tr><tr><td>Smoke and fire</td><td>Bonnet smoke from 10% damage, thicker as HP falls; fire below 20% HP</td></tr><tr><td>The wreck</td><td>An explosion, the car thrown up and stopped, then a burnt-out shell</td></tr><tr><td>Repair garage</td><td>A hidden garage repairs the van fully in a short cutscene</td></tr><tr><td>Burst tyres</td><td>Stay burst, with half the grip, until a garage fixes them</td></tr></tbody></table></div><h2 class="s">How the wreck and garage work</h2><p>The wreck is the big moment of a chase, and both teams can see it coming. Smoke tells the cops there is a target to finish off and tells the courier to slow down and repair. A health bar cannot do that at a distance. At 0 HP the car explodes, is thrown up and grinds to a stop on the same physics frame on every screen. Throttle, nitro, the net and reset all stop working, so a wreck cannot be driven or reset away. A player who joins later sees the burnt-out shell without the explosion.</p>
+<p>The garage visit has five steps:</p>
+<ol class="nums-list"><li>The courier pulls up to the open garage under 40 km/h with a damaged van and enough cash (£150).</li><li>The roller door opens and the game drives the van in.</li><li>The HUD fades and letterbox bars appear; the camera pans across the street for 5 s while welding glow spills under the door.</li><li>The van is driven back out at full health, with wheelspin.</li><li>The garage cools down for 60 s, with a countdown on its OPEN sign.</li></ol>
+<p>Two garages open each match, chosen at random from those Dafydd places. Only the courier sees which: a green beam, the OPEN sign and a green lamp. Abdullah found the door, air tool, welding and tyre sounds on Freesound. Garages also fix burst tyres, which now stay burst until then.</p><h2 class="s">From the build</h2><figure class="fig multi"><div class="imgs"><img src="../media/wiki/plog_img039.jpg" alt="Before and after: the first grey blockout garage with the courier-only beam (left) and the garage built from the city pack (right)"><img src="../media/wiki/plog_img040.jpg" alt="Before and after: the first grey blockout garage with the courier-only beam (left) and the garage built from the city pack (right)"></div><figcaption>Before and after: the first grey blockout garage with the courier-only beam (left) and the garage built from the city pack (right)</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img041.jpg" alt="Inside the garage: lit ceiling strips, the lift, tyres and a bench"></div><figcaption>Inside the garage: lit ceiling strips, the lift, tyres and a bench</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img083.jpg" alt="A van at 45% HP smoking from the bonnet, with the radar routing it to the nearest garage"></div><figcaption>A van at 45% HP smoking from the bonnet, with the radar routing it to the nearest garage</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/2026-10-28_economy_repair_charge.jpg" alt="Back on the road after a repair: the garage has taken £150 from the van&#x27;s cash"></div><figcaption>Back on the road after a repair: the garage has taken £150 from the van's cash</figcaption></figure>
+<p>Damage was tested with a server and two players on one PC. A server-only test drove the van into a wall and the cop into the van at set speeds. Both players' logs showed the server's HP after every hit. Every dent landed in the same place on both screens. The van, wrecked at 60 km/h, stopped within 2.2 m. Abdullah tested the garage in the sandbox: at full HP the door stays shut, and at 60 HP the van is driven in, repaired and sent back out.</p>
+    <button class="opener" type="button">Why it works like this <span aria-hidden="true">→</span></button>
+  </article>
+  <article class="topic d2">
+    <button class="peek" type="button" aria-label="Why it works like this: open the design page"><span class="pk-arrow" aria-hidden="true"></span><span class="pk-text">Why it works like this</span></button>
+    <div class="d2in">
+      <button class="closer" type="button">Back to how it plays</button>
+      <div class="crumb">Wiki / Behind the design / Wrecks &amp; the repair garage</div>
+      <span class="kick des">Behind the design</span>
+      <h1 class="t">Why <i>wrecks</i></h1>
+      <p class="credits"><b>Built</b> 24 Oct to 9 Nov 2026 · <b>Who</b> Abdullah (code, art and design calls, testing), Dafydd (numbers)</p>
+      <aside class="inspo"><span class="lab">Inspired by</span><div class="ins-item"><figure><img src="../media/wiki/plog_beamng_crash.jpg" alt="BeamNG.drive: a car crushed at the point of impact, with its front bumper torn off on the ground (BeamNG GmbH, 2015)"><figcaption>BeamNG.drive: a car crushed at the point of impact, with its front bumper torn off on the ground (BeamNG GmbH, 2015)</figcaption></figure><div class="txt"><p><b>BeamNG.drive (BeamNG GmbH, 2015):</b> soft-body physics bends each panel where it is hit, and parts such as bumpers and doors come off.</p>
+<p>What we took: dents that land where the hit lands, and bumpers that hang and then fall. What we changed: our dents are only a look. The car still drives on its original shape, and every PC dents from the server's list of hits, so the dents match on all five screens.</p></div></div><div class="ins-item"><figure><img src="../media/wiki/gsdd_burnout_crash.jpg" alt="Burnout Paradise (Criterion Games, 2008)"><figcaption>Burnout Paradise (Criterion Games, 2008)</figcaption></figure><div class="txt"><p><b>Burnout Paradise (Criterion Games, 2008):</b> players drive through the forecourt of a repair shop to repair the car at once, without leaving the open world.</p>
+<p>What we took: repair as a short detour on the map, not a menu. What we changed: the garage is hidden, random and shown only to the courier, so the police have to follow the van to find it.</p></div></div></aside>
+      
+      <h2 class="s">What we set out to do</h2><p>Pre-production named the damage numbers (health, multipliers, a scrape threshold) and three visible damage stages, but not how a crash becomes lost health. It also had no repairs: an in-match shop had been rejected because it stops the chase. We needed a damage rule one person could tune, a wreck both teams could see coming, and a way back from damage that keeps the chase moving.</p><h2 class="s">The big decisions</h2><p>Full comparison: Trade-off Appendix.</p>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>Damage from speed lost in the crash</td><td>Same rule for the heavy van and light police car; one number to tune</td><td>A heavy car is not punished for its weight</td><td>Chosen</td></tr><tr><td>Damage from the size of the hit</td><td>Physically real</td><td>Grows with weight, so each car needs its own tuning</td><td>Rejected</td></tr><tr><td>Each PC works out its own damage</td><td>Instant</td><td>Screens disagree about wrecks; a modified game could ignore damage</td><td>Rejected</td></tr></tbody></table></div>
+<p>Damage decides wrecks, and wrecks decide the match, so only the server works it out. Using speed lost means Dafydd tunes one value (damage per km/h) for both cars. A cop hitting the van does 1.5 times as much, and walls do 1 times.</p>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>A garage on the map, one of several, shown only to the courier</td><td>A risky detour; cannot be camped</td><td>Garages to place in every level</td><td>Chosen</td></tr><tr><td>An in-match shop</td><td>More choices</td><td>Stops the chase</td><td>Rejected in pre-production</td></tr><tr><td>No repairs</td><td>Simple</td><td>Cars wreck with no way back</td><td>Rejected</td></tr></tbody></table></div>
+<p>The garage replaced the shop idea in a form that keeps the chase going. The game drives the van in and out, which makes a cinematic moment and stops the courier hovering in the doorway as a shield. Abdullah searched Fab for a garage in the game's style, found none, and had it built from the city pack's own pieces so it matches the street.</p><h2 class="s">Playtesting and what changed</h2><div class="tbl"><table><thead><tr><th>Date</th><th>Who played</th><th>What they found</th><th>What we changed</th></tr></thead><tbody><tr><td>24 Oct</td><td>Abdullah, editor test</td><td>The wreck was "very underwhelming, no smoke"</td><td>Smoke, fire and explosion rebuilt as puffs moved in code, at any size</td></tr><tr><td>24 Oct</td><td>Abdullah</td><td>Smoke streamed back into the driver's camera</td><td>Smoke follows the car and fades near any camera</td></tr><tr><td>25 Oct</td><td>Abdullah</td><td>Cars got "absolutely wrecked with like one or 2 hits"</td><td>Damage per km/h lowered and a 20 HP cap per crash</td></tr><tr><td>25 Oct</td><td>Abdullah</td><td>Police should be able to have far more HP than the van</td><td>HP can go up to 1000 per car</td></tr><tr><td>27 Oct</td><td>Abdullah</td><td>The garage route vanished whenever a parcel was on board</td><td>Both routes show at once (see the HUD chapter)</td></tr><tr><td>30 Oct</td><td>Uni playtest, written up by Abdullah</td><td>Cops nearby kept the garage shut, then could follow the van in</td><td>Cops-near rule removed; an unseen doorway wall keeps cops out</td></tr></tbody></table></div>
+<p>Dafydd's sheet values that arrived with the playtest fixes set the van's health to 250. The balance pass shows the effect of the cap and the lower rate on the same server crash test:</p>
+<div class="tbl"><table><thead><tr><th>Wall hit</th><th>HP lost before</th><th>HP lost after</th></tr></thead><tbody><tr><td>20 km/h</td><td>7.6</td><td>4.8</td></tr><tr><td>60 km/h</td><td>25.7</td><td>18.5</td></tr><tr><td>100 km/h</td><td>51.6</td><td>20</td></tr><tr><td>Cop T-bone, 70 km/h</td><td>24.1</td><td>15.7</td></tr></tbody></table></div>
+<p>Removing the cops-near rule was Abdullah's call: the garage should be somewhere to run to in the middle of a chase. The doorway wall and a 3 s grace after the van leaves stop the cops ramming it straight back in.</p><h2 class="s">Problems and fixes</h2><div class="tbl"><table><thead><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr></thead><tbody><tr><td>No crash reached the car at all</td><td>Removing the wheels' extra physics bodies also took the car off the hit list</td><td>Sign the car up for hits again straight after</td></tr><tr><td>Only one of three close hits dented</td><td>Only the last hit's position was sent</td><td>Send the last six hits with the health</td></tr><tr><td>A grey box poked through the police car's dents</td><td>The model has parts inside its shell</td><td>Dent the body as columns, not panels</td></tr><tr><td>Soot vanished once a car was dented</td><td>Editable meshes draw no overlay material</td><td>Each dented car carries a soot twin</td></tr><tr><td>The van stopped inside the garage with the controls locked</td><td>The physics engine put the still car to sleep, so the drive-out never ran</td><td>Cars a garage holds are kept awake on every PC</td></tr></tbody></table></div><h2 class="s">Lessons</h2><ul class="dots"><li>Send a short list of recent events with the state, not just the last one, or close events get lost.</li><li>Effects that must read at a distance should be built to scale, not borrowed from small exhaust and tyre effects.</li><li>Cap any value that grows with speed, so one extreme moment cannot end the round.</li></ul><h2 class="s">Latest</h2><div class="tbl"><table><thead><tr><th>Date</th><th>What changed</th><th>Why</th></tr></thead><tbody><tr><td>30 Oct 2026</td><td>Cops nearby no longer stop a repair; doorway wall added</td><td>The garage should be an escape mid-chase</td></tr><tr><td>30 Oct 2026</td><td>Garage shows on the radar only once the van is damaged</td><td>Playtest list: show the garage only once damaged</td></tr><tr><td>8 Nov 2026</td><td>Burst tyres look burst, keep half grip and last until a garage</td><td>The handling change was too small to feel</td></tr><tr><td>9 Nov 2026</td><td>TYRES BURST! and RUN-FLATS HELD banners for the van</td><td>The courier must know what happened and what to do</td></tr></tbody></table></div>
+    </div>
+  </article>
+</div>
+    </div>
+  </div>
+</main>
+<footer class="foot"><div class="wrap">Shady Shipping is in development by Underdog Studios. Numbers on these pages come from our live tuning sheet and can change between builds.</div></footer>
+<script>
+(function () {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  document.querySelectorAll('.side > *').forEach(function (el, i) { el.style.setProperty('--i', i); });
+  document.addEventListener('click', function (e) {
+    var img = e.target.closest('.fig img, .ins-item img');
+    if (!img) return;
+    var z = document.createElement('div'); z.className = 'zoom'; z.setAttribute('role', 'dialog'); z.setAttribute('aria-label', 'Picture, click to close');
+    var big = document.createElement('img'); big.src = img.src; big.alt = img.alt; z.appendChild(big);
+    var cap = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+    if (cap) { var p = document.createElement('p'); p.textContent = cap.textContent; z.appendChild(p); }
+    function shut() { z.remove(); document.removeEventListener('keydown', esc); }
+    function esc(k) { if (k.key === 'Escape') shut(); }
+    z.addEventListener('click', shut); document.addEventListener('keydown', esc);
+    document.body.appendChild(z);
+  });
+  function toTop(el) { if (el) el.scrollTop = 0; }
+  document.querySelectorAll('.topic, .main').forEach(toTop);
+  function openDuo(d) {
+    if (!d) return;
+    d.classList.add('open');
+    toTop(d.querySelector('.d2'));
+    if (window.innerWidth <= 900) { var t = d.querySelector('.d2').getBoundingClientRect().top + window.scrollY - 70; window.scrollTo(0, Math.max(0, t)); }
+  }
+  document.querySelectorAll('.duo .peek, .opener').forEach(function (b) { b.addEventListener('click', function () { openDuo(b.closest('.duo')); if (history.replaceState) history.replaceState(null, '', '#why'); }); });
+  document.querySelectorAll('.closer').forEach(function (b) { b.addEventListener('click', function () { var d = b.closest('.duo'); d.classList.remove('open'); toTop(d.querySelector('.d1')); toTop(d.querySelector('.d2')); if (history.replaceState) history.replaceState(null, '', location.pathname); }); });
+  if (location.hash === '#why') { var d = document.querySelector('.duo'); if (d) { d.classList.add('instant', 'open'); setTimeout(function () { d.classList.remove('instant'); }, 50); } }
+})();
+</script>
+</body>
+</html>

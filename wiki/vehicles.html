@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Driving &amp; damage · Shady Shipping Wiki</title>
+<meta name="description" content="Driving &amp; damage in Shady Shipping: how it works, the numbers, and why we built it that way.">
+<link rel="icon" type="image/png" href="../media/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;1,900&family=Barlow:wght@400;500;600&family=Bungee&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Shady Shipping wiki: the game page's night colours on a parcel-sticker background, a topic list down the side, and every topic's design page behind a purple door. -TripleA */
+:root {
+  --night: #0B1638; --deep: #040817; --panel: #17286A; --line: #3B56AD;
+  --text: #EEF2FF; --mute: #B6C1E6; --blue: #3A72FF; --pink: #FF3FA4;
+  --legal: #36D6FF; --illegal: #A65BFF; --hot: #FFC21A; --stock: #ECE6D8; --ink: #121010;
+  --logo: "Barlow Condensed", "Arial Narrow", sans-serif; --body: "Barlow", "Segoe UI", sans-serif;
+  --ui: "Bungee", Impact, sans-serif; --mono: "IBM Plex Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 80px; }
+body { margin: 0; color: var(--text); font: 400 17px/1.6 var(--body); background: var(--night) url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22700%22 font-family=%22Bungee, Impact, sans-serif%22%3E%3Cg transform=%22translate(110 90) rotate(-6)%22 opacity=%22.2%22%3E%3Crect x=%22-50%22 y=%22-22%22 width=%22101%22 height=%2244%22 fill=%22none%22 stroke=%22%2336D6FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%2336D6FF%22%3ELEGAL%3C/text%3E%3C/g%3E%3Cg transform=%22translate(470 120) rotate(-18)%22 opacity=%22.2%22%3E%3Crect x=%22-66%22 y=%22-22%22 width=%22131%22 height=%2244%22 fill=%22none%22 stroke=%22%23A65BFF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23A65BFF%22%3EILLEGAL%3C/text%3E%3C/g%3E%3Cg transform=%22translate(300 300) rotate(0)%22 opacity=%22.2%22%3E%3Crect x=%22-36%22 y=%22-22%22 width=%2271%22 height=%2244%22 fill=%22none%22 stroke=%22%23FFC21A%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FFC21A%22%3EHOT%3C/text%3E%3C/g%3E%3Cg transform=%22translate(90 470) rotate(14)%22 opacity=%22.2%22%3E%3Crect x=%22-66%22 y=%22-22%22 width=%22131%22 height=%2244%22 fill=%22none%22 stroke=%22%23FF3FA4%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FF3FA4%22%3EFRAGILE%3C/text%3E%3C/g%3E%3Cg transform=%22translate(560 420) rotate(-14)%22 opacity=%22.2%22%3E%3Crect x=%22-88%22 y=%22-22%22 width=%22176%22 height=%2244%22 fill=%22none%22 stroke=%22%23EEF2FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23EEF2FF%22%3ESIGNED FOR%3C/text%3E%3C/g%3E%3Cg transform=%22translate(260 600) rotate(-5)%22 opacity=%22.2%22%3E%3Crect x=%22-148%22 y=%22-22%22 width=%22296%22 height=%2244%22 fill=%22none%22 stroke=%22%23FFC21A%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FFC21A%22%3ENO QUESTIONS ASKED%3C/text%3E%3C/g%3E%3Cg transform=%22translate(620 650) rotate(13)%22 opacity=%22.2%22%3E%3Crect x=%22-96%22 y=%22-22%22 width=%22191%22 height=%2244%22 fill=%22none%22 stroke=%22%2336D6FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%2336D6FF%22%3ETHIS WAY UP%3C/text%3E%3C/g%3E%3Cg opacity=%22.12%22%3E%3Crect x=%22380%22 y=%22230%22 width=%22230%22 height=%2234%22 fill=%22%23C9A15A%22 transform=%22rotate(-24 495 247)%22/%3E%3Crect x=%220%22 y=%22560%22 width=%22200%22 height=%2234%22 fill=%22%23C9A15A%22 transform=%22rotate(14 100 577)%22/%3E%3C/g%3E%3C/svg%3E") repeat fixed; }
+img { max-width: 100%; display: block; }
+a { color: var(--legal); }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+:focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+.wrap { max-width: 1440px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+code { font: 500 .9em var(--mono); background: rgba(255,255,255,.08); padding: 1px 5px; }
+
+/* Top bar */
+.bar { position: sticky; top: 0; z-index: 20; background: var(--stock); color: var(--ink); border-bottom: 4px solid var(--ink); }
+.bar .wrap { display: flex; align-items: center; gap: 16px; padding-block: 10px; }
+.bar a { color: var(--ink); text-decoration: none; font: 800 18px/1 var(--logo); letter-spacing: .08em; text-transform: uppercase; }
+.bar .brand { display: flex; align-items: center; gap: 10px; }
+.bar .brand img { width: 30px; height: 30px; border-radius: 7px; }
+.bar .crumb-top { font: 400 13px/1 var(--ui); background: var(--ink); color: var(--hot); padding: 6px 8px 5px; }
+.bar .studio { margin-left: auto; }
+.bar a:hover { color: #B11C26; }
+
+/* Layout */
+.wiki { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 34px; padding-block: 34px 80px; }
+.main { min-width: 0; }
+.side { position: sticky; top: 80px; align-self: start; display: grid; gap: 2px; max-height: calc(100vh - 100px); overflow-y: auto; scrollbar-width: thin; }
+.side .grp { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin: 16px 0 6px; }
+.side a { font: 800 18px/1.1 var(--logo); text-transform: uppercase; letter-spacing: .04em; color: var(--text); text-decoration: none; padding: 7px 10px; border-left: 4px solid transparent; background: rgba(4,8,23,.55); }
+.side a:hover { border-color: var(--line); }
+.side a.on { border-color: var(--pink); background: var(--panel); color: var(--hot); }
+.side a.home { font: 400 15px/1.1 var(--ui); color: var(--hot); }
+@media (max-width: 900px) {
+  .wiki { grid-template-columns: 1fr; gap: 18px; padding-top: 18px; }
+  .side { position: sticky; top: 58px; z-index: 5; display: flex; overflow-x: auto; overflow-y: hidden; max-height: none; gap: 6px; padding: 8px 0; background: var(--night); scrollbar-width: none; }
+  .side .grp { display: none; }
+  .side a { white-space: nowrap; border-left: 0; border-bottom: 4px solid transparent; }
+  .side a.on { border-color: var(--pink); }
+}
+
+/* Type */
+.kick { display: block; font: 400 14px/1 var(--ui); color: var(--hot); margin-bottom: 12px; }
+.kick.des { color: var(--illegal); }
+h1.t { font: 900 italic clamp(40px, 4.6vw, 66px)/.9 var(--logo); text-transform: uppercase; }
+h1.t.big { font-size: clamp(56px, 8vw, 110px); }
+h1.t i { color: var(--blue); font-style: italic; }
+h2.s { font: 900 italic clamp(28px, 2.8vw, 38px)/.95 var(--logo); text-transform: uppercase; margin: 34px 0 12px; }
+h3 { font: 800 21px/1.1 var(--logo); text-transform: uppercase; letter-spacing: .04em; margin: 22px 0 8px; color: var(--hot); }
+p { margin: 0 0 12px; color: #D9DCE6; }
+.lead, .lead-block p:first-child { font-size: 19px; color: var(--text); max-width: 64ch; }
+.lead-block { margin-top: 16px; }
+.crumb { font: 500 12px/1 var(--mono); color: var(--mute); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+.credits { font: 500 13px/1.5 var(--mono); color: var(--mute); }
+.credits b { color: var(--text); font-weight: 500; }
+ul.dots { margin: 8px 0 14px; padding: 0; list-style: none; display: grid; gap: 6px; }
+ul.dots li { padding-left: 22px; position: relative; color: #D9DCE6; }
+ul.dots li::before { content: ""; position: absolute; left: 0; top: .6em; width: 10px; height: 10px; background: var(--pink); transform: rotate(45deg); }
+ol.nums-list { margin: 8px 0 14px; padding-left: 22px; color: #D9DCE6; }
+
+/* Status chips */
+.status { display: inline-block; font: 500 12px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; border: 1px solid currentColor; padding: 6px 8px; margin: 14px 8px 0 0; }
+.status.built { color: var(--legal); }
+.status.wip { color: var(--hot); }
+.status.planned { color: var(--illegal); border-style: dashed; }
+
+/* Tables and figures */
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); background: rgba(4,8,23,.75); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(59,86,173,.6); vertical-align: top; }
+th { font: 500 12px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--mute); background: rgba(23,40,106,.6); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { color: var(--text); font-weight: 600; }
+tr.win td { background: rgba(255,194,26,.1); }
+tr.win td:last-child { color: var(--hot); }
+.fig { margin: 18px 0; }
+.fig .imgs { display: grid; gap: 8px; }
+.fig.multi .imgs { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.fig img { width: 100%; border: 1px solid var(--line); background: #000; }
+.fig figcaption { font: 500 13px/1.45 var(--mono); color: var(--mute); margin-top: 8px; }
+.inspo { margin: 20px 0; padding: 16px 18px 6px; border-left: 6px solid var(--hot); background: rgba(255,194,26,.07); }
+.inspo .lab { display: block; font: 400 13px/1 var(--ui); color: var(--hot); margin-bottom: 10px; }
+
+/* Home */
+.doors { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 28px; }
+.door { background: var(--panel); border: 1px solid var(--line); border-top: 8px solid var(--c); padding: 26px 24px 26px; display: grid; gap: 12px; align-content: start; text-decoration: none; color: var(--text); transition: transform .15s ease, box-shadow .15s ease; }
+.door:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--c); }
+.door .who { font: 500 13px/1 var(--mono); color: var(--mute); text-transform: uppercase; letter-spacing: .1em; }
+.door h2 { font: 900 italic clamp(38px, 4vw, 58px)/.9 var(--logo); text-transform: uppercase; color: var(--c); }
+.door p { margin: 0; }
+.door .go { font: 400 14px/1 var(--ui); color: var(--c); margin-top: 6px; }
+.index { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.ig { background: rgba(4,8,23,.75); border: 1px solid var(--line); padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.ig .grp2 { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin-bottom: 6px; }
+.ig a { font: 800 19px/1.3 var(--logo); text-transform: uppercase; color: var(--text); text-decoration: none; }
+.ig a:hover { color: var(--hot); }
+@media (max-width: 760px) { .doors { grid-template-columns: 1fr; } }
+
+/* Deep pages (one column) */
+.deep { max-width: 980px; margin-top: 16px; background: rgba(4,8,23,.82); border: 1px solid var(--line); border-top: 6px solid var(--illegal); padding: 8px 24px 20px; }
+
+/* Topic: the player page in the middle, the design page peeking out beside it */
+.topic { background: rgba(4,8,23,.9); border: 1px solid var(--line); padding: 22px 24px 26px; min-width: 0; }
+.d1 { border-top: 6px solid var(--legal); }
+.d2 { border-top: 6px solid var(--illegal); position: relative; }
+.duo { --g: 22px; position: relative; }
+.duo:not(.open) > .d1 { width: calc(50% - var(--g) / 2 + 120px); margin: 0 auto; }
+.duo:not(.open) > .d2 { position: absolute; top: 0; bottom: 0; left: calc(75% - var(--g) / 4 + 60px + 12px); width: 64px; padding: 0; overflow: hidden; border: 0; }
+.duo:not(.open) > .d2 > .d2in { display: none; }
+.duo.open { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--g); align-items: start; }
+.duo.open > .d1 { animation: slideL .55s cubic-bezier(.3,1.2,.5,1) backwards; }
+.duo.open > .d2 { animation: popIn .55s cubic-bezier(.3,1.2,.5,1) backwards; }
+.duo.instant > .d1, .duo.instant > .d2 { animation: none; }
+@keyframes slideL { 0% { transform: translateX(calc(50% + var(--g) / 2 - 60px)); } 100% { transform: none; } }
+@keyframes popIn { 0% { transform: translateX(-30%); opacity: 0; } 100% { transform: none; opacity: 1; } }
+.peek { position: absolute; left: 0; top: 0; bottom: 0; width: 64px; z-index: 2; border: 0; cursor: pointer; background: var(--illegal); color: #fff; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 22px 0 0; transition: background .15s ease, transform .15s ease; }
+.peek .pk-text { writing-mode: vertical-rl; font: 400 15px/1 var(--ui); letter-spacing: .04em; white-space: nowrap; }
+.peek .pk-arrow { border-left: 16px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+.peek:hover { background: #B877FF; transform: translateX(-4px); }
+.duo.open .peek { display: none; }
+.opener { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font: 400 15px/1 var(--ui); color: #fff; background: var(--illegal); border: 0; padding: 14px 18px 13px; cursor: pointer; box-shadow: 6px 6px 0 var(--deep); transition: transform .12s ease, box-shadow .12s ease; }
+.opener:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--deep); }
+.duo.open .opener { display: none; }
+.closer { font: 400 14px/1 var(--ui); color: var(--hot); background: transparent; border: 2px solid var(--hot); padding: 10px 14px 9px; cursor: pointer; margin-bottom: 18px; }
+.closer::before { content: ""; display: inline-block; margin-right: 10px; border-right: 10px solid var(--hot); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+@media (max-width: 1200px) {
+  .duo:not(.open) > .d1 { width: auto; margin-right: 76px; }
+  .duo:not(.open) > .d2 { left: auto; right: 0; }
+  .duo.open { grid-template-columns: 1fr; }
+  @keyframes slideL { 0% { transform: none; } 100% { transform: none; } }
+}
+@media (max-width: 640px) {
+  .duo:not(.open) > .d1 { margin-right: 0; }
+  .duo:not(.open) > .d2 { position: relative; left: auto; right: auto; width: auto; height: 64px; margin-top: 14px; }
+  .peek { right: 0; width: auto; bottom: 0; flex-direction: row; justify-content: center; padding: 0 16px; }
+  .peek .pk-text { writing-mode: horizontal-tb; }
+  .peek:hover { transform: none; }
+  .topic { padding: 18px 16px 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .duo.open > .d1, .duo.open > .d2 { animation: none; } * { transition: none !important; } }
+
+.foot { border-top: 1px solid var(--line); background: var(--deep); }
+.foot .wrap { padding-block: 22px; font: 500 13px/1.5 var(--mono); color: var(--mute); }
+main.wrap { min-height: calc(100vh - 130px); }
+
+/* Long topics: on wide screens each card is a screen-high panel with its own scroll, so opening the door shows both tops at once */
+@media (min-width: 1201px) {
+  .topic { max-height: calc(100vh - 110px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+  .duo:not(.open) > .d2 { max-height: none; }
+}
+
+/* Inspiration cards: the game's picture beside what we took from it */
+.ins-item { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 16px; align-items: start; padding: 4px 0 14px; }
+.ins-item + .ins-item { border-top: 1px dashed rgba(255,194,26,.35); padding-top: 16px; }
+.ins-item.text-only { grid-template-columns: 1fr; }
+.ins-item figure { margin: 0; }
+.ins-item img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border: 2px solid var(--hot); box-shadow: 5px 5px 0 rgba(4,8,23,.9); transform: rotate(-1.5deg); }
+.ins-item:nth-child(odd of .ins-item) img { transform: rotate(1.5deg); }
+.ins-item figcaption { font: 500 11px/1.4 var(--mono); color: var(--mute); margin-top: 8px; }
+.ins-item .txt p:last-child { margin-bottom: 0; }
+@media (max-width: 1500px) { .duo.open .ins-item { grid-template-columns: 1fr; } .duo.open .ins-item img { max-width: 360px; } }
+@media (max-width: 560px) { .ins-item { grid-template-columns: 1fr; } }
+.fig.dia img { background: #fff; padding: 10px; border: 3px solid var(--legal); box-shadow: 6px 6px 0 rgba(4,8,23,.9); }
+
+/* Wide screens: the page itself never scrolls; the side list and each card scroll on their own */
+@media (min-width: 901px) {
+  html, body { height: 100%; overflow: hidden; }
+  body { display: flex; flex-direction: column; }
+  .bar { flex: none; }
+  main.wrap { flex: 1; min-height: 0; width: 100%; }
+  .wiki { height: 100%; padding-block: 22px; box-sizing: border-box; }
+  .side { position: static; max-height: 100%; }
+  .main { height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; padding-right: 4px; }
+  .foot { display: none; }
+}
+@media (min-width: 1201px) {
+  .main:has(> .duo) { overflow: hidden; }
+  .duo { height: 100%; }
+  .duo.open { align-items: stretch; }
+  .topic { max-height: 100%; }
+  .duo.open > .topic { height: 100%; }
+}
+
+/* The door strip reads normally: a wider tab with the words across, not down */
+.duo:not(.open) > .d2 { width: 132px; }
+.peek { width: 132px; padding: 22px 12px 0; gap: 14px; justify-content: flex-start; }
+.peek .pk-text { writing-mode: horizontal-tb; white-space: normal; text-align: center; font-size: 17px; line-height: 1.15; }
+.peek .pk-arrow { order: 2; }
+@media (max-width: 1200px) {
+  .duo:not(.open) > .d1 { margin-right: 146px; }
+}
+@media (max-width: 640px) {
+  .duo:not(.open) > .d1 { margin-right: 0; }
+  .duo:not(.open) > .d2 { width: auto; }
+  .peek { width: auto; padding: 0 16px; flex-direction: row; justify-content: center; }
+  .peek .pk-arrow { order: 2; }
+}
+@media (min-width: 641px) { .peek { justify-content: center; padding: 0 12px; } }
+
+/* Under the hood: one wide card that scrolls inside itself, so its scrollbar sits on the card */
+.deep { max-width: none; margin-top: 0; padding: 24px 28px 28px; background: rgba(4,8,23,.9); }
+.deep h1.t { margin-bottom: 8px; }
+@media (min-width: 901px) {
+  .main:has(> .deep) { overflow: hidden; padding-right: 0; }
+  .deep { height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+}
+
+/* Motion: cards land, the list slides in, the door knocks once, photos lift, pictures open big */
+@keyframes land { 0% { transform: translateY(28px) scale(.97); opacity: 0; } 70% { transform: translateY(-4px) scale(1.005); opacity: 1; } 100% { transform: none; opacity: 1; } }
+@keyframes slideIn { 0% { transform: translateX(-24px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+@keyframes knock { 0%, 100% { transform: none; } 15% { transform: translateX(-12px); } 30% { transform: none; } 45% { transform: translateX(-12px); } 60% { transform: none; } }
+.duo:not(.open) > .d1, .deep, .main > .kick, .main > h1.t, .doors, .index { animation: land .5s cubic-bezier(.2,.9,.3,1.15) backwards; }
+.doors { animation-delay: .08s; } .index { animation-delay: .16s; }
+.side > * { animation: slideIn .35s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i, 0) * 28ms); }
+.duo:not(.open) > .d2 { animation: land .5s cubic-bezier(.2,.9,.3,1.15) .12s backwards; }
+.duo:not(.open) .peek { animation: knock .9s cubic-bezier(.3,1.4,.5,1) 1s 1 both; }
+.ins-item img { transition: transform .2s cubic-bezier(.2,.9,.3,1.3), box-shadow .2s ease; cursor: zoom-in; }
+.ins-item img:hover { transform: rotate(0deg) translate(-3px, -5px) scale(1.04); box-shadow: 10px 12px 0 rgba(4,8,23,.9); }
+.fig img { cursor: zoom-in; transition: transform .2s cubic-bezier(.2,.9,.3,1.3); }
+.fig img:hover { transform: translateY(-3px); }
+.zoom { position: fixed; inset: 0; z-index: 100; background: rgba(4,8,23,.92); display: grid; place-items: center; padding: 24px; cursor: zoom-out; animation: fadeIn .15s ease both; }
+.zoom img { max-width: min(1600px, 96vw); max-height: 86vh; width: auto; border: 3px solid var(--legal); box-shadow: 10px 10px 0 #000; background: #fff; animation: land .35s cubic-bezier(.2,.9,.3,1.15) both; }
+.zoom p { margin: 12px 0 0; font: 500 13px/1.4 var(--mono); color: var(--mute); text-align: center; max-width: 90ch; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .duo > *, .deep, .main > *, .side > *, .peek, .zoom, .zoom img { animation: none !important; } }
+
+/* A build-log chapter folded into a topic */
+.from-log { margin: 40px 0 6px; padding: 12px 14px; border: 2px dashed var(--line); background: rgba(23,40,106,.45); display: grid; gap: 4px; }
+.from-log span { font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.from-log b { font: 900 italic 24px/1 var(--logo); text-transform: uppercase; color: var(--hot); }
+
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="../shadyshipping.html"><img src="../media/favicon.png" alt="">Shady Shipping</a>
+    <span class="crumb-top">Wiki</span>
+    <a class="studio" href="../index.html">Underdog Studios</a>
+  </div>
+</header>
+<main class="wrap">
+  <div class="wiki">
+<nav class="side" aria-label="Wiki topics">
+<a class="home" href="index.html">Wiki home</a>
+<span class="grp">The round</span>
+<a href="round.html">The round</a>
+<a href="parcels.html">Parcels & jobs</a>
+<a href="heat.html">Heat & the radar</a>
+<a href="arrests.html">Arrests & the drop-in</a>
+<a href="money.html">Money & stars</a>
+<a href="hud.html">HUD, radar & routes</a>
+<span class="grp">On the road</span>
+<a href="vehicles.html" class="on" aria-current="page">Driving & damage</a>
+<a href="repair.html">Wrecks & the repair garage</a>
+<a href="destruction.html">Destruction</a>
+<a href="traffic.html">Traffic</a>
+<span class="grp">Your kit</span>
+<a href="abilities.html">Abilities</a>
+<a href="lobby.html">Lobby & garage</a>
+<a href="sound.html">Sound & effects</a>
+<span class="grp">Coming later</span>
+<a href="dispatcher.html">The Dispatcher</a>
+<span class="grp">Under the hood</span>
+<a href="systems.html">How it fits together</a>
+<a href="online.html">Online play</a>
+<a href="balance.html">Balance</a>
+<a href="city.html">Building the city</a>
+<a href="playtests.html">Playtests</a>
+</nav>
+    <div class="main">
+<div class="duo">
+  <article class="topic d1">
+    <div class="crumb">Wiki / How to play / Driving &amp; damage</div>
+    <span class="kick">On the road</span>
+    <h1 class="t">Vehicles and damage</h1>
+    <span class="status built">Built and playtested</span>
+    <div class="lead-block"><figure class="fig"><div class="imgs"><img src="../media/wiki/van_dented.jpg" alt="The van after a beating: dented panels, scrapes, soot and smoke from the bonnet"></div><figcaption>The van after a beating: dented panels, scrapes, soot and smoke from the bonnet</figcaption></figure>
+<p><b>What it does for play.</b> Driving is what players do every second, so it had to feel good before anything else was built. The van is slower to pick up speed but rides kerbs easily; the police car is faster and lighter. Damage turns "wreck the van" into a health bar the courier can see and feel getting worse.</p></div>
+    
+    <h2 class="s">How it works</h2><div class="tbl"><table><thead><tr><th>Part</th><th>What happens</th></tr></thead><tbody><tr><td>Handling</td><td>Physics cars with arcade help: steering assist, drift hold, downforce and self-righting keep them fun and forgiving.</td></tr><tr><td>Kerbs</td><td>The van rides kerbs easily; the police car is slowed by them, so the van can cut corners the police cannot.</td></tr><tr><td>Cameras</td><td>Third person by default. Tab cycles chase, far and bonnet views; hold C to look back; the mouse or right stick looks around.</td></tr><tr><td>Damage</td><td>A crash costs health by how much speed it knocks off. Cop cars hit harder than walls; small scrapes cost nothing.</td></tr><tr><td>What damage looks like</td><td>Dents where hits land, soot spreading over the body, bonnet smoke from grey to black, then fire. Bumpers hang off, then fall off.</td></tr><tr><td>Wreck</td><td>At 0 health the van catches fire and stops: a strike. A wrecked cop respawns away from the van after a few seconds.</td></tr><tr><td>Repairs</td><td>Repair garages around the city fix the van and its tyres for a price. They refuse a van carrying illegal cargo.</td></tr><tr><td>Getting unstuck</td><td>A car stuck on its side or roof rights itself; a stuck car resets a little way back for a small health cost.</td></tr><tr><td>Sound</td><td>Each car has its own engine with fake gears, tyre squeal, crashes by how hard the hit is, scrapes and landings.</td></tr><tr><td>Looks</td><td>The van looks illegal on sight: blacked-out windows, armour plates, bullet holes and a SHADY SHIPPING CO sign.</td></tr></tbody></table></div><h2 class="s">The numbers</h2><div class="tbl"><table><thead><tr><th>Value</th><th>Van</th><th>Police car</th></tr></thead><tbody><tr><td>Top speed</td><td>160 km/h</td><td>176 km/h</td></tr><tr><td>Health</td><td>100</td><td>100</td></tr><tr><td>Handbrake turn boost</td><td>2 times</td><td>1.7 times</td></tr><tr><td>Suspension stiffness</td><td>1.6 times</td><td>1 time</td></tr><tr><td>Chase camera distance / height</td><td>7.2 m / 2.3 m</td><td>6.5 m / 1.2 m</td></tr><tr><td>Radar range parked / at top speed</td><td>130 m / 200 m</td><td>110 m / 170 m</td></tr></tbody></table></div>
+<div class="tbl"><table><thead><tr><th>Damage value</th><th>Setting</th></tr></thead><tbody><tr><td>Damage per km/h of speed lost</td><td>0.25 health</td></tr><tr><td>Multiplier: wall / traffic / cop car</td><td>1 / 0.8 / 1.5 times</td></tr><tr><td>Most health one crash can take</td><td>20</td></tr><tr><td>Engine smokes / catches fire</td><td>10% health lost / below 50% left</td></tr><tr><td>Bumper hangs off / falls off</td><td>22 / 45 health lost</td></tr><tr><td>Repair garage</td><td>£150</td></tr></tbody></table></div>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/gsdd_img031.jpg" alt="The van at 45% health: soot over the body and smoke from the bonnet, with the radar showing a route to the nearest repair garage"></div><figcaption>The van at 45% health: soot over the body and smoke from the bonnet, with the radar showing a route to the nearest repair garage</figcaption></figure><div class="from-log"><span>From the build log</span><b>Vehicles and driving feel</b></div><h2 class="s">Everything in the build</h2><div class="tbl"><table><thead><tr><th>Feature</th><th>What it does for play</th></tr></thead><tbody><tr><td>One shared vehicle base</td><td>Van and police car share one set of code; a fix reaches both</td></tr><tr><td>Arcade handling</td><td>Steering, grip, drift, handbrake and brake assist that feel like an arcade racer</td></tr><tr><td>Live handling values</td><td>Every handling number comes from the tuning sheet and changes during play</td></tr><tr><td>Chase and bonnet cameras</td><td>Two views, look-back, and a field of view that widens with speed</td></tr><tr><td>Looking around</td><td>Mouse or stick swings the view round the car, then it swings back</td></tr><tr><td>Self-righting</td><td>A flipped car lands on its wheels or rolls back over by itself</td></tr><tr><td>Auto-reset when stuck</td><td>Only a truly stuck car is reset, after 3 s, for 5 health</td></tr><tr><td>Kerb riding</td><td>The van rides kerbs easily; the police car is slower on them on purpose</td></tr><tr><td>Nitro in two halves</td><td>One tap fires a fixed boost; two taps empty the tank</td></tr><tr><td>Ability feel</td><td>Camera kicks and gamepad rumble when nitro fires or fails</td></tr></tbody></table></div><h2 class="s">From the build</h2><figure class="fig"><div class="imgs"><img src="../media/wiki/2026-10-28_van_and_police_car.jpg" alt="Both cars in the city: the van with crash dents and the police car with its bumper net"></div><figcaption>Both cars in the city: the van with crash dents and the police car with its bumper net</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img045.jpg" alt="The van taking a city kerb in the kerb test, before the ball-shaped wheel traces"></div><figcaption>The van taking a city kerb in the kerb test, before the ball-shaped wheel traces</figcaption></figure>
+    <button class="opener" type="button">Why it works like this <span aria-hidden="true">→</span></button>
+  </article>
+  <article class="topic d2">
+    <button class="peek" type="button" aria-label="Why it works like this: open the design page"><span class="pk-arrow" aria-hidden="true"></span><span class="pk-text">Why it works like this</span></button>
+    <div class="d2in">
+      <button class="closer" type="button">Back to how it plays</button>
+      <div class="crumb">Wiki / Behind the design / Driving &amp; damage</div>
+      <span class="kick des">Behind the design</span>
+      <h1 class="t">Why <i>driving</i></h1>
+      <p class="credits"><b>Built by</b> Abdullah · <b>Numbers by</b> Dafydd · <b>In-game HUD by</b> Ieuan · <b>Tested by</b> Abdullah (feel), the team (playtests)</p>
+      <aside class="inspo"><span class="lab">Inspired by</span><div class="ins-item"><figure><img src="../media/wiki/gsdd_burnout_crash.jpg" alt="Burnout Paradise: crashes are spectacular and part of the fun, not a punishment (Criterion Games, 2008)"><figcaption>Burnout Paradise: crashes are spectacular and part of the fun, not a punishment (Criterion Games, 2008)</figcaption></figure><div class="txt"><p><b>Burnout Paradise (Criterion Games, 2008):</b> physics cars with heavy arcade help, where crashing is a show.</p>
+<p>What we took: forgiving handling and crashes that look great. What we changed: damage adds up towards a wreck, so a crash has a cost.</p></div></div><div class="ins-item text-only"><div class="txt"><p><b>Swink (2009), <i>Game Feel</i>:</b> how a game feels comes from instant response to input, simulated physics that react believably, and polish such as camera, sound and effects.</p>
+<p>What we took: every hit has a dent, a sound, a shake and a puff of effects, so damage is felt, not just read on a bar.</p></div></div></aside><aside class="inspo"><span class="lab">Inspired by</span><div class="ins-item"><figure><img src="../media/wiki/forza_horizon4.jpg" alt="Forza Horizon 4: a third-person chase camera on an open road (Playground Games, 2018)"><figcaption>Forza Horizon 4: a third-person chase camera on an open road (Playground Games, 2018)</figcaption></figure><div class="txt"><p><b>Forza Horizon 4 (Playground Games, 2018):</b> arcade handling built on a physics car, with a chase camera that swings round the car when the player looks around.</p>
+<p>What we took: assists on top of real physics, and a camera that orbits the car. What we changed: the camera never pitches on its own, because a tilting chase camera made prototype players feel sick.</p></div></div><div class="ins-item text-only"><div class="txt"><p><b>Swink (2009), <i>Game Feel</i>:</b> feel comes from the player's input, the car's response and the polish around it, judged together.</p>
+<p>What we took: nitro and abilities now answer with a camera kick, rumble and an effect, and a failed tap says so. What we changed: feel is judged by Abdullah driving it, not by test numbers.</p></div></div><div class="ins-item text-only"><div class="txt"><p><b>Fiedler (2004), <i>Fix Your Timestep!</i>:</b> physics runs at a fixed rate and the picture is blended between physics steps.</p>
+<p>What we took: the 60 Hz physics step and the smoothing between steps; this article explained the police car stutter.</p></div></div></aside>
+      
+      <h2 class="s">Why we chose this</h2><div class="tbl"><table><thead><tr><th>Option</th><th>For</th><th>Against</th><th>Verdict</th></tr></thead><tbody><tr><td>Simulation handling</td><td>Realistic</td><td>Hard to drive in a busy city; not the toy-box tone</td><td>Rejected</td></tr><tr><td>Moving cars without physics</td><td>Easy to network</td><td>Rams, nets and spin-outs need believable collisions</td><td>Rejected</td></tr><tr class="win"><td><b>Physics cars with arcade assists</b></td><td>Believable hits; fun to drive</td><td>Needs careful tuning and network prediction</td><td><b>Chosen</b></td></tr></tbody></table></div>
+<div class="tbl"><table><thead><tr><th>Damage option</th><th>For</th><th>Against</th><th>Verdict</th></tr></thead><tbody><tr><td>Damage per part (wheels, engine)</td><td>Deep</td><td>Hard to read at speed; big scope</td><td>Rejected</td></tr><tr class="win"><td><b>One health pool with visible stages</b></td><td>Easy to read; dents show where</td><td>Less depth</td><td><b>Chosen</b></td></tr></tbody></table></div>
+<p>Our pitch named bad driving feel as the biggest risk. The answer, also from our pitch, was to tune one car until it felt right before building the rest, and the van was that car. Abdullah tested handling, kerbs and bumps in the editor after every change.</p><h2 class="s">What can go wrong</h2><div class="tbl"><table><thead><tr><th>Situation</th><th>What the game does</th></tr></thead><tbody><tr><td>A crash stutters the game</td><td>Dents are worked out in the background and only the dented part is redrawn</td></tr><tr><td>A car hangs off its wheels at the start</td><td>A car with a driver is never left asleep</td></tr><tr><td>A car is stuck on its roof</td><td>It rights itself, or resets for a small health cost</td></tr><tr><td>A huge hit</td><td>One crash can never take more than 20 health</td></tr></tbody></table></div><h2 class="s">How we know it works</h2><div class="tbl"><table><thead><tr><th>Check</th><th>Target</th><th>Result so far</th></tr></thead><tbody><tr><td>Driving feel</td><td>Testers rate handling as fun</td><td>Met in the uni playtests, after the steering retune</td></tr><tr><td>No stutter on crashes</td><td>A dent costs under 1 ms a frame</td><td>Met: was 5 to 50 ms</td></tr><tr><td>Kerbs</td><td>The van climbs kerbs the police car cannot</td><td>Met</td></tr><tr><td>Online sync</td><td>Cars meet at the same moment on every screen</td><td>Met at 50 to 73 ms of lag</td></tr></tbody></table></div><div class="from-log"><span>From the build log</span><b>Vehicles and driving feel</b></div><h2 class="s">What we set out to do</h2><p>The prototype handled well but ran poorly and pushed the cars from code the network could not replay. Production had to start from a measured, fast foundation, rebuild the arcade handling so it works online, and give the courier a way to break a chase through driving skill.</p><h2 class="s">The big decisions</h2><p>Full comparison: Trade-off Appendix.</p>
+<h3>How the handling is built</h3>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>Rebuild in C++ inside the physics step</td><td>Replays exactly when the network rewinds</td><td>Rewrites work that already existed</td><td>Chosen</td></tr><tr><td>Reuse the prototype Blueprint</td><td>Already tuned</td><td>Its pushes are not replayed online, so cars snap back</td><td>Rejected</td></tr><tr><td>One class per car</td><td>Each car free to differ</td><td>Every fix written twice</td><td>Rejected</td></tr></tbody></table></div>
+<p>Online, each player's machine predicts its own car and the server corrects it. A correction rewinds the car and replays its physics. Handling that runs inside the physics step is replayed with it, so every machine agrees. Abdullah rebuilt the prototype's assists this way, on one base shared by both cars. The police car then needed no new code at all: only a model, wheels and a handling row.</p>
+<h3>How a stuck car gets moving</h3>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>A reset key</td><td>Always gets the player moving</td><td>A boxed-in van teleports out of a police trap</td><td>Rejected</td></tr><tr><td>Self-righting, then auto-reset only when truly stuck</td><td>The police team's work cannot be undone</td><td>A rare stuck car waits 3 s</td><td>Chosen</td></tr></tbody></table></div>
+<p>Abdullah found that "pressing R is super exploitable". Three cops could box the van in and it would simply teleport out. The reset key was removed. Most flips now fix themselves in about a second, so the chase keeps going.</p>
+<h3>How the police car handles kerbs</h3>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>Same as the van</td><td>Even</td><td>No terrain advantage for the courier</td><td>Rejected</td></tr><tr><td>Slower and rougher on kerbs</td><td>Kerbs become an escape route for the van</td><td>The police are slowed on purpose</td><td>Chosen</td></tr></tbody></table></div>
+<p>This was Abdullah's call: riding kerbs should be the van's advantage. It is written into the design document so nobody "fixes" it later.</p><h2 class="s">Playtesting and what changed</h2><div class="tbl"><table><thead><tr><th>Date</th><th>Who played</th><th>What they found</th><th>What we changed</th></tr></thead><tbody><tr><td>21 Oct</td><td>Abdullah, editor</td><td>Van and police car drive; live tuning works</td><td>Dafydd given the handling course to tune on</td></tr><tr><td>24 Oct</td><td>Abdullah, editor</td><td>Mouse look felt unsteady</td><td>The view now eases after the input</td></tr><tr><td>25 Oct</td><td>Abdullah, editor</td><td>Reset key exploitable; camera looked under the map when upside down</td><td>Reset key removed; camera lifts along the world's up</td></tr><tr><td>26 Oct</td><td>Abdullah's playtest</td><td>Kerbs hit like walls and cost health</td><td>Ball-shaped wheel traces, firmer van springs, no damage on low steps</td></tr><tr><td>26 Oct</td><td>Abdullah's playtest</td><td>Look-back slid the camera over the roof</td><td>No camera lag while looking back</td></tr><tr><td>30 Oct</td><td>Abdullah, uni playtest</td><td>Police car turned too slowly</td><td>Police steering sharpened (table below)</td></tr><tr><td>9 Nov</td><td>Online test</td><td>Van hung off its wheels at the start</td><td>A car with a driver is never left asleep</td></tr></tbody></table></div>
+<p>The police steering changes after the uni playtest were:</p>
+<div class="tbl"><table><thead><tr><th>Setting</th><th>Before</th><th>After</th></tr></thead><tbody><tr><td>Fastest turn rate</td><td>150</td><td>185</td></tr><tr><td>Turn rate at top speed</td><td>80</td><td>95</td></tr><tr><td>Full steering up to</td><td>20</td><td>12</td></tr><tr><td>Turn response</td><td>9</td><td>12</td></tr><tr><td>Physics wheel size</td><td>38 cm</td><td>44 cm</td></tr></tbody></table></div><h2 class="s">Problems and fixes</h2><div class="tbl"><table><thead><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr></thead><tbody><tr><td>The editor froze for about 70 ms every 6 s</td><td>The tuning sheet was re-read on every download</td><td>Only re-read when a value really changes; worst frame now 13 ms</td></tr><tr><td>The police car stuttered at speed, the van did not</td><td>Smoothing between physics steps gives up when a frame takes over about 20 ms</td><td>Faster frames from the city speed-up</td></tr><tr><td>Kerbs kicked the car</td><td>A thin ray met the kerb edge and jumped up it in one frame</td><td>A ball the size of the tyre rolls up the kerb</td></tr><tr><td>A slow handbrake donut rolled the van over</td><td>No resistance to tipping</td><td>Roll resistance, like an anti-roll bar</td></tr><tr><td>Holding brake reversed at 93 km/h</td><td>Reverse speed was not held to the sheet value</td><td>Held to each car's value; tested at 42 km/h against 40</td></tr></tbody></table></div>
+<p>Two of these were found by measuring, not guessing. For the 6-second freeze, a self-drive test logged every frame. The slow frames came exactly 6.0 seconds apart, which matched the sheet download, not the car. For the police stutter, two guesses had been wrong. Abdullah then drove both cars with a per-frame recorder. One comparison showed the cause (see the chart below). A larger smoothing window fixed it fully but felt like input lag, so it was left at the default.</p>
+<p>The foundation was measured too. The headless host was found running at 1,380 frames a second and using a whole CPU core, and was capped at 60.</p>
+<div class="tbl"><table><thead><tr><th>Measurement (1080p, test map)</th><th>Lab tier</th><th>High tier</th></tr></thead><tbody><tr><td>Frames per second</td><td>185</td><td>133</td></tr><tr><td>Graphics card time per frame</td><td>4.7 ms</td><td>6.8 ms</td></tr><tr><td>Within the 16.6 ms budget</td><td>Yes</td><td>Yes</td></tr></tbody></table></div><h2 class="s">Lessons</h2><ul class="dots"><li>Record before guessing: one recording of each car answered what two guesses could not.</li><li>Driving feel is tested by the person who drives it, because automated bump runs passed while the car still felt wrong.</li><li>Settings a whole class depends on, such as physics being switched on, belong in code and not in each Blueprint.</li></ul><h2 class="s">Latest</h2><div class="tbl"><table><thead><tr><th>Date</th><th>What changed</th><th>Why</th></tr></thead><tbody><tr><td>8 Nov 2026</td><td>Nitro fires in two fixed halves, with a blast and a fire trail</td><td>One tap gives a fixed, predictable boost</td></tr><tr><td>9 Nov 2026</td><td>Nitro slot shows both halves; a failed tap says NOT READY</td><td>A tap that does nothing now says so</td></tr><tr><td>9 Nov 2026</td><td>Camera kicks and rumble for nitro</td><td>Abilities should be felt, not just seen</td></tr><tr><td>9 Nov 2026</td><td>A car with a driver is never left asleep</td><td>Van hung off its wheels at the start online</td></tr></tbody></table></div>
+    </div>
+  </article>
+</div>
+    </div>
+  </div>
+</main>
+<footer class="foot"><div class="wrap">Shady Shipping is in development by Underdog Studios. Numbers on these pages come from our live tuning sheet and can change between builds.</div></footer>
+<script>
+(function () {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  document.querySelectorAll('.side > *').forEach(function (el, i) { el.style.setProperty('--i', i); });
+  document.addEventListener('click', function (e) {
+    var img = e.target.closest('.fig img, .ins-item img');
+    if (!img) return;
+    var z = document.createElement('div'); z.className = 'zoom'; z.setAttribute('role', 'dialog'); z.setAttribute('aria-label', 'Picture, click to close');
+    var big = document.createElement('img'); big.src = img.src; big.alt = img.alt; z.appendChild(big);
+    var cap = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+    if (cap) { var p = document.createElement('p'); p.textContent = cap.textContent; z.appendChild(p); }
+    function shut() { z.remove(); document.removeEventListener('keydown', esc); }
+    function esc(k) { if (k.key === 'Escape') shut(); }
+    z.addEventListener('click', shut); document.addEventListener('keydown', esc);
+    document.body.appendChild(z);
+  });
+  function toTop(el) { if (el) el.scrollTop = 0; }
+  document.querySelectorAll('.topic, .main').forEach(toTop);
+  function openDuo(d) {
+    if (!d) return;
+    d.classList.add('open');
+    toTop(d.querySelector('.d2'));
+    if (window.innerWidth <= 900) { var t = d.querySelector('.d2').getBoundingClientRect().top + window.scrollY - 70; window.scrollTo(0, Math.max(0, t)); }
+  }
+  document.querySelectorAll('.duo .peek, .opener').forEach(function (b) { b.addEventListener('click', function () { openDuo(b.closest('.duo')); if (history.replaceState) history.replaceState(null, '', '#why'); }); });
+  document.querySelectorAll('.closer').forEach(function (b) { b.addEventListener('click', function () { var d = b.closest('.duo'); d.classList.remove('open'); toTop(d.querySelector('.d1')); toTop(d.querySelector('.d2')); if (history.replaceState) history.replaceState(null, '', location.pathname); }); });
+  if (location.hash === '#why') { var d = document.querySelector('.duo'); if (d) { d.classList.add('instant', 'open'); setTimeout(function () { d.classList.remove('instant'); }, 50); } }
+})();
+</script>
+</body>
+</html>

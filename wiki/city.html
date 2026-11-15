@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Building the city · Shady Shipping Wiki</title>
+<meta name="description" content="Building the city: how Shady Shipping was built.">
+<link rel="icon" type="image/png" href="../media/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;1,900&family=Barlow:wght@400;500;600&family=Bungee&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Shady Shipping wiki: the game page's night colours on a parcel-sticker background, a topic list down the side, and every topic's design page behind a purple door. -TripleA */
+:root {
+  --night: #0B1638; --deep: #040817; --panel: #17286A; --line: #3B56AD;
+  --text: #EEF2FF; --mute: #B6C1E6; --blue: #3A72FF; --pink: #FF3FA4;
+  --legal: #36D6FF; --illegal: #A65BFF; --hot: #FFC21A; --stock: #ECE6D8; --ink: #121010;
+  --logo: "Barlow Condensed", "Arial Narrow", sans-serif; --body: "Barlow", "Segoe UI", sans-serif;
+  --ui: "Bungee", Impact, sans-serif; --mono: "IBM Plex Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 80px; }
+body { margin: 0; color: var(--text); font: 400 17px/1.6 var(--body); background: var(--night) url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22700%22 font-family=%22Bungee, Impact, sans-serif%22%3E%3Cg transform=%22translate(110 90) rotate(-6)%22 opacity=%22.2%22%3E%3Crect x=%22-50%22 y=%22-22%22 width=%22101%22 height=%2244%22 fill=%22none%22 stroke=%22%2336D6FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%2336D6FF%22%3ELEGAL%3C/text%3E%3C/g%3E%3Cg transform=%22translate(470 120) rotate(-18)%22 opacity=%22.2%22%3E%3Crect x=%22-66%22 y=%22-22%22 width=%22131%22 height=%2244%22 fill=%22none%22 stroke=%22%23A65BFF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23A65BFF%22%3EILLEGAL%3C/text%3E%3C/g%3E%3Cg transform=%22translate(300 300) rotate(0)%22 opacity=%22.2%22%3E%3Crect x=%22-36%22 y=%22-22%22 width=%2271%22 height=%2244%22 fill=%22none%22 stroke=%22%23FFC21A%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FFC21A%22%3EHOT%3C/text%3E%3C/g%3E%3Cg transform=%22translate(90 470) rotate(14)%22 opacity=%22.2%22%3E%3Crect x=%22-66%22 y=%22-22%22 width=%22131%22 height=%2244%22 fill=%22none%22 stroke=%22%23FF3FA4%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FF3FA4%22%3EFRAGILE%3C/text%3E%3C/g%3E%3Cg transform=%22translate(560 420) rotate(-14)%22 opacity=%22.2%22%3E%3Crect x=%22-88%22 y=%22-22%22 width=%22176%22 height=%2244%22 fill=%22none%22 stroke=%22%23EEF2FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23EEF2FF%22%3ESIGNED FOR%3C/text%3E%3C/g%3E%3Cg transform=%22translate(260 600) rotate(-5)%22 opacity=%22.2%22%3E%3Crect x=%22-148%22 y=%22-22%22 width=%22296%22 height=%2244%22 fill=%22none%22 stroke=%22%23FFC21A%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FFC21A%22%3ENO QUESTIONS ASKED%3C/text%3E%3C/g%3E%3Cg transform=%22translate(620 650) rotate(13)%22 opacity=%22.2%22%3E%3Crect x=%22-96%22 y=%22-22%22 width=%22191%22 height=%2244%22 fill=%22none%22 stroke=%22%2336D6FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%2336D6FF%22%3ETHIS WAY UP%3C/text%3E%3C/g%3E%3Cg opacity=%22.12%22%3E%3Crect x=%22380%22 y=%22230%22 width=%22230%22 height=%2234%22 fill=%22%23C9A15A%22 transform=%22rotate(-24 495 247)%22/%3E%3Crect x=%220%22 y=%22560%22 width=%22200%22 height=%2234%22 fill=%22%23C9A15A%22 transform=%22rotate(14 100 577)%22/%3E%3C/g%3E%3C/svg%3E") repeat fixed; }
+img { max-width: 100%; display: block; }
+a { color: var(--legal); }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+:focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+.wrap { max-width: 1440px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+code { font: 500 .9em var(--mono); background: rgba(255,255,255,.08); padding: 1px 5px; }
+
+/* Top bar */
+.bar { position: sticky; top: 0; z-index: 20; background: var(--stock); color: var(--ink); border-bottom: 4px solid var(--ink); }
+.bar .wrap { display: flex; align-items: center; gap: 16px; padding-block: 10px; }
+.bar a { color: var(--ink); text-decoration: none; font: 800 18px/1 var(--logo); letter-spacing: .08em; text-transform: uppercase; }
+.bar .brand { display: flex; align-items: center; gap: 10px; }
+.bar .brand img { width: 30px; height: 30px; border-radius: 7px; }
+.bar .crumb-top { font: 400 13px/1 var(--ui); background: var(--ink); color: var(--hot); padding: 6px 8px 5px; }
+.bar .studio { margin-left: auto; }
+.bar a:hover { color: #B11C26; }
+
+/* Layout */
+.wiki { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 34px; padding-block: 34px 80px; }
+.main { min-width: 0; }
+.side { position: sticky; top: 80px; align-self: start; display: grid; gap: 2px; max-height: calc(100vh - 100px); overflow-y: auto; scrollbar-width: thin; }
+.side .grp { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin: 16px 0 6px; }
+.side a { font: 800 18px/1.1 var(--logo); text-transform: uppercase; letter-spacing: .04em; color: var(--text); text-decoration: none; padding: 7px 10px; border-left: 4px solid transparent; background: rgba(4,8,23,.55); }
+.side a:hover { border-color: var(--line); }
+.side a.on { border-color: var(--pink); background: var(--panel); color: var(--hot); }
+.side a.home { font: 400 15px/1.1 var(--ui); color: var(--hot); }
+@media (max-width: 900px) {
+  .wiki { grid-template-columns: 1fr; gap: 18px; padding-top: 18px; }
+  .side { position: sticky; top: 58px; z-index: 5; display: flex; overflow-x: auto; overflow-y: hidden; max-height: none; gap: 6px; padding: 8px 0; background: var(--night); scrollbar-width: none; }
+  .side .grp { display: none; }
+  .side a { white-space: nowrap; border-left: 0; border-bottom: 4px solid transparent; }
+  .side a.on { border-color: var(--pink); }
+}
+
+/* Type */
+.kick { display: block; font: 400 14px/1 var(--ui); color: var(--hot); margin-bottom: 12px; }
+.kick.des { color: var(--illegal); }
+h1.t { font: 900 italic clamp(40px, 4.6vw, 66px)/.9 var(--logo); text-transform: uppercase; }
+h1.t.big { font-size: clamp(56px, 8vw, 110px); }
+h1.t i { color: var(--blue); font-style: italic; }
+h2.s { font: 900 italic clamp(28px, 2.8vw, 38px)/.95 var(--logo); text-transform: uppercase; margin: 34px 0 12px; }
+h3 { font: 800 21px/1.1 var(--logo); text-transform: uppercase; letter-spacing: .04em; margin: 22px 0 8px; color: var(--hot); }
+p { margin: 0 0 12px; color: #D9DCE6; }
+.lead, .lead-block p:first-child { font-size: 19px; color: var(--text); max-width: 64ch; }
+.lead-block { margin-top: 16px; }
+.crumb { font: 500 12px/1 var(--mono); color: var(--mute); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+.credits { font: 500 13px/1.5 var(--mono); color: var(--mute); }
+.credits b { color: var(--text); font-weight: 500; }
+ul.dots { margin: 8px 0 14px; padding: 0; list-style: none; display: grid; gap: 6px; }
+ul.dots li { padding-left: 22px; position: relative; color: #D9DCE6; }
+ul.dots li::before { content: ""; position: absolute; left: 0; top: .6em; width: 10px; height: 10px; background: var(--pink); transform: rotate(45deg); }
+ol.nums-list { margin: 8px 0 14px; padding-left: 22px; color: #D9DCE6; }
+
+/* Status chips */
+.status { display: inline-block; font: 500 12px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; border: 1px solid currentColor; padding: 6px 8px; margin: 14px 8px 0 0; }
+.status.built { color: var(--legal); }
+.status.wip { color: var(--hot); }
+.status.planned { color: var(--illegal); border-style: dashed; }
+
+/* Tables and figures */
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); background: rgba(4,8,23,.75); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(59,86,173,.6); vertical-align: top; }
+th { font: 500 12px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--mute); background: rgba(23,40,106,.6); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { color: var(--text); font-weight: 600; }
+tr.win td { background: rgba(255,194,26,.1); }
+tr.win td:last-child { color: var(--hot); }
+.fig { margin: 18px 0; }
+.fig .imgs { display: grid; gap: 8px; }
+.fig.multi .imgs { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.fig img { width: 100%; border: 1px solid var(--line); background: #000; }
+.fig figcaption { font: 500 13px/1.45 var(--mono); color: var(--mute); margin-top: 8px; }
+.inspo { margin: 20px 0; padding: 16px 18px 6px; border-left: 6px solid var(--hot); background: rgba(255,194,26,.07); }
+.inspo .lab { display: block; font: 400 13px/1 var(--ui); color: var(--hot); margin-bottom: 10px; }
+
+/* Home */
+.doors { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 28px; }
+.door { background: var(--panel); border: 1px solid var(--line); border-top: 8px solid var(--c); padding: 26px 24px 26px; display: grid; gap: 12px; align-content: start; text-decoration: none; color: var(--text); transition: transform .15s ease, box-shadow .15s ease; }
+.door:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--c); }
+.door .who { font: 500 13px/1 var(--mono); color: var(--mute); text-transform: uppercase; letter-spacing: .1em; }
+.door h2 { font: 900 italic clamp(38px, 4vw, 58px)/.9 var(--logo); text-transform: uppercase; color: var(--c); }
+.door p { margin: 0; }
+.door .go { font: 400 14px/1 var(--ui); color: var(--c); margin-top: 6px; }
+.index { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.ig { background: rgba(4,8,23,.75); border: 1px solid var(--line); padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.ig .grp2 { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin-bottom: 6px; }
+.ig a { font: 800 19px/1.3 var(--logo); text-transform: uppercase; color: var(--text); text-decoration: none; }
+.ig a:hover { color: var(--hot); }
+@media (max-width: 760px) { .doors { grid-template-columns: 1fr; } }
+
+/* Deep pages (one column) */
+.deep { max-width: 980px; margin-top: 16px; background: rgba(4,8,23,.82); border: 1px solid var(--line); border-top: 6px solid var(--illegal); padding: 8px 24px 20px; }
+
+/* Topic: the player page in the middle, the design page peeking out beside it */
+.topic { background: rgba(4,8,23,.9); border: 1px solid var(--line); padding: 22px 24px 26px; min-width: 0; }
+.d1 { border-top: 6px solid var(--legal); }
+.d2 { border-top: 6px solid var(--illegal); position: relative; }
+.duo { --g: 22px; position: relative; }
+.duo:not(.open) > .d1 { width: calc(50% - var(--g) / 2 + 120px); margin: 0 auto; }
+.duo:not(.open) > .d2 { position: absolute; top: 0; bottom: 0; left: calc(75% - var(--g) / 4 + 60px + 12px); width: 64px; padding: 0; overflow: hidden; border: 0; }
+.duo:not(.open) > .d2 > .d2in { display: none; }
+.duo.open { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--g); align-items: start; }
+.duo.open > .d1 { animation: slideL .55s cubic-bezier(.3,1.2,.5,1) backwards; }
+.duo.open > .d2 { animation: popIn .55s cubic-bezier(.3,1.2,.5,1) backwards; }
+.duo.instant > .d1, .duo.instant > .d2 { animation: none; }
+@keyframes slideL { 0% { transform: translateX(calc(50% + var(--g) / 2 - 60px)); } 100% { transform: none; } }
+@keyframes popIn { 0% { transform: translateX(-30%); opacity: 0; } 100% { transform: none; opacity: 1; } }
+.peek { position: absolute; left: 0; top: 0; bottom: 0; width: 64px; z-index: 2; border: 0; cursor: pointer; background: var(--illegal); color: #fff; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 22px 0 0; transition: background .15s ease, transform .15s ease; }
+.peek .pk-text { writing-mode: vertical-rl; font: 400 15px/1 var(--ui); letter-spacing: .04em; white-space: nowrap; }
+.peek .pk-arrow { border-left: 16px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+.peek:hover { background: #B877FF; transform: translateX(-4px); }
+.duo.open .peek { display: none; }
+.opener { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font: 400 15px/1 var(--ui); color: #fff; background: var(--illegal); border: 0; padding: 14px 18px 13px; cursor: pointer; box-shadow: 6px 6px 0 var(--deep); transition: transform .12s ease, box-shadow .12s ease; }
+.opener:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--deep); }
+.duo.open .opener { display: none; }
+.closer { font: 400 14px/1 var(--ui); color: var(--hot); background: transparent; border: 2px solid var(--hot); padding: 10px 14px 9px; cursor: pointer; margin-bottom: 18px; }
+.closer::before { content: ""; display: inline-block; margin-right: 10px; border-right: 10px solid var(--hot); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+@media (max-width: 1200px) {
+  .duo:not(.open) > .d1 { width: auto; margin-right: 76px; }
+  .duo:not(.open) > .d2 { left: auto; right: 0; }
+  .duo.open { grid-template-columns: 1fr; }
+  @keyframes slideL { 0% { transform: none; } 100% { transform: none; } }
+}
+@media (max-width: 640px) {
+  .duo:not(.open) > .d1 { margin-right: 0; }
+  .duo:not(.open) > .d2 { position: relative; left: auto; right: auto; width: auto; height: 64px; margin-top: 14px; }
+  .peek { right: 0; width: auto; bottom: 0; flex-direction: row; justify-content: center; padding: 0 16px; }
+  .peek .pk-text { writing-mode: horizontal-tb; }
+  .peek:hover { transform: none; }
+  .topic { padding: 18px 16px 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .duo.open > .d1, .duo.open > .d2 { animation: none; } * { transition: none !important; } }
+
+.foot { border-top: 1px solid var(--line); background: var(--deep); }
+.foot .wrap { padding-block: 22px; font: 500 13px/1.5 var(--mono); color: var(--mute); }
+main.wrap { min-height: calc(100vh - 130px); }
+
+/* Long topics: on wide screens each card is a screen-high panel with its own scroll, so opening the door shows both tops at once */
+@media (min-width: 1201px) {
+  .topic { max-height: calc(100vh - 110px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+  .duo:not(.open) > .d2 { max-height: none; }
+}
+
+/* Inspiration cards: the game's picture beside what we took from it */
+.ins-item { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 16px; align-items: start; padding: 4px 0 14px; }
+.ins-item + .ins-item { border-top: 1px dashed rgba(255,194,26,.35); padding-top: 16px; }
+.ins-item.text-only { grid-template-columns: 1fr; }
+.ins-item figure { margin: 0; }
+.ins-item img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border: 2px solid var(--hot); box-shadow: 5px 5px 0 rgba(4,8,23,.9); transform: rotate(-1.5deg); }
+.ins-item:nth-child(odd of .ins-item) img { transform: rotate(1.5deg); }
+.ins-item figcaption { font: 500 11px/1.4 var(--mono); color: var(--mute); margin-top: 8px; }
+.ins-item .txt p:last-child { margin-bottom: 0; }
+@media (max-width: 1500px) { .duo.open .ins-item { grid-template-columns: 1fr; } .duo.open .ins-item img { max-width: 360px; } }
+@media (max-width: 560px) { .ins-item { grid-template-columns: 1fr; } }
+.fig.dia img { background: #fff; padding: 10px; border: 3px solid var(--legal); box-shadow: 6px 6px 0 rgba(4,8,23,.9); }
+
+/* Wide screens: the page itself never scrolls; the side list and each card scroll on their own */
+@media (min-width: 901px) {
+  html, body { height: 100%; overflow: hidden; }
+  body { display: flex; flex-direction: column; }
+  .bar { flex: none; }
+  main.wrap { flex: 1; min-height: 0; width: 100%; }
+  .wiki { height: 100%; padding-block: 22px; box-sizing: border-box; }
+  .side { position: static; max-height: 100%; }
+  .main { height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; padding-right: 4px; }
+  .foot { display: none; }
+}
+@media (min-width: 1201px) {
+  .main:has(> .duo) { overflow: hidden; }
+  .duo { height: 100%; }
+  .duo.open { align-items: stretch; }
+  .topic { max-height: 100%; }
+  .duo.open > .topic { height: 100%; }
+}
+
+/* The door strip reads normally: a wider tab with the words across, not down */
+.duo:not(.open) > .d2 { width: 132px; }
+.peek { width: 132px; padding: 22px 12px 0; gap: 14px; justify-content: flex-start; }
+.peek .pk-text { writing-mode: horizontal-tb; white-space: normal; text-align: center; font-size: 17px; line-height: 1.15; }
+.peek .pk-arrow { order: 2; }
+@media (max-width: 1200px) {
+  .duo:not(.open) > .d1 { margin-right: 146px; }
+}
+@media (max-width: 640px) {
+  .duo:not(.open) > .d1 { margin-right: 0; }
+  .duo:not(.open) > .d2 { width: auto; }
+  .peek { width: auto; padding: 0 16px; flex-direction: row; justify-content: center; }
+  .peek .pk-arrow { order: 2; }
+}
+@media (min-width: 641px) { .peek { justify-content: center; padding: 0 12px; } }
+
+/* Under the hood: one wide card that scrolls inside itself, so its scrollbar sits on the card */
+.deep { max-width: none; margin-top: 0; padding: 24px 28px 28px; background: rgba(4,8,23,.9); }
+.deep h1.t { margin-bottom: 8px; }
+@media (min-width: 901px) {
+  .main:has(> .deep) { overflow: hidden; padding-right: 0; }
+  .deep { height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+}
+
+/* Motion: cards land, the list slides in, the door knocks once, photos lift, pictures open big */
+@keyframes land { 0% { transform: translateY(28px) scale(.97); opacity: 0; } 70% { transform: translateY(-4px) scale(1.005); opacity: 1; } 100% { transform: none; opacity: 1; } }
+@keyframes slideIn { 0% { transform: translateX(-24px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+@keyframes knock { 0%, 100% { transform: none; } 15% { transform: translateX(-12px); } 30% { transform: none; } 45% { transform: translateX(-12px); } 60% { transform: none; } }
+.duo:not(.open) > .d1, .deep, .main > .kick, .main > h1.t, .doors, .index { animation: land .5s cubic-bezier(.2,.9,.3,1.15) backwards; }
+.doors { animation-delay: .08s; } .index { animation-delay: .16s; }
+.side > * { animation: slideIn .35s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i, 0) * 28ms); }
+.duo:not(.open) > .d2 { animation: land .5s cubic-bezier(.2,.9,.3,1.15) .12s backwards; }
+.duo:not(.open) .peek { animation: knock .9s cubic-bezier(.3,1.4,.5,1) 1s 1 both; }
+.ins-item img { transition: transform .2s cubic-bezier(.2,.9,.3,1.3), box-shadow .2s ease; cursor: zoom-in; }
+.ins-item img:hover { transform: rotate(0deg) translate(-3px, -5px) scale(1.04); box-shadow: 10px 12px 0 rgba(4,8,23,.9); }
+.fig img { cursor: zoom-in; transition: transform .2s cubic-bezier(.2,.9,.3,1.3); }
+.fig img:hover { transform: translateY(-3px); }
+.zoom { position: fixed; inset: 0; z-index: 100; background: rgba(4,8,23,.92); display: grid; place-items: center; padding: 24px; cursor: zoom-out; animation: fadeIn .15s ease both; }
+.zoom img { max-width: min(1600px, 96vw); max-height: 86vh; width: auto; border: 3px solid var(--legal); box-shadow: 10px 10px 0 #000; background: #fff; animation: land .35s cubic-bezier(.2,.9,.3,1.15) both; }
+.zoom p { margin: 12px 0 0; font: 500 13px/1.4 var(--mono); color: var(--mute); text-align: center; max-width: 90ch; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .duo > *, .deep, .main > *, .side > *, .peek, .zoom, .zoom img { animation: none !important; } }
+
+/* A build-log chapter folded into a topic */
+.from-log { margin: 40px 0 6px; padding: 12px 14px; border: 2px dashed var(--line); background: rgba(23,40,106,.45); display: grid; gap: 4px; }
+.from-log span { font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.from-log b { font: 900 italic 24px/1 var(--logo); text-transform: uppercase; color: var(--hot); }
+
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="../shadyshipping.html"><img src="../media/favicon.png" alt="">Shady Shipping</a>
+    <span class="crumb-top">Wiki</span>
+    <a class="studio" href="../index.html">Underdog Studios</a>
+  </div>
+</header>
+<main class="wrap">
+  <div class="wiki">
+<nav class="side" aria-label="Wiki topics">
+<a class="home" href="index.html">Wiki home</a>
+<span class="grp">The round</span>
+<a href="round.html">The round</a>
+<a href="parcels.html">Parcels & jobs</a>
+<a href="heat.html">Heat & the radar</a>
+<a href="arrests.html">Arrests & the drop-in</a>
+<a href="money.html">Money & stars</a>
+<a href="hud.html">HUD, radar & routes</a>
+<span class="grp">On the road</span>
+<a href="vehicles.html">Driving & damage</a>
+<a href="repair.html">Wrecks & the repair garage</a>
+<a href="destruction.html">Destruction</a>
+<a href="traffic.html">Traffic</a>
+<span class="grp">Your kit</span>
+<a href="abilities.html">Abilities</a>
+<a href="lobby.html">Lobby & garage</a>
+<a href="sound.html">Sound & effects</a>
+<span class="grp">Coming later</span>
+<a href="dispatcher.html">The Dispatcher</a>
+<span class="grp">Under the hood</span>
+<a href="systems.html">How it fits together</a>
+<a href="online.html">Online play</a>
+<a href="balance.html">Balance</a>
+<a href="city.html" class="on" aria-current="page">Building the city</a>
+<a href="playtests.html">Playtests</a>
+</nav>
+    <div class="main">
+<div class="deep">
+<span class="kick">Under the hood</span>
+<h1 class="t">City and level</h1>
+<p>The city is the arena: a district of streets, alleys, junctions and garages where one van tries to lose four police cars. It had to run well on the uni PCs, drive smoothly, read clearly at speed and look as colourful as the game's interface.</p>
+<h2 class="s">What we set out to do</h2><p>The team bought a stylised modern city pack. Its demo map is a showroom built for screenshots, not for chases. We needed a game map that Dafydd could shape into a chase district, with parcel spots, garages, police spawns, player starts and exits. The level also had to hold a high frame rate on the lab PCs without losing the pack's look.</p>
+<p>Ownership was split clearly. Dafydd owns the level design: the layout, the new areas, paths, spawns and lane markings in his city map. Abdullah has the final say on art direction and map changes, and fixed the technical problems the map threw up.</p>
+<h2 class="s">What we built</h2><div class="tbl"><table><thead><tr><th>Feature</th><th>What it does for play</th></tr></thead><tbody><tr><td>A game copy of the city</td><td>A map Dafydd can cut down for chases; the pack map stays for cutscenes</td></tr><tr><td>Dafydd's city map</td><td>The chase district: his layout, new area, paths, spawns and lane decals</td></tr><tr><td>Building instancing</td><td>Repeated building pieces drawn in batches: same look, faster frames</td></tr><tr><td>Golden hour lighting</td><td>A low warm sun with cool shade, so colours stay strong</td></tr><tr><td>Sunset pastel recolour</td><td>Each brick family its own pastel; teal kerbs; pink neon</td></tr><tr><td>Level junctions</td><td>The pack's T-junctions and corners fixed so cars no longer bump</td></tr><tr><td>Curb ramps at garages</td><td>A garage on a pavement lays its own ramp over the curb</td></tr><tr><td>Placeable markers</td><td>Parcel spots, garages, police spawns, alley paths and exits</td></tr></tbody></table></div>
+<div class="tbl"><table><thead><tr><th>Lynch's element</th><th>In our city</th></tr></thead><tbody><tr><td>Paths</td><td>Main roads in cyan on the radar; alleys marked by Dafydd</td></tr><tr><td>Edges</td><td>The district boundary; two exits that open after the first star</td></tr><tr><td>Districts</td><td>Brick families recoloured as separate pastels</td></tr><tr><td>Nodes</td><td>Junctions, parcel spots and garages</td></tr><tr><td>Landmarks</td><td>Still thin; the uni playtest asked for more</td></tr></tbody></table></div>
+<h2 class="s">The big decisions</h2><p>Full comparison: Trade-off Appendix.</p>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>Cut the radar camera (city drawn twice a frame)</td><td>Biggest saving, nothing lost on screen</td><td>The radar needed a new design</td><td>Chosen</td></tr><tr><td>Ray tracing off</td><td>Saves 1.6 ms</td><td>Costs the look</td><td>Rejected</td></tr><tr><td>Nanite (the engine's detailed-mesh system) on its own</td><td>An engine feature</td><td>Changed nothing measurable</td><td>Rejected</td></tr></tbody></table></div>
+<p>Abdullah measured before changing anything. The render thread was the limit, and its breakdown showed the city drawn once for the screen and once for each car's radar camera. Removing that, then batching the building pieces, took the city from 97 to 125 frames a second with the same picture.</p>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>Recolour the pack's shared materials, then grade</td><td>Puts colour into the surfaces; one change covers every building</td><td>Many materials to tune</td><td>Chosen</td></tr><tr><td>A colour grade only</td><td>Minutes of work</td><td>Cannot add colour to grey or red-brown surfaces</td><td>Finishing pass only</td></tr><tr><td>New materials on each building in the map</td><td>Only this map changes</td><td>Thousands of overrides in Dafydd's working file</td><td>Rejected</td></tr></tbody></table></div>
+<p>The lecturers praised the arcade interface but called the world grey. Abdullah set the art direction himself and picked "sunset pastel". One rule was kept throughout: the world stays one step less saturated than the gameplay, so vans, cops, arrows and parcels are always the brightest things on screen. Changing the pack's shared materials kept the colour out of Dafydd's map file.</p>
+<h2 class="s">Playtesting and what changed</h2><div class="tbl"><table><thead><tr><th>Date</th><th>Who played</th><th>What they found</th><th>What we changed</th></tr></thead><tbody><tr><td>26 Oct</td><td>Abdullah</td><td>The city was too slow on the target PCs</td><td>Radar camera removed, buildings batched: "much more playable"</td></tr><tr><td>27 Oct</td><td>Abdullah</td><td>The van struggled into a garage on a pavement</td><td>A curb ramp, and the garage floor made solid to the wheels</td></tr><tr><td>28 Oct</td><td>Check of Dafydd's map</td><td>No parcel jobs: only one parcel spot</td><td>Dafydd placed more parcel spots (one became five)</td></tr><tr><td>29 Oct</td><td>Abdullah</td><td>Dafydd's map looked grey and flat beside the pack's showcase</td><td>A second, stacked lighting setup removed; lit for golden hour</td></tr><tr><td>29 Oct</td><td>Abdullah</td><td>Facing the sun was blinding</td><td>Fog glow, bloom and sun disc turned down; a shot into the sun added to every check</td></tr><tr><td>29 Oct</td><td>Abdullah</td><td>Bumps at every T-junction</td><td>The pack's junction pieces fixed</td></tr><tr><td>30 Oct</td><td>Uni playtest, written up by Abdullah</td><td>A bigger map with more turns, landmarks and lower kerbs</td><td>Passed to Dafydd; still open</td></tr><tr><td>31 Oct</td><td>Lecturers</td><td>The world looked grey next to the UI</td><td>The sunset pastel recolour</td></tr></tbody></table></div>
+<p>Dafydd also added player starts after the first map had only one, so every player after the courier spawned in the same place. His added spawns were used at the uni playtest.</p>
+<h2 class="s">Problems and fixes</h2><div class="tbl"><table><thead><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr></thead><tbody><tr><td>Cars rode up onto an invisible 12 cm lip at T-junctions</td><td>The pack's junction piece collided with a hidden slab, not the road you see</td><td>The visible road collides; the slab is off; drain pipes no collision</td></tr><tr><td>The map looked flat and grey</td><td>Two lighting setups stacked: two suns pointing down, two fogs, two skies</td><td>Removed the duplicates, then relit</td></tr><tr><td>Raising "brightness" made bricks darker</td><td>The pack's brightness and dirt values work backwards from their names</td><td>Tested each value at an extreme first</td></tr><tr><td>The pavements never changed colour</td><td>The pack shipped the pavement with its colour switch off</td><td>Found with an extreme tint test; switch turned on</td></tr><tr><td>The radar cut off streets at the city edge</td><td>It only counted streets within 400 m; the new city is about 1 km across</td><td>It uses the biggest connected street network</td></tr></tbody></table></div>
+<p>The junction bump took two tries. Six road pieces were a few millimetres to 4.7 cm off level, and levelling them did not remove the bump. Abdullah still felt it, so the whole road surface was traced every 50 cm (645,000 points) in a running game. That found the hidden slab under every T-junction. Fixing the pack's own pieces means every junction Dafydd places is right automatically.</p>
+<h2 class="s">Keeping the map safe</h2><p>The city map is a single binary file, so two people cannot merge their changes to it. Fixes were made in a sandbox copy of Dafydd's latest version and checked in only when he had nothing newer. Twice, a check-in of the map caused trouble:</p>
+<div class="tbl"><table><thead><tr><th>What happened</th><th>Effect</th><th>What we did</th></tr></thead><tbody><tr><td>Two map check-ins were saved over a copy from before the lighting fix</td><td>Golden hour and the levelled roads were lost</td><td>Re-ran the same scripted fixes; kept all of Dafydd's new work</td></tr><tr><td>A newer map needed a road plugin and assets not yet in the project</td><td>Players could not load into a match</td><td>Went back to the previous map until the plugin arrives</td></tr></tbody></table></div>
+<p>The lighting is applied by a script from one values file, which is why it could be put back exactly. The lesson for the team is simple: update to the latest version before opening the city map.</p>
+<h2 class="s">Evidence</h2><figure class="fig"><div class="imgs"><img src="../media/wiki/frame-time.png" alt="Average frame time over seven fixed spots: before, after removing the radar camera, and with building instancing"></div><figcaption>Average frame time over seven fixed spots: before, after removing the radar camera, and with building instancing</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img107.jpg" alt="The pack&#x27;s showcase (left), the city map with two stacked lighting setups (middle) and after the clean-up (right)"></div><figcaption>The pack's showcase (left), the city map with two stacked lighting setups (middle) and after the clean-up (right)</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img110.jpg" alt="The road audit: the hidden slab under every T-junction before the fix, and every junction at road level after"></div><figcaption>The road audit: the hidden slab under every T-junction before the fix, and every junction at road level after</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img116.jpg" alt="The same street before and after the sunset pastel recolour"></div><figcaption>The same street before and after the sunset pastel recolour</figcaption></figure>
+<p>Every visual change was checked from fixed camera views and compared side by side. Speed-up screenshots were also compared pixel by pixel: under 0.6% of pixels differed after instancing, which is particle and edge noise. Abdullah drove the junctions and garages himself after each fix.</p>
+<h2 class="s">Lessons</h2><ul class="dots"><li>Measure the part of the frame that is the limit before cutting anything; two early ideas would have cost looks for nothing.</li><li>A level that looks wrong may have two of something, so compare it with a known good map first.</li><li>What a wheel touches is the collision, not the mesh you see, so trace the surface.</li></ul>
+<h2 class="s">Latest</h2><div class="tbl"><table><thead><tr><th>Date</th><th>What changed</th><th>Why</th></tr></thead><tbody><tr><td>31 Oct 2026</td><td>Sunset pastel recolour, grade and lilac haze</td><td>Lecturers: the world looked grey</td></tr><tr><td>2 Nov 2026</td><td>Two exits placed by Abdullah, opening after the first star</td><td>The courier needs a way out of the district</td></tr><tr><td>9 Nov 2026</td><td>City map returned to the previous version</td><td>The newer one needed a plugin not yet in the project</td></tr></tbody></table></div>
+<aside class="inspo"><span class="lab">Inspired by</span><div class="ins-item text-only"><div class="txt"><p><b>The Image of the City (Lynch, 1960):</b> people find their way round a city through five kinds of element: paths, edges, districts, nodes (junctions and meeting points) and landmarks.</p>
+<p>What we took: a check of whether a fleeing driver can read the district at speed. What we changed: the "edges" are exits that only open during the round, and the radar draws the paths and districts for the player.</p></div></div></aside>
+</div>
+    </div>
+  </div>
+</main>
+<footer class="foot"><div class="wrap">Shady Shipping is in development by Underdog Studios. Numbers on these pages come from our live tuning sheet and can change between builds.</div></footer>
+<script>
+(function () {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  document.querySelectorAll('.side > *').forEach(function (el, i) { el.style.setProperty('--i', i); });
+  document.addEventListener('click', function (e) {
+    var img = e.target.closest('.fig img, .ins-item img');
+    if (!img) return;
+    var z = document.createElement('div'); z.className = 'zoom'; z.setAttribute('role', 'dialog'); z.setAttribute('aria-label', 'Picture, click to close');
+    var big = document.createElement('img'); big.src = img.src; big.alt = img.alt; z.appendChild(big);
+    var cap = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+    if (cap) { var p = document.createElement('p'); p.textContent = cap.textContent; z.appendChild(p); }
+    function shut() { z.remove(); document.removeEventListener('keydown', esc); }
+    function esc(k) { if (k.key === 'Escape') shut(); }
+    z.addEventListener('click', shut); document.addEventListener('keydown', esc);
+    document.body.appendChild(z);
+  });
+  function toTop(el) { if (el) el.scrollTop = 0; }
+  document.querySelectorAll('.topic, .main').forEach(toTop);
+  function openDuo(d) {
+    if (!d) return;
+    d.classList.add('open');
+    toTop(d.querySelector('.d2'));
+    if (window.innerWidth <= 900) { var t = d.querySelector('.d2').getBoundingClientRect().top + window.scrollY - 70; window.scrollTo(0, Math.max(0, t)); }
+  }
+  document.querySelectorAll('.duo .peek, .opener').forEach(function (b) { b.addEventListener('click', function () { openDuo(b.closest('.duo')); if (history.replaceState) history.replaceState(null, '', '#why'); }); });
+  document.querySelectorAll('.closer').forEach(function (b) { b.addEventListener('click', function () { var d = b.closest('.duo'); d.classList.remove('open'); toTop(d.querySelector('.d1')); toTop(d.querySelector('.d2')); if (history.replaceState) history.replaceState(null, '', location.pathname); }); });
+  if (location.hash === '#why') { var d = document.querySelector('.duo'); if (d) { d.classList.add('instant', 'open'); setTimeout(function () { d.classList.remove('instant'); }, 50); } }
+})();
+</script>
+</body>
+</html>

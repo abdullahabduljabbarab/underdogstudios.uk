@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Abilities · Shady Shipping Wiki</title>
+<meta name="description" content="Abilities in Shady Shipping: how it works, the numbers, and why we built it that way.">
+<link rel="icon" type="image/png" href="../media/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;1,900&family=Barlow:wght@400;500;600&family=Bungee&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Shady Shipping wiki: the game page's night colours on a parcel-sticker background, a topic list down the side, and every topic's design page behind a purple door. -TripleA */
+:root {
+  --night: #0B1638; --deep: #040817; --panel: #17286A; --line: #3B56AD;
+  --text: #EEF2FF; --mute: #B6C1E6; --blue: #3A72FF; --pink: #FF3FA4;
+  --legal: #36D6FF; --illegal: #A65BFF; --hot: #FFC21A; --stock: #ECE6D8; --ink: #121010;
+  --logo: "Barlow Condensed", "Arial Narrow", sans-serif; --body: "Barlow", "Segoe UI", sans-serif;
+  --ui: "Bungee", Impact, sans-serif; --mono: "IBM Plex Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 80px; }
+body { margin: 0; color: var(--text); font: 400 17px/1.6 var(--body); background: var(--night) url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22700%22 font-family=%22Bungee, Impact, sans-serif%22%3E%3Cg transform=%22translate(110 90) rotate(-6)%22 opacity=%22.2%22%3E%3Crect x=%22-50%22 y=%22-22%22 width=%22101%22 height=%2244%22 fill=%22none%22 stroke=%22%2336D6FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%2336D6FF%22%3ELEGAL%3C/text%3E%3C/g%3E%3Cg transform=%22translate(470 120) rotate(-18)%22 opacity=%22.2%22%3E%3Crect x=%22-66%22 y=%22-22%22 width=%22131%22 height=%2244%22 fill=%22none%22 stroke=%22%23A65BFF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23A65BFF%22%3EILLEGAL%3C/text%3E%3C/g%3E%3Cg transform=%22translate(300 300) rotate(0)%22 opacity=%22.2%22%3E%3Crect x=%22-36%22 y=%22-22%22 width=%2271%22 height=%2244%22 fill=%22none%22 stroke=%22%23FFC21A%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FFC21A%22%3EHOT%3C/text%3E%3C/g%3E%3Cg transform=%22translate(90 470) rotate(14)%22 opacity=%22.2%22%3E%3Crect x=%22-66%22 y=%22-22%22 width=%22131%22 height=%2244%22 fill=%22none%22 stroke=%22%23FF3FA4%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FF3FA4%22%3EFRAGILE%3C/text%3E%3C/g%3E%3Cg transform=%22translate(560 420) rotate(-14)%22 opacity=%22.2%22%3E%3Crect x=%22-88%22 y=%22-22%22 width=%22176%22 height=%2244%22 fill=%22none%22 stroke=%22%23EEF2FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23EEF2FF%22%3ESIGNED FOR%3C/text%3E%3C/g%3E%3Cg transform=%22translate(260 600) rotate(-5)%22 opacity=%22.2%22%3E%3Crect x=%22-148%22 y=%22-22%22 width=%22296%22 height=%2244%22 fill=%22none%22 stroke=%22%23FFC21A%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FFC21A%22%3ENO QUESTIONS ASKED%3C/text%3E%3C/g%3E%3Cg transform=%22translate(620 650) rotate(13)%22 opacity=%22.2%22%3E%3Crect x=%22-96%22 y=%22-22%22 width=%22191%22 height=%2244%22 fill=%22none%22 stroke=%22%2336D6FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%2336D6FF%22%3ETHIS WAY UP%3C/text%3E%3C/g%3E%3Cg opacity=%22.12%22%3E%3Crect x=%22380%22 y=%22230%22 width=%22230%22 height=%2234%22 fill=%22%23C9A15A%22 transform=%22rotate(-24 495 247)%22/%3E%3Crect x=%220%22 y=%22560%22 width=%22200%22 height=%2234%22 fill=%22%23C9A15A%22 transform=%22rotate(14 100 577)%22/%3E%3C/g%3E%3C/svg%3E") repeat fixed; }
+img { max-width: 100%; display: block; }
+a { color: var(--legal); }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+:focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+.wrap { max-width: 1440px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+code { font: 500 .9em var(--mono); background: rgba(255,255,255,.08); padding: 1px 5px; }
+
+/* Top bar */
+.bar { position: sticky; top: 0; z-index: 20; background: var(--stock); color: var(--ink); border-bottom: 4px solid var(--ink); }
+.bar .wrap { display: flex; align-items: center; gap: 16px; padding-block: 10px; }
+.bar a { color: var(--ink); text-decoration: none; font: 800 18px/1 var(--logo); letter-spacing: .08em; text-transform: uppercase; }
+.bar .brand { display: flex; align-items: center; gap: 10px; }
+.bar .brand img { width: 30px; height: 30px; border-radius: 7px; }
+.bar .crumb-top { font: 400 13px/1 var(--ui); background: var(--ink); color: var(--hot); padding: 6px 8px 5px; }
+.bar .studio { margin-left: auto; }
+.bar a:hover { color: #B11C26; }
+
+/* Layout */
+.wiki { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 34px; padding-block: 34px 80px; }
+.main { min-width: 0; }
+.side { position: sticky; top: 80px; align-self: start; display: grid; gap: 2px; max-height: calc(100vh - 100px); overflow-y: auto; scrollbar-width: thin; }
+.side .grp { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin: 16px 0 6px; }
+.side a { font: 800 18px/1.1 var(--logo); text-transform: uppercase; letter-spacing: .04em; color: var(--text); text-decoration: none; padding: 7px 10px; border-left: 4px solid transparent; background: rgba(4,8,23,.55); }
+.side a:hover { border-color: var(--line); }
+.side a.on { border-color: var(--pink); background: var(--panel); color: var(--hot); }
+.side a.home { font: 400 15px/1.1 var(--ui); color: var(--hot); }
+@media (max-width: 900px) {
+  .wiki { grid-template-columns: 1fr; gap: 18px; padding-top: 18px; }
+  .side { position: sticky; top: 58px; z-index: 5; display: flex; overflow-x: auto; overflow-y: hidden; max-height: none; gap: 6px; padding: 8px 0; background: var(--night); scrollbar-width: none; }
+  .side .grp { display: none; }
+  .side a { white-space: nowrap; border-left: 0; border-bottom: 4px solid transparent; }
+  .side a.on { border-color: var(--pink); }
+}
+
+/* Type */
+.kick { display: block; font: 400 14px/1 var(--ui); color: var(--hot); margin-bottom: 12px; }
+.kick.des { color: var(--illegal); }
+h1.t { font: 900 italic clamp(40px, 4.6vw, 66px)/.9 var(--logo); text-transform: uppercase; }
+h1.t.big { font-size: clamp(56px, 8vw, 110px); }
+h1.t i { color: var(--blue); font-style: italic; }
+h2.s { font: 900 italic clamp(28px, 2.8vw, 38px)/.95 var(--logo); text-transform: uppercase; margin: 34px 0 12px; }
+h3 { font: 800 21px/1.1 var(--logo); text-transform: uppercase; letter-spacing: .04em; margin: 22px 0 8px; color: var(--hot); }
+p { margin: 0 0 12px; color: #D9DCE6; }
+.lead, .lead-block p:first-child { font-size: 19px; color: var(--text); max-width: 64ch; }
+.lead-block { margin-top: 16px; }
+.crumb { font: 500 12px/1 var(--mono); color: var(--mute); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+.credits { font: 500 13px/1.5 var(--mono); color: var(--mute); }
+.credits b { color: var(--text); font-weight: 500; }
+ul.dots { margin: 8px 0 14px; padding: 0; list-style: none; display: grid; gap: 6px; }
+ul.dots li { padding-left: 22px; position: relative; color: #D9DCE6; }
+ul.dots li::before { content: ""; position: absolute; left: 0; top: .6em; width: 10px; height: 10px; background: var(--pink); transform: rotate(45deg); }
+ol.nums-list { margin: 8px 0 14px; padding-left: 22px; color: #D9DCE6; }
+
+/* Status chips */
+.status { display: inline-block; font: 500 12px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; border: 1px solid currentColor; padding: 6px 8px; margin: 14px 8px 0 0; }
+.status.built { color: var(--legal); }
+.status.wip { color: var(--hot); }
+.status.planned { color: var(--illegal); border-style: dashed; }
+
+/* Tables and figures */
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); background: rgba(4,8,23,.75); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(59,86,173,.6); vertical-align: top; }
+th { font: 500 12px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--mute); background: rgba(23,40,106,.6); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { color: var(--text); font-weight: 600; }
+tr.win td { background: rgba(255,194,26,.1); }
+tr.win td:last-child { color: var(--hot); }
+.fig { margin: 18px 0; }
+.fig .imgs { display: grid; gap: 8px; }
+.fig.multi .imgs { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.fig img { width: 100%; border: 1px solid var(--line); background: #000; }
+.fig figcaption { font: 500 13px/1.45 var(--mono); color: var(--mute); margin-top: 8px; }
+.inspo { margin: 20px 0; padding: 16px 18px 6px; border-left: 6px solid var(--hot); background: rgba(255,194,26,.07); }
+.inspo .lab { display: block; font: 400 13px/1 var(--ui); color: var(--hot); margin-bottom: 10px; }
+
+/* Home */
+.doors { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 28px; }
+.door { background: var(--panel); border: 1px solid var(--line); border-top: 8px solid var(--c); padding: 26px 24px 26px; display: grid; gap: 12px; align-content: start; text-decoration: none; color: var(--text); transition: transform .15s ease, box-shadow .15s ease; }
+.door:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--c); }
+.door .who { font: 500 13px/1 var(--mono); color: var(--mute); text-transform: uppercase; letter-spacing: .1em; }
+.door h2 { font: 900 italic clamp(38px, 4vw, 58px)/.9 var(--logo); text-transform: uppercase; color: var(--c); }
+.door p { margin: 0; }
+.door .go { font: 400 14px/1 var(--ui); color: var(--c); margin-top: 6px; }
+.index { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.ig { background: rgba(4,8,23,.75); border: 1px solid var(--line); padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.ig .grp2 { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin-bottom: 6px; }
+.ig a { font: 800 19px/1.3 var(--logo); text-transform: uppercase; color: var(--text); text-decoration: none; }
+.ig a:hover { color: var(--hot); }
+@media (max-width: 760px) { .doors { grid-template-columns: 1fr; } }
+
+/* Deep pages (one column) */
+.deep { max-width: 980px; margin-top: 16px; background: rgba(4,8,23,.82); border: 1px solid var(--line); border-top: 6px solid var(--illegal); padding: 8px 24px 20px; }
+
+/* Topic: the player page in the middle, the design page peeking out beside it */
+.topic { background: rgba(4,8,23,.9); border: 1px solid var(--line); padding: 22px 24px 26px; min-width: 0; }
+.d1 { border-top: 6px solid var(--legal); }
+.d2 { border-top: 6px solid var(--illegal); position: relative; }
+.duo { --g: 22px; position: relative; }
+.duo:not(.open) > .d1 { width: calc(50% - var(--g) / 2 + 120px); margin: 0 auto; }
+.duo:not(.open) > .d2 { position: absolute; top: 0; bottom: 0; left: calc(75% - var(--g) / 4 + 60px + 12px); width: 64px; padding: 0; overflow: hidden; border: 0; }
+.duo:not(.open) > .d2 > .d2in { display: none; }
+.duo.open { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--g); align-items: start; }
+.duo.open > .d1 { animation: slideL .55s cubic-bezier(.3,1.2,.5,1) backwards; }
+.duo.open > .d2 { animation: popIn .55s cubic-bezier(.3,1.2,.5,1) backwards; }
+.duo.instant > .d1, .duo.instant > .d2 { animation: none; }
+@keyframes slideL { 0% { transform: translateX(calc(50% + var(--g) / 2 - 60px)); } 100% { transform: none; } }
+@keyframes popIn { 0% { transform: translateX(-30%); opacity: 0; } 100% { transform: none; opacity: 1; } }
+.peek { position: absolute; left: 0; top: 0; bottom: 0; width: 64px; z-index: 2; border: 0; cursor: pointer; background: var(--illegal); color: #fff; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 22px 0 0; transition: background .15s ease, transform .15s ease; }
+.peek .pk-text { writing-mode: vertical-rl; font: 400 15px/1 var(--ui); letter-spacing: .04em; white-space: nowrap; }
+.peek .pk-arrow { border-left: 16px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+.peek:hover { background: #B877FF; transform: translateX(-4px); }
+.duo.open .peek { display: none; }
+.opener { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font: 400 15px/1 var(--ui); color: #fff; background: var(--illegal); border: 0; padding: 14px 18px 13px; cursor: pointer; box-shadow: 6px 6px 0 var(--deep); transition: transform .12s ease, box-shadow .12s ease; }
+.opener:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--deep); }
+.duo.open .opener { display: none; }
+.closer { font: 400 14px/1 var(--ui); color: var(--hot); background: transparent; border: 2px solid var(--hot); padding: 10px 14px 9px; cursor: pointer; margin-bottom: 18px; }
+.closer::before { content: ""; display: inline-block; margin-right: 10px; border-right: 10px solid var(--hot); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+@media (max-width: 1200px) {
+  .duo:not(.open) > .d1 { width: auto; margin-right: 76px; }
+  .duo:not(.open) > .d2 { left: auto; right: 0; }
+  .duo.open { grid-template-columns: 1fr; }
+  @keyframes slideL { 0% { transform: none; } 100% { transform: none; } }
+}
+@media (max-width: 640px) {
+  .duo:not(.open) > .d1 { margin-right: 0; }
+  .duo:not(.open) > .d2 { position: relative; left: auto; right: auto; width: auto; height: 64px; margin-top: 14px; }
+  .peek { right: 0; width: auto; bottom: 0; flex-direction: row; justify-content: center; padding: 0 16px; }
+  .peek .pk-text { writing-mode: horizontal-tb; }
+  .peek:hover { transform: none; }
+  .topic { padding: 18px 16px 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .duo.open > .d1, .duo.open > .d2 { animation: none; } * { transition: none !important; } }
+
+.foot { border-top: 1px solid var(--line); background: var(--deep); }
+.foot .wrap { padding-block: 22px; font: 500 13px/1.5 var(--mono); color: var(--mute); }
+main.wrap { min-height: calc(100vh - 130px); }
+
+/* Long topics: on wide screens each card is a screen-high panel with its own scroll, so opening the door shows both tops at once */
+@media (min-width: 1201px) {
+  .topic { max-height: calc(100vh - 110px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+  .duo:not(.open) > .d2 { max-height: none; }
+}
+
+/* Inspiration cards: the game's picture beside what we took from it */
+.ins-item { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 16px; align-items: start; padding: 4px 0 14px; }
+.ins-item + .ins-item { border-top: 1px dashed rgba(255,194,26,.35); padding-top: 16px; }
+.ins-item.text-only { grid-template-columns: 1fr; }
+.ins-item figure { margin: 0; }
+.ins-item img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border: 2px solid var(--hot); box-shadow: 5px 5px 0 rgba(4,8,23,.9); transform: rotate(-1.5deg); }
+.ins-item:nth-child(odd of .ins-item) img { transform: rotate(1.5deg); }
+.ins-item figcaption { font: 500 11px/1.4 var(--mono); color: var(--mute); margin-top: 8px; }
+.ins-item .txt p:last-child { margin-bottom: 0; }
+@media (max-width: 1500px) { .duo.open .ins-item { grid-template-columns: 1fr; } .duo.open .ins-item img { max-width: 360px; } }
+@media (max-width: 560px) { .ins-item { grid-template-columns: 1fr; } }
+.fig.dia img { background: #fff; padding: 10px; border: 3px solid var(--legal); box-shadow: 6px 6px 0 rgba(4,8,23,.9); }
+
+/* Wide screens: the page itself never scrolls; the side list and each card scroll on their own */
+@media (min-width: 901px) {
+  html, body { height: 100%; overflow: hidden; }
+  body { display: flex; flex-direction: column; }
+  .bar { flex: none; }
+  main.wrap { flex: 1; min-height: 0; width: 100%; }
+  .wiki { height: 100%; padding-block: 22px; box-sizing: border-box; }
+  .side { position: static; max-height: 100%; }
+  .main { height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; padding-right: 4px; }
+  .foot { display: none; }
+}
+@media (min-width: 1201px) {
+  .main:has(> .duo) { overflow: hidden; }
+  .duo { height: 100%; }
+  .duo.open { align-items: stretch; }
+  .topic { max-height: 100%; }
+  .duo.open > .topic { height: 100%; }
+}
+
+/* The door strip reads normally: a wider tab with the words across, not down */
+.duo:not(.open) > .d2 { width: 132px; }
+.peek { width: 132px; padding: 22px 12px 0; gap: 14px; justify-content: flex-start; }
+.peek .pk-text { writing-mode: horizontal-tb; white-space: normal; text-align: center; font-size: 17px; line-height: 1.15; }
+.peek .pk-arrow { order: 2; }
+@media (max-width: 1200px) {
+  .duo:not(.open) > .d1 { margin-right: 146px; }
+}
+@media (max-width: 640px) {
+  .duo:not(.open) > .d1 { margin-right: 0; }
+  .duo:not(.open) > .d2 { width: auto; }
+  .peek { width: auto; padding: 0 16px; flex-direction: row; justify-content: center; }
+  .peek .pk-arrow { order: 2; }
+}
+@media (min-width: 641px) { .peek { justify-content: center; padding: 0 12px; } }
+
+/* Under the hood: one wide card that scrolls inside itself, so its scrollbar sits on the card */
+.deep { max-width: none; margin-top: 0; padding: 24px 28px 28px; background: rgba(4,8,23,.9); }
+.deep h1.t { margin-bottom: 8px; }
+@media (min-width: 901px) {
+  .main:has(> .deep) { overflow: hidden; padding-right: 0; }
+  .deep { height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+}
+
+/* Motion: cards land, the list slides in, the door knocks once, photos lift, pictures open big */
+@keyframes land { 0% { transform: translateY(28px) scale(.97); opacity: 0; } 70% { transform: translateY(-4px) scale(1.005); opacity: 1; } 100% { transform: none; opacity: 1; } }
+@keyframes slideIn { 0% { transform: translateX(-24px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+@keyframes knock { 0%, 100% { transform: none; } 15% { transform: translateX(-12px); } 30% { transform: none; } 45% { transform: translateX(-12px); } 60% { transform: none; } }
+.duo:not(.open) > .d1, .deep, .main > .kick, .main > h1.t, .doors, .index { animation: land .5s cubic-bezier(.2,.9,.3,1.15) backwards; }
+.doors { animation-delay: .08s; } .index { animation-delay: .16s; }
+.side > * { animation: slideIn .35s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i, 0) * 28ms); }
+.duo:not(.open) > .d2 { animation: land .5s cubic-bezier(.2,.9,.3,1.15) .12s backwards; }
+.duo:not(.open) .peek { animation: knock .9s cubic-bezier(.3,1.4,.5,1) 1s 1 both; }
+.ins-item img { transition: transform .2s cubic-bezier(.2,.9,.3,1.3), box-shadow .2s ease; cursor: zoom-in; }
+.ins-item img:hover { transform: rotate(0deg) translate(-3px, -5px) scale(1.04); box-shadow: 10px 12px 0 rgba(4,8,23,.9); }
+.fig img { cursor: zoom-in; transition: transform .2s cubic-bezier(.2,.9,.3,1.3); }
+.fig img:hover { transform: translateY(-3px); }
+.zoom { position: fixed; inset: 0; z-index: 100; background: rgba(4,8,23,.92); display: grid; place-items: center; padding: 24px; cursor: zoom-out; animation: fadeIn .15s ease both; }
+.zoom img { max-width: min(1600px, 96vw); max-height: 86vh; width: auto; border: 3px solid var(--legal); box-shadow: 10px 10px 0 #000; background: #fff; animation: land .35s cubic-bezier(.2,.9,.3,1.15) both; }
+.zoom p { margin: 12px 0 0; font: 500 13px/1.4 var(--mono); color: var(--mute); text-align: center; max-width: 90ch; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .duo > *, .deep, .main > *, .side > *, .peek, .zoom, .zoom img { animation: none !important; } }
+
+/* A build-log chapter folded into a topic */
+.from-log { margin: 40px 0 6px; padding: 12px 14px; border: 2px dashed var(--line); background: rgba(23,40,106,.45); display: grid; gap: 4px; }
+.from-log span { font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.from-log b { font: 900 italic 24px/1 var(--logo); text-transform: uppercase; color: var(--hot); }
+
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="../shadyshipping.html"><img src="../media/favicon.png" alt="">Shady Shipping</a>
+    <span class="crumb-top">Wiki</span>
+    <a class="studio" href="../index.html">Underdog Studios</a>
+  </div>
+</header>
+<main class="wrap">
+  <div class="wiki">
+<nav class="side" aria-label="Wiki topics">
+<a class="home" href="index.html">Wiki home</a>
+<span class="grp">The round</span>
+<a href="round.html">The round</a>
+<a href="parcels.html">Parcels & jobs</a>
+<a href="heat.html">Heat & the radar</a>
+<a href="arrests.html">Arrests & the drop-in</a>
+<a href="money.html">Money & stars</a>
+<a href="hud.html">HUD, radar & routes</a>
+<span class="grp">On the road</span>
+<a href="vehicles.html">Driving & damage</a>
+<a href="repair.html">Wrecks & the repair garage</a>
+<a href="destruction.html">Destruction</a>
+<a href="traffic.html">Traffic</a>
+<span class="grp">Your kit</span>
+<a href="abilities.html" class="on" aria-current="page">Abilities</a>
+<a href="lobby.html">Lobby & garage</a>
+<a href="sound.html">Sound & effects</a>
+<span class="grp">Coming later</span>
+<a href="dispatcher.html">The Dispatcher</a>
+<span class="grp">Under the hood</span>
+<a href="systems.html">How it fits together</a>
+<a href="online.html">Online play</a>
+<a href="balance.html">Balance</a>
+<a href="city.html">Building the city</a>
+<a href="playtests.html">Playtests</a>
+</nav>
+    <div class="main">
+<div class="duo">
+  <article class="topic d1">
+    <div class="crumb">Wiki / How to play / Abilities</div>
+    <span class="kick">Your kit</span>
+    <h1 class="t">Police tools and abilities</h1>
+    <span class="status planned">10 of 18 abilities built; 4 more planned per side</span>
+    <div class="lead-block"><figure class="fig"><div class="imgs"><img src="../media/wiki/2026-11-05_ability_hud.jpg" alt="The ability slots on the HUD: each pick has its key, its name and whether it is ready"></div><figcaption>The ability slots on the HUD: each pick has its key, its name and whether it is ready</figcaption></figure>
+<p><b>What it does for play.</b> Every player picks two abilities from their side's list before a round. The pair is their build, like a class in a team game: one cop might hunt with Lights Out and the Spike Strip, another with the Drone and the Net. Every ability has a counter on the other side and a tell the other side can see or hear, so no trick is unbeatable.</p></div>
+    
+    <h2 class="s">How it works</h2><div class="tbl"><table><thead><tr><th>Rule</th><th>What happens</th></tr></thead><tbody><tr><td>Two picks</td><td>Each player picks 2 abilities in the garage. Last round's build is picked by default.</td></tr><tr><td>In the round</td><td>The two abilities sit on Shift and E (LB and Y on a pad), each slot showing its name, readiness and time left.</td></tr><tr><td>Limits</td><td>Each runs on charges or a cooldown from the tuning sheet. A build has at most one always-on ability.</td></tr><tr><td>Counters</td><td>Every ability has an answer on the other side (see the tables).</td></tr><tr><td>Tells</td><td>Each one can be seen, heard or felt by the other side: lamps on the cop's roof for the net, a shimmer when the van cloaks.</td></tr><tr><td>Feel</td><td>Each ability has its own camera shake, pad rumble and burst of effects, so it can be felt, not just seen.</td></tr><tr><td>Warnings</td><td>Both sides get clear banners: SPIKES AHEAD, NET BEHIND, DRONE ON YOU, EMP CHARGING and the result of each use.</td></tr></tbody></table></div><h2 class="s">Police abilities</h2><div class="tbl"><table><thead><tr><th>Ability</th><th>What it does</th><th>Van's counter</th><th>Status</th></tr></thead><tbody><tr><td>Net</td><td>Fires a rope from the bumper that grabs the van's back wheels and drags it; no nitro while caught</td><td>Keep the rear away from cop bumpers</td><td>Built and playtested</td></tr><tr><td>Spike Strip</td><td>Drop a folding stinger; once its spikes flip up, the van's tyres burst until a garage fixes them</td><td>Run-flat Tyres; read the road</td><td>Built and playtested</td></tr><tr><td>Lights Out</td><td>Siren and lights off: the cop vanishes from the van's radar</td><td>Scanner</td><td>Built and playtested</td></tr><tr><td>Drone</td><td>Flies after the van and locks on for 6 s: every cop sees it live, even cloaked</td><td>Smoke breaks the lock; nitro outruns it</td><td>Built</td></tr><tr><td>EMP</td><td>Up close, a blue ring switches off the van's nitro and abilities for 3 s</td><td>Keep away</td><td>Built</td></tr><tr><td>Tank</td><td>For a few seconds: heavier, tougher and harder shoving</td><td>Nitro, alleys</td><td>Planned</td></tr><tr><td>Roadblock</td><td>Drop a barrier across a lane for a while</td><td>Alleys</td><td>Planned</td></tr><tr><td>Trace</td><td>One use: instantly pings where the van is</td><td>Jammer</td><td>Planned</td></tr></tbody></table></div><h2 class="s">Van abilities</h2><div class="tbl"><table><thead><tr><th>Ability</th><th>What it does</th><th>Police counter</th><th>Status</th></tr></thead><tbody><tr><td>Nitro</td><td>Two halves: each tap fires a 2 s boost with a blast and a fire trail</td><td>EMP; the net blocks it</td><td>Built and playtested</td></tr><tr><td>Cloak</td><td>The van vanishes from screens and radar for a few seconds; the driver sees a blue ghost</td><td>Drone</td><td>Built and playtested</td></tr><tr><td>Smoke</td><td>A purple wall of smoke across the road that blocks sight</td><td>Drone, Trace</td><td>Built and playtested</td></tr><tr><td>Run-flat Tyres</td><td>Always on: spikes do nothing</td><td>Pick a different build</td><td>Built and playtested</td></tr><tr><td>Scanner</td><td>Always on: cops using Lights Out stay on the van's radar</td><td>Pick a different build</td><td>Built</td></tr><tr><td>Armour</td><td>Always on: less crash damage, the net drags harder, EMP lasts half as long</td><td>Spike Strip</td><td>Planned</td></tr><tr><td>Decoy</td><td>A fake van blip on the police radar going the other way</td><td>A cop actually seeing the van</td><td>Planned</td></tr><tr><td>Jammer</td><td>For a while, pings show a much bigger search circle</td><td>Trace</td><td>Planned</td></tr><tr><td>Parcel Drop</td><td>Throw parcels out of the back; cars that hit one spin out</td><td>Keep your distance</td><td>Planned</td></tr><tr><td>Oil Slick</td><td>Cars driving through it lose grip</td><td>Drive round it</td><td>Planned</td></tr></tbody></table></div>
+<p>The PIT manoeuvre from pre-production (a shove on the van's rear corner that spins it) is not built. Ramming with the car still damages the van, and the arrest ring now gives the police the stopping power the PIT was meant to add.</p><h2 class="s">The numbers</h2><div class="tbl"><table><thead><tr><th>Ability</th><th>Key values</th></tr></thead><tbody><tr><td>Net</td><td>Arms for 3 s; reload 8 s; catch range 2.6 m from a back wheel; holds for 6 s; caught top speed 12 km/h</td></tr><tr><td>Spike Strip</td><td>2 charges; 25 s each to come back; lies 20 s; spikes up after 0.8 s; burst tyres lose half their grip</td></tr><tr><td>Lights Out</td><td>Dark for 25 s</td></tr><tr><td>Drone</td><td>Flies at 180 km/h; locks on for 6 s</td></tr><tr><td>EMP</td><td>Reaches 35 m; switches the van off for 3 s</td></tr><tr><td>Nitro</td><td>2 s per half; a half comes back about every 6 s</td></tr><tr><td>Smoke</td><td>Hangs for 10 s; about 13 m wide</td></tr></tbody></table></div>
+<figure class="fig multi"><div class="imgs"><img src="../media/wiki/2026-11-05_spike_strip.jpg" alt="Spike Strip, Cloak and Smoke in an online round"><img src="../media/wiki/2026-11-05_cloak.jpg" alt="Spike Strip, Cloak and Smoke in an online round"><img src="../media/wiki/2026-11-05_smoke.jpg" alt="Spike Strip, Cloak and Smoke in an online round"></div><figcaption>Spike Strip, Cloak and Smoke in an online round</figcaption></figure><div class="from-log"><span>From the build log</span><b>Police toolkit</b></div><h2 class="s">Everything in the build</h2><div class="tbl"><table><thead><tr><th>Feature</th><th>What it does for play</th></tr></thead><tbody><tr><td>Bumper net</td><td>A cop presses E; for 3 s a van wheel near the front bumper is caught</td></tr><tr><td>Snare</td><td>A caught van is braked to 12 km/h for 6 s with no nitro</td></tr><tr><td>Rope</td><td>A spring pulls the van round by the caught wheel and tows the cop</td></tr><tr><td>Yellow net on the car</td><td>Folds up over the reload, so "ready" can be seen on the car</td></tr><tr><td>Siren and light bar</td><td>Always on, louder as a cop closes in; the cop's own is quieter</td></tr><tr><td>Cop respawn</td><td>A wrecked cop returns after 5 s, out of the van's sight</td></tr><tr><td>Spike strip</td><td>A folding stinger that arms after 0.8 s and snaps when hit</td></tr><tr><td>Net and spike alerts</td><td>Warning boxes and banners for both sides, with distances</td></tr><tr><td>Scanner</td><td>A van perk that keeps a dark cop on the van's radar</td></tr><tr><td>Drone</td><td>Chases the van and shows it to every cop for 6 s; smoke breaks it</td></tr><tr><td>EMP</td><td>A 35 m burst that switches off the van's nitro and abilities for 3 s</td></tr></tbody></table></div>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/net-flow.png" alt="How the net works on the server"></div><figcaption>How the net works on the server</figcaption></figure><h2 class="s">How the later tools work</h2><p>The second wave of tools came after the abilities system (see the Abilities chapter), which lets each player pick two tools as a "build".</p>
+<div class="tbl"><table><thead><tr><th>Tool</th><th>The cop's side</th><th>The van's side (tell and counter)</th></tr></thead><tbody><tr><td>Spike strip</td><td>STRIP DOWN note; TYRES BURST banner with a ping</td><td>SPIKES AHEAD box within 50 m; Run-flat Tyres drive through</td></tr><tr><td>Net</td><td>Two amber roof lamps blink faster as the 3 s run out; CAUGHT! or NET MISSED</td><td>NET BEHIND box with the distance; NETTED! with the seconds left</td></tr><tr><td>Lights Out</td><td>Note with a draining bar; turns red if the van has Scanner</td><td>Scanner keeps the dark cop on the radar</td></tr><tr><td>Drone</td><td>VAN SPOTTED! banner; sees the van through walls with a distance pin</td><td>DRONE ON YOU warning; nitro outruns it at 180 km/h; smoke breaks the lock</td></tr><tr><td>EMP</td><td>Dashed reach ring turns cyan with the van inside</td><td>EMP CHARGING · GET AWAY; then both ability slots read OFFLINE</td></tr></tbody></table></div>
+<p>The strip overhaul fixed two faults of the first version: it was only a flat placeholder, and a cop driving just in front of the van could spike it instantly. Each tool also got "feel": a shake or rumble for the player who used it, and a clear effect in the world. The spike strip, for example, gives four quick bangs and sparks off every tyre, then a flap with every turn of the wheels. Run-flats give one dull thud and green sparks instead, so both players know at once that the strip failed.</p><h2 class="s">From the build</h2><figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img085.jpg" alt="The police car with the prototype&#x27;s yellow net out on its front bumper, beside a dented van"></div><figcaption>The police car with the prototype's yellow net out on its front bumper, beside a dented van</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/2026-11-05_spike_strip.jpg" alt="The first placeholder spike strip, a flat plank on the road; the overhaul replaced it with a folding stinger"></div><figcaption>The first placeholder spike strip, a flat plank on the road; the overhaul replaced it with a folding stinger</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img114.jpg" alt="Test log: the net catches the van, and when the cop is wrecked the server lets go of the van at once"></div><figcaption>Test log: the net catches the van, and when the cop is wrecked the server lets go of the van at once</figcaption></figure>
+<p>The net was tested on one PC with a server and two players under made-up network conditions. Every snare and rope started on the server's frame on both screens.</p>
+<div class="tbl"><table><thead><tr><th>Network (round trip, loss, jitter)</th><th>Catches</th><th>Started on the server's frame</th><th>Largest jump in a snare</th></tr></thead><tbody><tr><td>100 ms, 0%, none</td><td>2</td><td>all, on both PCs</td><td>0 cm</td></tr><tr><td>200 ms, 2%, none</td><td>5</td><td>all (1 replayed on each PC)</td><td>1 cm</td></tr><tr><td>150 ms, 5%, 60 ms</td><td>4</td><td>all (3 to 4 replayed, 1 frame late)</td><td>2 cm</td></tr></tbody></table></div>
+<p>The respawn was tested with three spawn points round the van. One was 50 m away in the open, one 200 m away in the open, and one 200 m away behind a wall. The wrecked cop came back at the hidden one after 5 s, repaired and on the ground.</p><div class="from-log"><span>From the build log</span><b>Abilities, vehicle kits and arrests</b></div><h2 class="s">Everything in the build</h2><div class="tbl"><table><thead><tr><th>Feature</th><th>What it does for play</th></tr></thead><tbody><tr><td>Two ability slots</td><td>The two garage picks sit on two keys; the HUD shows ready, active or seconds left</td></tr><tr><td>Ability feel</td><td>Camera kicks, pad rumble and bursts in the world for every built ability</td></tr><tr><td>Police body kit</td><td>Spoilers, guards, rear parts, roof lamps, skirts, wheels and paint for each part</td></tr><tr><td>The van's new look</td><td>Blacked-out windows, armour plates and bullet holes explain why it is chased</td></tr><tr><td>Van body kit</td><td>22 hand-modelled parts, five wheels and back doors that open at every bay</td></tr><tr><td>Arrest ring</td><td>A cop stopped beside a nearly stopped van can arrest it</td></tr><tr><td>Three strikes</td><td>A wreck or an arrest is a strike; three and the police win</td></tr><tr><td>Drop-in</td><td>After a strike the van picks one of three drop zones from the sky</td></tr><tr><td>Strike cutscenes</td><td>BUSTED and WRECKED scenes with a cargo flyer that lifts the van out (in progress)</td></tr></tbody></table></div>
+<p>The abilities built so far:</p>
+<div class="tbl"><table><thead><tr><th>Ability</th><th>Side</th><th>What it does</th></tr></thead><tbody><tr><td>Net</td><td>Police</td><td>Catches the van's back wheels and drags it</td></tr><tr><td>Spike Strip</td><td>Police</td><td>Dropped behind the cop car; bursts tyres for 10 s or until repaired</td></tr><tr><td>Lights Out</td><td>Police</td><td>Siren and lights off, off the van's radar, 10% slower, up to 25 s</td></tr><tr><td>Drone</td><td>Police</td><td>Locks onto the van for 6 s so every cop sees it (see the police chapter)</td></tr><tr><td>EMP</td><td>Police</td><td>A 35 m burst that switches off the van's nitro and abilities for 3 s</td></tr><tr><td>Nitro</td><td>Courier</td><td>A 2 s boost for each half of the tank</td></tr><tr><td>Cloak</td><td>Courier</td><td>Invisible to every cop and off their radar for 4 s</td></tr><tr><td>Smoke</td><td>Courier</td><td>A purple wall across the road that hangs for 10 s and blocks sight</td></tr><tr><td>Run-flat Tyres</td><td>Courier</td><td>Spike strips do nothing</td></tr><tr><td>Scanner</td><td>Courier</td><td>A cop running Lights Out stays on the van's radar</td></tr></tbody></table></div>
+<p>Still to build: Tank, Roadblock and Trace for the police; Parcel Drop, Decoy, Oil Slick, Jammer and Armour for the courier.</p>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/strike-loop.png" alt="Arrests, wrecks and strikes, and what happens after each"></div><figcaption>Arrests, wrecks and strikes, and what happens after each</figcaption></figure><h2 class="s">From the build</h2><figure class="fig"><div class="imgs"><img src="../media/wiki/arrest_cop.jpg" alt="An arrest from the cop&#x27;s car: the ring on the road turns red and fills"></div><figcaption>An arrest from the cop's car: the ring on the road turns red and fills</figcaption></figure>
+<figure class="fig multi"><div class="imgs"><img src="../media/wiki/arrest_bar.jpg" alt="The van&#x27;s screen while being arrested, and the drop-in zones seen from above"><img src="../media/wiki/dropin_zones.jpg" alt="The van&#x27;s screen while being arrested, and the drop-in zones seen from above"></div><figcaption>The van's screen while being arrested, and the drop-in zones seen from above</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/cutscene_busted_sheet.jpg" alt="The BUSTED cutscene, beat by beat, from the van&#x27;s screen"></div><figcaption>The BUSTED cutscene, beat by beat, from the van's screen</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/cutscene_copfeed_sheet.jpg" alt="The cop&#x27;s screen during a strike: the corner LIVE ARREST CAM feed while they keep driving"></div><figcaption>The cop's screen during a strike: the corner LIVE ARREST CAM feed while they keep driving</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img146.jpg" alt="Cloak: the cop sees the van ahead, then nothing, while the courier still sees their own van"></div><figcaption>Cloak: the cop sees the van ahead, then nothing, while the courier still sees their own van</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img143.jpg" alt="A Spike Strip on the road behind the courier after the van drove over it"></div><figcaption>A Spike Strip on the road behind the courier after the van drove over it</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img150.jpg" alt="The van&#x27;s new look: grubby off-white, blacked-out windows, armour plates, the side sign and a bull bar"></div><figcaption>The van's new look: grubby off-white, blacked-out windows, armour plates, the side sign and a bull bar</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img138.jpg" alt="Four exhaust choices on Lynnisha&#x27;s police body: none, Twin Pipes, Big Bore and Quad Pipes"></div><figcaption>Four exhaust choices on Lynnisha's police body: none, Twin Pipes, Big Bore and Quad Pipes</figcaption></figure>
+    <button class="opener" type="button">Why it works like this <span aria-hidden="true">→</span></button>
+  </article>
+  <article class="topic d2">
+    <button class="peek" type="button" aria-label="Why it works like this: open the design page"><span class="pk-arrow" aria-hidden="true"></span><span class="pk-text">Why it works like this</span></button>
+    <div class="d2in">
+      <button class="closer" type="button">Back to how it plays</button>
+      <div class="crumb">Wiki / Behind the design / Abilities</div>
+      <span class="kick des">Behind the design</span>
+      <h1 class="t">Why <i>abilities</i></h1>
+      <p class="credits"><b>Built by</b> Abdullah · <b>Numbers by</b> Dafydd · <b>In-game HUD by</b> Ieuan · <b>Tested by</b> The team (playtests), Dafydd (tool feel)</p>
+      <aside class="inspo"><span class="lab">Inspired by</span><div class="ins-item"><figure><img src="../media/wiki/gsdd_nfshp_helicopter.jpg" alt="Need for Speed: Hot Pursuit: racers and police players chase each other with tools like spike strips, EMPs and a helicopter (Criterion Games, 2010)"><figcaption>Need for Speed: Hot Pursuit: racers and police players chase each other with tools like spike strips, EMPs and a helicopter (Criterion Games, 2010)</figcaption></figure><div class="txt"><p><b>Need for Speed: Hot Pursuit (Criterion Games, 2010):</b> racers and police are both played by people, each side with its own gadgets: spike strips, EMP, roadblocks, a helicopter, jammers and turbo.</p>
+<p>What we took: two sides with their own kits, and tools that slow or reveal rather than kill. What we changed: each player picks only two, so the picks form a build and the team has to combine them.</p></div></div><div class="ins-item"><figure><img src="../media/wiki/overwatch_screenshot.png" alt="Overwatch (Blizzard Entertainment, 2016)"><figcaption>Overwatch (Blizzard Entertainment, 2016)</figcaption></figure><div class="txt"><p><b>Overwatch (Blizzard Entertainment, 2016):</b> heroes are built from a small set of abilities, each with a clear counter, so team make-up matters.</p>
+<p>What we took: a small kit per player and a counter for every tool.</p></div></div></aside><aside class="inspo"><span class="lab">Inspired by</span><div class="ins-item"><figure><img src="../media/wiki/plog_nfshp_emp.png" alt="Need for Speed: Hot Pursuit: the cop&#x27;s weapon list (HELI, SPIKE) and an EMP lock on the racer ahead (Criterion Games, 2010)"><figcaption>Need for Speed: Hot Pursuit: the cop's weapon list (HELI, SPIKE) and an EMP lock on the racer ahead (Criterion Games, 2010)</figcaption></figure><div class="txt"><p><b>Need for Speed: Hot Pursuit (Criterion Games, 2010):</b> cops carry a small set of weapons (spike strips, roadblocks, a helicopter and an EMP that has to lock on before it fires), and the racer sees each one coming.</p>
+<p>What we took: a short police loadout, an EMP that charges before it bursts, and a drone that plays the helicopter's role. What we changed: every tool has a counter on the van's side (Run-flat Tyres, Scanner, Smoke), and the server decides each hit so all five players see the same result.</p></div></div></aside><aside class="inspo"><span class="lab">Inspired by</span><div class="ins-item"><figure><img src="../media/wiki/plog_overwatch_ability.jpg" alt="Overwatch 2: a hero&#x27;s barrier ability, a large effect both teams can read at a glance (Blizzard Entertainment, 2022)"><figcaption>Overwatch 2: a hero's barrier ability, a large effect both teams can read at a glance (Blizzard Entertainment, 2022)</figcaption></figure><div class="txt"><p><b>Overwatch 2 (Blizzard Entertainment, 2022):</b> each hero has a small kit of abilities with big, readable effects and clear counters.</p>
+<p>What we took: a small kit, effects anyone can read (the smoke wall, the cloak shimmer) and a counter for each. What we changed: players build their own kit from two picks instead of choosing a fixed hero.</p></div></div><div class="ins-item"><figure><img src="../media/wiki/plog_nfsmw_screen2.jpg" alt="Need for Speed: Most Wanted: the BUSTED to EVADE meter along the bottom of the pursuit screen (EA Black Box, 2005)"><figcaption>Need for Speed: Most Wanted: the BUSTED to EVADE meter along the bottom of the pursuit screen (EA Black Box, 2005)</figcaption></figure><div class="txt"><p><b>Need for Speed: Most Wanted (EA Black Box, 2005):</b> the busted meter fills while the player is slow and boxed in by police.</p>
+<p>What we took: an arrest that fills while the van is nearly stopped. What we changed: the cop must stop too and see the van, and an arrest is one strike, not the end.</p></div></div></aside>
+      <figure class="fig dia"><div class="imgs"><img src="../media/wiki/net-flow.png" alt="How the net works on the server"></div><figcaption>How the net works on the server</figcaption></figure>
+      <h2 class="s">Why we chose this</h2><div class="tbl"><table><thead><tr><th>Option</th><th>For</th><th>Against</th><th>Verdict</th></tr></thead><tbody><tr><td>A fixed set of three police tools</td><td>Easy to learn</td><td>Every cop plays the same; the van has no tools</td><td>Replaced</td></tr><tr><td>Everything for everyone</td><td>Most variety</td><td>Too much to read; no team roles</td><td>Rejected</td></tr><tr class="win"><td><b>Pick two from a side list, each with a counter</b></td><td>Builds, roles and counterplay on both sides</td><td>More abilities to build and balance</td><td><b>Chosen</b></td></tr></tbody></table></div>
+<p>Pre-production gave every cop the same three tools. In production Abdullah turned them into a pick-two list for both sides, so the van gets tools of its own and the police can build a team. Nitro moved off the default van to become one of the van's picks.</p><h2 class="s">What can go wrong</h2><div class="tbl"><table><thead><tr><th>Situation</th><th>What the game does</th></tr></thead><tbody><tr><td>A cop drops spikes right in front of the van</td><td>Spikes only burst tyres once they have flipped up, 0.8 s after landing</td></tr><tr><td>A van too fast to touch the strip between frames</td><td>The server checks if it crossed the strip, not just if it was on it</td></tr><tr><td>Nitro tapped while netted or switched off</td><td>Nothing happens, and the slot says why: NETTED or EMP</td></tr><tr><td>A wrecked cop still holding the van with the net</td><td>The net lets go at once</td></tr></tbody></table></div><h2 class="s">How we know it works</h2><div class="tbl"><table><thead><tr><th>Check</th><th>Target</th><th>Result so far</th></tr></thead><tbody><tr><td>Every ability readable by both sides</td><td>Testers can say what hit them</td><td>Met for the first five in online play</td></tr><tr><td>Counters work</td><td>Each counter beats its ability every time</td><td>Met in two-player tests</td></tr><tr><td>No dominant build</td><td>No build wins far more often than others</td><td>To measure in team playtests</td></tr></tbody></table></div><div class="from-log"><span>From the build log</span><b>Police toolkit</b></div><h2 class="s">What we set out to do</h2><p>The plan asked for a police net that fires within one round trip of the press and catches the van the same way on every PC. Each tool had to be decided by the server (the PC that runs the match and has the final say), so a player with a modified game could not ignore it. Every tool also needed a "tell" (a sign the other side can read) and a counter, so no tool is the one best pick.</p><h2 class="s">The big decisions</h2><p>Full comparison: Trade-off Appendix.</p>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>Server checks the distance to the van's wheels</td><td>One answer for every PC; matches the plan</td><td>Decided on the server's frame</td><td>Chosen</td></tr><tr><td>Physics contact on each PC</td><td>Feels exact on one screen</td><td>Can hit on one screen and miss on another</td><td>Rejected</td></tr><tr><td>Van's own PC applies the snare (the prototype)</td><td>Instant for the van</td><td>A modified game could ignore it</td><td>Rejected</td></tr></tbody></table></div>
+<p>The server owns outcomes, so the catch is one distance check there. The snare and the rope are "effect windows": the server stamps them with the physics frames they cover, every PC brakes the van on those frames, and a PC that hears late rewinds and replays them. That is why the rope pull waited until it could run inside the physics step on both cars. A pull from ordinary game code would not be replayed on a rewind, and the cars would snap.</p>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>Siren always on</td><td>A cop has nothing to switch; always warns the van</td><td>No silent approach</td><td>Chosen</td></tr><tr><td>Siren on a toggle</td><td>Stealth as a choice</td><td>One more button; a silent cop breaks "sound is a warning"</td><td>Rejected</td></tr></tbody></table></div>
+<p>Abdullah chose the always-on siren: a police car is always hunting. Stealth came back later as the Lights Out ability, which has its own counter in Scanner. Abdullah also asked that the police player not be "annoyed" by their own siren all match, so the driver hears it at 25% and sees their own light bar at 20%.</p><h2 class="s">Playtesting and what changed</h2><div class="tbl"><table><thead><tr><th>Date</th><th>Who played</th><th>What they found</th><th>What we changed</th></tr></thead><tbody><tr><td>24 Oct</td><td>Abdullah, editor test as the cop</td><td>The net went back up while still holding the van</td><td>The net stays down until the snare ends</td></tr><tr><td>24 Oct</td><td>Abdullah</td><td>Just after a miss, the net still looked fully down</td><td>It lifts clear at once, then winds up</td></tr><tr><td>24 Oct</td><td>Abdullah</td><td>Reload counted from the catch, so one cop could re-net at once</td><td>Reload counts from when the van is let go</td></tr><tr><td>25 Oct</td><td>Abdullah</td><td>The siren was tiring for the cop driving</td><td>Own siren at 25%, own lights at 20%</td></tr><tr><td>30 Oct</td><td>Uni playtest, written up by Abdullah</td><td>A wrecked cop kept the net on, stretching the rope across the map</td><td>A wrecked or leaving cop lets go at once</td></tr></tbody></table></div>
+<p>The reload change was agreed with Abdullah and keeps the net a team tool: one cop waits about 14 s between catches, but other cops can still net the van once its 4 s immunity ends. Dafydd can lower the reload on the tuning sheet.</p><h2 class="s">Problems and fixes</h2><div class="tbl"><table><thead><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr></thead><tbody><tr><td>The net never caught the van in the first test</td><td>The car's size included the camera's 20 m editor outline</td><td>Measure cars from the parts that collide only</td></tr><tr><td>The net was drawn metres in front of the police car</td><td>Minimap markers on the car had collision and counted as body</td><td>Measure body and wheel meshes only</td></tr><tr><td>A 29.5 m jump on the cop's screen</td><td>Most likely the test, which teleported the cop to force a catch</td><td>None needed so far: without the teleport the jump was 4 cm</td></tr><tr><td>A fast van could pass right over a strip between two frames</td><td>The hit check only looked at where the van was</td><td>Also count the van crossing the strip's line since the last frame</td></tr><tr><td>A net miss was called while the van was being caught</td><td>The van's snare can arrive a moment after the net goes in</td><td>Wait 0.4 s before calling a miss</td></tr></tbody></table></div><h2 class="s">Lessons</h2><ul class="dots"><li>Building the snare on the server's effect windows meant the rope, the spikes and the later tools needed no new network code.</li><li>Give "can act" and "cannot act" clearly different looks, on the car as well as on the HUD.</li><li>A test that teleports a car can make its own jumps, so check strange results against a run without the teleport.</li></ul><h2 class="s">Latest</h2><div class="tbl"><table><thead><tr><th>Date</th><th>What changed</th><th>Why</th></tr></thead><tbody><tr><td>8 Nov 2026</td><td>Spike strip overhaul: folding stinger, arm time, snap, alerts</td><td>The placeholder was flat and could spike the van instantly</td></tr><tr><td>9 Nov 2026</td><td>Net alerts, net lamps, and feel for net and spikes</td><td>Both sides needed to know what had just happened</td></tr><tr><td>9 Nov 2026</td><td>Scanner and Lights Out alerts</td><td>A counter to Lights Out, and a note for the dark cop</td></tr><tr><td>9 Nov 2026</td><td>Drone</td><td>A hunting tool that smoke and nitro can beat</td></tr><tr><td>9 Nov 2026</td><td>EMP</td><td>A short shutdown with a visible charge-up to dodge</td></tr></tbody></table></div><div class="from-log"><span>From the build log</span><b>Abilities, vehicle kits and arrests</b></div><h2 class="s">What we set out to do</h2><p>Turn the planned "two tools from a list" into builds, where each player picks two abilities from their side's list and every ability has a counter and a tell. Give both cars a real body kit to spend the wallet on. Then, after the lecturers' playtest, give the police a reason to box the van in rather than just ram it.</p><h2 class="s">How it was built</h2><p><b>The lists.</b> Abdullah wanted each player to make a class from two abilities, for example spikes with Lights Out. He corrected Cloak to hide the van in the world as well as on the radar, like the active camouflage in Call of Duty: Black Ops III (Treyarch, 2015). On 3 November he reviewed the whole list: Nitro became a courier pick, the net now grabs the van's back wheels, and only a police Tank or an Armoured van can break a Roadblock. The van's way to win, escaping through an exit, came from escaping in Dead by Daylight (Behaviour Interactive, 2016).</p>
+<p><b>The slots.</b> The pick, HUD and network path were built first, with unbuilt abilities shown as COMING SOON. Each ability then went in one at a time behind the same slots. Abdullah kept nitro and the net on their old keys so nothing learned in playtests was lost. The server checks every pick, so a changed game cannot use an ability it did not pick.</p>
+<p><b>The first five.</b> Spike Strip, Lights Out, Cloak, Smoke and Run-flat Tyres make two full builds: an ambusher for the police and a ghost for the courier, with Run-flat as the answer to the first police tool. The plan had the strip thrown ahead of the van. It is dropped behind the cop car instead, because an ambusher waits ahead on the van's route and a thrown strip would land where the van already was. Smoke later became a purple wall, and a cloaked driver now sees their own van as a blue ghost.</p>
+<p><b>Kits.</b> Lynnisha modelled the police parts in place on a new bare body, so every part fits by construction. Abdullah's tests shaped the rules: each exhaust brings its own bumper, and flames come out of whichever pipes are fitted. Abdullah's lecturers kept asking why the police chase a delivery van, so the van itself became the answer: grubby off-white (Abdullah approved white as the dodgiest colour), blacked-out windows, welded armour plates and bullet holes. Parts generated from pictures came back unusable, so all 22 van parts were modelled by hand in Blender to fit the van exactly.</p>
+<p><b>Arrests and strikes.</b> At the 9 November uni playtest the lecturers pointed out that the police gained nothing when the van stopped at a bay. Ieuan found the round timer redundant. Abdullah agreed a new plan the next day: an arrest ring, and three strikes in place of the shift clock. A wreck is now a strike too, not an instant loss, and the van comes back fresh at full health each time. Abdullah set the ring at 10 m round the van and kept loading short, so at a bay the cops have to box the van in, not just pull up beside it. All 19 values went onto the tuning sheet the same day, so Dafydd can tune them.</p>
+<div class="tbl"><table><thead><tr><th>Setting</th><th>Value</th></tr></thead><tbody><tr><td>Strikes until the police win</td><td>3</td></tr><tr><td>Arrest ring size</td><td>10 m</td></tr><tr><td>Van can be arrested below / is safe above</td><td>8 km/h / 15 km/h</td></tr><tr><td>Arrest time, one cop / two or more</td><td>3 s / 2.25 s</td></tr><tr><td>Pay for an arrest / a wreck</td><td>£300 each cop / £150 to the cop</td></tr><tr><td>Drop zones to pick from / time to pick</td><td>3 / 6 s</td></tr><tr><td>No delivery before the police start searching</td><td>60 s</td></tr></tbody></table></div>
+<p><b>Strike cutscenes (in progress).</b> Built in the sandbox and tested in two-player play from both sides, but not checked in yet. The cops keep driving and watch it in a corner LIVE ARREST CAM. Abdullah fixed and decalled the flyer, clamp and evidence bag models in Blender.</p>
+<div class="tbl"><table><thead><tr><th>Beat</th><th>BUSTED (arrest, 7 s)</th><th>WRECKED (6 s)</th></tr></thead><tbody><tr><td>Opening</td><td>A stamp slams down</td><td>A white flash</td></tr><tr><td>The parcel</td><td>Pops into an evidence bag: PARCEL SEIZED</td><td>PARCEL LOST</td></tr><tr><td>The count</td><td>Strike count shown</td><td>Strike count shown</td></tr><tr><td>Extra</td><td>A police clamp drops onto a front wheel</td><td>None</td></tr><tr><td>The lift</td><td>A cargo flyer comes down, magnets the van and lifts it out</td><td>The same lift</td></tr></tbody></table></div><h2 class="s">The big decisions</h2><p>Full comparison: Trade-off Appendix.</p>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>Nitro as a courier ability</td><td>Picking it costs another ability; the police can answer it</td><td>A courier who skips it has no boost</td><td>Chosen</td></tr><tr><td>Nitro on every van, as first built</td><td>Every courier can escape a straight chase</td><td>Every courier has the strongest escape for free</td><td>Rejected</td></tr><tr><td>A weak boost for all, a full one as the ability</td><td>Nobody left without</td><td>Two versions to tune and explain</td><td>Rejected</td></tr></tbody></table></div>
+<p>Abdullah moved Nitro off the default van onto the courier list.</p>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>Shift clock; a wreck ends the round</td><td>Simple; already built</td><td>Stops cost the van nothing; a wreck ends everything</td><td>Kept behind a switch</td></tr><tr><td>Three strikes from wrecks or arrests</td><td>Boxing in pays; a wreck is not an instant loss</td><td>More to build: ring, drop-in, cutscenes</td><td>Chosen</td></tr></tbody></table></div>
+<p>Abdullah's call from the lecturers' and Ieuan's feedback; the clock stays in code so the two can be compared.</p><h2 class="s">Playtesting and what changed</h2><div class="tbl"><table><thead><tr><th>Date</th><th>Who played</th><th>What they found</th><th>What we changed</th></tr></thead><tbody><tr><td>3 Nov</td><td>Abdullah, police garage</td><td>The splitter overlapped the exhaust bumpers; flashing lights hid the paint</td><td>Pipes-only exhausts under a splitter; light bar dark in the garage</td></tr><tr><td>Oct to Nov</td><td>Lecturers</td><td>Why do the police chase a delivery van?</td><td>The van's dodgy new look</td></tr><tr><td>6 Nov</td><td>Abdullah, van kit review</td><td>Hovering tape, a blurry spare wheel, a loose ladder, blocked exhausts</td><td>Every part fixed, with hollow, sooty pipes</td></tr><tr><td>6 Nov</td><td>Abdullah</td><td>Kit parts stayed level while the van rolled</td><td>Parts, doors and cargo now lean with the body</td></tr><tr><td>9 Nov</td><td>Uni playtest, lecturers and Ieuan</td><td>No police upside to stops; the timer felt redundant</td><td>Arrest ring, three strikes and the drop-in</td></tr><tr><td>10 Nov</td><td>Abdullah, two players</td><td>Cutscene clamp shot and wreck lift framing not right yet</td><td>Still open</td></tr></tbody></table></div><h2 class="s">Problems and fixes</h2><div class="tbl"><table><thead><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr></thead><tbody><tr><td>Lynnisha's first new body had a second set of tyres and brakes 1.8 m out</td><td>The export included parts of the scene</td><td>Lynnisha re-exported; every artist file is now checked in the engine first</td></tr><tr><td>Police paint never showed</td><td>Paint went on the black panels, and colour times black stays black</td><td>Paint goes on the white panels</td></tr><tr><td>Kit parts stayed level while the van rolled</td><td>The body roll skipped everything under the hidden collision body</td><td>Those parts now lean too</td></tr><tr><td>The van's exhaust vanished with a ladder fitted</td><td>A rule written for police rear parts swapped in pipes the van does not have</td><td>The van's rear parts keep its bumper and exhaust</td></tr></tbody></table></div><h2 class="s">Lessons</h2><ul class="dots"><li>Building the slot, HUD and network path first meant every ability after it was only the ability itself.</li><li>An artist's file should be checked in the engine (size, triangle count, material slots) before it replaces the old one.</li><li>People outside the team found the biggest design gap, no police reward for a stopped van, which none of our own tests had shown.</li></ul><h2 class="s">Latest</h2><div class="tbl"><table><thead><tr><th>Date</th><th>What changed</th><th>Why</th></tr></thead><tbody><tr><td>3 Nov 2026</td><td>Ability slots and HUD; first police kit tabs</td><td>Picks had to reach the round first</td></tr><tr><td>5 Nov 2026</td><td>Spike Strip, Lights Out, Cloak, Smoke and Run-flat Tyres</td><td>The first two full builds</td></tr><tr><td>6 Nov 2026</td><td>The van's new look and its 22 parts</td><td>Lecturers asked why the van is chased</td></tr><tr><td>9 Nov 2026</td><td>Every built ability has its own feel</td><td>Abilities should be felt, not just seen</td></tr><tr><td>10 Nov 2026</td><td>Arrests, three strikes and the drop-in, all on the tuning sheet</td><td>The 9 Nov playtest</td></tr><tr><td>10 Nov 2026</td><td>Strike cutscenes in the sandbox</td><td>Give each strike a moment for both sides</td></tr></tbody></table></div>
+    </div>
+  </article>
+</div>
+    </div>
+  </div>
+</main>
+<footer class="foot"><div class="wrap">Shady Shipping is in development by Underdog Studios. Numbers on these pages come from our live tuning sheet and can change between builds.</div></footer>
+<script>
+(function () {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  document.querySelectorAll('.side > *').forEach(function (el, i) { el.style.setProperty('--i', i); });
+  document.addEventListener('click', function (e) {
+    var img = e.target.closest('.fig img, .ins-item img');
+    if (!img) return;
+    var z = document.createElement('div'); z.className = 'zoom'; z.setAttribute('role', 'dialog'); z.setAttribute('aria-label', 'Picture, click to close');
+    var big = document.createElement('img'); big.src = img.src; big.alt = img.alt; z.appendChild(big);
+    var cap = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+    if (cap) { var p = document.createElement('p'); p.textContent = cap.textContent; z.appendChild(p); }
+    function shut() { z.remove(); document.removeEventListener('keydown', esc); }
+    function esc(k) { if (k.key === 'Escape') shut(); }
+    z.addEventListener('click', shut); document.addEventListener('keydown', esc);
+    document.body.appendChild(z);
+  });
+  function toTop(el) { if (el) el.scrollTop = 0; }
+  document.querySelectorAll('.topic, .main').forEach(toTop);
+  function openDuo(d) {
+    if (!d) return;
+    d.classList.add('open');
+    toTop(d.querySelector('.d2'));
+    if (window.innerWidth <= 900) { var t = d.querySelector('.d2').getBoundingClientRect().top + window.scrollY - 70; window.scrollTo(0, Math.max(0, t)); }
+  }
+  document.querySelectorAll('.duo .peek, .opener').forEach(function (b) { b.addEventListener('click', function () { openDuo(b.closest('.duo')); if (history.replaceState) history.replaceState(null, '', '#why'); }); });
+  document.querySelectorAll('.closer').forEach(function (b) { b.addEventListener('click', function () { var d = b.closest('.duo'); d.classList.remove('open'); toTop(d.querySelector('.d1')); toTop(d.querySelector('.d2')); if (history.replaceState) history.replaceState(null, '', location.pathname); }); });
+  if (location.hash === '#why') { var d = document.querySelector('.duo'); if (d) { d.classList.add('instant', 'open'); setTimeout(function () { d.classList.remove('instant'); }, 50); } }
+})();
+</script>
+</body>
+</html>

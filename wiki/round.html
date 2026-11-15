@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The round · Shady Shipping Wiki</title>
+<meta name="description" content="The round in Shady Shipping: how it works, the numbers, and why we built it that way.">
+<link rel="icon" type="image/png" href="../media/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;1,900&family=Barlow:wght@400;500;600&family=Bungee&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Shady Shipping wiki: the game page's night colours on a parcel-sticker background, a topic list down the side, and every topic's design page behind a purple door. -TripleA */
+:root {
+  --night: #0B1638; --deep: #040817; --panel: #17286A; --line: #3B56AD;
+  --text: #EEF2FF; --mute: #B6C1E6; --blue: #3A72FF; --pink: #FF3FA4;
+  --legal: #36D6FF; --illegal: #A65BFF; --hot: #FFC21A; --stock: #ECE6D8; --ink: #121010;
+  --logo: "Barlow Condensed", "Arial Narrow", sans-serif; --body: "Barlow", "Segoe UI", sans-serif;
+  --ui: "Bungee", Impact, sans-serif; --mono: "IBM Plex Mono", Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 80px; }
+body { margin: 0; color: var(--text); font: 400 17px/1.6 var(--body); background: var(--night) url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22700%22 font-family=%22Bungee, Impact, sans-serif%22%3E%3Cg transform=%22translate(110 90) rotate(-6)%22 opacity=%22.2%22%3E%3Crect x=%22-50%22 y=%22-22%22 width=%22101%22 height=%2244%22 fill=%22none%22 stroke=%22%2336D6FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%2336D6FF%22%3ELEGAL%3C/text%3E%3C/g%3E%3Cg transform=%22translate(470 120) rotate(-18)%22 opacity=%22.2%22%3E%3Crect x=%22-66%22 y=%22-22%22 width=%22131%22 height=%2244%22 fill=%22none%22 stroke=%22%23A65BFF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23A65BFF%22%3EILLEGAL%3C/text%3E%3C/g%3E%3Cg transform=%22translate(300 300) rotate(0)%22 opacity=%22.2%22%3E%3Crect x=%22-36%22 y=%22-22%22 width=%2271%22 height=%2244%22 fill=%22none%22 stroke=%22%23FFC21A%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FFC21A%22%3EHOT%3C/text%3E%3C/g%3E%3Cg transform=%22translate(90 470) rotate(14)%22 opacity=%22.2%22%3E%3Crect x=%22-66%22 y=%22-22%22 width=%22131%22 height=%2244%22 fill=%22none%22 stroke=%22%23FF3FA4%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FF3FA4%22%3EFRAGILE%3C/text%3E%3C/g%3E%3Cg transform=%22translate(560 420) rotate(-14)%22 opacity=%22.2%22%3E%3Crect x=%22-88%22 y=%22-22%22 width=%22176%22 height=%2244%22 fill=%22none%22 stroke=%22%23EEF2FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23EEF2FF%22%3ESIGNED FOR%3C/text%3E%3C/g%3E%3Cg transform=%22translate(260 600) rotate(-5)%22 opacity=%22.2%22%3E%3Crect x=%22-148%22 y=%22-22%22 width=%22296%22 height=%2244%22 fill=%22none%22 stroke=%22%23FFC21A%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%23FFC21A%22%3ENO QUESTIONS ASKED%3C/text%3E%3C/g%3E%3Cg transform=%22translate(620 650) rotate(13)%22 opacity=%22.2%22%3E%3Crect x=%22-96%22 y=%22-22%22 width=%22191%22 height=%2244%22 fill=%22none%22 stroke=%22%2336D6FF%22 stroke-width=%223%22/%3E%3Ctext x=%220%22 y=%228%22 text-anchor=%22middle%22 font-size=%2222%22 fill=%22%2336D6FF%22%3ETHIS WAY UP%3C/text%3E%3C/g%3E%3Cg opacity=%22.12%22%3E%3Crect x=%22380%22 y=%22230%22 width=%22230%22 height=%2234%22 fill=%22%23C9A15A%22 transform=%22rotate(-24 495 247)%22/%3E%3Crect x=%220%22 y=%22560%22 width=%22200%22 height=%2234%22 fill=%22%23C9A15A%22 transform=%22rotate(14 100 577)%22/%3E%3C/g%3E%3C/svg%3E") repeat fixed; }
+img { max-width: 100%; display: block; }
+a { color: var(--legal); }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+:focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
+.wrap { max-width: 1440px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+code { font: 500 .9em var(--mono); background: rgba(255,255,255,.08); padding: 1px 5px; }
+
+/* Top bar */
+.bar { position: sticky; top: 0; z-index: 20; background: var(--stock); color: var(--ink); border-bottom: 4px solid var(--ink); }
+.bar .wrap { display: flex; align-items: center; gap: 16px; padding-block: 10px; }
+.bar a { color: var(--ink); text-decoration: none; font: 800 18px/1 var(--logo); letter-spacing: .08em; text-transform: uppercase; }
+.bar .brand { display: flex; align-items: center; gap: 10px; }
+.bar .brand img { width: 30px; height: 30px; border-radius: 7px; }
+.bar .crumb-top { font: 400 13px/1 var(--ui); background: var(--ink); color: var(--hot); padding: 6px 8px 5px; }
+.bar .studio { margin-left: auto; }
+.bar a:hover { color: #B11C26; }
+
+/* Layout */
+.wiki { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 34px; padding-block: 34px 80px; }
+.main { min-width: 0; }
+.side { position: sticky; top: 80px; align-self: start; display: grid; gap: 2px; max-height: calc(100vh - 100px); overflow-y: auto; scrollbar-width: thin; }
+.side .grp { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin: 16px 0 6px; }
+.side a { font: 800 18px/1.1 var(--logo); text-transform: uppercase; letter-spacing: .04em; color: var(--text); text-decoration: none; padding: 7px 10px; border-left: 4px solid transparent; background: rgba(4,8,23,.55); }
+.side a:hover { border-color: var(--line); }
+.side a.on { border-color: var(--pink); background: var(--panel); color: var(--hot); }
+.side a.home { font: 400 15px/1.1 var(--ui); color: var(--hot); }
+@media (max-width: 900px) {
+  .wiki { grid-template-columns: 1fr; gap: 18px; padding-top: 18px; }
+  .side { position: sticky; top: 58px; z-index: 5; display: flex; overflow-x: auto; overflow-y: hidden; max-height: none; gap: 6px; padding: 8px 0; background: var(--night); scrollbar-width: none; }
+  .side .grp { display: none; }
+  .side a { white-space: nowrap; border-left: 0; border-bottom: 4px solid transparent; }
+  .side a.on { border-color: var(--pink); }
+}
+
+/* Type */
+.kick { display: block; font: 400 14px/1 var(--ui); color: var(--hot); margin-bottom: 12px; }
+.kick.des { color: var(--illegal); }
+h1.t { font: 900 italic clamp(40px, 4.6vw, 66px)/.9 var(--logo); text-transform: uppercase; }
+h1.t.big { font-size: clamp(56px, 8vw, 110px); }
+h1.t i { color: var(--blue); font-style: italic; }
+h2.s { font: 900 italic clamp(28px, 2.8vw, 38px)/.95 var(--logo); text-transform: uppercase; margin: 34px 0 12px; }
+h3 { font: 800 21px/1.1 var(--logo); text-transform: uppercase; letter-spacing: .04em; margin: 22px 0 8px; color: var(--hot); }
+p { margin: 0 0 12px; color: #D9DCE6; }
+.lead, .lead-block p:first-child { font-size: 19px; color: var(--text); max-width: 64ch; }
+.lead-block { margin-top: 16px; }
+.crumb { font: 500 12px/1 var(--mono); color: var(--mute); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+.credits { font: 500 13px/1.5 var(--mono); color: var(--mute); }
+.credits b { color: var(--text); font-weight: 500; }
+ul.dots { margin: 8px 0 14px; padding: 0; list-style: none; display: grid; gap: 6px; }
+ul.dots li { padding-left: 22px; position: relative; color: #D9DCE6; }
+ul.dots li::before { content: ""; position: absolute; left: 0; top: .6em; width: 10px; height: 10px; background: var(--pink); transform: rotate(45deg); }
+ol.nums-list { margin: 8px 0 14px; padding-left: 22px; color: #D9DCE6; }
+
+/* Status chips */
+.status { display: inline-block; font: 500 12px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; border: 1px solid currentColor; padding: 6px 8px; margin: 14px 8px 0 0; }
+.status.built { color: var(--legal); }
+.status.wip { color: var(--hot); }
+.status.planned { color: var(--illegal); border-style: dashed; }
+
+/* Tables and figures */
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); background: rgba(4,8,23,.75); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(59,86,173,.6); vertical-align: top; }
+th { font: 500 12px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--mute); background: rgba(23,40,106,.6); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { color: var(--text); font-weight: 600; }
+tr.win td { background: rgba(255,194,26,.1); }
+tr.win td:last-child { color: var(--hot); }
+.fig { margin: 18px 0; }
+.fig .imgs { display: grid; gap: 8px; }
+.fig.multi .imgs { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.fig img { width: 100%; border: 1px solid var(--line); background: #000; }
+.fig figcaption { font: 500 13px/1.45 var(--mono); color: var(--mute); margin-top: 8px; }
+.inspo { margin: 20px 0; padding: 16px 18px 6px; border-left: 6px solid var(--hot); background: rgba(255,194,26,.07); }
+.inspo .lab { display: block; font: 400 13px/1 var(--ui); color: var(--hot); margin-bottom: 10px; }
+
+/* Home */
+.doors { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 28px; }
+.door { background: var(--panel); border: 1px solid var(--line); border-top: 8px solid var(--c); padding: 26px 24px 26px; display: grid; gap: 12px; align-content: start; text-decoration: none; color: var(--text); transition: transform .15s ease, box-shadow .15s ease; }
+.door:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--c); }
+.door .who { font: 500 13px/1 var(--mono); color: var(--mute); text-transform: uppercase; letter-spacing: .1em; }
+.door h2 { font: 900 italic clamp(38px, 4vw, 58px)/.9 var(--logo); text-transform: uppercase; color: var(--c); }
+.door p { margin: 0; }
+.door .go { font: 400 14px/1 var(--ui); color: var(--c); margin-top: 6px; }
+.index { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.ig { background: rgba(4,8,23,.75); border: 1px solid var(--line); padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.ig .grp2 { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin-bottom: 6px; }
+.ig a { font: 800 19px/1.3 var(--logo); text-transform: uppercase; color: var(--text); text-decoration: none; }
+.ig a:hover { color: var(--hot); }
+@media (max-width: 760px) { .doors { grid-template-columns: 1fr; } }
+
+/* Deep pages (one column) */
+.deep { max-width: 980px; margin-top: 16px; background: rgba(4,8,23,.82); border: 1px solid var(--line); border-top: 6px solid var(--illegal); padding: 8px 24px 20px; }
+
+/* Topic: the player page in the middle, the design page peeking out beside it */
+.topic { background: rgba(4,8,23,.9); border: 1px solid var(--line); padding: 22px 24px 26px; min-width: 0; }
+.d1 { border-top: 6px solid var(--legal); }
+.d2 { border-top: 6px solid var(--illegal); position: relative; }
+.duo { --g: 22px; position: relative; }
+.duo:not(.open) > .d1 { width: calc(50% - var(--g) / 2 + 120px); margin: 0 auto; }
+.duo:not(.open) > .d2 { position: absolute; top: 0; bottom: 0; left: calc(75% - var(--g) / 4 + 60px + 12px); width: 64px; padding: 0; overflow: hidden; border: 0; }
+.duo:not(.open) > .d2 > .d2in { display: none; }
+.duo.open { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--g); align-items: start; }
+.duo.open > .d1 { animation: slideL .55s cubic-bezier(.3,1.2,.5,1) backwards; }
+.duo.open > .d2 { animation: popIn .55s cubic-bezier(.3,1.2,.5,1) backwards; }
+.duo.instant > .d1, .duo.instant > .d2 { animation: none; }
+@keyframes slideL { 0% { transform: translateX(calc(50% + var(--g) / 2 - 60px)); } 100% { transform: none; } }
+@keyframes popIn { 0% { transform: translateX(-30%); opacity: 0; } 100% { transform: none; opacity: 1; } }
+.peek { position: absolute; left: 0; top: 0; bottom: 0; width: 64px; z-index: 2; border: 0; cursor: pointer; background: var(--illegal); color: #fff; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 22px 0 0; transition: background .15s ease, transform .15s ease; }
+.peek .pk-text { writing-mode: vertical-rl; font: 400 15px/1 var(--ui); letter-spacing: .04em; white-space: nowrap; }
+.peek .pk-arrow { border-left: 16px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+.peek:hover { background: #B877FF; transform: translateX(-4px); }
+.duo.open .peek { display: none; }
+.opener { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; font: 400 15px/1 var(--ui); color: #fff; background: var(--illegal); border: 0; padding: 14px 18px 13px; cursor: pointer; box-shadow: 6px 6px 0 var(--deep); transition: transform .12s ease, box-shadow .12s ease; }
+.opener:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--deep); }
+.duo.open .opener { display: none; }
+.closer { font: 400 14px/1 var(--ui); color: var(--hot); background: transparent; border: 2px solid var(--hot); padding: 10px 14px 9px; cursor: pointer; margin-bottom: 18px; }
+.closer::before { content: ""; display: inline-block; margin-right: 10px; border-right: 10px solid var(--hot); border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+@media (max-width: 1200px) {
+  .duo:not(.open) > .d1 { width: auto; margin-right: 76px; }
+  .duo:not(.open) > .d2 { left: auto; right: 0; }
+  .duo.open { grid-template-columns: 1fr; }
+  @keyframes slideL { 0% { transform: none; } 100% { transform: none; } }
+}
+@media (max-width: 640px) {
+  .duo:not(.open) > .d1 { margin-right: 0; }
+  .duo:not(.open) > .d2 { position: relative; left: auto; right: auto; width: auto; height: 64px; margin-top: 14px; }
+  .peek { right: 0; width: auto; bottom: 0; flex-direction: row; justify-content: center; padding: 0 16px; }
+  .peek .pk-text { writing-mode: horizontal-tb; }
+  .peek:hover { transform: none; }
+  .topic { padding: 18px 16px 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .duo.open > .d1, .duo.open > .d2 { animation: none; } * { transition: none !important; } }
+
+.foot { border-top: 1px solid var(--line); background: var(--deep); }
+.foot .wrap { padding-block: 22px; font: 500 13px/1.5 var(--mono); color: var(--mute); }
+main.wrap { min-height: calc(100vh - 130px); }
+
+/* Long topics: on wide screens each card is a screen-high panel with its own scroll, so opening the door shows both tops at once */
+@media (min-width: 1201px) {
+  .topic { max-height: calc(100vh - 110px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+  .duo:not(.open) > .d2 { max-height: none; }
+}
+
+/* Inspiration cards: the game's picture beside what we took from it */
+.ins-item { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 16px; align-items: start; padding: 4px 0 14px; }
+.ins-item + .ins-item { border-top: 1px dashed rgba(255,194,26,.35); padding-top: 16px; }
+.ins-item.text-only { grid-template-columns: 1fr; }
+.ins-item figure { margin: 0; }
+.ins-item img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border: 2px solid var(--hot); box-shadow: 5px 5px 0 rgba(4,8,23,.9); transform: rotate(-1.5deg); }
+.ins-item:nth-child(odd of .ins-item) img { transform: rotate(1.5deg); }
+.ins-item figcaption { font: 500 11px/1.4 var(--mono); color: var(--mute); margin-top: 8px; }
+.ins-item .txt p:last-child { margin-bottom: 0; }
+@media (max-width: 1500px) { .duo.open .ins-item { grid-template-columns: 1fr; } .duo.open .ins-item img { max-width: 360px; } }
+@media (max-width: 560px) { .ins-item { grid-template-columns: 1fr; } }
+.fig.dia img { background: #fff; padding: 10px; border: 3px solid var(--legal); box-shadow: 6px 6px 0 rgba(4,8,23,.9); }
+
+/* Wide screens: the page itself never scrolls; the side list and each card scroll on their own */
+@media (min-width: 901px) {
+  html, body { height: 100%; overflow: hidden; }
+  body { display: flex; flex-direction: column; }
+  .bar { flex: none; }
+  main.wrap { flex: 1; min-height: 0; width: 100%; }
+  .wiki { height: 100%; padding-block: 22px; box-sizing: border-box; }
+  .side { position: static; max-height: 100%; }
+  .main { height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; padding-right: 4px; }
+  .foot { display: none; }
+}
+@media (min-width: 1201px) {
+  .main:has(> .duo) { overflow: hidden; }
+  .duo { height: 100%; }
+  .duo.open { align-items: stretch; }
+  .topic { max-height: 100%; }
+  .duo.open > .topic { height: 100%; }
+}
+
+/* The door strip reads normally: a wider tab with the words across, not down */
+.duo:not(.open) > .d2 { width: 132px; }
+.peek { width: 132px; padding: 22px 12px 0; gap: 14px; justify-content: flex-start; }
+.peek .pk-text { writing-mode: horizontal-tb; white-space: normal; text-align: center; font-size: 17px; line-height: 1.15; }
+.peek .pk-arrow { order: 2; }
+@media (max-width: 1200px) {
+  .duo:not(.open) > .d1 { margin-right: 146px; }
+}
+@media (max-width: 640px) {
+  .duo:not(.open) > .d1 { margin-right: 0; }
+  .duo:not(.open) > .d2 { width: auto; }
+  .peek { width: auto; padding: 0 16px; flex-direction: row; justify-content: center; }
+  .peek .pk-arrow { order: 2; }
+}
+@media (min-width: 641px) { .peek { justify-content: center; padding: 0 12px; } }
+
+/* Under the hood: one wide card that scrolls inside itself, so its scrollbar sits on the card */
+.deep { max-width: none; margin-top: 0; padding: 24px 28px 28px; background: rgba(4,8,23,.9); }
+.deep h1.t { margin-bottom: 8px; }
+@media (min-width: 901px) {
+  .main:has(> .deep) { overflow: hidden; padding-right: 0; }
+  .deep { height: 100%; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+}
+
+/* Motion: cards land, the list slides in, the door knocks once, photos lift, pictures open big */
+@keyframes land { 0% { transform: translateY(28px) scale(.97); opacity: 0; } 70% { transform: translateY(-4px) scale(1.005); opacity: 1; } 100% { transform: none; opacity: 1; } }
+@keyframes slideIn { 0% { transform: translateX(-24px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+@keyframes knock { 0%, 100% { transform: none; } 15% { transform: translateX(-12px); } 30% { transform: none; } 45% { transform: translateX(-12px); } 60% { transform: none; } }
+.duo:not(.open) > .d1, .deep, .main > .kick, .main > h1.t, .doors, .index { animation: land .5s cubic-bezier(.2,.9,.3,1.15) backwards; }
+.doors { animation-delay: .08s; } .index { animation-delay: .16s; }
+.side > * { animation: slideIn .35s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i, 0) * 28ms); }
+.duo:not(.open) > .d2 { animation: land .5s cubic-bezier(.2,.9,.3,1.15) .12s backwards; }
+.duo:not(.open) .peek { animation: knock .9s cubic-bezier(.3,1.4,.5,1) 1s 1 both; }
+.ins-item img { transition: transform .2s cubic-bezier(.2,.9,.3,1.3), box-shadow .2s ease; cursor: zoom-in; }
+.ins-item img:hover { transform: rotate(0deg) translate(-3px, -5px) scale(1.04); box-shadow: 10px 12px 0 rgba(4,8,23,.9); }
+.fig img { cursor: zoom-in; transition: transform .2s cubic-bezier(.2,.9,.3,1.3); }
+.fig img:hover { transform: translateY(-3px); }
+.zoom { position: fixed; inset: 0; z-index: 100; background: rgba(4,8,23,.92); display: grid; place-items: center; padding: 24px; cursor: zoom-out; animation: fadeIn .15s ease both; }
+.zoom img { max-width: min(1600px, 96vw); max-height: 86vh; width: auto; border: 3px solid var(--legal); box-shadow: 10px 10px 0 #000; background: #fff; animation: land .35s cubic-bezier(.2,.9,.3,1.15) both; }
+.zoom p { margin: 12px 0 0; font: 500 13px/1.4 var(--mono); color: var(--mute); text-align: center; max-width: 90ch; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .duo > *, .deep, .main > *, .side > *, .peek, .zoom, .zoom img { animation: none !important; } }
+
+/* A build-log chapter folded into a topic */
+.from-log { margin: 40px 0 6px; padding: 12px 14px; border: 2px dashed var(--line); background: rgba(23,40,106,.45); display: grid; gap: 4px; }
+.from-log span { font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.from-log b { font: 900 italic 24px/1 var(--logo); text-transform: uppercase; color: var(--hot); }
+
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="../shadyshipping.html"><img src="../media/favicon.png" alt="">Shady Shipping</a>
+    <span class="crumb-top">Wiki</span>
+    <a class="studio" href="../index.html">Underdog Studios</a>
+  </div>
+</header>
+<main class="wrap">
+  <div class="wiki">
+<nav class="side" aria-label="Wiki topics">
+<a class="home" href="index.html">Wiki home</a>
+<span class="grp">The round</span>
+<a href="round.html" class="on" aria-current="page">The round</a>
+<a href="parcels.html">Parcels & jobs</a>
+<a href="heat.html">Heat & the radar</a>
+<a href="arrests.html">Arrests & the drop-in</a>
+<a href="money.html">Money & stars</a>
+<a href="hud.html">HUD, radar & routes</a>
+<span class="grp">On the road</span>
+<a href="vehicles.html">Driving & damage</a>
+<a href="repair.html">Wrecks & the repair garage</a>
+<a href="destruction.html">Destruction</a>
+<a href="traffic.html">Traffic</a>
+<span class="grp">Your kit</span>
+<a href="abilities.html">Abilities</a>
+<a href="lobby.html">Lobby & garage</a>
+<a href="sound.html">Sound & effects</a>
+<span class="grp">Coming later</span>
+<a href="dispatcher.html">The Dispatcher</a>
+<span class="grp">Under the hood</span>
+<a href="systems.html">How it fits together</a>
+<a href="online.html">Online play</a>
+<a href="balance.html">Balance</a>
+<a href="city.html">Building the city</a>
+<a href="playtests.html">Playtests</a>
+</nav>
+    <div class="main">
+<div class="duo">
+  <article class="topic d1">
+    <div class="crumb">Wiki / How to play / The round</div>
+    <span class="kick">The round</span>
+    <h1 class="t">Match, strikes and exits</h1>
+    <span class="status built">Built and playtested; strikes built, not yet in a team playtest</span>
+    <div class="lead-block"><figure class="fig"><div class="imgs"><img src="../media/wiki/gsdd_img011.jpg" alt="The results screen in an online round after a real wreck: every line is read from the host&#x27;s database"></div><figcaption>The results screen in an online round after a real wreck: every line is read from the host's database</figcaption></figure>
+<p><b>What it does for play.</b> This system is the referee. It runs the round from countdown to results and decides who wins. The van wins by escaping. The police win by catching it three times.</p></div>
+    <figure class="fig dia"><div class="imgs"><img src="../media/wiki/two-loops.png" alt="The two loops: everything the courier does feeds what the police are told, and every strike sends the van back in"></div><figcaption>The two loops: everything the courier does feeds what the police are told, and every strike sends the van back in</figcaption></figure>
+    <h2 class="s">How it works</h2><div class="tbl"><table><thead><tr><th>Rule</th><th>What happens</th></tr></thead><tbody><tr><td>Strikes</td><td>A wreck or an arrest is a strike. The strike count sits at the top of everyone's screen.</td></tr><tr><td>Third strike</td><td>Three strikes and the police win the round.</td></tr><tr><td>After a strike</td><td>The van loses its parcel, a cutscene plays, and it drops back in fresh at full health (see <a href="arrests.html">Arrests and the drop-in</a>).</td></tr><tr><td>Stars</td><td>Deliveries earn stars: five stars, each needing more deliveries and paying a bigger bonus.</td></tr><tr><td>Exits</td><td>After the first star, two exits open at random. Both sides see them on the radar.</td></tr><tr><td>Escape</td><td>The van smashes through an open exit's barrier at speed. An escape cutscene plays and the van wins with its star bonus.</td></tr><tr><td>No hiding</td><td>A van that goes a minute without delivering is searched for on the police radar, so it cannot sit still and wait.</td></tr><tr><td>Results</td><td>Each player sees their own round: deliveries, best job, money earned, spent and lost.</td></tr></tbody></table></div><h2 class="s">The numbers</h2><div class="tbl"><table><thead><tr><th>Value</th><th>Setting</th></tr></thead><tbody><tr><td>Strikes until the police win</td><td>3</td></tr><tr><td>Deliveries for stars 1 to 5</td><td>2, 4, 6, 9, 12</td></tr><tr><td>Escape bonus</td><td>£100 to £800, rising with stars</td></tr><tr><td>Exits that open after the first star</td><td>2</td></tr><tr><td>Speed needed to smash an exit barrier</td><td>40 km/h</td></tr><tr><td>Searched for after no delivery for</td><td>60 s</td></tr><tr><td>Countdown</td><td>5 s</td></tr><tr><td>Results screen</td><td>10 s</td></tr></tbody></table></div><div class="from-log"><span>From the build log</span><b>Parcels, economy and round flow</b></div><h2 class="s">Everything in the build</h2><div class="tbl"><table><thead><tr><th>Feature</th><th>What it does for play</th></tr></thead><tbody><tr><td>Parcel bays</td><td>Spots on the street, placed by Dafydd, lit up for the courier only</td></tr><tr><td>One job at a time</td><td>The game rolls Legal or Illegal, so every round plays differently</td></tr><tr><td>Pay by distance</td><td>A long job pays more and adds more time than a short one</td></tr><tr><td>Stop to load</td><td>The van must stop in the bay, so every pickup with a cop behind is a gamble</td></tr><tr><td>Ditching</td><td>Hold a key for 1 s to throw the parcel away: an escape with a cost</td></tr><tr><td>Hot Parcels</td><td>Double pay, with a gold bonus look, stars and coins</td></tr><tr><td>Round cash and wallet</td><td>Cash is at risk until it is banked into a wallet that lasts between sessions</td></tr><tr><td>Host database</td><td>Every round, job and money movement is kept on the host PC</td></tr><tr><td>Stars and exits</td><td>Five delivery stars; after the first, two exits open and the van escapes through one to win</td></tr><tr><td>Countdown and results</td><td>Every car is held until GO; a results screen shows each player their round</td></tr><tr><td>Trip into the city</td><td>A moving cover hides the load, and the round waits until every PC is ready</td></tr></tbody></table></div>
+<p>Legal jobs are cyan, Illegal purple and Hot gold. Legal started out gold, but that clashed with the Hot jackpot look.</p>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/round-loop.png" alt="The courier&#x27;s job loop and the ways out of it"></div><figcaption>The courier's job loop and the ways out of it</figcaption></figure><h2 class="s">From the build</h2><figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img075.jpg" alt="A legal job from the courier&#x27;s seat: the job card, the pickup&#x27;s beam ahead and the route on the radar"></div><figcaption>A legal job from the courier's seat: the job card, the pickup's beam ahead and the route on the radar</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img079.jpg" alt="Going Hot: gold stars and coins burst off the van and the job card switches to HOT at double pay"></div><figcaption>Going Hot: gold stars and coins burst off the van and the job card switches to HOT at double pay</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img093.jpg" alt="A delivery lands: the cash and clock pops on the shift panel"></div><figcaption>A delivery lands: the cash and clock pops on the shift panel</figcaption></figure>
+<figure class="fig"><div class="imgs"><img src="../media/wiki/plog_img104.jpg" alt="The results screen in a networked game after a real wreck, every line read from the host&#x27;s database"></div><figcaption>The results screen in a networked game after a real wreck, every line read from the host's database</figcaption></figure>
+    <button class="opener" type="button">Why it works like this <span aria-hidden="true">→</span></button>
+  </article>
+  <article class="topic d2">
+    <button class="peek" type="button" aria-label="Why it works like this: open the design page"><span class="pk-arrow" aria-hidden="true"></span><span class="pk-text">Why it works like this</span></button>
+    <div class="d2in">
+      <button class="closer" type="button">Back to how it plays</button>
+      <div class="crumb">Wiki / Behind the design / The round</div>
+      <span class="kick des">Behind the design</span>
+      <h1 class="t">Why <i>the round</i></h1>
+      <p class="credits"><b>Built by</b> Abdullah · <b>Numbers by</b> Dafydd · <b>In-game HUD by</b> Ieuan · <b>Tested by</b> The team (playtests)</p>
+      <aside class="inspo"><span class="lab">Inspired by</span><div class="ins-item"><figure><img src="../media/wiki/gsdd_dbd_wiki.jpg" alt="Dead by Daylight: each survivor&#x27;s status sits at the side of the screen, and every hook brings them closer to being out (Behaviour Interactive, 2016)"><figcaption>Dead by Daylight: each survivor's status sits at the side of the screen, and every hook brings them closer to being out (Behaviour Interactive, 2016)</figcaption></figure><div class="txt"><p><b>Dead by Daylight (Behaviour Interactive, 2016):</b> a survivor caught three times is out, and everyone can see how close each one is. Being caught is a setback, not the end, so the hunted keep taking risks.</p>
+<p>What we took: three catches to lose, shown to both sides. What we changed: each strike also costs the van its parcel, so getting caught always hurts.</p></div></div><div class="ins-item text-only"><div class="txt"><p><b>Salen and Zimmerman (2004):</b> the rules must make the intended action the meaningful one. Under strikes, the only way to win is to deliver and then escape, so standing still never pays.</p></div></div></aside><aside class="inspo"><span class="lab">Inspired by</span><div class="ins-item"><figure><img src="../media/wiki/plog_crazytaxi_gameplay.jpg" alt="Crazy Taxi: the game clock top left and the fare top right, with the arrow pointing to the drop-off (Hitmaker, 1999)"><figcaption>Crazy Taxi: the game clock top left and the fare top right, with the arrow pointing to the drop-off (Hitmaker, 1999)</figcaption></figure><div class="txt"><p><b>Crazy Taxi (Hitmaker, 1999):</b> each fare adds seconds to a running clock, so good driving buys more time to earn.</p>
+<p>What we took: deliveries that pay and add time, priced by distance. What we changed: there is a chase on top, and the clock was later replaced by strikes (see the abilities chapter).</p></div></div><div class="ins-item text-only"><div class="txt"><p><b>Adams and Dormans (2012)</b> describe a game's internal economy as sources, drains and converters joined by feedback loops.</p>
+<p>What we took: deliveries are the source, the repair garage is the first drain, and a wreck takes away cash that was never banked.</p></div></div></aside>
+      
+      <h2 class="s">Why we chose this</h2><p>The pre-production design used a shift clock: deliveries added time, and the police won if it ran out or if they wrecked the van. Playtest feedback changed that. our lecturers found the police gained nothing when the van stopped at a bay, and Ieuan found the round timer added nothing the chase did not already give. Abdullah replaced the clock with strikes and arrests on 10 November.</p>
+<div class="tbl"><table><thead><tr><th>Option</th><th>For</th><th>Against</th><th>Verdict</th></tr></thead><tbody><tr><td>Shift clock refilled by deliveries</td><td>Constant pressure; simple</td><td>No police reward for a stopped van; one wreck ended the round</td><td>Replaced</td></tr><tr><td>Survive to the end of a timer</td><td>Easy to explain</td><td>Rewards stalling; the best play is no parcels</td><td>Rejected</td></tr><tr class="win"><td><b>Three strikes, escape to win</b></td><td>A catch is a setback, not the end; arrests become a real police goal</td><td>More to explain; needs the drop-in</td><td><b>Chosen</b></td></tr></tbody></table></div>
+<p>Strikes give the police two ways to score (wreck or arrest) and give the van a second and third chance, which keeps a round tense until the end. Abdullah's call.</p><h2 class="s">What can go wrong</h2><div class="tbl"><table><thead><tr><th>Situation</th><th>What the game does</th></tr></thead><tbody><tr><td>The van parks in a corner and waits</td><td>After a minute without a delivery, the police radar searches for it</td></tr><tr><td>The van delivers just as it is wrecked</td><td>The wreck still counts as a strike: the van must survive to be paid</td></tr><tr><td>A slower PC is still loading at the start</td><td>The countdown waits until every PC is running smoothly, up to 90 s</td></tr><tr><td>The courier quits mid-round</td><td>Planned: a 30 s grace, then the police win by forfeit</td></tr></tbody></table></div><h2 class="s">How we know it works</h2><div class="tbl"><table><thead><tr><th>Check</th><th>Target</th><th>Result so far</th></tr></thead><tbody><tr><td>Same result on every screen</td><td>100% of rounds</td><td>Met in every online test</td></tr><tr><td>Round length</td><td>4 to 6 minutes</td><td>To measure with strikes in the next team playtest</td></tr><tr><td>Balance</td><td>Van wins 45% to 55% at each cop count</td><td>To measure in the next team playtest</td></tr><tr><td>Nobody misses the start</td><td>Every PC starts the countdown together</td><td>Met after the loading fix</td></tr></tbody></table></div><div class="from-log"><span>From the build log</span><b>Parcels, economy and round flow</b></div><h2 class="s">What we set out to do</h2><p>The parcel system had to give the police radar heat a cause: what the van carries decides how hard it is hunted. Each delivery then had to pay something and buy something, and each round had to end cleanly and show every player how it went.</p><h2 class="s">How the round grew</h2><p><b>Parcels.</b> Abdullah designed the job rules. The pre-production plan offered two jobs after every drop-off, one legal and one illegal, so a careful courier could take legal jobs forever. Abdullah wanted every game to play differently, so the game now picks the job. The courier's choices are how to drive it and whether to ditch it. The job mix is Dafydd's: never illegal on the first job, then rising chances, and never more than three legal jobs in a row. Hot Parcels never roll by themselves, because they are meant as a pressure tool that lands when it matters.</p>
+<p>Two of Abdullah's calls shaped the risk. The garage refuses a van carrying illegal cargo, so a damaged van cannot hide there mid-chase. The police never see a parcel on the van, because the radar heat already tells them about the cargo and a visible parcel would make hiding pointless.</p>
+<p><b>Feel.</b> Abdullah then steered every look and sound in the editor. None of the cash register clips felt rewarding, so we made layered pay-out stings and he picked "Big Payday" for illegal and Hot jobs and "Quick Win" for legal ones, so the sound grows with the money. For Hot he asked for a "super hot", "BONUS" feel to suit the cartoony style.</p>
+<p><b>Economy.</b> Abdullah set the direction: money that lasts, for the lobby's vehicle customisation; one wallet per player whichever side they play; and the host (his home PC) keeping the saves, so nobody can edit their own money. Cash earned in a round is held as round cash. The garage takes its repair cost from it, and a wreck loses it. It is banked into the wallet only when the round ends.</p>
+<p><b>Storage.</b> Abdullah, who was paid to develop FiveM servers using SQL, asked whether a database would suit player data better than save files. It would, but he chose to check in the save files first so the change would show as iteration. The database followed the same day and now holds every profile, round, job and money movement. Each player's results screen is read from it, and it already records what wrecked the van, for a final killcam Abdullah wants later.</p>
+<p><b>Round end.</b> Abdullah asked for a countdown, a round end and a results screen fed by the database. The level reloads between rounds, so every car, parcel, dent and timer starts fresh without each system needing its own reset code. The results screen and the shift panel are placeholders built fully in Blueprint (Unreal's visual scripting), because Ieuan owns the UI and works only in Blueprint. The first parcel HUD put its logic in C++; Abdullah pointed out Ieuan could not touch it, so every bit of logic moved into the widget.</p><h2 class="s">The big decisions</h2><p>Full comparison: Trade-off Appendix.</p>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>One job at a time, tier rolled from the job mix</td><td>Every game differs; no farming safe jobs</td><td>No choice of job</td><td>Chosen</td></tr><tr><td>Two offers after every drop-off (the plan)</td><td>A choice each job</td><td>The courier could take legal jobs forever</td><td>Replaced</td></tr><tr><td>One offer, decline to re-roll</td><td>Simple</td><td>Declining stops the car and the chase</td><td>Rejected</td></tr></tbody></table></div>
+<p>Abdullah's call: every game should play differently.</p>
+<div class="tbl"><table><thead><tr><th>Option</th><th>Pros</th><th>Cons</th><th>Verdict</th></tr></thead><tbody><tr><td>A save file per player on the host</td><td>Quick; nothing to install</td><td>Unreadable files; no history; a crash loses round cash</td><td>Built first, then replaced</td></tr><tr><td>One SQLite database file on the host</td><td>Readable and fixable by hand; full history; survives a crash</td><td>A schema to keep in step with the code</td><td>Chosen</td></tr><tr><td>A MySQL server, as on FiveM</td><td>Familiar to Abdullah</td><td>A server to run and secure; overkill for one host</td><td>Rejected</td></tr><tr><td>A save on each player's own PC</td><td>Works offline</td><td>Players could give themselves money</td><td>Rejected</td></tr></tbody></table></div>
+<p>Abdullah's call, from his FiveM work with SQL; the save files went in first so the change is on record.</p><h2 class="s">Playtesting and what changed</h2><div class="tbl"><table><thead><tr><th>Date</th><th>Who played</th><th>What they found</th><th>What we changed</th></tr></thead><tbody><tr><td>27 Oct</td><td>Abdullah, in the editor</td><td>Faint beam, flat pay-out, sparkles flying into the camera</td><td>Brighter beam, new pay-out stings, sparkles thrown sideways</td></tr><tr><td>28 Oct</td><td>Networked test, host and client</td><td>The next round started with no courier for 10 s</td><td>The host now waits for the last round's players, up to 30 s</td></tr><tr><td>30 Oct</td><td>Uni playtest, lab PCs</td><td>Pickups and drop-offs looked alike</td><td>Drop-offs pink, with opposite light and ripple motion</td></tr><tr><td>2 Nov</td><td>Uni, five online rounds</td><td>Stops felt slow; a ditch cost too much time</td><td>Abdullah retuned loading, unloading and the ditch wait</td></tr><tr><td>9 Nov</td><td>Uni playtest, lecturers</td><td>No police upside to the van stopping; the round timer felt redundant</td><td>Arrests and three strikes replaced the clock</td></tr><tr><td>9 Nov</td><td>Uni playtest</td><td>Players could not afford to try the garage</td><td>Every wallet topped up to £100,000 for testing</td></tr><tr><td>10 Nov</td><td>Two-PC tests</td><td>A slower PC started late and missed the drive-in</td><td>The round waits until every PC runs smoothly</td></tr></tbody></table></div>
+<p>The stop and ditch values Abdullah changed after the 2 Nov rounds:</p>
+<div class="tbl"><table><thead><tr><th>Setting</th><th>Before</th><th>After</th></tr></thead><tbody><tr><td>Time to load at a pickup</td><td>1.5 s</td><td>0.5 s</td></tr><tr><td>Time to unload at a drop-off</td><td>1 s</td><td>0.2 s</td></tr><tr><td>Next job after a ditch</td><td>15 s</td><td>10 s</td></tr></tbody></table></div><h2 class="s">Problems and fixes</h2><div class="tbl"><table><thead><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr></thead><tbody><tr><td>A courier who joined late saw no bay or beam</td><td>The job arrived before the van had a player</td><td>Light the bays again whenever the van changes hands</td></tr><tr><td>The red repair cost never showed</td><td>The money moved while the HUD was faded out for the garage</td><td>The money moves at the door; the pop shows on the drive out</td></tr><tr><td>A player's round lost its deliveries after banking</td><td>A late save wrote the reset numbers over it</td><td>A banked round is never written again</td></tr><tr><td>Every results line read zero</td><td>A database viewer held the file, so the game could not open it</td><td>Keep the viewer closed while the game runs</td></tr></tbody></table></div><h2 class="s">Lessons</h2><ul class="dots"><li>Anything a teammate who does not code will change must live where they can change it, which for Ieuan means Blueprint.</li><li>Shipping the simple version first and the better one next keeps the change, and the reason for it, on record.</li><li>Anything timed from the level starting must wait for every player, because loading is never instant for everyone.</li></ul><h2 class="s">Latest</h2><div class="tbl"><table><thead><tr><th>Date</th><th>What changed</th><th>Why</th></tr></thead><tbody><tr><td>28 Oct 2026</td><td>Countdown, round end, results screen and host database</td><td>Each round needed an end and a breakdown</td></tr><tr><td>2 Nov 2026</td><td>Faster loading and unloading, shorter ditch wait</td><td>Abdullah's tuning after five uni rounds</td></tr><tr><td>9 Nov 2026</td><td>Starting wallet of £100,000</td><td>So playtesters can try the whole garage</td></tr><tr><td>10 Nov 2026</td><td>Shift clock replaced by three strikes</td><td>Lecturers' playtest feedback</td></tr><tr><td>10 Nov 2026</td><td>Live send-off cover; everyone starts together</td><td>A slower PC missed the drive-in</td></tr></tbody></table></div>
+    </div>
+  </article>
+</div>
+    </div>
+  </div>
+</main>
+<footer class="foot"><div class="wrap">Shady Shipping is in development by Underdog Studios. Numbers on these pages come from our live tuning sheet and can change between builds.</div></footer>
+<script>
+(function () {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  document.querySelectorAll('.side > *').forEach(function (el, i) { el.style.setProperty('--i', i); });
+  document.addEventListener('click', function (e) {
+    var img = e.target.closest('.fig img, .ins-item img');
+    if (!img) return;
+    var z = document.createElement('div'); z.className = 'zoom'; z.setAttribute('role', 'dialog'); z.setAttribute('aria-label', 'Picture, click to close');
+    var big = document.createElement('img'); big.src = img.src; big.alt = img.alt; z.appendChild(big);
+    var cap = img.closest('figure') && img.closest('figure').querySelector('figcaption');
+    if (cap) { var p = document.createElement('p'); p.textContent = cap.textContent; z.appendChild(p); }
+    function shut() { z.remove(); document.removeEventListener('keydown', esc); }
+    function esc(k) { if (k.key === 'Escape') shut(); }
+    z.addEventListener('click', shut); document.addEventListener('keydown', esc);
+    document.body.appendChild(z);
+  });
+  function toTop(el) { if (el) el.scrollTop = 0; }
+  document.querySelectorAll('.topic, .main').forEach(toTop);
+  function openDuo(d) {
+    if (!d) return;
+    d.classList.add('open');
+    toTop(d.querySelector('.d2'));
+    if (window.innerWidth <= 900) { var t = d.querySelector('.d2').getBoundingClientRect().top + window.scrollY - 70; window.scrollTo(0, Math.max(0, t)); }
+  }
+  document.querySelectorAll('.duo .peek, .opener').forEach(function (b) { b.addEventListener('click', function () { openDuo(b.closest('.duo')); if (history.replaceState) history.replaceState(null, '', '#why'); }); });
+  document.querySelectorAll('.closer').forEach(function (b) { b.addEventListener('click', function () { var d = b.closest('.duo'); d.classList.remove('open'); toTop(d.querySelector('.d1')); toTop(d.querySelector('.d2')); if (history.replaceState) history.replaceState(null, '', location.pathname); }); });
+  if (location.hash === '#why') { var d = document.querySelector('.duo'); if (d) { d.classList.add('instant', 'open'); setTimeout(function () { d.classList.remove('instant'); }, 50); } }
+})();
+</script>
+</body>
+</html>

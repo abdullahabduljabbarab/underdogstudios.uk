@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Underdog Studios</title>
+<meta name="description" content="Underdog Studios is an indie game studio from Cardiff. Small team, loud games. Now making Shady Shipping.">
+<link rel="icon" type="image/png" href="media/favicon.png">
+<link rel="apple-touch-icon" href="media/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://underdogstudios.uk/">
+<meta property="og:title" content="Underdog Studios">
+<meta property="og:description" content="Small team. Loud games. An indie studio from Cardiff, now making Shady Shipping.">
+<meta property="og:image" content="https://underdogstudios.uk/media/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@800;900&family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Permanent+Marker&family=Barlow+Condensed:ital,wght@0,300;1,800&display=swap">
+<script>
+// Open at the top unless the link asks for a section: hide the page until it is there, and jump without smooth scrolling
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+if (!location.hash) {
+  var de = document.documentElement; de.style.visibility = 'hidden';
+  var top0 = function () { de.style.scrollBehavior = 'auto'; window.scrollTo(0, 0); de.style.scrollBehavior = ''; de.style.visibility = ''; };
+  document.addEventListener('DOMContentLoaded', top0);
+  setTimeout(function () { de.style.visibility = ''; }, 1500);
+}
+</script>
+<style>
+/* Layout: a screen-printed studio poster. Off-white print stock, black and crimson ink, a grain over everything, massive condensed stencil headlines. The Shady Shipping showcase is a dark, cinematic band in the game's own look. */
+:root {
+  --stock: #ECE6D8;      /* print paper, the logo's off-white */
+  --stock-2: #E2DACA;    /* a second pull of the same paper */
+  --ink: #121010;        /* black ink */
+  --ink-2: #1C1919;      /* black band, slightly lifted */
+  --crimson: #B11C26;    /* the logo's red, brightened for screens */
+  --faded: #6B645A;      /* worn ink for secondary text */
+  --on-ink: #E9E2D2;     /* paper-coloured text on black */
+  --stencil: "Big Shoulders Stencil Display", Impact, "Arial Narrow", sans-serif;
+  --head: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
+  --body: "IBM Plex Sans Condensed", "Arial Narrow", Arial, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.5 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--stock); color: var(--ink); font: 400 18px/1.55 var(--body); }
+a { color: inherit; }
+img, video { max-width: 100%; display: block; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.band { position: relative; isolation: isolate; }
+.band::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: var(--grain); opacity: .32; mix-blend-mode: multiply; pointer-events: none; }
+.band.dark::before { mix-blend-mode: screen; opacity: .1; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h2 { font: 900 clamp(56px, 8vw, 116px)/.84 var(--stencil); text-transform: uppercase; }
+.label { display: block; font: 500 14px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--faded); margin-bottom: 18px; }
+.dark .label { color: #A39B8C; }
+:focus-visible { outline: 3px solid var(--crimson); outline-offset: 3px; }
+
+/* Top bar */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--stock); }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--stock); border-bottom: 4px solid var(--ink); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.mark { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.mark img { width: 42px; height: 42px; border-radius: 9px; }
+.mark b { font: 900 24px/1 var(--stencil); text-transform: uppercase; letter-spacing: .04em; }
+.nav { display: flex; gap: 26px; }
+.nav a { font: 800 19px/1 var(--head); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; padding: 6px 0; border-bottom: 3px solid transparent; }
+.nav a:hover { border-color: var(--crimson); color: var(--crimson); }
+@media (max-width: 760px) {
+  .top .wrap { flex-wrap: wrap; row-gap: 6px; }
+  .nav { width: 100%; gap: 18px; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; padding-bottom: 2px; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { font-size: 17px; white-space: nowrap; }
+}
+
+/* Hero */
+.hero { position: relative; overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 48px; align-items: center; padding-block: clamp(48px, 8vw, 104px) clamp(56px, 8vw, 96px); }
+.hero h1 { font: 900 clamp(76px, 12vw, 176px)/.8 var(--stencil); text-transform: uppercase; letter-spacing: -.005em; }
+.hero h1 span { display: block; }
+.hero h1 .red { color: var(--crimson); }
+.hero .lede { font: 500 clamp(18px, 1.6vw, 20px)/1.55 var(--body); max-width: 44ch; margin: 28px 0 32px; color: #2E2A26; }
+.hero .meta { font: 500 14px/1.6 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--faded); margin-top: 22px; }
+.ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { font: 800 22px/1 var(--head); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; padding: 15px 24px 13px; border: 3px solid var(--ink); }
+.btn.solid { background: var(--ink); color: var(--stock); }
+.btn.solid:hover { background: var(--crimson); border-color: var(--crimson); }
+.btn.line:hover { background: var(--ink); color: var(--stock); }
+.badge { position: relative; justify-self: center; width: min(100%, 380px); }
+.badge img { width: 100%; border: 6px solid var(--ink); border-radius: 14%; transform: rotate(-3deg); box-shadow: 10px 12px 0 rgba(18,16,16,.85); }
+.stamp { position: absolute; right: -14px; bottom: -16px; background: var(--crimson); color: var(--stock); font: 900 24px/1 var(--stencil); text-transform: uppercase; letter-spacing: .03em; padding: 11px 15px 9px; transform: rotate(-6deg); border: 3px solid var(--ink); }
+@media (max-width: 600px) { body { font-size: 18px; } .hero h1 { font-size: clamp(52px, 15vw, 84px); } .stamp { font-size: 20px; right: -6px; } .show .film { min-height: 520px; } }
+@media (max-width: 880px) { .hero .wrap { grid-template-columns: 1fr; } .badge { width: min(78%, 330px); margin-bottom: 18px; } }
+
+/* Shady Shipping showcase: cinematic, in the game's own look */
+.show { background: #05070D; color: #EEF2FF; overflow: hidden; }
+.show .film { position: relative; min-height: clamp(460px, 62vw, 640px); display: flex; align-items: end; }
+.show .film video, .show .film .still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.show .film::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #05070D 0%, rgba(5,7,13,.55) 38%, rgba(5,7,13,.15) 70%, rgba(5,7,13,.6) 100%), linear-gradient(90deg, rgba(5,7,13,.85) 0%, transparent 60%); }
+.show .film .wrap { position: relative; z-index: 2; width: 100%; padding-block: 56px 48px; }
+.show .now { font: 500 14px/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: #FFC21A; }
+.show h3 { font: 800 italic clamp(64px, 9vw, 132px)/.86 "Barlow Condensed", "Arial Narrow", Impact, sans-serif; text-transform: uppercase; margin-top: 16px; }
+.show h3 i { color: #3A72FF; }
+.show .pitch { font: 300 clamp(22px, 2.4vw, 30px)/1.3 "Barlow Condensed", "Arial Narrow", sans-serif; max-width: 34ch; color: #D4DBF3; margin: 18px 0 26px; }
+.show .acts { display: flex; gap: 12px; flex-wrap: wrap; }
+.show .acts a { font: 600 15px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; padding: 14px 20px; border: 1px solid rgba(238,242,255,.6); color: #fff; }
+.show .acts a:first-child { background: #fff; color: #05070D; border-color: #fff; }
+.stills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; background: #05070D; }
+.stills figure { margin: 0; position: relative; aspect-ratio: 16 / 9; overflow: hidden; }
+.stills img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.9) contrast(1.05); transition: transform .6s ease; }
+.stills figure:hover img { transform: scale(1.04); }
+.stills figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 18px 14px; background: linear-gradient(0deg, rgba(5,7,13,.9), transparent); font: 500 13px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #E2E7F7; }
+@media (max-width: 760px) { .stills { grid-template-columns: 1fr; } }
+.swap img { position: absolute; inset: 0; }
+.swap img.b { animation: swap 8s ease-in-out infinite; }
+@keyframes swap { 0%, 40% { opacity: 0; } 50%, 90% { opacity: 1; } 100% { opacity: 0; } }
+
+/* A founder with no photo yet: a suspect silhouette on the height chart, stamped AT LARGE */
+.person .mug.unknown { background:
+  repeating-linear-gradient(0deg, transparent 0 23px, rgba(18,16,16,.22) 23px 24px),
+  linear-gradient(#DCD3C1, #CFC5B1); }
+.person .mug.unknown .sil { position: absolute; left: 50%; bottom: 0; width: 72%; transform: translateX(-50%); fill: var(--ink); opacity: .88; }
+.person .mug.unknown .no { position: absolute; top: 12px; left: 14px; font: 500 12px/1 var(--mono); letter-spacing: .14em; color: var(--ink); background: var(--stock); padding: 5px 7px; border: 2px solid var(--ink); }
+.person .mug.unknown .stamp { display: block; height: auto; width: auto; align-self: start; justify-self: start; line-height: 1; box-sizing: border-box; position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%) rotate(-12deg); font: 900 clamp(28px, 3.2vw, 44px)/1 var(--stencil); letter-spacing: .05em; text-transform: uppercase; color: var(--crimson); border: 5px solid var(--crimson); padding: 6px 14px 4px; background: rgba(236,230,216,.82); mix-blend-mode: multiply; white-space: nowrap; }
+.person .mug.unknown .soon { color: var(--on-ink); bottom: 14px; z-index: 1; }
+.seen .mug.unknown .stamp { animation: stampMug .38s cubic-bezier(.2,.9,.3,1.3) .5s backwards; }
+@keyframes stampMug { 0% { transform: translate(-50%, -50%) rotate(-12deg) scale(2.2); opacity: 0; } 70% { transform: translate(-50%, -50%) rotate(-12deg) scale(.94); opacity: 1; } 100% { transform: translate(-50%, -50%) rotate(-12deg); } }
+
+/* Booked: a mob-file mugshot, a height ruler down the side and a booking placard */
+.person .mug.booked .no { position: absolute; top: 12px; left: 14px; z-index: 2; font: 500 12px/1 var(--mono); letter-spacing: .14em; color: var(--ink); background: var(--stock); padding: 5px 7px; border: 2px solid var(--ink); }
+.person .mug .ruler { position: absolute; top: 0; bottom: 0; right: 0; width: 30px; z-index: 2; display: flex; flex-direction: column; justify-content: space-evenly; align-items: flex-end;
+  background: repeating-linear-gradient(0deg, transparent 0 11px, rgba(236,230,216,.55) 11px 12px); border-left: 1px solid rgba(236,230,216,.35); }
+.person .mug .ruler i { font: 500 9px/1 var(--mono); font-style: normal; color: var(--stock); background: rgba(18,16,16,.7); padding: 2px 3px; letter-spacing: .04em; }
+.person .mug .placard { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%) rotate(-1deg); z-index: 2; display: grid; gap: 3px; text-align: center; background: var(--ink); color: var(--stock); border: 2px solid var(--stock); outline: 2px solid var(--ink); padding: 7px 14px 6px; white-space: nowrap; box-shadow: 4px 4px 0 rgba(0,0,0,.35); }
+.person .mug .placard b { font: 900 16px/1 var(--stencil); letter-spacing: .1em; text-transform: uppercase; }
+.person .mug .placard span { font: 500 10px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #CFC6B4; }
+.person .mug.unknown .ruler { display: none; }
+
+/* Kingpin card: a paperclip holding the photo on, and a quick red marker ring with a note */
+.person.booked-card { position: relative; }
+.person.booked-card .clip { position: absolute; top: -26px; right: 64px; width: 26px; height: auto; z-index: 3; transform: rotate(-6deg); filter: drop-shadow(2px 3px 0 rgba(18,16,16,.35)); pointer-events: none; }
+.person .mug .ring { position: absolute; left: 50%; top: 0; width: 98%; transform: translateX(-51%) rotate(-3deg) scaleY(1.2); z-index: 2; pointer-events: none; }
+.person .mug .note { position: absolute; left: 2.5%; bottom: 1.5%; transform: rotate(-10deg); z-index: 3; font: 400 clamp(28px, 2.9vw, 38px)/1 "Permanent Marker", "Comic Sans MS", cursive; color: #E4434D; text-shadow: 0 2px 0 rgba(0,0,0,.5); pointer-events: none; }
+.seen .mug .ring path { stroke-dasharray: 900; stroke-dashoffset: 900; animation: drawRing .7s ease-out .55s forwards; }
+@keyframes drawRing { to { stroke-dashoffset: 0; } }
+.person .mug .note .w { display: inline-block; white-space: nowrap; }
+.person .mug .note i { font-style: normal; display: inline-block; }
+.seen .mug .note i { opacity: 0; animation: ink .16s ease-out var(--d) forwards; }
+@keyframes ink { 0% { opacity: 0; clip-path: inset(0 100% 0 0); } 30% { opacity: 1; } 100% { opacity: 1; clip-path: inset(0 0 0 0); } }
+
+/* Our story: a small pile of taped prints per game */
+.prints { position: relative; margin-top: 22px; aspect-ratio: 16 / 11.5; max-width: 420px; }
+.prints img { position: absolute; display: block; object-fit: cover; border: 6px solid var(--stock); box-shadow: 6px 6px 0 rgba(18,16,16,.55); background: var(--ink); transition: transform .2s cubic-bezier(.2,.9,.3,1.3); }
+.prints .p1 { left: 0; top: 0; width: 78%; aspect-ratio: 16 / 9; transform: rotate(-2deg); z-index: 2; }
+.prints .p2 { right: 0; top: 6%; width: 44%; aspect-ratio: 16 / 10; transform: rotate(4deg); z-index: 1; }
+.prints .p3 { right: 6%; bottom: 0; width: 46%; aspect-ratio: 16 / 10; transform: rotate(-3deg); z-index: 3; }
+.prints .tape { position: absolute; left: 30%; top: -10px; width: 74px; height: 22px; background: rgba(236,230,216,.75); transform: rotate(-6deg); z-index: 4; box-shadow: 0 1px 0 rgba(0,0,0,.15); }
+.prints img:hover { transform: rotate(0) scale(1.04); z-index: 5; }
+@media (prefers-reduced-motion: reduce) { .seen .mug .note i { animation: none; opacity: 1; } }
+
+.seen .mug .ring .x1, .seen .mug .ring .x2 { stroke-dasharray: 340; stroke-dashoffset: 340; }
+.seen .mug .ring .x1 { animation: drawRing .25s ease-out 1.3s forwards; }
+.seen .mug .ring .x2 { animation: drawRing .25s ease-out 1.6s forwards; }
+
+@media (prefers-reduced-motion: reduce) { .seen .mug .ring path, .seen .mug .ring .x1, .seen .mug .ring .x2 { animation: none; stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .swap img.b { animation: none; opacity: 0; } }
+
+/* Games */
+.games .wrap { padding-block: 96px; }
+.games .intro { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+.games .intro p { margin: 0; max-width: 42ch; color: #2E2A26; }
+.grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; }
+@media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
+.game { border: 4px solid var(--ink); background: var(--stock); text-decoration: none; display: flex; flex-direction: column; box-shadow: 8px 9px 0 var(--ink); }
+.game .pic { aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 4px solid var(--ink); position: relative; background: var(--ink-2); }
+.game .pic img { width: 100%; height: 100%; object-fit: cover; }
+.game .body { padding: 22px 24px 26px; display: grid; gap: 10px; flex: 1; align-content: start; }
+.game .status { font: 500 14px/1.3 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--crimson); }
+.game h3 { font: 900 clamp(40px, 4.2vw, 56px)/.88 var(--stencil); text-transform: uppercase; }
+.game p { margin: 0; color: #2E2A26; max-width: 46ch; }
+.game .go { font: 800 20px/1 var(--head); letter-spacing: .06em; text-transform: uppercase; margin-top: 6px; }
+.game:hover { box-shadow: 8px 9px 0 var(--crimson); }
+.blank { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 16px; color: #A39B8C; font: 500 13px/1.6 var(--mono); letter-spacing: .16em; text-transform: uppercase;
+  background-color: var(--ink-2); background-image: repeating-linear-gradient(-45deg, rgba(233,226,210,.05) 0 14px, transparent 14px 28px); }
+
+/* Our story: a crimson pull */
+.story { background: var(--crimson); color: var(--stock); }
+.story .label { color: rgba(236,230,216,.8); }
+.story .wrap { padding-block: 96px; }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 48px; border-top: 4px solid var(--ink); }
+.step { padding: 26px 28px 4px 0; }
+.step + .step { padding-left: 28px; border-left: 4px solid var(--ink); }
+.step .n { font: 900 84px/.8 var(--stencil); color: var(--ink); }
+.step .when { font: 500 14px/1.3 var(--mono); letter-spacing: .16em; text-transform: uppercase; margin-top: 18px; color: rgba(236,230,216,.85); }
+.step h3 { font: 900 clamp(34px, 3.4vw, 46px)/.9 var(--stencil); text-transform: uppercase; margin-top: 10px; }
+.step p { margin: 12px 0 0; max-width: 34ch; font-size: 19px; }
+.step .who { font: 500 15px/1.5 var(--mono); margin-top: 14px; color: rgba(236,230,216,.8); }
+.step p { color: rgba(236,230,216,.92); }
+.step a.out { display: inline-block; margin-top: 16px; font: 800 19px/1 var(--head); letter-spacing: .06em; text-transform: uppercase; color: var(--ink); background: var(--stock); padding: 10px 14px 8px; text-decoration: none; }
+.step a.out:hover { background: var(--ink); color: var(--stock); }
+.step .outs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.step .outs a.out { margin-top: 0; }
+@media (max-width: 880px) { .steps { grid-template-columns: 1fr; } .step, .step + .step { padding: 24px 0; border-left: 0; border-bottom: 3px solid var(--ink); } }
+
+/* Founders */
+.team .wrap { padding-block: 96px; }
+.people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 44px; }
+@media (max-width: 880px) { .people { grid-template-columns: 1fr; } }
+.person { border: 4px solid var(--ink); background: var(--stock-2); display: grid; align-content: start; }
+.person .top-strip { background: var(--ink); color: var(--stock); display: flex; justify-content: space-between; align-items: center; padding: 11px 16px; font: 500 14px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+.person .top-strip b { color: var(--crimson); font-weight: 500; }
+.person .inner { padding: 20px 18px 22px; display: grid; gap: 8px; }
+.person .name { font: 900 clamp(46px, 4.6vw, 62px)/.84 var(--stencil); text-transform: uppercase; }
+.person .role { font: 800 20px/1.1 var(--head); letter-spacing: .05em; text-transform: uppercase; color: var(--crimson); }
+.person p { margin: 6px 0 0; color: #2E2A26; font-size: 19px; }
+.person .plinks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.person .plink { justify-self: start; font: 800 19px/1 var(--head); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; color: var(--stock); background: var(--ink); padding: 10px 14px 8px; }
+.person .plink:hover { background: var(--crimson); }
+.wider { margin-top: 28px; color: #2E2A26; }
+
+/* Studio news */
+.news { background: var(--ink-2); color: var(--on-ink); }
+.news .wrap { padding-block: 96px; }
+.items { display: grid; margin-top: 40px; border-top: 4px solid var(--crimson); }
+.item { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; padding: 26px 0; border-bottom: 1px solid #3A3532; }
+.item .txt { display: grid; gap: 10px; }
+.item:first-child h3 { color: #F2E9D8; }
+.item:first-child .date { color: #E5484F; }
+@media (max-width: 700px) { .item { grid-template-columns: 1fr; gap: 8px; } }
+.item .date { font: 500 14px/1.4 var(--mono); padding-top: 6px; letter-spacing: .16em; text-transform: uppercase; color: #A39B8C; }
+.item h3 { font: 900 clamp(32px, 3.2vw, 44px)/.9 var(--stencil); text-transform: uppercase; }
+.item p { margin: 0; color: #C9C1B1; max-width: 64ch; }
+
+/* Footer */
+.foot { border-top: 4px solid var(--ink); }
+.foot .wrap { padding-block: 34px 48px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.foot small { font: 500 14px/1.7 var(--mono); letter-spacing: .1em; color: var(--faded); }
+@media (prefers-reduced-motion: reduce) { .stills img { transition: none; } }
+
+
+/* Trailer */
+.show .acts .play { display: inline-flex; align-items: center; gap: 10px; background: var(--crimson); color: #fff; border: 1px solid var(--crimson); font: 600 15px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; padding: 14px 20px; cursor: pointer; }
+.show .acts .play::before { content: ""; width: 0; height: 0; border-left: 11px solid #fff; border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+.tv { position: fixed; inset: 0; z-index: 60; background: rgba(5,7,13,.92); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.tv[hidden] { display: none; }
+.tv .box { width: min(1100px, 100%); }
+.tv video { width: 100%; aspect-ratio: 16 / 9; background: #000; border: 4px solid var(--stock); }
+.tv .bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; color: var(--stock); font: 900 28px/1 var(--stencil); text-transform: uppercase; }
+.tv button { font: 800 18px/1 var(--head); letter-spacing: .08em; text-transform: uppercase; background: var(--stock); color: var(--ink); border: 0; padding: 10px 14px 8px; cursor: pointer; }
+
+/* Numbers band */
+.numbers { background: var(--ink); color: var(--stock); }
+.numbers .wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: 44px; }
+.num { padding: 6px 22px; border-left: 3px solid #3A3532; }
+.num:first-child { border-left: 0; padding-left: 0; }
+.num b { display: block; font: 900 clamp(56px, 7vw, 92px)/.85 var(--stencil); color: var(--stock); font-variant-numeric: tabular-nums; }
+.num:last-child b { color: #E5484F; }
+.num span { display: block; margin-top: 10px; font: 500 14px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #A39B8C; }
+@media (max-width: 760px) { .numbers .wrap { grid-template-columns: 1fr 1fr; row-gap: 28px; } .num:nth-child(3) { border-left: 0; padding-left: 0; } }
+
+/* Then and now */
+.then .wrap { padding-block: 96px; }
+.then p.sub { margin: 16px 0 0; max-width: 52ch; color: #2E2A26; }
+.compare { position: relative; margin-top: 36px; aspect-ratio: 16 / 9; border: 4px solid var(--ink); box-shadow: 8px 9px 0 var(--ink); overflow: hidden; --cut: 50%; user-select: none; }
+.compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.compare .old { clip-path: inset(0 calc(100% - var(--cut)) 0 0); }
+.compare .line { position: absolute; top: 0; bottom: 0; left: var(--cut); width: 4px; margin-left: -2px; background: var(--stock); box-shadow: 0 0 0 2px var(--ink); pointer-events: none; }
+.compare .knob { position: absolute; top: 50%; left: var(--cut); transform: translate(-50%, -50%); width: 54px; height: 54px; border-radius: 50%; background: var(--crimson); border: 4px solid var(--stock); box-shadow: 0 0 0 3px var(--ink); pointer-events: none; display: grid; place-items: center; color: #fff; font: 900 22px/1 var(--stencil); }
+.compare input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+.compare .tag { position: absolute; top: 14px; font: 500 13px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; background: var(--ink); color: var(--stock); padding: 8px 10px; pointer-events: none; }
+.compare .tag.l { left: 14px; } .compare .tag.r { right: 14px; background: var(--crimson); }
+
+/* Wanted posters */
+.person .mug { position: relative; aspect-ratio: 4 / 4.2; border-bottom: 4px solid var(--ink); overflow: hidden; background: #D9D0BE; display: grid; place-items: center; }
+.person .mug::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(18,16,16,.18) 1.2px, transparent 1.5px); background-size: 7px 7px; }
+.person .mug .initial { position: relative; font: 900 clamp(120px, 14vw, 180px)/.8 var(--stencil); color: var(--ink); opacity: .9; }
+.person .mug .soon { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; font: 500 12px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--faded); }
+.person .mug img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: grayscale(1) contrast(1.35); mix-blend-mode: multiply; }
+.person .mug img.printed { filter: contrast(1.12); mix-blend-mode: normal; z-index: 1; }
+.person .mug:has(img)::before { display: none; }
+.person .wanted { font: 900 46px/.9 var(--stencil); text-transform: uppercase; color: var(--crimson); letter-spacing: .02em; }
+.person .crime { font: 500 15px/1.45 var(--mono); color: var(--ink); border-top: 2px dashed var(--ink); padding-top: 10px; margin-top: 6px; }
+.person .crime b { color: var(--crimson); font-weight: 500; }
+
+/* Ink stamps on the hero */
+body { cursor: crosshair; }
+a, button, input { cursor: pointer; }
+img, video, figure, .film, .mug, .badge { cursor: default; }
+.inklayer { position: absolute; left: 0; top: 0; width: 100%; height: 0; overflow: visible; pointer-events: none; z-index: 15; }
+.ink { position: absolute; z-index: 5; pointer-events: none; transform: translate(-50%, -50%) rotate(var(--r)); animation: inkThud .32s cubic-bezier(.2,.9,.3,1.3) backwards; }
+.ink.word { font: 900 30px/1 var(--stencil); text-transform: uppercase; color: var(--crimson); border: 4px solid var(--crimson); padding: 6px 10px 4px; opacity: .92; background: rgba(236,230,216,.0); white-space: nowrap; text-shadow: 0 0 1px rgba(0,0,0,.2); }
+.ink.dog { width: 92px; height: 92px; border-radius: 22%; opacity: .95; }
+@keyframes inkThud { 0% { transform: translate(-50%, -50%) rotate(var(--r)) scale(2.2); opacity: 0; } 70% { transform: translate(-50%, -50%) rotate(var(--r)) scale(.95); opacity: .95; } 100% { transform: translate(-50%, -50%) rotate(var(--r)) scale(1); } }
+.hint { font: 500 13px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--crimson); margin-top: 14px; }
+
+/* Socials */
+.socials { display: flex; gap: 8px; flex-wrap: wrap; }
+.socials a { font: 800 17px/1 var(--head); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; border: 3px solid var(--ink); padding: 9px 12px 7px; }
+.socials a:hover { background: var(--ink); color: var(--stock); }
+.socials a.todo { border-style: dashed; color: var(--faded); }
+
+
+/* Evidence tags */
+.person .evidence { margin-top: 12px; border-top: 2px dashed var(--ink); padding-top: 10px; }
+.person .ev-head { font: 900 22px/1 var(--stencil); text-transform: uppercase; color: var(--crimson); letter-spacing: .04em; margin-bottom: 8px; }
+.person .plinks { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 0; }
+.person .plink { display: grid; gap: 4px; background: var(--stock); color: var(--ink); border: 2px solid var(--ink); padding: 8px 10px 7px; font: 800 18px/1 var(--head); letter-spacing: .04em; text-transform: uppercase; text-decoration: none; }
+.person .plink .ex { font: 500 11px/1 var(--mono); letter-spacing: .14em; color: var(--crimson); }
+.person .plink:hover { background: var(--ink); color: var(--stock); }
+.person .plink:hover .ex { color: #E5484F; }
+
+
+.person .contact { margin-top: 10px; display: grid; gap: 5px; background: var(--ink); color: var(--stock); padding: 10px 12px; }
+.person .contact .ex { font: 500 11px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #E5484F; }
+.person .contact a { font: 500 15px/1.3 var(--mono); color: var(--stock); text-decoration: none; overflow-wrap: anywhere; user-select: all; }
+.person .contact a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+
+.person .contact .reveal { justify-self: start; font: 800 17px/1 var(--head); letter-spacing: .06em; text-transform: uppercase; background: var(--crimson); color: var(--stock); border: 0; padding: 8px 12px 6px; cursor: pointer; }
+.person .contact .reveal:hover { background: #D32834; }
+
+
+/* Known associates */
+.assoc { margin-top: 44px; }
+.assoc-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+.assoc-head .label { margin: 0; }
+.assoc-sub { font: 800 22px/1 var(--head); letter-spacing: .04em; text-transform: uppercase; }
+.crew { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 760px) { .crew { grid-template-columns: 1fr; } }
+.mate { border: 3px solid var(--ink); background: var(--stock-2); padding: 14px 16px 16px; display: grid; gap: 6px; position: relative; transition: transform .18s ease, box-shadow .18s ease; }
+.mate:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--crimson); }
+.mate .tag { font: 500 12px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--crimson); }
+.mate b { font: 900 clamp(38px, 3.6vw, 50px)/.85 var(--stencil); text-transform: uppercase; }
+.mate .what { font: 800 20px/1 var(--head); letter-spacing: .06em; text-transform: uppercase; color: var(--faded); }
+
+/* Motion: chunky and playful, never trippy. The badge stamps down hard with an ink splat, words land one at a time, and as you scroll each section stamps, skids or slides onto the page once. Nothing loops or flickers. All off for reduced motion. */
+@keyframes stampDown { 0% { transform: translateY(-60px) scale(2.6) rotate(-18deg); opacity: 0; } 45% { opacity: 1; } 62% { transform: scale(.9) rotate(-2deg); } 78% { transform: scale(1.04) rotate(-3.5deg); } 100% { transform: rotate(-3deg); opacity: 1; } }
+@keyframes splat { 0% { transform: translate(-50%, -50%) scale(.4); opacity: .9; } 100% { transform: translate(-50%, -50%) scale(1.7); opacity: 0; } }
+@keyframes thud { 0% { transform: scale(2.4) rotate(-16deg); opacity: 0; } 55% { transform: scale(.9) rotate(-5deg); opacity: 1; } 75% { transform: scale(1.06) rotate(-7deg); } 100% { transform: rotate(-6deg); opacity: 1; } }
+@keyframes wordIn { 0% { transform: translateY(-.35em) scale(1.25) rotate(-3deg); opacity: 0; } 70% { transform: scale(.97); opacity: 1; } 100% { transform: none; opacity: 1; } }
+@keyframes bump { 0%, 100% { transform: none; } 40% { transform: translateY(5px); } }
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes skid { 0% { transform: translateX(-110%) skewX(-18deg); opacity: 0; } 70% { transform: translateX(3%) skewX(6deg); opacity: 1; } 85% { transform: translateX(-1%) skewX(-2deg); } 100% { transform: none; opacity: 1; } }
+@keyframes stampIn { 0% { transform: scale(1.5) rotate(-6deg); opacity: 0; } 60% { transform: scale(.96) rotate(1deg); opacity: 1; } 100% { transform: none; opacity: 1; } }
+@keyframes slideL { from { transform: translateX(-70px) rotate(-2deg); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes pop { 0% { transform: scale(.85) translateY(30px); opacity: 0; } 70% { transform: scale(1.02); opacity: 1; } 100% { transform: none; opacity: 1; } }
+@keyframes wiggle { 0%, 100% { transform: rotate(-6deg); } 30% { transform: rotate(-11deg) scale(1.06); } 60% { transform: rotate(-2deg) scale(1.06); } }
+
+/* Intro */
+.hero h1 b { font-weight: inherit; }
+.hero h1 .w { display: inline-block; }
+.intro .hero h1 .w { animation: wordIn .45s cubic-bezier(.2,.9,.3,1.15) backwards; }
+.intro .hero h1 span:first-child .w:nth-of-type(1) { animation-delay: .05s; }
+.intro .hero h1 span:first-child .w:nth-of-type(2) { animation-delay: .2s; }
+.intro .hero h1 span:last-child .w:nth-of-type(1) { animation-delay: .38s; }
+.intro .hero h1 span:last-child .w:nth-of-type(2) { animation-delay: .53s; }
+.intro .hero .lede, .intro .hero .ctas, .intro .hero .meta { animation: rise .45s ease-out backwards; }
+.intro .hero .lede { animation-delay: 1.35s; } .intro .hero .ctas { animation-delay: 1.45s; } .intro .hero .meta { animation-delay: 1.55s; }
+.intro .badge img { animation: stampDown .62s cubic-bezier(.5,0,.3,1) .75s backwards; }
+.badge::after { content: ""; position: absolute; left: 50%; top: 50%; width: 120%; aspect-ratio: 1; border-radius: 50%; border: 10px solid var(--crimson); opacity: 0; pointer-events: none; transform: translate(-50%, -50%); z-index: -1; }
+.intro .badge::after { animation: splat .55s ease-out 1.12s backwards; }
+.intro .hero h1 { animation: bump .25s ease-out 1.12s; }
+.intro .stamp { animation: thud .45s cubic-bezier(.2,.9,.3,1.2) 1.5s backwards; }
+
+/* Scroll: each thing plays once as it comes on screen. Without script everything is simply visible. */
+.js .on-scroll:not(.seen) { opacity: 0; }
+.seen.skid { animation: skid .7s cubic-bezier(.2,.8,.2,1) backwards; }
+.seen.stamp-in { animation: stampIn .45s cubic-bezier(.2,.9,.3,1.2) backwards; }
+.seen.slide-l { animation: slideL .5s cubic-bezier(.2,.8,.2,1) backwards; }
+.seen.pop { animation: pop .5s cubic-bezier(.2,.9,.3,1.1) backwards; }
+
+/* Hover */
+.btn { transition: transform .12s ease, box-shadow .12s ease, background .15s ease; box-shadow: 4px 4px 0 var(--ink); }
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--ink); }
+.badge img { transition: transform .25s cubic-bezier(.3,1.4,.5,1); }
+.badge:hover img { transform: rotate(-1deg) scale(1.03); }
+.badge:hover .stamp { animation: wiggle .45s ease-in-out; }
+.person { transition: transform .18s ease, box-shadow .18s ease; }
+.person:hover { transform: translate(-3px, -3px) rotate(-.5deg); box-shadow: 8px 8px 0 var(--crimson); }
+.item { transition: background .2s ease, padding-left .2s ease; }
+.item:hover { background: rgba(255,255,255,.03); padding-left: 12px; }
+.item:hover .date { color: #E5484F; }
+.step a.out:active, .person .plink:active { transform: translate(2px, 2px); }
+
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .on-scroll:not(.seen) { opacity: 1; }
+}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Underdog Studios home"><img src="media/logo-small.webp" alt=""><b>Underdog Studios</b></a>
+    <nav class="nav" aria-label="Main">
+      <a href="shadyshipping.html">Shady Shipping</a><a href="#story">Our story</a><a href="#team">The team</a><a href="#news">News</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="band hero" aria-label="Underdog Studios">
+    <div class="wrap">
+      <div>
+        <h1><span><b class="w">Small</b> <b class="w">team.</b></span><span class="red"><b class="w">Loud</b> <b class="w">games.</b></span></h1>
+        <p class="lede">Underdog Studios is an indie team from Cardiff making online multiplayer games in Unreal Engine. Chases nobody scripted, and a playtest every week.</p>
+        <div class="ctas">
+          <a class="btn solid" href="#games">Our game</a>
+          <a class="btn line" href="#story">Our story</a>
+          <a class="btn line" href="#team">The team</a>
+        </div>
+        <div class="meta">Est. Cardiff · University of South Wales</div>
+        <div class="hint">Psst. Click anywhere on the page.</div>
+      </div>
+      <div class="badge">
+        <img src="media/logo-sticker.webp" alt="The Underdog Studios bulldog badge">
+        <span class="stamp">Don't let the dog fool you</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="show" id="games" aria-label="Shady Shipping">
+    <div class="film">
+      <img class="still" src="media/hero.jpg" alt="">
+      <video src="media/hero.mp4" poster="media/hero.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+      <div class="wrap">
+        <div class="now">Now in development</div>
+        <h3 class="on-scroll skid">Shady <i>Shipping</i></h3>
+        <p class="pitch">One van. Up to four cops. The riskier the parcel, the more the police know.</p>
+        <div class="acts"><button class="play" type="button" id="playTrailer">Watch Milestone 1</button><a href="shadyshipping.html">Go to the game</a><a href="wiki/index.html">Design wiki</a></div>
+      </div>
+    </div>
+    <div class="stills">
+      <figure class="on-scroll pop"><img src="media/boxin.jpg" alt="Two police cars block the road as the van comes towards them"><figcaption>Two cops, one road: box the van in</figcaption></figure>
+      <figure class="on-scroll pop"><img src="media/van.jpg" alt="The courier van in the chop shop garage"><figcaption>A van that looks illegal on sight</figcaption></figure>
+      <figure class="swap on-scroll pop"><img src="media/garage-van.jpg" alt="The van in the chop shop garage"><img class="b" src="media/garage-police.jpg" alt="The police car in the fleet bay garage"><figcaption>Chop shop or fleet bay: a garage for each side</figcaption></figure>
+    </div>
+  </section>
+
+
+  <section class="numbers" aria-label="Studio in numbers">
+    <div class="wrap">
+      <div class="num"><b>200+</b><span>Check-ins to the build</span></div>
+      <div class="num"><b>7+</b><span>Online playtests at uni</span></div>
+      <div class="num"><b>10+</b><span>Abilities built</span></div>
+      <div class="num"><b id="days">27</b><span>Days to hand-in</span></div>
+    </div>
+  </section>
+
+  <section class="band story" id="story" aria-label="Our story">
+    <div class="wrap">
+      <span class="label">Our story</span>
+      <h2 class="on-scroll stamp-in">How we got here</h2>
+      <div class="steps">
+        <div class="step on-scroll stamp-in">
+          <div class="n">01</div>
+          <div class="when">Year 2 · Start</div>
+          <h3>NMDTY</h3>
+          <p>Our first game together: a mannequin comes to life and has to sneak past a security guard, without being able to walk.</p>
+          <div class="prints"><img class="p1" src="media/story-nmdty-1.jpg" alt="NMDTY: the mannequin sneaking between shelves as the guard's red torch sweeps the shop" loading="lazy"><img class="p2" src="media/story-nmdty-2.jpg" alt="NMDTY: the shop floor from above" loading="lazy"><img class="p3" src="media/story-nmdty-3.jpg" alt="NMDTY: the title screen, No More Dummy Than You!" loading="lazy"><span class="tape" aria-hidden="true"></span></div>
+          <div class="who">Abdullah · Dafydd · Ieuan</div>
+          <div class="outs"><a class="out" href="https://www.abdullahabduljabbar.com/nmdty" target="_blank" rel="noopener">Abdullah's case study ↗</a></div>
+        </div>
+        <div class="step on-scroll stamp-in">
+          <div class="n">02</div>
+          <div class="when">Year 2</div>
+          <h3>STARCADE</h3>
+          <p>Abdullah and Dafydd joined a 20-person team and learned to build systems a big team can work on at once.</p>
+          <div class="prints"><img class="p1" src="media/story-starcade-1.jpg" alt="STARCADE: maintain the arcade and attract alien visitors" loading="lazy"><img class="p2" src="media/story-starcade-2.jpg" alt="STARCADE: the arcade floor" loading="lazy"><img class="p3" src="media/story-starcade-3.jpg" alt="STARCADE: alien visitors at the tables" loading="lazy"><span class="tape" aria-hidden="true"></span></div>
+          <div class="who">Made with the STARCADE team</div>
+          <div class="outs"><a class="out" href="https://ryanno.itch.io/starcade" target="_blank" rel="noopener">Play it on itch.io ↗</a><a class="out" href="https://www.youtube.com/watch?v=g1Z5qt83vK8" target="_blank" rel="noopener">Watch the trailer ↗</a><a class="out" href="https://www.abdullahabduljabbar.com/starcade" target="_blank" rel="noopener">Abdullah's case study ↗</a></div>
+        </div>
+        <div class="step on-scroll stamp-in">
+          <div class="n">03</div>
+          <div class="when">Year 3 · Now</div>
+          <h3>Shady Shipping</h3>
+          <p>Everything we learned, in one online chase game, built and playtested every week.</p>
+          <div class="prints"><img class="p1" src="media/now-nov.jpg" alt="Shady Shipping: the van on the arrest ring in the new city" loading="lazy"><img class="p2" src="media/van.jpg" alt="Shady Shipping: the courier van" loading="lazy"><img class="p3" src="media/boxin.jpg" alt="Shady Shipping: two police cars boxing the van in" loading="lazy"><span class="tape" aria-hidden="true"></span></div>
+          <div class="who">Abdullah · Dafydd · Ieuan, and the wider team</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band team" id="team" aria-label="Team">
+    <div class="wrap">
+      <span class="label">Team</span>
+      <h2 class="on-scroll stamp-in">Most wanted</h2>
+      <div class="people">
+        <div class="person booked-card on-scroll pop"><svg class="clip" viewBox="0 0 40 110" aria-hidden="true"><path d="M27 34V90a11 11 0 0 1-22 0V22a7 7 0 0 1 14 0v58" fill="none" stroke="#8C8C8C" stroke-width="4.5" stroke-linecap="round"/><path d="M27 34V90a11 11 0 0 1-22 0V22a7 7 0 0 1 14 0v58" fill="none" stroke="#E6E6E6" stroke-width="1.6" stroke-linecap="round" transform="translate(-1 -1)"/></svg><div class="top-strip"><span>Kingpin</span><b>01</b></div><div class="mug booked"><img class="printed" src="media/mug-abdullah.jpg" alt="Abdullah"><svg class="ring" viewBox="0 0 300 300" aria-hidden="true"><path filter="url(#marker)" d="M150 18c74-4 124 52 122 128s-58 132-128 130S20 214 26 140 92 26 168 30" fill="none" stroke="#B11C26" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".88"/><defs><filter id="marker" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.5" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="2.4" numOctaves="1" seed="9" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.7 1.3" result="ga"/><feComposite in="d" in2="ga" operator="in"/></filter></defs><g filter="url(#marker)"><path class="x1" d="M66 54 C96 86 128 122 152 150 S205 214 236 252 L246 262" fill="none" stroke="#B11C26" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><path class="x1" d="M74 58 C104 92 134 126 156 154 S206 216 240 256" fill="none" stroke="#B11C26" stroke-width="4" stroke-linecap="round" opacity=".3"/><path class="x2" d="M244 48 C238 52 232 58 226 66 C200 98 176 128 152 158 C126 190 98 222 62 256" fill="none" stroke="#B11C26" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><path class="x2" d="M236 58 C206 94 180 126 156 156 C130 188 102 220 70 250" fill="none" stroke="#B11C26" stroke-width="3.5" stroke-linecap="round" opacity=".28"/></g></svg><span class="note" aria-label="Dead?"><span class="w"><i style="--d:1.95s">D</i><i style="--d:2.06s">E</i><i style="--d:2.17s">A</i><i style="--d:2.28s">D</i><i style="--d:2.39s">?</i></span></span><span class="no">UDS-01</span><span class="ruler" aria-hidden="true"><i>10'0"</i><i>9'6"</i><i>9'0"</i></span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Abdullah</div><div class="role">Lead programmer and architect</div><div class="crime"><b>For:</b> building every system, then making five PCs agree on them</div><p>Leads programming on Shady Shipping: the core gameplay systems and the online multiplayer that keeps every player in sync.</p><div class="evidence"><div class="ev-head">Evidence</div><div class="plinks"><a class="plink" href="https://www.abdullahabduljabbar.com/" target="_blank" rel="noopener"><span class="ex">Exhibit A</span>Portfolio ↗</a><a class="plink" href="https://github.com/abdullahabduljabbarab" target="_blank" rel="noopener"><span class="ex">Exhibit B</span>GitHub ↗</a><a class="plink" href="https://www.linkedin.com/in/abdullah-abduljabbar-b06415374/" target="_blank" rel="noopener"><span class="ex">Exhibit C</span>LinkedIn ↗</a><a class="plink" href="https://www.youtube.com/@abdullahameedabduljabbar" target="_blank" rel="noopener"><span class="ex">Exhibit D</span>YouTube ↗</a></div></div><div class="contact"><span class="ex">Last known contact</span><button type="button" class="reveal" data-u="abdullaameedab" data-d="gmail.com">Reveal email</button></div></div></div>
+        <div class="person on-scroll pop"><div class="top-strip"><span>Boss</span><b>02</b></div><div class="mug unknown"><svg class="sil" viewBox="0 0 200 210" aria-hidden="true"><path d="M100 22c-24 0-40 18-40 44 0 20 9 36 21 44-30 8-55 26-63 60l-3 40h170l-3-40c-8-34-33-52-63-60 12-8 21-24 21-44 0-26-16-44-40-44z"/></svg><span class="no">UDS-02</span><span class="stamp">New kingpin?</span><span class="soon">Photo not on file</span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Dafydd</div><div class="role">Level designer and generalist</div><div class="crime"><b>For:</b> building a whole city for car chases</div><p>Designs the levels, owns every gameplay number, and jumps in wherever the game needs a hand.</p></div></div>
+        <div class="person on-scroll pop"><div class="top-strip"><span>Boss</span><b>03</b></div><div class="mug unknown"><svg class="sil" viewBox="0 0 200 210" aria-hidden="true"><path d="M100 22c-24 0-40 18-40 44 0 20 9 36 21 44-30 8-55 26-63 60l-3 40h170l-3-40c-8-34-33-52-63-60 12-8 21-24 21-44 0-26-16-44-40-44z"/></svg><span class="no">UDS-03</span><span class="stamp">Gone rogue</span><span class="soon">Undercover &middot; file sealed</span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Ieuan</div><div class="role">UI and HUD</div><div class="crime"><b>For:</b> crimes against bad menus (he fixes them)</div><p>Designs the in-game HUD: the job panel, the radar frame, the alerts and the ability slots, so players can read the game at a glance.</p></div></div>
+      </div>
+      <p class="wider">The team runs the playtests together.</p>
+      <div class="assoc">
+        <div class="assoc-head"><span class="label">Known associates</span><span class="assoc-sub">The crew on Shady Shipping</span></div>
+        <div class="crew">
+          <div class="mate on-scroll pop"><span class="tag">Associate 01</span><b>Xabi</b><span class="what">Audio</span></div>
+          <div class="mate on-scroll pop"><span class="tag">Associate 02</span><b>Lynnisha</b><span class="what">Art</span></div>
+          <div class="mate on-scroll pop"><span class="tag">Associate 03</span><b>Betsy</b><span class="what">Effects</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band dark news" id="news" aria-label="Studio news">
+    <div class="wrap">
+      <span class="label">News</span>
+      <h2 class="on-scroll stamp-in">Studio news</h2>
+      <div class="items">
+        <article class="item on-scroll slide-l">
+          <div class="date">10 Nov 2026</div>
+          <div class="txt"><h3>Our uni test setup goes wired</h3>
+          <p>We've played online at uni since October over a phone hotspot. This time we wired it through a five-port switch for a steadier connection, and worked out what a fully local setup on campus needs.</p></div>
+        </article>
+        <article class="item on-scroll slide-l">
+          <div class="date">19 Oct 2026</div>
+          <div class="txt"><h3>All change for production</h3>
+          <p>Two of our pitch team moved on to another project just as production started, and three new faces joined: Xabi on audio, Lynnisha on art and Betsy on effects. Dafydd took on level design.</p></div>
+        </article>
+        <article class="item on-scroll slide-l">
+          <div class="date">16 Oct 2026</div>
+          <div class="txt"><h3>Shady Shipping wins the pitch</h3>
+          <p>We pitched two games to the panel: DEADLOAD, a 1v1 tactical thriller, and Shady Shipping. The courier won, and went into full production.</p></div>
+        </article>
+        <article class="item on-scroll slide-l">
+          <div class="date">11 Oct 2026</div>
+          <div class="txt"><h3>Two prototypes in two weeks</h3>
+          <p>Before the pitch we built both games for real: DEADLOAD's helmet cam and shootable pillars, then Shady's chases, bumper net, collapsing scaffolds and balloon-popping pedestrians.</p></div>
+        </article>
+        <article class="item on-scroll slide-l">
+          <div class="date">2 Oct 2026</div>
+          <div class="txt"><h3>Four uni PCs, one online game</h3>
+          <p>We hosted our game server off campus and got four uni PCs into one online game for the first time. Then we wrote the whole setup up as a guide for future students.</p></div>
+        </article>
+        <article class="item on-scroll slide-l">
+          <div class="date">21 Sept 2026</div>
+          <div class="txt"><h3>Four ideas in, two out</h3>
+          <p>An oil rig survival horror, a soul-extraction hunt, DEADLOAD and a parcel chase. Two made the shortlist, and the parcel chase became Shady Shipping.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="band foot" id="press">
+  <div class="wrap">
+    <a class="mark" href="#top"><img src="media/logo-small.webp" alt=""><b>Underdog Studios</b></a>
+    <div class="socials"><a href="https://discord.com/invite/underdogstudios" target="_blank" rel="noopener">Join our Discord ↗</a></div>
+    <small>underdogstudios.uk · © 2026 Underdog Studios</small>
+  </div>
+</footer>
+
+<div class="tv" id="tv" hidden role="dialog" aria-label="Shady Shipping Milestone 1 video">
+  <div class="box">
+    <div class="bar"><span>Shady Shipping · Milestone 1</span><button type="button" id="closeTrailer">Close ✕</button></div>
+    <video id="trailerVideo" src="media/trailer.mp4" poster="media/trailer.jpg" controls playsinline preload="none"></video>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  root.classList.add('js', 'intro');
+  var introDone = function () { root.classList.remove('intro'); };
+  var introTimer = setTimeout(introDone, 2600);
+  var els = [].slice.call(document.querySelectorAll('.on-scroll'));
+  els.forEach(function (el) {
+    var sibs = [].slice.call(el.parentNode.children).filter(function (c) { return c.classList.contains('on-scroll'); });
+    el.style.animationDelay = (sibs.indexOf(el) * 0.12) + 's';
+  });
+  var io = null;
+  if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('seen'); }); }
+  else {
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } });
+    }, { threshold: 0.18 });
+    els.forEach(function (el) { io.observe(el); });
+  }
+})();
+
+(function () {
+  // Trailer
+  var tv = document.getElementById('tv'), vid = document.getElementById('trailerVideo');
+  function openTv() { tv.hidden = false; try { vid.play(); } catch (e) {} }
+  function closeTv() { vid.pause(); tv.hidden = true; }
+  var pb = document.getElementById('playTrailer'); if (pb) pb.addEventListener('click', openTv);
+  var cb = document.getElementById('closeTrailer'); if (cb) cb.addEventListener('click', closeTv);
+  tv.addEventListener('click', function (e) { if (e.target === tv) closeTv(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !tv.hidden) closeTv(); });
+
+  // Days to hand-in
+  var d = document.getElementById('days');
+  if (d) { var left = Math.ceil((new Date(2026, 11, 11) - new Date()) / 86400000); d.textContent = Math.max(left, 0); }
+
+  // Then and now
+  var cmp = document.getElementById('compare'), cut = document.getElementById('cut');
+  if (cmp && cut) cut.addEventListener('input', function () { cmp.style.setProperty('--cut', cut.value + '%'); });
+
+
+  // Reveal email: the address is only put together when someone asks for it
+  document.querySelectorAll('.reveal').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var addr = b.getAttribute('data-u') + '@' + b.getAttribute('data-d');
+      var a = document.createElement('a'); a.href = 'mailto:' + addr; a.textContent = addr;
+      b.replaceWith(a);
+    });
+  });
+  // Ink stamps: click anywhere that isn't a button or link and it stamps down
+  // A stamp only lands on empty background: never on text, pictures or cards
+  var KEEP = '.prints, a, button, input, select, textarea, label, video, img, figure, picture, p, h1, h2, h3, h4, li, small, blockquote, time, b, strong, i, em, span, .film, .mug, .badge, .tv, .compare, .card, .post, .news article';
+  function clear(x, y, w, h) {
+    var pts = [[x, y], [x - w, y - h], [x + w, y - h], [x - w, y + h], [x + w, y + h], [x - w, y], [x + w, y], [x, y - h], [x, y + h]];
+    return pts.every(function (p) { var t = document.elementFromPoint(p[0], p[1]); return !t || !t.closest(KEEP); });
+  }
+  var layer = document.createElement('div'); layer.className = 'inklayer'; document.body.appendChild(layer);
+  var words = ['No questions asked', 'Handle with care', 'Busted', 'Fragile', 'Shady'], n = 0;
+  document.addEventListener('click', function (e) {
+    if (e.target.closest(KEEP) || !clear(e.clientX, e.clientY, n % 3 === 2 ? 50 : 110, n % 3 === 2 ? 50 : 26)) return;
+    var el;
+    if (n % 3 === 2) { el = document.createElement('img'); el.src = 'media/logo-small.webp'; el.alt = ''; el.className = 'ink dog'; }
+    else { el = document.createElement('span'); el.className = 'ink word'; el.textContent = words[n % words.length]; }
+    el.style.left = e.pageX + 'px'; el.style.top = e.pageY + 'px';
+    el.style.setProperty('--r', (Math.random() * 24 - 12).toFixed(1) + 'deg');
+    layer.appendChild(el); n++;
+    var inks = layer.querySelectorAll('.ink'); if (inks.length > 30) inks[0].remove();
+  });
+})();
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('video').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+}
+</script>
+
+</body>
+</html>
