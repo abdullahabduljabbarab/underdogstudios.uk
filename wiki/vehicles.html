@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="only dark">
 <title>Driving &amp; damage · Shady Shipping Wiki</title>
 <meta name="description" content="Driving &amp; damage in Shady Shipping: how it works, the numbers, and why we built it that way.">
 <meta property="og:type" content="website">
@@ -28,7 +29,7 @@
   --legal: #36D6FF; --illegal: #A65BFF; --hot: #FFC21A; --stock: #ECE6D8; --ink: #121010;
   --logo: "Barlow Condensed", "Arial Narrow", sans-serif; --body: "Barlow", "Segoe UI", sans-serif;
   --ui: "Bungee", Impact, sans-serif; --mono: "IBM Plex Mono", Consolas, monospace;
-  color-scheme: dark;
+  color-scheme: only dark;
 }
 * { box-sizing: border-box; }
 html { scroll-padding-top: 80px; }
@@ -257,6 +258,9 @@ main.wrap { min-height: calc(100vh - 130px); }
 .from-log span { font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
 .from-log b { font: 900 italic 24px/1 var(--logo); text-transform: uppercase; color: var(--hot); }
 
+/* Images cannot be dragged out or right-clicked open */
+img, video { -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
+
 </style>
 </head>
 <body>
@@ -355,6 +359,9 @@ main.wrap { min-height: calc(100vh - 130px); }
 (function () {
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   document.querySelectorAll('.side > *').forEach(function (el, i) { el.style.setProperty('--i', i); });
+  document.addEventListener('dragstart', function (e) { if (e.target.closest && e.target.closest('img')) e.preventDefault(); });
+  document.addEventListener('contextmenu', function (e) { if (e.target.closest && e.target.closest('img')) e.preventDefault(); });
+  document.querySelectorAll('img').forEach(function (i) { i.setAttribute('draggable', 'false'); });
   document.addEventListener('click', function (e) {
     var img = e.target.closest('.fig img, .ins-item img');
     if (!img) return;

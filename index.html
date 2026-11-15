@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="only light">
 <title>Underdog Studios</title>
 <meta name="description" content="Underdog Studios is an indie game studio from Cardiff. Small team, loud games. Now making Shady Shipping.">
 <link rel="icon" type="image/png" href="media/favicon.png">
@@ -47,7 +48,7 @@ if (!location.hash) {
   --body: "IBM Plex Sans Condensed", "Arial Narrow", Arial, sans-serif;
   --mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.5 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  color-scheme: light;
+  color-scheme: only light;
 }
 *, *::before, *::after { box-sizing: border-box; }
 body { margin: 0; background: var(--stock); color: var(--ink); font: 400 18px/1.55 var(--body); }
@@ -190,8 +191,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .person .mug .crown { position: absolute; right: 44px; left: auto; top: 4%; width: 20%; transform: rotate(14deg); z-index: 2; pointer-events: none; overflow: visible; }
 .person .mug .crown path { stroke-dasharray: 700; stroke-dashoffset: 700; }
 .people.go .mug .crown path { animation: drawRing .8s ease-out 3.1s forwards; }
-.person .sticky { position: absolute; right: 18px; left: auto; top: auto; bottom: -96px; z-index: 4; width: 132px; padding: 12px 12px 14px; background: #F3D54E; color: #2a2410; font: 400 14px/1.2 "Permanent Marker", "Comic Sans MS", cursive; transform: rotate(5deg); box-shadow: 4px 6px 0 rgba(18,16,16,.3); pointer-events: none; }
-.person .sticky::before { content: ""; position: absolute; left: 50%; top: -8px; width: 46px; height: 16px; margin-left: -23px; background: rgba(236,230,216,.8); transform: rotate(-4deg); }
+.people .sticky { position: absolute; right: 18px; left: auto; top: auto; bottom: -96px; z-index: 4; width: 132px; padding: 12px 12px 14px; background: #F3D54E; color: #2a2410; font: 400 14px/1.2 "Permanent Marker", "Comic Sans MS", cursive; transform: rotate(5deg); box-shadow: 4px 6px 0 rgba(18,16,16,.3); pointer-events: none; }
+.people .sticky::before { content: ""; position: absolute; left: 50%; top: -8px; width: 46px; height: 16px; margin-left: -23px; background: rgba(236,230,216,.8); transform: rotate(-4deg); }
 .person .mug .note.note2 { left: 6%; right: 6%; bottom: 5%; transform: rotate(-7deg); white-space: normal; text-align: center; line-height: 1.02; }
 .person .mug .note.note2 .w { white-space: nowrap; }
 .person .mug .note i.sp { width: .3em; }
@@ -203,17 +204,17 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   #F4F5F2;
   border: 12px solid #B9BEC3; border-image: linear-gradient(160deg, #E4E7EA, #9CA2A8 45%, #D9DDE0 60%, #8E949A) 1;
   box-shadow: 0 2px 0 #7d838a, 10px 14px 0 rgba(18,16,16,.35), inset 0 0 40px rgba(120,130,140,.12); }
-.people::after { content: ""; position: absolute; left: 6%; right: 6%; bottom: -26px; height: 16px; background: linear-gradient(#C9CDD1, #8F959B); border-radius: 0 0 8px 8px; box-shadow: 4px 6px 0 rgba(18,16,16,.25); }
 @media (max-width: 880px) { .people { padding: 26px 14px 44px; border-width: 8px; } }
 /* the "took over?" label is slapped on like a strip of tape */
 .people .string-note::before { content: ""; position: absolute; left: 50%; top: -9px; width: 40px; height: 14px; margin-left: -20px; background: rgba(236,230,216,.85); transform: rotate(5deg); }
 .people .string-note { opacity: 0; transition: none; }
 .people.go .string-note { animation: slapOn .42s cubic-bezier(.2,.9,.3,1.35) 1.05s backwards; opacity: 1; }
 @keyframes slapOn { 0% { transform: translate(-50%, -120%) rotate(-18deg) scale(1.9); opacity: 0; } 70% { transform: translate(-50%, -120%) rotate(-4deg) scale(.94); opacity: 1; } 100% { transform: translate(-50%, -120%) rotate(-6deg); } }
-.person .sticky { opacity: 0; }
-.people.go .person .sticky { animation: slapSticky .42s cubic-bezier(.2,.9,.3,1.35) 4.1s backwards; opacity: 1; }
+.people .sticky { opacity: 0; }
+.people.go .people .sticky { animation: slapSticky .42s cubic-bezier(.2,.9,.3,1.35) 4.1s backwards; opacity: 1; }
 @keyframes slapSticky { 0% { transform: rotate(-10deg) scale(1.9); opacity: 0; } 70% { transform: rotate(7deg) scale(.95); opacity: 1; } 100% { transform: rotate(5deg); } }
-@media (prefers-reduced-motion: reduce) { .people.go .string-note, .people.go .person .sticky { animation: none; } .person .sticky { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) { .people.go .string-note, .people.go .people .sticky { animation: none; } .people .sticky { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .people .string path, .person .mug .crown path { animation: none !important; stroke-dashoffset: 0; } .person .top-strip .promo { animation: none !important; clip-path: none; } .person.heir .mug .note i { animation: none !important; opacity: 1; } .people .string-note, .people .pin { transition: none; } }
 @media (prefers-reduced-motion: reduce) { .seen .mug .stamp2 { animation: none; } }
 @media (prefers-reduced-motion: reduce) { .seen .mug .note i { animation: none; opacity: 1; } }
@@ -264,12 +265,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Founders */
 .team .wrap { padding-block: 96px; }
-.people { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.28fr) minmax(0, 1fr); gap: 28px; margin-top: 44px; align-items: start; }
+.people { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.14fr) minmax(0, 1fr); gap: 28px; margin-top: 44px; align-items: start; }
 /* The Kingpin's card sits in the middle and larger on PC, and first on phones */
 .people > .booked-card { order: 2; }
 .people > .heir { order: 1; margin-top: 54px; }
 .people > .person:not(.booked-card):not(.heir) { order: 3; margin-top: 54px; }
-@media (max-width: 880px) { .people .string, .people .pin, .people .string-note { display: none; } .person .sticky { right: 10px; bottom: auto; top: 12px; transform: rotate(6deg) scale(.85); } .people { grid-template-columns: 1fr; } .people > .booked-card { order: 0; } .people > .heir, .people > .person:not(.booked-card):not(.heir) { margin-top: 0; } }
+@media (max-width: 880px) { .people .string, .people .pin, .people .string-note { display: none; } .people .sticky { right: 10px; bottom: auto; top: 12px; transform: rotate(6deg) scale(.85); } .people { grid-template-columns: 1fr; } .people > .booked-card { order: 0; } .people > .heir, .people > .person:not(.booked-card):not(.heir) { margin-top: 0; } }
 .person { border: 4px solid var(--ink); background: var(--stock-2); display: grid; align-content: start; }
 .person .top-strip { background: var(--ink); color: var(--stock); display: flex; justify-content: space-between; align-items: center; padding: 11px 16px; font: 500 14px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
 .person .top-strip b { color: var(--crimson); font-weight: 500; }
@@ -452,6 +453,289 @@ img, video, figure, .film, .mug, .badge { cursor: default; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js .on-scroll:not(.seen) { opacity: 1; }
 }
+/* Compact cards: the whole card fits on a laptop screen without scrolling */
+@media (min-width: 881px) {
+  .people .person:not(.booked-card) .mug { aspect-ratio: 4 / 3.25; }
+  .people .person:not(.booked-card) .mug img { object-position: center 18%; }
+  .person .inner { padding: 12px 16px 14px; gap: 4px; }
+  .person .wanted { font-size: 30px; }
+  .person .name { font-size: clamp(36px, 3.1vw, 44px); }
+  .person .crime { font-size: 13px; padding-top: 7px; margin-top: 2px; }
+  .person p { font-size: 15px; line-height: 1.38; margin-top: 2px; }
+  .person .evidence { margin-top: 6px; padding-top: 7px; }
+  .person .ev-head { font-size: 18px; margin-bottom: 6px; }
+  .person .plinks { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .person .plink { font-size: 14px; padding: 6px 7px 5px; }
+  .person .plink .ex { font-size: 9px; letter-spacing: .1em; }
+  .person .contact { margin-top: 6px; padding: 7px 10px; grid-template-columns: auto 1fr; align-items: center; gap: 10px; }
+  .person .contact .reveal { font-size: 14px; padding: 6px 10px; }
+  .people > .heir, .people > .person:not(.booked-card):not(.heir) { margin-top: 40px; }
+}
+
+/* Drawable whiteboard */
+.people .ink-board { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; touch-action: auto; }
+.people.drawing .ink-board { pointer-events: auto; touch-action: none; cursor: crosshair; }
+.people > .person { position: relative; z-index: 1; }
+.people .tray { position: absolute; left: 6%; right: 6%; bottom: -34px; height: 30px; z-index: 8; display: flex; align-items: center; gap: 10px; padding: 0 14px; background: linear-gradient(#D3D7DB, #8F959B); border-radius: 0 0 10px 10px; box-shadow: 4px 6px 0 rgba(18,16,16,.25); }
+.people .tray .pen { position: relative; width: 70px; height: 16px; border: 0; padding: 0; border-radius: 4px 9px 9px 4px; background: #F4F5F2; cursor: pointer; box-shadow: inset 0 -2px 0 rgba(0,0,0,.15); transition: transform .15s cubic-bezier(.2,.9,.3,1.4); }
+.people .tray .pen span { position: absolute; left: -2px; top: 0; bottom: 0; width: 24px; border-radius: 4px 2px 2px 4px; background: var(--c); }
+.people .tray .pen::after { content: ""; position: absolute; right: -6px; top: 4px; width: 8px; height: 8px; border-radius: 0 50% 50% 0; background: #2a2a2a; }
+.people .tray .pen:hover { transform: translateY(-3px); }
+.people .tray .pen[aria-pressed="true"] { transform: translateY(-12px) rotate(-12deg); box-shadow: 0 6px 0 rgba(18,16,16,.25); }
+.people .tray .wipe { margin-left: 6px; font: 800 14px/1 var(--head); letter-spacing: .08em; text-transform: uppercase; background: #3a3f45; color: #fff; border: 0; padding: 6px 10px; border-radius: 3px; cursor: pointer; }
+.people .tray .wipe:hover { background: var(--crimson); }
+.people .tray-hint { margin-left: auto; font: 500 12px/1 var(--mono); color: #2c3136; letter-spacing: .06em; }
+@media (max-width: 880px) { .people .tray { left: 3%; right: 3%; gap: 7px; padding: 0 8px; } .people .tray .pen { width: 46px; } .people .tray-hint { display: none; } }
+
+/* Chalkboard version of the evidence wall: slate, wooden frame, chalk ghosts, chalk sticks and a felt eraser */
+.people { background:
+  radial-gradient(ellipse at 20% 15%, rgba(255,255,255,.06), transparent 45%),
+  radial-gradient(ellipse at 80% 85%, rgba(255,255,255,.05), transparent 50%),
+  url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22900%22 height=%22600%22%3E%3Cg fill=%22none%22 stroke=%22%23ffffff%22 stroke-linecap=%22round%22 opacity=%22.07%22%3E%3Cpath d=%22M60 90c80-30 160 40 240 0s120-20 180 10%22 stroke-width=%2214%22/%3E%3Cpath d=%22M520 420c60 40 140 30 210-10%22 stroke-width=%2218%22/%3E%3Cpath d=%22M120 470l90-60 40 50 70-80%22 stroke-width=%227%22/%3E%3Cellipse cx=%22700%22 cy=%22160%22 rx=%22110%22 ry=%2260%22 stroke-width=%226%22/%3E%3Cpath d=%22M300 300h160M300 330h110%22 stroke-width=%226%22/%3E%3C/g%3E%3Cg fill=%22%23ffffff%22 opacity=%22.08%22 font-family=%22Comic Sans MS, cursive%22 font-size=%2240%22%3E%3Ctext x=%22610%22 y=%22175%22%3EWHO%3F%3C/text%3E%3Ctext x=%2290%22 y=%22300%22%3Emotive%3F%3C/text%3E%3Ctext x=%22480%22 y=%22540%22%3Eroute%3F%3C/text%3E%3C/g%3E%3C/svg%3E") center / 900px auto repeat,
+  #263330;
+  border: 16px solid #7a5232; border-image: linear-gradient(160deg, #a7734a, #6b4426 40%, #8d5d38 60%, #5a3820) 1;
+  box-shadow: 0 2px 0 #3d2614, 10px 14px 0 rgba(18,16,16,.35), inset 0 0 60px rgba(0,0,0,.45); }
+.people .tray { background: linear-gradient(#9b6a43, #5e3c22); bottom: -38px; height: 32px; }
+.people .tray .pen { width: 46px; height: 14px; border-radius: 3px; background: var(--chalk, #f4f1e8); box-shadow: inset 0 -3px 0 rgba(0,0,0,.18), 0 1px 0 rgba(255,255,255,.3); }
+.people .tray .pen span, .people .tray .pen::after { display: none; }
+.people .tray .wipe { background: linear-gradient(#e9e2d2 0 40%, #3a3f45 40%); color: transparent; width: 58px; height: 22px; padding: 0; border-radius: 3px; position: relative; font-size: 0; }
+.people .tray .wipe::after { content: "ERASER"; position: absolute; left: 0; right: 0; bottom: 3px; font: 800 9px/1 var(--head); letter-spacing: .12em; color: #fff; text-align: center; }
+.people .tray .wipe:hover { background: linear-gradient(#e9e2d2 0 40%, var(--crimson) 40%); }
+.people .tray-hint { color: #f1e6d4; }
+/* a push pin in the top corner of every card */
+.people > .person::before { content: ""; position: absolute; left: -8px; top: -10px; width: 20px; height: 20px; border-radius: 50%; z-index: 6;
+  background: radial-gradient(circle at 35% 32%, #ff7a82 0 18%, #c4161f 45%, #6e0a10 100%); box-shadow: 2px 4px 0 rgba(0,0,0,.45); }
+.people > .person::after { content: ""; position: absolute; left: 1px; top: 8px; width: 2px; height: 7px; background: #9aa0a6; z-index: 5; }
+/* NEW KINGPIN? kept small and low so it never covers his face */
+.person .mug .note.note2 { font-size: clamp(20px, 1.9vw, 26px); bottom: 3%; left: 6%; right: 6%; white-space: nowrap; }
+
+/* Ieuan's thread: in on the faked death */
+.person .mug .note.note3 { left: 50%; right: auto; bottom: auto; top: 34%; transform: translateX(-50%) rotate(-8deg); white-space: nowrap; z-index: 3; }
+.person.partner .mug .note i { opacity: 0; animation: none; }
+.people.go .person.partner .mug .note i { animation: ink .16s ease-out var(--d) forwards; }
+.people .string.s2 path { stroke-dasharray: 2000; stroke-dashoffset: 2000; }
+.people.go .string.s2 path { animation: drawRing 1s ease-out 4.6s forwards; }
+.people .p-c, .people .p-d { transition-delay: 5.5s; }
+.people .string-note.n2 { opacity: 0; }
+.people.go .string-note.n2 { animation: slapOn .42s cubic-bezier(.2,.9,.3,1.35) 5.6s backwards; opacity: 1; }
+.person.partner { position: relative; }
+.people .receipt { position: absolute; left: 22px; bottom: -150px; width: 170px; z-index: 4; display: grid; gap: 3px; padding: 24px 12px 18px; background: #FBFAF6; color: #2a2a2a;
+  font: 500 11px/1.35 var(--mono); letter-spacing: .04em; text-transform: uppercase; transform: rotate(-4deg); box-shadow: 4px 6px 0 rgba(0,0,0,.35);
+  clip-path: polygon(0 0, 100% 0, 100% 94%, 93% 100%, 86% 94%, 79% 100%, 72% 94%, 65% 100%, 58% 94%, 51% 100%, 44% 94%, 37% 100%, 30% 94%, 23% 100%, 16% 94%, 9% 100%, 0 94%); opacity: 0; }
+.people .receipt b { font: 800 13px/1.1 var(--head); letter-spacing: .08em; border-bottom: 1px dashed #777; padding-bottom: 4px; margin-bottom: 2px; }
+.people .receipt .tot { border-top: 1px dashed #777; padding-top: 4px; margin-top: 2px; font-weight: 600; }
+.people .receipt .sig { font: 400 15px/1 "Permanent Marker", "Comic Sans MS", cursive; text-transform: none; color: #1E5BD6; letter-spacing: 0; margin-top: 2px; }
+.people.go .people .receipt { animation: slapReceipt .42s cubic-bezier(.2,.9,.3,1.35) 6.2s backwards; opacity: 1; }
+@keyframes slapReceipt { 0% { transform: rotate(-16deg) scale(1.9); opacity: 0; } 70% { transform: rotate(-2deg) scale(.95); opacity: 1; } 100% { transform: rotate(-4deg); } }
+.people .receipt::before { content: ""; position: absolute; left: 50%; top: 4px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: radial-gradient(circle at 35% 32%, #ff7a82 0 18%, #c4161f 45%, #6e0a10 100%); box-shadow: 1px 2px 0 rgba(0,0,0,.4); }
+@media (max-width: 880px) { .people .receipt { left: auto; right: 10px; bottom: auto; top: 50px; transform: rotate(5deg) scale(.8); } }
+@media (prefers-reduced-motion: reduce) { .people.go .string.s2 path { animation: none; stroke-dashoffset: 0; } .people.go .string-note.n2, .people.go .people .receipt { animation: none; } .person.partner .mug .note i { opacity: 1; } }
+
+/* Sightings since the funeral: a row of pinned evidence along the bottom of the board */
+.people .evidence-row { grid-column: 1 / -1; order: 4; position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 22px 28px; margin-top: 34px; padding-top: 8px; }
+.people .evidence-row .ev { position: relative; margin: 0; }
+.people .evidence-row .ev::before { content: ""; position: absolute; left: 50%; top: -8px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; z-index: 3;
+  background: radial-gradient(circle at 35% 32%, #ff7a82 0 18%, #c4161f 45%, #6e0a10 100%); box-shadow: 1px 3px 0 rgba(0,0,0,.45); }
+.people .evidence-row .shot { background: #f4f1e8; padding: 8px 8px 10px; box-shadow: 5px 7px 0 rgba(0,0,0,.4); width: 230px; }
+.people .evidence-row .shot img { width: 100%; display: block; }
+.people .evidence-row .shot figcaption { font: 400 16px/1.15 "Permanent Marker", "Comic Sans MS", cursive; color: #B11C26; margin-top: 7px; text-align: center; }
+.people .evidence-row .polaroid { padding-bottom: 14px; }
+.people .evidence-row .ev:nth-child(1) { transform: rotate(-5deg); }
+.people .evidence-row .ev:nth-child(2) { transform: rotate(3deg); }
+.people .evidence-row .ev:nth-child(3) { transform: rotate(-2deg); margin-top: 14px; }
+.people .evidence-row .ev:nth-child(4) { transform: rotate(4deg); }
+.people .evidence-row .ev:nth-child(5) { transform: rotate(-4deg); margin-top: 10px; }
+.people .evidence-row .sticky.ev { position: relative; right: auto; bottom: auto; top: auto; left: auto; opacity: 1; animation: none; margin-top: 18px; }
+.people .evidence-row .receipt.ev { position: relative; left: auto; bottom: auto; opacity: 1; animation: none; }
+.people .evidence-row .ev { opacity: 0; }
+.people.go .evidence-row .ev { animation: slapEv .42s cubic-bezier(.2,.9,.3,1.35) backwards; opacity: 1; }
+.people.go .evidence-row .ev:nth-child(1) { animation-delay: 6.4s; } .people.go .evidence-row .ev:nth-child(2) { animation-delay: 6.8s; }
+.people.go .evidence-row .ev:nth-child(3) { animation-delay: 7.2s; } .people.go .evidence-row .ev:nth-child(4) { animation-delay: 7.6s; }
+.people.go .evidence-row .ev:nth-child(5) { animation-delay: 8s; }
+@keyframes slapEv { 0% { scale: 1.8; opacity: 0; } 70% { scale: .95; opacity: 1; } 100% { scale: 1; } }
+.people .evidence-row .shot img { cursor: zoom-in; }
+/* yeah right, scribbled next to DEAD? */
+.person .mug .yeah { position: absolute; left: 30%; bottom: 3.5%; z-index: 3; font: 400 clamp(15px, 1.4vw, 19px)/1 "Permanent Marker", "Comic Sans MS", cursive; color: #E4434D; transform: rotate(-12deg); opacity: 0; text-shadow: 0 1px 0 rgba(0,0,0,.5); }
+.people.go .person .mug .yeah { animation: inkIn .3s ease-out .2s forwards; }
+@keyframes inkIn { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
+@media (max-width: 880px) { .people .evidence-row { gap: 18px; } .people .evidence-row .shot { width: 44%; } }
+@media (prefers-reduced-motion: reduce) { .people .evidence-row .ev, .person .mug .yeah { opacity: 1 !important; animation: none !important; } }
+
+/* Sightings hang in the free board space under the side cards (no extra row, so the board fits on screen) */
+.people .ev-hang { position: absolute; left: 0; right: 0; top: calc(100% + 26px); z-index: 2; height: 230px; }
+.people .ev-hang .ev { position: absolute; margin: 0; }
+.people .ev-hang .shot { width: 46%; padding: 6px 6px 8px; }
+.people .ev-hang .shot figcaption { font-size: 13px; margin-top: 5px; }
+.people .ev-left .shot:nth-of-type(1) { left: -4%; top: 0; transform: rotate(-5deg); }
+.people .ev-left .shot:nth-of-type(2) { right: 0; top: 18px; transform: rotate(4deg); }
+.people .ev-left .sticky.ev { left: 30%; top: 128px; width: 118px; font-size: 12px; padding: 10px; transform: rotate(-3deg); z-index: 3; }
+.people .ev-right .shot { left: 0; top: 4px; transform: rotate(3deg); }
+.people .ev-right .receipt.ev { right: -2%; top: 0; width: 46%; transform: rotate(-4deg); font-size: 10px; padding: 22px 10px 16px; }
+.people .ev-hang .ev::before { content: ""; position: absolute; left: 50%; top: -8px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; z-index: 3;
+  background: radial-gradient(circle at 35% 32%, #ff7a82 0 18%, #c4161f 45%, #6e0a10 100%); box-shadow: 1px 3px 0 rgba(0,0,0,.45); }
+.people .ev-hang .shot { background: #f4f1e8; box-shadow: 5px 7px 0 rgba(0,0,0,.4); }
+.people .ev-hang .shot img { width: 100%; display: block; cursor: zoom-in; }
+.people .ev-hang .shot figcaption { font-family: "Permanent Marker", "Comic Sans MS", cursive; color: #B11C26; text-align: center; line-height: 1.15; }
+.people .ev-hang .ev { opacity: 0; }
+.people.go .ev-hang .ev { animation: slapEv .42s cubic-bezier(.2,.9,.3,1.35) backwards; opacity: 1; }
+.people.go .ev-left .ev:nth-child(1) { animation-delay: 6.4s; } .people.go .ev-right .ev:nth-child(1) { animation-delay: 6.8s; }
+.people.go .ev-left .ev:nth-child(2) { animation-delay: 7.2s; } .people.go .ev-right .ev:nth-child(2) { animation-delay: 7.6s; }
+.people.go .ev-left .ev:nth-child(3) { animation-delay: 8s; }
+@media (max-width: 880px) {
+  .people .ev-hang { position: static; height: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; padding: 22px 8px 6px; }
+  .people .ev-hang .ev { position: relative; left: auto; right: auto; top: auto; }
+  .people .ev-hang .shot, .people .ev-right .receipt.ev { width: 44%; }
+}
+@media (prefers-reduced-motion: reduce) { .people .ev-hang .ev { opacity: 1 !important; animation: none !important; } }
+
+/* hung evidence layout, take two: no stretching, two pieces per side */
+.people .ev-hang .ev { bottom: auto !important; height: auto; }
+.people .ev-left .shot:nth-of-type(1) { left: 2%; top: 0; width: 50%; transform: rotate(-5deg); }
+.people .ev-left .sticky.ev { left: auto; right: 4%; top: 30px; width: 130px; font-size: 13px; padding: 12px; transform: rotate(4deg); }
+.people .ev-right .shot { left: 2%; top: 6px; width: 50%; transform: rotate(3deg); }
+.people .ev-right .receipt.ev { left: auto; right: 0; top: -6px; width: 44%; font-size: 10px; line-height: 1.25; gap: 1px; padding: 22px 10px 16px; transform: rotate(-4deg); }
+.people.go .ev-left .ev:nth-child(1) { animation-delay: 6.4s; } .people.go .ev-right .ev:nth-child(1) { animation-delay: 6.8s; }
+.people.go .ev-left .ev:nth-child(2) { animation-delay: 7.2s; } .people.go .ev-right .ev:nth-child(2) { animation-delay: 7.6s; }
+
+/* sticky note back on Dafydd's card, on its right edge */
+.people .partner > .sticky.on-card { position: absolute; right: -20px; left: auto; top: 50%; bottom: auto; z-index: 7; width: 128px; opacity: 0; transform: rotate(5deg); }
+.people.go .partner > .sticky.on-card { animation: slapSticky .42s cubic-bezier(.2,.9,.3,1.35) 4.1s backwards; opacity: 1; }
+.people .ev-left .shot:nth-of-type(1) { left: 6%; width: 82%; }
+.people .ev-left .shot figcaption { font-size: 15px; }
+/* strings from the Kingpin to each sighting */
+.people .string.s3 path, .people .string.s4 path { stroke-dasharray: 2000; stroke-dashoffset: 2000; }
+.people.go .string.s3 path { animation: drawRing .9s ease-out 6.9s forwards; }
+.people.go .string.s4 path { animation: drawRing .9s ease-out 7.7s forwards; }
+.people .p-e, .people .p-f { transition-delay: 7.6s; } .people .p-g, .people .p-h { transition-delay: 8.4s; }
+@media (max-width: 880px) { .people .partner > .sticky.on-card { right: 10px; top: 12px; transform: rotate(6deg) scale(.85); } }
+@media (prefers-reduced-motion: reduce) { .people .partner > .sticky.on-card { opacity: 1; animation: none; } .people.go .string.s3 path, .people.go .string.s4 path { animation: none; stroke-dashoffset: 0; } }
+
+/* the sighting strings run behind the side cards, like real string on a board */
+.people .string.s3, .people .string.s4 { z-index: 8; } .people .pin.p-e, .people .pin.p-f, .people .pin.p-g, .people .pin.p-h { z-index: 9; } .people .string-note { z-index: 10; } .people.crewgo .pin.cp { opacity: 1; } .people .crew-row .chalk-head { left: 130px; }
+@media (max-width: 880px) { .people .pin.cp { display: none; } .people .crew-row .chalk-head { left: 0; } } .people .ev-left .abs-tag { top: auto; bottom: 52px; right: -12px; left: auto; transform: rotate(8deg); }
+
+/* Images cannot be dragged out or right-clicked open */
+img, video { -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
+
+/* The crew: a second chalkboard, scrolled to under the main one */
+.crewboard { position: relative; margin-top: 70px; padding: 70px 40px 70px; background:
+  radial-gradient(ellipse at 70% 20%, rgba(255,255,255,.05), transparent 50%), #263330;
+  border: 14px solid #7a5232; border-image: linear-gradient(160deg, #a7734a, #6b4426 40%, #8d5d38 60%, #5a3820) 1;
+  box-shadow: 0 2px 0 #3d2614, 10px 14px 0 rgba(18,16,16,.35), inset 0 0 60px rgba(0,0,0,.45); }
+.crewboard .chalk-head { position: absolute; left: 34px; top: 18px; font: 400 clamp(24px, 2.6vw, 34px)/1 "Permanent Marker", "Comic Sans MS", cursive; color: rgba(244,241,232,.88); transform: rotate(-2deg); text-transform: uppercase; letter-spacing: .04em; }
+.crewboard .chalk-ref { position: absolute; right: 34px; top: 26px; font: 400 16px/1 "Permanent Marker", "Comic Sans MS", cursive; color: rgba(244,241,232,.55); transform: rotate(2deg); }
+.crew2 { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 46px; }
+.mate2 { position: relative; display: grid; gap: 6px; padding: 26px 18px 18px; background:
+  repeating-linear-gradient(#f7f5ee 0 27px, #b9cde6 27px 28px), #f7f5ee; border-top: 26px solid #f7f5ee; box-shadow: 6px 8px 0 rgba(0,0,0,.4); color: var(--ink); }
+.mate2::before { content: ""; position: absolute; left: 50%; top: -34px; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; z-index: 3;
+  background: radial-gradient(circle at 35% 32%, #ff7a82 0 18%, #c4161f 45%, #6e0a10 100%); box-shadow: 1px 3px 0 rgba(0,0,0,.45); }
+.mate2::after { content: ""; position: absolute; left: 22px; top: -26px; bottom: 0; width: 2px; background: rgba(214,86,96,.6); }
+.mate2.xabi { transform: rotate(-2deg); } .mate2.lynn { transform: rotate(1.5deg); margin-top: 18px; } .mate2.betsy { transform: rotate(-1deg); }
+.mate2 .tag { font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--crimson); margin-top: -18px; }
+.mate2 b { font: 900 clamp(38px, 3.4vw, 48px)/.85 var(--stencil); text-transform: uppercase; }
+.mate2 .what { font: 800 18px/1 var(--head); letter-spacing: .06em; text-transform: uppercase; color: var(--faded); }
+.mate2 .m-note { font: 400 clamp(19px, 1.8vw, 24px)/1.1 "Permanent Marker", "Comic Sans MS", cursive; color: #C62828; margin-top: 6px; transform: rotate(-3deg); transform-origin: left; }
+.mate2 .m-ref { font: 400 14px/1.3 "Permanent Marker", "Comic Sans MS", cursive; color: #1E5BD6; transform: rotate(-1deg); }
+.crewboard .cstring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 3; }
+.crewboard .cstring path { fill: none; stroke: #B11C26; stroke-width: 3; stroke-linecap: round; filter: drop-shadow(1px 2px 0 rgba(18,16,16,.35)); stroke-dasharray: 2000; stroke-dashoffset: 2000; }
+.crewboard.go .cstring path { animation: drawRing 1s ease-out forwards; }
+.crewboard.go .cstring .c2 { animation-delay: .3s; } .crewboard.go .cstring .c3 { animation-delay: .6s; } .crewboard.go .cstring .c4 { animation-delay: .9s; }
+.crewboard .up-label, .crewboard .tie-label { position: absolute; z-index: 4; font: 400 clamp(15px, 1.4vw, 19px)/1 "Permanent Marker", "Comic Sans MS", cursive; color: #B11C26; background: var(--stock); padding: 2px 8px; box-shadow: 3px 3px 0 rgba(18,16,16,.25); opacity: 0; white-space: nowrap; }
+.crewboard .up-label::before, .crewboard .tie-label::before { content: ""; position: absolute; left: 50%; top: -9px; width: 36px; height: 13px; margin-left: -18px; background: rgba(236,230,216,.85); transform: rotate(5deg); }
+.crewboard.go .up-label, .crewboard.go .tie-label { animation: slapLabel .42s cubic-bezier(.2,.9,.3,1.35) 1.2s forwards; }
+.crewboard.go .tie-label { animation-delay: 1.5s; }
+@keyframes slapLabel { 0% { opacity: 0; scale: 1.8; } 70% { opacity: 1; scale: .95; } 100% { opacity: 1; scale: 1; } }
+@media (max-width: 880px) { .crewboard { padding: 64px 14px 34px; border-width: 8px; } .crew2 { grid-template-columns: 1fr; gap: 40px; } .crewboard .cstring, .crewboard .up-label, .crewboard .tie-label { display: none; } .crewboard .chalk-ref { display: none; } }
+@media (prefers-reduced-motion: reduce) { .crewboard .cstring path { stroke-dashoffset: 0; animation: none !important; } .crewboard .up-label, .crewboard .tie-label { opacity: 1; animation: none !important; } }
+
+/* Nicknames */
+.person .aka { font: 500 13px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--faded); margin-top: -2px; }
+/* Sightings hang off Abs's card, on either side of it, below the other two files */
+.people .booked-card .ev-hang { position: absolute; top: auto; bottom: 0; height: 225px; width: 88%; }
+.people .booked-card .ev-left { right: calc(100% + 28px); left: auto; }
+.people .booked-card .ev-right { left: calc(100% + 28px); right: auto; }
+.people .abs-tag { position: absolute; right: -10px; top: 12px; z-index: 4; font: 400 15px/1 "Permanent Marker", "Comic Sans MS", cursive; color: #B11C26; background: #F3D54E; padding: 3px 7px; transform: rotate(10deg); box-shadow: 2px 3px 0 rgba(0,0,0,.35); }
+/* The crew row, on the same board */
+.people .crew-row { grid-column: 1 / -1; order: 5; position: relative; z-index: 1; margin-top: 70px; padding-top: 48px; border-top: 2px dashed rgba(244,241,232,.18); }
+.people .crew-row .chalk-head { position: absolute; left: 0; top: 0; font: 400 clamp(24px, 2.6vw, 34px)/1 "Permanent Marker", "Comic Sans MS", cursive; color: rgba(244,241,232,.88); transform: rotate(-2deg); text-transform: uppercase; letter-spacing: .04em; }
+.people .crew-row .chalk-ref { position: absolute; right: 0; top: 8px; font: 400 16px/1 "Permanent Marker", "Comic Sans MS", cursive; color: rgba(244,241,232,.55); transform: rotate(2deg); }
+.people .crew2 { gap: 46px; }
+.people .string.s5, .people .string.s6, .people .string.s7 { z-index: 8; }
+.people .string.s5 path, .people .string.s6 path, .people .string.s7 path { stroke-dasharray: 2000; stroke-dashoffset: 2000; }
+.people.crewgo .string.s5 path { animation: drawRing 1s ease-out .1s forwards; }
+.people.crewgo .string.s6 path { animation: drawRing 1s ease-out .4s forwards; }
+.people.crewgo .string.s7 path { animation: drawRing 1s ease-out .7s forwards; }
+.people .string-note.n5, .people .string-note.n6, .people .string-note.n7 { opacity: 0; animation: none; }
+.people.crewgo .string-note.n5, .people.crewgo .string-note.n6, .people.crewgo .string-note.n7 { animation: slapOn .42s cubic-bezier(.2,.9,.3,1.35) 1.2s backwards; opacity: 1; }
+@media (max-width: 880px) {
+  .people .booked-card .ev-hang { position: static; width: auto; height: auto; }
+  .people .booked-card .ev-hang .ev { left: auto !important; right: auto !important; top: auto !important; }
+  .people .booked-card .ev-hang .shot, .people .booked-card .ev-right .receipt.ev { width: 44% !important; }
+  .people .booked-card .ev-left .shot { width: 70% !important; }
+  .band.team { overflow-x: clip; }
+  .people .crew-row { margin-top: 40px; } .people .crew-row .chalk-ref { display: none; }
+  .people .string.s5, .people .string.s6, .people .string.s7, .people .string-note.n5, .people .string-note.n6, .people .string-note.n7 { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .people .string.s5 path, .people .string.s6 path, .people .string.s7 path { animation: none !important; stroke-dashoffset: 0; } .people .string-note.n5, .people .string-note.n6, .people .string-note.n7 { opacity: 1; animation: none !important; } }
+
+/* Exhibit 7: half-burnt note in an evidence bag, clipped under the receipt */
+.people .ev-right .scrap { position: absolute; right: -6%; top: 168px; width: 66%; z-index: 3; padding: 24px 8px 8px; transform: rotate(3deg);
+  background: linear-gradient(135deg, rgba(255,255,255,.28), rgba(255,255,255,.08) 40%, rgba(255,255,255,.2)); border: 1px solid rgba(255,255,255,.45); box-shadow: 5px 7px 0 rgba(0,0,0,.35); }
+.people .scrap .bag-tag { position: absolute; left: 0; right: 0; top: 0; padding: 4px 8px; background: #F4F1E8; border-bottom: 3px solid #B11C26; font: 500 9px/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #333; }
+.people .scrap .bag-tag b { color: #B11C26; margin-right: 4px; }
+.people .scrap .burnt { display: grid; gap: 1px; padding: 8px 14px 9px; background: radial-gradient(ellipse at 50% 45%, #F1E6C8 55%, #C9A46A 75%, #5a3a1c 92%);
+  clip-path: polygon(0 8%, 9% 0, 22% 5%, 35% 0, 52% 6%, 70% 1%, 86% 7%, 100% 2%, 97% 30%, 100% 55%, 94% 78%, 100% 100%, 78% 94%, 60% 100%, 41% 93%, 22% 100%, 6% 92%, 2% 70%, 0 45%); }
+.people .scrap .burnt i { font: 400 13px/1.1 "Permanent Marker", "Comic Sans MS", cursive; font-style: normal; color: #1E3F8F; }
+.people .scrap .burnt .h { font-size: 15px; text-decoration: underline; }
+.people .scrap .burnt .gone { color: transparent; background: linear-gradient(90deg, #3b2412, #7a4f2a 60%, transparent); border-radius: 6px; height: 11px; margin: 2px 0; }
+.people .scrap .burnt .sig { justify-self: end; color: #1E5BD6; }
+.people .scrap .sclip { position: absolute; left: auto; right: 40px; top: -30px; width: 16px; transform: rotate(-8deg); z-index: 5; }
+.people .scrap::before { display: none !important; }
+.people.go .ev-right .scrap { animation-delay: 8s; }
+@media (max-width: 880px) { .people .ev-right .scrap { position: relative; right: auto; top: auto; width: 60%; margin-top: 10px; } .people .scrap .sclip { display: none; } }
+
+/* Exhibit 7 points at Ieuan: string from his card, marker note, circled signature */
+.people .string.s8 { z-index: 8; }
+.people .string.s8 path { stroke-dasharray: 2000; stroke-dashoffset: 2000; }
+.people.go .string.s8 path { animation: drawRing .8s ease-out 8.5s forwards; }
+.people .pin.ip { opacity: 0; } .people.go .pin.ip { opacity: 1; transition: opacity .2s ease 8.5s; }
+.people .scrap .burnt .sig { position: relative; }
+.people .scrap .burnt .sig::after { content: ""; position: absolute; left: -9px; right: -9px; top: -5px; bottom: -5px; border: 2px solid #D3202B; border-radius: 50%; transform: rotate(-8deg); }
+.people .scrap .hw { position: absolute; left: -8px; bottom: -16px; z-index: 6; font: 400 15px/1 "Permanent Marker", "Comic Sans MS", cursive; color: #E4434D; transform: rotate(-6deg); text-shadow: 0 1px 0 rgba(0,0,0,.6); white-space: nowrap; }
+@media (max-width: 880px) { .people .string.s8, .people .pin.ip { display: none; } .people .scrap .hw { bottom: -20px; } .people .ev-right .scrap { margin-bottom: 30px; } }
+@media (prefers-reduced-motion: reduce) { .people .string.s8 path { animation: none !important; stroke-dashoffset: 0; } .people .pin.ip { opacity: 1; transition: none; } }
+
+.people .string-note.gapnote { width: max-content; max-width: 128px; white-space: normal; text-align: center; font-size: 16px; line-height: 1.05; padding: 4px 7px; }
+
+/* Phones hide the strings, so each card carries a string tag naming who it links to */
+.people .link-tag { display: none; }
+@media (max-width: 880px) {
+  .people .link-tag { display: flex; align-items: center; gap: 6px; position: absolute; left: 50%; top: -26px; z-index: 8; transform: translateX(-50%) rotate(-2deg); white-space: nowrap;
+    font: 400 16px/1 "Permanent Marker", "Comic Sans MS", cursive; color: #B11C26; background: var(--stock, #F4F1E8); padding: 5px 10px 5px 8px; box-shadow: 3px 3px 0 rgba(18,16,16,.3); }
+  .people .link-tag::before { content: ""; width: 28px; height: 10px; flex: none;
+    background: radial-gradient(circle at 5px 5px, #D3202B 4px, transparent 5px), radial-gradient(circle at 23px 5px, #D3202B 4px, transparent 5px), linear-gradient(#B11C26, #B11C26) center / 18px 2px no-repeat; }
+  .people .link-tag em { font: 500 10px/1 var(--mono); font-style: normal; letter-spacing: .1em; text-transform: uppercase; color: #555; }
+  .people .mate2 .link-tag { top: auto; bottom: -18px; left: auto; right: 6px; transform: rotate(-2deg); }
+  .people .crew-row { padding-top: 84px; }
+  .people .partner > .sticky.on-card { top: 70px !important; }
+}
+
+/* Phones: the board is one long column, so each card and each piece of evidence plays its own animation when it scrolls into view */
+@media (max-width: 880px) {
+  .people.go .person:not(.mgo) *, .people.go .person:not(.mgo) *::before, .people.go .person:not(.mgo) *::after,
+  .people.go .ev:not(.mgo), .people.go .ev:not(.mgo) * { animation-play-state: paused !important; }
+  .people.go .ev-hang .ev, .people.go .ev-left .ev:nth-child(n), .people.go .ev-right .ev:nth-child(n), .people.go .ev-right .scrap { animation-delay: .15s !important; }
+  .people.go .top-strip .promo { animation-delay: .5s; }
+  .people.go .mug .crown path { animation-delay: 1.4s; }
+  .people.go .partner > .sticky.on-card { animation-delay: .4s; }
+}
+
+/* Chalk goes over the cards: the drawing layer sits on top, and only catches the pointer while a chalk is in hand */
+.people .ink-board { z-index: 20; }
+.people .tray { z-index: 21; }
+@media (max-width: 880px) {
+  .people.inview .tray { position: fixed; left: 12px; right: 12px; bottom: 12px; height: 40px; border-radius: 10px; z-index: 60; box-shadow: 0 6px 18px rgba(0,0,0,.45); }
+}
 </style>
 
 </head>
@@ -551,23 +835,20 @@ img, video, figure, .film, .mug, .badge { cursor: default; }
 
   <section class="band team" id="team" aria-label="Team">
     <div class="wrap">
-      <span class="label">Team</span>
-      <h2 class="on-scroll stamp-in">Most wanted</h2>
+      <span class="label">Shady Shipping Co.</span>
+      <h2 class="on-scroll stamp-in">Meet the board</h2>
       <div class="people">
-        <svg class="string" aria-hidden="true"><path d="" /></svg><span class="pin p-a" aria-hidden="true"></span><span class="pin p-b" aria-hidden="true"></span><span class="string-note" aria-hidden="true">took over?</span>
-        <div class="person booked-card on-scroll pop"><svg class="clip" viewBox="0 0 40 110" aria-hidden="true"><path d="M27 34V90a11 11 0 0 1-22 0V22a7 7 0 0 1 14 0v58" fill="none" stroke="#8C8C8C" stroke-width="4.5" stroke-linecap="round"/><path d="M27 34V90a11 11 0 0 1-22 0V22a7 7 0 0 1 14 0v58" fill="none" stroke="#E6E6E6" stroke-width="1.6" stroke-linecap="round" transform="translate(-1 -1)"/></svg><div class="top-strip"><span>Kingpin</span><b>01</b></div><div class="mug booked"><img class="printed" src="media/mug-abdullah.jpg" alt="Abdullah"><svg class="ring" viewBox="0 0 300 300" aria-hidden="true"><path filter="url(#marker)" d="M150 18c74-4 124 52 122 128s-58 132-128 130S20 214 26 140 92 26 168 30" fill="none" stroke="#B11C26" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".88"/><defs><filter id="marker" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.5" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="2.4" numOctaves="1" seed="9" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.7 1.3" result="ga"/><feComposite in="d" in2="ga" operator="in"/></filter></defs><g filter="url(#marker)"><path class="x1" d="M66 54 C96 86 128 122 152 150 S205 214 236 252 L246 262" fill="none" stroke="#B11C26" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><path class="x1" d="M74 58 C104 92 134 126 156 154 S206 216 240 256" fill="none" stroke="#B11C26" stroke-width="4" stroke-linecap="round" opacity=".3"/><path class="x2" d="M244 48 C238 52 232 58 226 66 C200 98 176 128 152 158 C126 190 98 222 62 256" fill="none" stroke="#B11C26" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><path class="x2" d="M236 58 C206 94 180 126 156 156 C130 188 102 220 70 250" fill="none" stroke="#B11C26" stroke-width="3.5" stroke-linecap="round" opacity=".28"/></g></svg><span class="note" aria-label="Dead?"><span class="w"><i style="--d:1.95s">D</i><i style="--d:2.06s">E</i><i style="--d:2.17s">A</i><i style="--d:2.28s">D</i><i style="--d:2.39s">?</i></span></span><span class="no">UDS-01</span><span class="ruler" aria-hidden="true"><i>10'0"</i><i>9'6"</i><i>9'0"</i></span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Abdullah</div><div class="role">Lead programmer and architect</div><div class="crime"><b>For:</b> building every system, then making five PCs agree on them</div><p>Leads programming on Shady Shipping: the core gameplay systems and the online multiplayer that keeps every player in sync.</p><div class="evidence"><div class="ev-head">Evidence</div><div class="plinks"><a class="plink" href="https://www.abdullahabduljabbar.com/" target="_blank" rel="noopener"><span class="ex">Exhibit A</span>Portfolio ↗</a><a class="plink" href="https://github.com/abdullahabduljabbarab" target="_blank" rel="noopener"><span class="ex">Exhibit B</span>GitHub ↗</a><a class="plink" href="https://www.linkedin.com/in/abdullah-abduljabbar-b06415374/" target="_blank" rel="noopener"><span class="ex">Exhibit C</span>LinkedIn ↗</a><a class="plink" href="https://www.youtube.com/@abdullahameedabduljabbar" target="_blank" rel="noopener"><span class="ex">Exhibit D</span>YouTube ↗</a></div></div><div class="contact"><span class="ex">Last known contact</span><button type="button" class="reveal" data-u="abdullaameedab" data-d="gmail.com">Reveal email</button></div></div></div>
-        <div class="person heir on-scroll pop"><div class="top-strip"><span><s>Boss</s> <em class="promo" aria-label="Kingpin?">Kingpin?</em></span><b>02</b></div><span class="sticky" aria-hidden="true">Suspect no.&nbsp;1:<br>last seen with<br>the Kingpin.</span><div class="mug booked"><img class="printed" src="media/mug-dafydd.jpg" alt="Dafydd"><svg class="crown" viewBox="0 0 200 110" aria-hidden="true"><path d="M22 92 L14 26 L58 60 L100 10 L142 58 L186 22 L176 92 Z M24 92 C70 100 132 100 176 92" fill="none" stroke="#E8B92E" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" filter="url(#marker)"/></svg><span class="no">UDS-02</span><span class="ruler" aria-hidden="true"><i>6'0"</i><i>5'9"</i><i>5'6"</i></span><span class="note note2" aria-label="New kingpin?"><span class="w"><i style="--d:1.90s">N</i><i style="--d:1.98s">E</i><i style="--d:2.06s">W</i></span> <span class="w"><i style="--d:2.22s">K</i><i style="--d:2.30s">I</i><i style="--d:2.38s">N</i><i style="--d:2.46s">G</i><i style="--d:2.54s">P</i><i style="--d:2.62s">I</i><i style="--d:2.70s">N</i><i style="--d:2.78s">?</i></span></span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Dafydd</div><div class="role">Level designer and generalist</div><div class="crime"><b>For:</b> building a whole city for car chases</div><p>Designs the levels, owns every gameplay number, and jumps in wherever the game needs a hand.</p></div></div>
-        <div class="person on-scroll pop"><div class="top-strip"><span>Boss</span><b>03</b></div><div class="mug unknown"><svg class="sil" viewBox="0 0 200 210" aria-hidden="true"><path d="M100 22c-24 0-40 18-40 44 0 20 9 36 21 44-30 8-55 26-63 60l-3 40h170l-3-40c-8-34-33-52-63-60 12-8 21-24 21-44 0-26-16-44-40-44z"/></svg><span class="no">UDS-03</span><span class="stamp">Gone rogue</span><span class="soon">Undercover &middot; file sealed</span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Ieuan</div><div class="role">UI and HUD</div><div class="crime"><b>For:</b> crimes against bad menus (he fixes them)</div><p>Designs the in-game HUD: the job panel, the radar frame, the alerts and the ability slots, so players can read the game at a glance.</p></div></div>
+        <canvas class="ink-board" aria-hidden="true"></canvas>
+        <svg class="string" aria-hidden="true"><path d="" /></svg><span class="pin p-a" aria-hidden="true"></span><span class="pin p-b" aria-hidden="true"></span><span class="string-note gapnote" aria-hidden="true">next in line?</span><svg class="string s2" aria-hidden="true"><path d="" /></svg><span class="pin p-c" aria-hidden="true"></span><span class="pin p-d" aria-hidden="true"></span><span class="string-note n2 gapnote" aria-hidden="true">made the arrangements?</span><svg class="string s3" aria-hidden="true"><path d="" /></svg><svg class="string s4" aria-hidden="true"><path d="" /></svg><svg class="string s5" aria-hidden="true"><path d="" /></svg><svg class="string s6" aria-hidden="true"><path d="" /></svg><svg class="string s7" aria-hidden="true"><path d="" /></svg><span class="string-note n5" aria-hidden="true">Daf&rsquo;s lookout</span><span class="string-note n6" aria-hidden="true">Abs&rsquo;s &ldquo;death&rdquo;</span><span class="string-note n7" aria-hidden="true">for the crash</span><span class="pin cp cp1" aria-hidden="true"></span><span class="pin cp cp2" aria-hidden="true"></span><span class="pin cp cp3" aria-hidden="true"></span><span class="pin cp cp4" aria-hidden="true"></span><span class="pin cp cp5" aria-hidden="true"></span><span class="pin cp cp6" aria-hidden="true"></span><svg class="string s8" aria-hidden="true"><path d="" /></svg><span class="pin cp cp7 ip" aria-hidden="true"></span><span class="pin cp cp8 ip" aria-hidden="true"></span><span class="pin p-e" aria-hidden="true"></span><span class="pin p-f" aria-hidden="true"></span><span class="pin p-g" aria-hidden="true"></span><span class="pin p-h" aria-hidden="true"></span>
+        <div class="person booked-card on-scroll pop"><svg class="clip" viewBox="0 0 40 110" aria-hidden="true"><path d="M27 34V90a11 11 0 0 1-22 0V22a7 7 0 0 1 14 0v58" fill="none" stroke="#8C8C8C" stroke-width="4.5" stroke-linecap="round"/><path d="M27 34V90a11 11 0 0 1-22 0V22a7 7 0 0 1 14 0v58" fill="none" stroke="#E6E6E6" stroke-width="1.6" stroke-linecap="round" transform="translate(-1 -1)"/></svg><div class="top-strip"><span>Kingpin</span><b>01</b></div><div class="mug booked"><img class="printed" src="media/mug-abdullah.jpg" alt="Abdullah"><svg class="ring" viewBox="0 0 300 300" aria-hidden="true"><path filter="url(#marker)" d="M150 18c74-4 124 52 122 128s-58 132-128 130S20 214 26 140 92 26 168 30" fill="none" stroke="#B11C26" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".88"/><defs><filter id="marker" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.5" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="2.4" numOctaves="1" seed="9" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.7 1.3" result="ga"/><feComposite in="d" in2="ga" operator="in"/></filter></defs><g filter="url(#marker)"><path class="x1" d="M66 54 C96 86 128 122 152 150 S205 214 236 252 L246 262" fill="none" stroke="#B11C26" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><path class="x1" d="M74 58 C104 92 134 126 156 154 S206 216 240 256" fill="none" stroke="#B11C26" stroke-width="4" stroke-linecap="round" opacity=".3"/><path class="x2" d="M244 48 C238 52 232 58 226 66 C200 98 176 128 152 158 C126 190 98 222 62 256" fill="none" stroke="#B11C26" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><path class="x2" d="M236 58 C206 94 180 126 156 156 C130 188 102 220 70 250" fill="none" stroke="#B11C26" stroke-width="3.5" stroke-linecap="round" opacity=".28"/></g></svg><span class="yeah" aria-hidden="true">yeah right.</span><span class="note" aria-label="Dead?"><span class="w"><i style="--d:1.95s">D</i><i style="--d:2.06s">E</i><i style="--d:2.17s">A</i><i style="--d:2.28s">D</i><i style="--d:2.39s">?</i></span></span><span class="no">UDS-01</span><span class="ruler" aria-hidden="true"><i>10'0"</i><i>9'6"</i><i>9'0"</i></span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Abdullah</div><div class="aka">a.k.a. &quot;Abs&quot;</div><div class="role">Lead programmer and architect</div><div class="crime"><b>For:</b> building every system, then making five PCs agree on them</div><p>Leads programming on Shady Shipping: the core gameplay systems and the online multiplayer that keeps every player in sync.</p><div class="evidence"><div class="ev-head">Evidence</div><div class="plinks"><a class="plink" href="https://www.abdullahabduljabbar.com/" target="_blank" rel="noopener"><span class="ex">Exhibit A</span>Portfolio ↗</a><a class="plink" href="https://github.com/abdullahabduljabbarab" target="_blank" rel="noopener"><span class="ex">Exhibit B</span>GitHub ↗</a><a class="plink" href="https://www.linkedin.com/in/abdullah-abduljabbar-b06415374/" target="_blank" rel="noopener"><span class="ex">Exhibit C</span>LinkedIn ↗</a><a class="plink" href="https://www.youtube.com/@abdullahameedabduljabbar" target="_blank" rel="noopener"><span class="ex">Exhibit D</span>YouTube ↗</a></div></div><div class="contact"><span class="ex">Last known contact</span><button type="button" class="reveal" data-u="abdullaameedab" data-d="gmail.com">Reveal email</button></div></div><div class="ev-hang ev-left" aria-label="Sightings"><figure class="ev shot"><img src="media/sighting-airport.jpg" alt="CCTV still: Abdullah waiting at an airport coach stop the night after his funeral"><span class="abs-tag" aria-hidden="true">ABS?</span><figcaption>the night after the &quot;funeral&quot;. one way?</figcaption></figure></div><div class="ev-hang ev-right" aria-label="Sightings"><figure class="ev shot polaroid"><img src="media/sighting-beach.jpg" alt="Long-lens photo: a figure walking on a beach at sunset"><span class="abs-tag" aria-hidden="true">ABS?</span><figcaption>early retirement?</figcaption></figure><span class="receipt ev" aria-hidden="true"><b>CARDIFF FUNERAL CO.</b><span>1x coffin (empty)</span><span>1x headstone, &quot;K&quot;</span><span>flowers, discreet</span><span>1x fake moustache</span><span>1x one-way ticket</span><span class="tot">PAID IN CASH</span><span class="sig">signed: I.</span></span><span class="scrap ev" aria-label="Exhibit 7: half-burnt note found in the funeral home bin. Readable: Job for K. Betsy, crash. Lyn, van. K. somewhere sunny. Signed I."><span class="bag-tag" aria-hidden="true"><b>EVIDENCE</b> Exhibit 7 &middot; funeral home bin &middot; suspect UDS-03</span><span class="burnt" aria-hidden="true"><i class="h">Job for K.</i><i>Betsy &ndash; crash &check;</i><i>Lyn &ndash; van &check;</i><i class="gone">Xabi &ndash; keep D</i><i>K. somewhere sunny &check;</i><i class="sig">&ndash; I.</i></span><span class="hw" aria-hidden="true">I. = Ieuan&rsquo;s handwriting</span><svg class="sclip" viewBox="0 0 40 110" aria-hidden="true"><path d="M27 34V90a11 11 0 0 1-22 0V22a7 7 0 0 1 14 0v58" fill="none" stroke="#8C8C8C" stroke-width="4.5" stroke-linecap="round"/></svg></span></div></div>
+        <div class="person heir on-scroll pop"><span class="link-tag" aria-hidden="true"><em>to Abs</em>next in line?</span><div class="top-strip"><span><s>Boss</s> <em class="promo" aria-label="Kingpin?">Kingpin?</em></span><b>02</b></div><div class="mug booked"><img class="printed" src="media/mug-dafydd.jpg" alt="Dafydd"><svg class="crown" viewBox="0 0 200 110" aria-hidden="true"><path d="M22 92 L14 26 L58 60 L100 10 L142 58 L186 22 L176 92 Z M24 92 C70 100 132 100 176 92" fill="none" stroke="#E8B92E" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" filter="url(#marker)"/></svg><span class="no">UDS-02</span><span class="ruler" aria-hidden="true"><i>6'0"</i><i>5'9"</i><i>5'6"</i></span><span class="note note2" aria-label="New kingpin?"><span class="w"><i style="--d:1.90s">N</i><i style="--d:1.98s">E</i><i style="--d:2.06s">W</i></span> <span class="w"><i style="--d:2.22s">K</i><i style="--d:2.30s">I</i><i style="--d:2.38s">N</i><i style="--d:2.46s">G</i><i style="--d:2.54s">P</i><i style="--d:2.62s">I</i><i style="--d:2.70s">N</i><i style="--d:2.78s">?</i></span></span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Dafydd</div><div class="aka">a.k.a. &quot;Daf&quot;</div><div class="role">Level designer and generalist</div><div class="crime"><b>For:</b> building a whole city for car chases</div><p>Designs the levels, owns every gameplay number, and jumps in wherever the game needs a hand.</p></div></div>
+        <div class="person partner on-scroll pop"><span class="link-tag" aria-hidden="true"><em>to Abs</em>made the arrangements?</span><span class="sticky on-card" aria-hidden="true">Suspect no.&nbsp;1:<br>last seen with<br>the Kingpin.</span><div class="top-strip"><span>Boss</span><b>03</b></div><div class="mug unknown"><svg class="sil" viewBox="0 0 200 210" aria-hidden="true"><path d="M100 22c-24 0-40 18-40 44 0 20 9 36 21 44-30 8-55 26-63 60l-3 40h170l-3-40c-8-34-33-52-63-60 12-8 21-24 21-44 0-26-16-44-40-44z"/></svg><span class="no">UDS-03</span><span class="soon">Photo not on file</span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Ieuan</div><div class="role">UI and HUD</div><div class="crime"><b>For:</b> crimes against bad menus (he fixes them)</div><p>Designs the in-game HUD: the job panel, the radar frame, the alerts and the ability slots, so players can read the game at a glance.</p></div></div>
+                <div class="crew-row" aria-label="Known associates"><span class="chalk-head" aria-hidden="true">Known associates</span><span class="chalk-ref" aria-hidden="true">case ref UDS-26 · open</span><div class="crew2"><div class="mate2 xabi"><span class="link-tag" aria-hidden="true"><em>to Daf</em>his lookout</span><span class="tag">Known associate 01</span><b>Xabi</b><span class="what">Audio</span><span class="m-note">heard the sirens first</span><span class="m-ref">tipped off Daf?</span></div>
+          <div class="mate2 lynn"><span class="link-tag" aria-hidden="true"><em>to Betsy</em>for the crash</span><span class="tag">Known associate 02</span><b>Lynnisha</b><span class="what">Art</span><span class="m-note">built the decoy van?</span><span class="m-ref">the one that burned was a double</span></div>
+          <div class="mate2 betsy"><span class="link-tag" aria-hidden="true"><em>to Abs</em>his &ldquo;death&rdquo;</span><span class="tag">Known associate 03</span><b>Betsy</b><span class="what">Effects</span><span class="m-note">staged the crash?</span><span class="m-ref">that fire was a bit too perfect</span></div></div></div>
+        <div class="tray" role="toolbar" aria-label="Chalk"><button type="button" class="pen" data-c="#F4F1E8" aria-pressed="false" aria-label="White chalk" style="--chalk:#F4F1E8"><span></span></button><button type="button" class="pen" data-c="#F6D365" aria-pressed="false" aria-label="Yellow chalk" style="--chalk:#F6D365"><span></span></button><button type="button" class="pen" data-c="#F4A6C0" aria-pressed="false" aria-label="Pink chalk" style="--chalk:#F4A6C0"><span></span></button><button type="button" class="wipe">Wipe</button><span class="tray-hint">Pick up a chalk and draw on anything. Only you can see it.</span></div>
       </div>
       <p class="wider">The team runs the playtests together.</p>
-      <div class="assoc">
-        <div class="assoc-head"><span class="label">Known associates</span><span class="assoc-sub">The crew on Shady Shipping</span></div>
-        <div class="crew">
-          <div class="mate on-scroll pop"><span class="tag">Associate 01</span><b>Xabi</b><span class="what">Audio</span></div>
-          <div class="mate on-scroll pop"><span class="tag">Associate 02</span><b>Lynnisha</b><span class="what">Art</span></div>
-          <div class="mate on-scroll pop"><span class="tag">Associate 03</span><b>Betsy</b><span class="what">Effects</span></div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -676,7 +957,7 @@ img, video, figure, .film, .mug, .badge { cursor: default; }
   });
   // Ink stamps: click anywhere that isn't a button or link and it stamps down
   // A stamp only lands on empty background: never on text, pictures or cards
-  var KEEP = '.prints, a, button, input, select, textarea, label, video, img, figure, picture, p, h1, h2, h3, h4, li, small, blockquote, time, b, strong, i, em, span, .film, .mug, .badge, .tv, .compare, .card, .post, .news article';
+  var KEEP = '.people, .prints, a, button, input, select, textarea, label, video, img, figure, picture, p, h1, h2, h3, h4, li, small, blockquote, time, b, strong, i, em, span, .film, .mug, .badge, .tv, .compare, .card, .post, .news article';
   function clear(x, y, w, h) {
     var pts = [[x, y], [x - w, y - h], [x + w, y - h], [x - w, y + h], [x + w, y + h], [x - w, y], [x + w, y], [x, y - h], [x, y + h]];
     return pts.every(function (p) { var t = document.elementFromPoint(p[0], p[1]); return !t || !t.closest(KEEP); });
@@ -713,9 +994,63 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
     var mx = (x1 + x2) / 2, my = Math.max(y1, y2) + (stacked ? 0 : 70);
     path.setAttribute('d', 'M' + x1 + ' ' + y1 + ' Q' + mx + ' ' + my + ' ' + x2 + ' ' + y2);
     pa.style.left = x1 + 'px'; pa.style.top = y1 + 'px'; pb.style.left = x2 + 'px'; pb.style.top = y2 + 'px';
-    note.style.left = mx + 'px'; note.style.top = ((y1 + y2) / 2 + (stacked ? 0 : 52)) + 'px';
+    var c = box.querySelector('.partner .mug');
+    if (c) {
+      var rc = c.getBoundingClientRect(), p2 = box.querySelector('.s2 path'), pc = box.querySelector('.p-c'), pd = box.querySelector('.p-d'), n2 = box.querySelector('.n2');
+      var right = rc.left >= ra.right - 10;
+      var x3 = rc.left - r.left + rc.width * (right ? 0.14 : 0.86), y3 = rc.top - r.top + rc.height * 0.62;
+      var x4 = ra.left - r.left + ra.width * (right ? 0.74 : 0.26), y4 = ra.top - r.top + ra.height * 0.62;
+      var mx2 = (x3 + x4) / 2, my2 = Math.max(y3, y4) + 60;
+      p2.setAttribute('d', 'M' + x3 + ' ' + y3 + ' Q' + mx2 + ' ' + my2 + ' ' + x4 + ' ' + y4);
+      pc.style.left = x3 + 'px'; pc.style.top = y3 + 'px'; pd.style.left = x4 + 'px'; pd.style.top = y4 + 'px';
+      // label sits on Ieuan's side so it never covers Abs's face
+      n2.style.left = ((right ? ra.right + rc.left : rc.right + ra.left) / 2 - r.left) + 'px'; n2.style.top = ((y3 + y4) / 2 + 44) + 'px';
+    }
+
+      [['.s3', '.ev-left .shot', '.p-e', '.p-f', 0.18], ['.s4', '.ev-right .shot', '.p-g', '.p-h', 0.82]].forEach(function (k) {
+        var ph = box.querySelector(k[1]); if (!ph) return;
+        var rp = ph.getBoundingClientRect(), pa2 = box.querySelector(k[2]), pb2 = box.querySelector(k[3]);
+        var rcard = a.closest('.person').getBoundingClientRect();
+        var sx = rcard.left - r.left + (k[4] < .5 ? 16 : rcard.width - 16), sy = rcard.bottom - r.top - 150;
+        var rh = ph.parentNode.getBoundingClientRect();
+        var m = (getComputedStyle(ph).transform.match(/matrix\(([^,]+),\s*([^,]+)/) || [0, 1, 0]), ang = Math.atan2(+m[2], +m[1]);
+        var hx = rh.left - r.left + ph.offsetLeft + ph.offsetWidth / 2, hy = rh.top - r.top + ph.offsetTop + ph.offsetHeight / 2, d = ph.offsetHeight / 2;
+        var ox = (k[4] < .5 ? 1 : -1) * (ph.offsetWidth / 2 - 14), oy = -(d - 14);
+        var ex = hx + ox * Math.cos(ang) - oy * Math.sin(ang), ey = hy + ox * Math.sin(ang) + oy * Math.cos(ang);
+        var cx = (sx + ex) / 2, cy = (sy + ey) / 2 + 18;
+        box.querySelector(k[0] + ' path').setAttribute('d', 'M' + sx + ' ' + sy + ' Q' + cx + ' ' + cy + ' ' + ex + ' ' + ey);
+        pa2.style.left = sx + 'px'; pa2.style.top = sy + 'px'; pb2.style.left = ex + 'px'; pb2.style.top = ey + 'px';
+      });
+    (function () {
+      var cr = box.querySelector('.crew-row'); if (!cr) return;
+      function R(sel) { var e = box.querySelector(sel); if (!e) return null; var q = e.getBoundingClientRect(); return { l: q.left - r.left, t: q.top - r.top, w: q.width, h: q.height }; }
+      var X = R('.mate2.xabi'), L = R('.mate2.lynn'), B = R('.mate2.betsy'), D = R('.heir'), K = R('.booked-card');
+      function link(path, noteSel, x1, y1, x2, y2, sag, t, pin, ly) {
+        var p1 = box.querySelector('.cp' + pin), p2 = box.querySelector('.cp' + (pin + 1));
+        p1.style.left = x1 + 'px'; p1.style.top = y1 + 'px'; p2.style.left = x2 + 'px'; p2.style.top = y2 + 'px';
+        var cx = (x1 + x2) / 2, cy = (y1 + y2) / 2 + sag;
+        box.querySelector(path + ' path').setAttribute('d', 'M' + x1 + ' ' + y1 + ' Q' + cx + ' ' + cy + ' ' + x2 + ' ' + y2);
+        t = t || .5; var n = box.querySelector(noteSel); n.style.left = (x1 + (x2 - x1) * (1 - t)) + 'px'; n.style.top = (y1 + (y2 - y1) * (1 - t) + sag / 2 + 14 + (ly || 0)) + 'px';
+      }
+      link('.s5', '.n5', X.l + 12, X.t + 18, D.l + 9, D.t + D.h - 16, 0, .78, 1);
+      link('.s6', '.n6', B.l + B.w * .3, B.t + 18, K.l + K.w * .82, K.t + K.h - 16, 0, .18, 3);
+      link('.s7', '.n7', L.l + L.w - 22, L.t + 22, B.l + 22, B.t + 22, 30, .5, 5, -62);
+    })();
+    (function () {
+      var sc = box.querySelector('.ev-right .scrap'), pt = box.querySelector('.partner'); if (!sc || !pt) return;
+      var rh = sc.parentNode.getBoundingClientRect(), rp = pt.getBoundingClientRect();
+      var x1 = rp.left - r.left + rp.width - 22, y1 = rp.bottom - r.top - 16;
+      var x2 = rh.left - r.left + sc.offsetLeft + sc.offsetWidth - 16, y2 = rh.top - r.top + sc.offsetTop + 34;
+      box.querySelector('.s8 path').setAttribute('d', 'M' + x1 + ' ' + y1 + ' Q' + (Math.max(x1, x2) + 22) + ' ' + ((y1 + y2) / 2) + ' ' + x2 + ' ' + y2);
+      var p7 = box.querySelector('.cp7'), p8 = box.querySelector('.cp8');
+      p7.style.left = x1 + 'px'; p7.style.top = y1 + 'px'; p8.style.left = x2 + 'px'; p8.style.top = y2 + 'px';
+    })();
+    // labels sit in the gap between the cards so they never cover a face
+    note.style.left = (stacked ? mx : ((left ? rb.right + ra.left : ra.right + rb.left) / 2 - r.left)) + 'px'; note.style.top = ((y1 + y2) / 2 + (stacked ? 0 : 52)) + 'px';
   }
   draw(); window.addEventListener('resize', draw); window.addEventListener('load', draw);
+  var crewRow = box.querySelector('.crew-row');
+  if (crewRow && 'IntersectionObserver' in window) { var cio = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { draw(); box.classList.add('crewgo'); cio.disconnect(); } }, { threshold: 0.4 }); cio.observe(crewRow); } else { box.classList.add('crewgo'); }
   if ('IntersectionObserver' in window) {
     var last = box.querySelector('.booked-card .mug .note i:last-child'), fired = false;
     function go() { if (fired) return; fired = true; draw(); box.classList.add('go'); }
@@ -724,6 +1059,70 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) go();
     io.observe(box);
   } else { box.classList.add('go'); }
+})();
+
+// Drawable board: pick up a chalk from the tray and draw over anything, cards included. Strokes are kept per visitor.
+(function () {
+  var box = document.querySelector('.people'), cv = box && box.querySelector('.ink-board'); if (!cv) return;
+  var ctx = cv.getContext('2d'), strokes = [], cur = null, colour = null, KEY = 'uds-chalk-v1';
+  try { strokes = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { strokes = []; }
+  function size() { var r = box.getBoundingClientRect(), d = window.devicePixelRatio || 1; cv.width = r.width * d; cv.height = r.height * d; ctx.setTransform(d, 0, 0, d, 0, 0); redraw(); }
+  function line(st) {
+    var r = box.getBoundingClientRect(); if (st.p.length < 2) return;
+    ctx.strokeStyle = st.c; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    var passes = [[6, .45, 0], [3, .5, 1.6], [2, .55, 2.4]];
+    for (var k = 0; k < passes.length; k++) {
+      var seed = 7 + k * 13; ctx.lineWidth = passes[k][0]; ctx.globalAlpha = passes[k][1];
+      ctx.beginPath();
+      for (var i = 0; i < st.p.length; i++) {
+        seed = (seed * 9301 + 49297) % 233280; var j = (seed / 233280 - .5) * passes[k][2] * 2;
+        var x = st.p[i][0] * r.width + j, y = st.p[i][1] * r.height - j;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+  function redraw() { var r = box.getBoundingClientRect(); ctx.clearRect(0, 0, r.width, r.height); strokes.forEach(line); }
+  function pt(e) { var r = box.getBoundingClientRect(); return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height]; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(strokes.slice(-300))); } catch (e) {} }
+  cv.addEventListener('pointerdown', function (e) { if (!colour) return; cur = { c: colour, p: [pt(e)] }; strokes.push(cur); cv.setPointerCapture(e.pointerId); });
+  cv.addEventListener('pointermove', function (e) { if (!cur) return; cur.p.push(pt(e)); redraw(); });
+  ['pointerup', 'pointercancel'].forEach(function (t) { cv.addEventListener(t, function () { if (cur) { cur = null; save(); } }); });
+  box.querySelectorAll('.tray .pen').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = b.getAttribute('aria-pressed') !== 'true';
+      box.querySelectorAll('.tray .pen').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', on ? 'true' : 'false'); colour = on ? b.dataset.c : null; box.classList.toggle('drawing', on);
+    });
+  });
+  box.querySelector('.tray .wipe').addEventListener('click', function () { strokes = []; save(); redraw(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && colour) { box.querySelectorAll('.tray .pen').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); }); colour = null; box.classList.remove('drawing'); } });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { box.classList.toggle('inview', en[0].isIntersecting); }, { rootMargin: '-120px 0px -120px 0px' }).observe(box);
+  window.addEventListener('resize', size); window.addEventListener('load', size); size();
+})();
+</script>
+
+<script>
+(function () {
+  function lock(el) { el.setAttribute('draggable', 'false'); }
+  document.querySelectorAll('img, video').forEach(lock);
+  new MutationObserver(function (m) { m.forEach(function (r) { r.addedNodes.forEach(function (n) { if (n.nodeType === 1) { if (n.matches('img, video')) lock(n); n.querySelectorAll && n.querySelectorAll('img, video').forEach(lock); } }); }); }).observe(document.body, { childList: true, subtree: true });
+  document.addEventListener('dragstart', function (e) { if (e.target.closest && e.target.closest('img, video')) e.preventDefault(); });
+  document.addEventListener('contextmenu', function (e) { if (e.target.closest && e.target.closest('img, video')) e.preventDefault(); });
+})();
+
+
+// Phones: start the board as soon as it appears, then let each card and exhibit wait until it is actually on screen
+(function () {
+  var box = document.querySelector('.people');
+  if (!box || !window.matchMedia || !window.matchMedia('(max-width: 880px)').matches || !('IntersectionObserver' in window)) return;
+  var start = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { box.classList.add('go'); start.disconnect(); } }, { threshold: 0 });
+  start.observe(box);
+  var each = new IntersectionObserver(function (en) {
+    en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('mgo'); each.unobserve(e.target); } });
+  }, { threshold: 0, rootMargin: '0px 0px -30% 0px' });
+  box.querySelectorAll('.person, .ev').forEach(function (el) { each.observe(el); });
 })();
 </script>
 
