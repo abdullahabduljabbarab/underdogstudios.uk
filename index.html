@@ -129,7 +129,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .person .mug.unknown .sil { position: absolute; left: 50%; bottom: 0; width: 72%; transform: translateX(-50%); fill: var(--ink); opacity: .88; }
 .person .mug.unknown .no { position: absolute; top: 12px; left: 14px; font: 500 12px/1 var(--mono); letter-spacing: .14em; color: var(--ink); background: var(--stock); padding: 5px 7px; border: 2px solid var(--ink); }
 .person .mug.unknown .stamp { display: block; height: auto; width: auto; align-self: start; justify-self: start; line-height: 1; box-sizing: border-box; position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%) rotate(-12deg); font: 900 clamp(28px, 3.2vw, 44px)/1 var(--stencil); letter-spacing: .05em; text-transform: uppercase; color: var(--crimson); border: 5px solid var(--crimson); padding: 6px 14px 4px; background: rgba(236,230,216,.82); mix-blend-mode: multiply; white-space: nowrap; }
-.person .mug.unknown .soon { color: var(--on-ink); bottom: 14px; z-index: 1; }
+.person .mug.unknown .soon { color: var(--on-ink); bottom: 14px; z-index: 1; letter-spacing: .08em; font-size: 11px; }
 .seen .mug.unknown .stamp { animation: stampMug .38s cubic-bezier(.2,.9,.3,1.3) .5s backwards; }
 @keyframes stampMug { 0% { transform: translate(-50%, -50%) rotate(-12deg) scale(2.2); opacity: 0; } 70% { transform: translate(-50%, -50%) rotate(-12deg) scale(.94); opacity: 1; } 100% { transform: translate(-50%, -50%) rotate(-12deg); } }
 
@@ -153,6 +153,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .person .mug .note .w { display: inline-block; white-space: nowrap; }
 .person .mug .note i { font-style: normal; display: inline-block; }
 .seen .mug .note i { opacity: 0; animation: ink .16s ease-out var(--d) forwards; }
+.person.heir .mug .note i { opacity: 0; animation: none; }
+.people.go .person.heir .mug .note i { animation: ink .16s ease-out var(--d) forwards; }
 @keyframes ink { 0% { opacity: 0; clip-path: inset(0 100% 0 0); } 30% { opacity: 1; } 100% { opacity: 1; clip-path: inset(0 0 0 0); } }
 
 /* Our story: a small pile of taped prints per game */
@@ -176,21 +178,43 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .people .pin { position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #F05A63, #8E1018 70%); box-shadow: 2px 3px 0 rgba(18,16,16,.45); z-index: 7; pointer-events: none; }
 .people .string-note { position: absolute; z-index: 7; font: 400 clamp(18px, 1.8vw, 24px)/1 "Permanent Marker", "Comic Sans MS", cursive; color: #B11C26; background: var(--stock); padding: 2px 8px; transform: translate(-50%, -120%) rotate(-6deg); pointer-events: none; box-shadow: 3px 3px 0 rgba(18,16,16,.25); }
 .people .string path { stroke-dasharray: 2000; stroke-dashoffset: 2000; }
-.people.strung .string path { animation: drawRing 1s ease-out .2s forwards; }
-.people .string-note, .people .pin { opacity: 0; transition: opacity .2s ease 1.1s; }
-.people.strung .string-note, .people.strung .pin { opacity: 1; }
+.people.go .string path { animation: drawRing 1s ease-out .1s forwards; }
+.people .string-note, .people .pin { opacity: 0; transition: opacity .2s ease 1s; }
+.people.go .string-note, .people.go .pin { opacity: 1; }
 .person.heir { position: relative; }
 .person .top-strip s { text-decoration-color: #E4434D; text-decoration-thickness: 3px; color: #8d8679; }
 .person .top-strip .promo { font: 400 17px/1 "Permanent Marker", "Comic Sans MS", cursive; font-style: normal; color: #E8B92E; letter-spacing: .02em; text-transform: none; margin-left: 6px; display: inline-block; transform: rotate(-4deg); }
-.seen .top-strip .promo { clip-path: inset(0 100% 0 0); animation: writeIn .7s steps(8) 1.4s forwards; }
+.person .top-strip .promo { clip-path: inset(0 100% 0 0); }
+.people.go .top-strip .promo { animation: writeIn .7s steps(8) 1.3s forwards; }
 @keyframes writeIn { to { clip-path: inset(0 0 0 0); } }
 .person .mug .crown { position: absolute; right: 44px; left: auto; top: 4%; width: 20%; transform: rotate(14deg); z-index: 2; pointer-events: none; overflow: visible; }
-.seen .mug .crown path { stroke-dasharray: 700; stroke-dashoffset: 700; animation: drawRing .8s ease-out 1s forwards; }
-.person .sticky { position: absolute; right: -16px; top: 45%; z-index: 4; width: 132px; padding: 12px 12px 14px; background: #F3D54E; color: #2a2410; font: 400 14px/1.2 "Permanent Marker", "Comic Sans MS", cursive; transform: rotate(5deg); box-shadow: 4px 6px 0 rgba(18,16,16,.3); pointer-events: none; }
+.person .mug .crown path { stroke-dasharray: 700; stroke-dashoffset: 700; }
+.people.go .mug .crown path { animation: drawRing .8s ease-out 3.1s forwards; }
+.person .sticky { position: absolute; right: 18px; left: auto; top: auto; bottom: -96px; z-index: 4; width: 132px; padding: 12px 12px 14px; background: #F3D54E; color: #2a2410; font: 400 14px/1.2 "Permanent Marker", "Comic Sans MS", cursive; transform: rotate(5deg); box-shadow: 4px 6px 0 rgba(18,16,16,.3); pointer-events: none; }
 .person .sticky::before { content: ""; position: absolute; left: 50%; top: -8px; width: 46px; height: 16px; margin-left: -23px; background: rgba(236,230,216,.8); transform: rotate(-4deg); }
-.person .mug .note.note2 { left: 50%; right: auto; bottom: 6%; transform: translateX(-50%) rotate(-7deg); white-space: nowrap; font-size: clamp(30px, 3.1vw, 42px); }
+.person .mug .note.note2 { left: 6%; right: 6%; bottom: 5%; transform: rotate(-7deg); white-space: normal; text-align: center; line-height: 1.02; }
+.person .mug .note.note2 .w { white-space: nowrap; }
 .person .mug .note i.sp { width: .3em; }
-@media (prefers-reduced-motion: reduce) { .people .string path, .seen .mug .crown path { animation: none; stroke-dashoffset: 0; } .seen .top-strip .promo { animation: none; clip-path: none; } .people .string-note, .people .pin { transition: none; } }
+
+/* The cards hang on a detective's whiteboard: aluminium frame, glossy surface, half-wiped marker ghosts and a pen tray */
+.people { padding: 44px 36px 64px; background:
+  linear-gradient(115deg, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 32%, rgba(255,255,255,0) 58%, rgba(255,255,255,.45) 72%, rgba(255,255,255,0) 86%),
+  url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22900%22 height=%22600%22%3E%3Cg fill=%22none%22 stroke=%22%239aa3ad%22 stroke-linecap=%22round%22 opacity=%22.18%22%3E%3Cpath d=%22M60 90c80-30 160 40 240 0s120-20 180 10%22 stroke-width=%2210%22/%3E%3Cpath d=%22M520 420c60 40 140 30 210-10%22 stroke-width=%2214%22/%3E%3Cpath d=%22M120 470l90-60 40 50 70-80%22 stroke-width=%226%22/%3E%3Cellipse cx=%22700%22 cy=%22160%22 rx=%22110%22 ry=%2260%22 stroke-width=%225%22/%3E%3Cpath d=%22M300 300h160M300 330h110%22 stroke-width=%225%22/%3E%3C/g%3E%3Cg fill=%22%239aa3ad%22 opacity=%22.14%22 font-family=%22Comic Sans MS, cursive%22 font-size=%2240%22%3E%3Ctext x=%22610%22 y=%22175%22%3EWHO%3F%3C/text%3E%3Ctext x=%2290%22 y=%22300%22%3Emotive%3F%3C/text%3E%3Ctext x=%22480%22 y=%22540%22%3Eroute%3F%3C/text%3E%3C/g%3E%3C/svg%3E") center / 900px auto repeat,
+  #F4F5F2;
+  border: 12px solid #B9BEC3; border-image: linear-gradient(160deg, #E4E7EA, #9CA2A8 45%, #D9DDE0 60%, #8E949A) 1;
+  box-shadow: 0 2px 0 #7d838a, 10px 14px 0 rgba(18,16,16,.35), inset 0 0 40px rgba(120,130,140,.12); }
+.people::after { content: ""; position: absolute; left: 6%; right: 6%; bottom: -26px; height: 16px; background: linear-gradient(#C9CDD1, #8F959B); border-radius: 0 0 8px 8px; box-shadow: 4px 6px 0 rgba(18,16,16,.25); }
+@media (max-width: 880px) { .people { padding: 26px 14px 44px; border-width: 8px; } }
+/* the "took over?" label is slapped on like a strip of tape */
+.people .string-note::before { content: ""; position: absolute; left: 50%; top: -9px; width: 40px; height: 14px; margin-left: -20px; background: rgba(236,230,216,.85); transform: rotate(5deg); }
+.people .string-note { opacity: 0; transition: none; }
+.people.go .string-note { animation: slapOn .42s cubic-bezier(.2,.9,.3,1.35) 1.05s backwards; opacity: 1; }
+@keyframes slapOn { 0% { transform: translate(-50%, -120%) rotate(-18deg) scale(1.9); opacity: 0; } 70% { transform: translate(-50%, -120%) rotate(-4deg) scale(.94); opacity: 1; } 100% { transform: translate(-50%, -120%) rotate(-6deg); } }
+.person .sticky { opacity: 0; }
+.people.go .person .sticky { animation: slapSticky .42s cubic-bezier(.2,.9,.3,1.35) 4.1s backwards; opacity: 1; }
+@keyframes slapSticky { 0% { transform: rotate(-10deg) scale(1.9); opacity: 0; } 70% { transform: rotate(7deg) scale(.95); opacity: 1; } 100% { transform: rotate(5deg); } }
+@media (prefers-reduced-motion: reduce) { .people.go .string-note, .people.go .person .sticky { animation: none; } .person .sticky { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .people .string path, .person .mug .crown path { animation: none !important; stroke-dashoffset: 0; } .person .top-strip .promo { animation: none !important; clip-path: none; } .person.heir .mug .note i { animation: none !important; opacity: 1; } .people .string-note, .people .pin { transition: none; } }
 @media (prefers-reduced-motion: reduce) { .seen .mug .stamp2 { animation: none; } }
 @media (prefers-reduced-motion: reduce) { .seen .mug .note i { animation: none; opacity: 1; } }
 
@@ -240,8 +264,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Founders */
 .team .wrap { padding-block: 96px; }
-.people { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 44px; }
-@media (max-width: 880px) { .people { grid-template-columns: 1fr; } }
+.people { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.28fr) minmax(0, 1fr); gap: 28px; margin-top: 44px; align-items: start; }
+/* The Kingpin's card sits in the middle and larger on PC, and first on phones */
+.people > .booked-card { order: 2; }
+.people > .heir { order: 1; margin-top: 54px; }
+.people > .person:not(.booked-card):not(.heir) { order: 3; margin-top: 54px; }
+@media (max-width: 880px) { .people .string, .people .pin, .people .string-note { display: none; } .person .sticky { right: 10px; bottom: auto; top: 12px; transform: rotate(6deg) scale(.85); } .people { grid-template-columns: 1fr; } .people > .booked-card { order: 0; } .people > .heir, .people > .person:not(.booked-card):not(.heir) { margin-top: 0; } }
 .person { border: 4px solid var(--ink); background: var(--stock-2); display: grid; align-content: start; }
 .person .top-strip { background: var(--ink); color: var(--stock); display: flex; justify-content: space-between; align-items: center; padding: 11px 16px; font: 500 14px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
 .person .top-strip b { color: var(--crimson); font-weight: 500; }
@@ -528,7 +556,7 @@ img, video, figure, .film, .mug, .badge { cursor: default; }
       <div class="people">
         <svg class="string" aria-hidden="true"><path d="" /></svg><span class="pin p-a" aria-hidden="true"></span><span class="pin p-b" aria-hidden="true"></span><span class="string-note" aria-hidden="true">took over?</span>
         <div class="person booked-card on-scroll pop"><svg class="clip" viewBox="0 0 40 110" aria-hidden="true"><path d="M27 34V90a11 11 0 0 1-22 0V22a7 7 0 0 1 14 0v58" fill="none" stroke="#8C8C8C" stroke-width="4.5" stroke-linecap="round"/><path d="M27 34V90a11 11 0 0 1-22 0V22a7 7 0 0 1 14 0v58" fill="none" stroke="#E6E6E6" stroke-width="1.6" stroke-linecap="round" transform="translate(-1 -1)"/></svg><div class="top-strip"><span>Kingpin</span><b>01</b></div><div class="mug booked"><img class="printed" src="media/mug-abdullah.jpg" alt="Abdullah"><svg class="ring" viewBox="0 0 300 300" aria-hidden="true"><path filter="url(#marker)" d="M150 18c74-4 124 52 122 128s-58 132-128 130S20 214 26 140 92 26 168 30" fill="none" stroke="#B11C26" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".88"/><defs><filter id="marker" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.5" xChannelSelector="R" yChannelSelector="G" result="d"/><feTurbulence type="fractalNoise" baseFrequency="2.4" numOctaves="1" seed="9" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.7 1.3" result="ga"/><feComposite in="d" in2="ga" operator="in"/></filter></defs><g filter="url(#marker)"><path class="x1" d="M66 54 C96 86 128 122 152 150 S205 214 236 252 L246 262" fill="none" stroke="#B11C26" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><path class="x1" d="M74 58 C104 92 134 126 156 154 S206 216 240 256" fill="none" stroke="#B11C26" stroke-width="4" stroke-linecap="round" opacity=".3"/><path class="x2" d="M244 48 C238 52 232 58 226 66 C200 98 176 128 152 158 C126 190 98 222 62 256" fill="none" stroke="#B11C26" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/><path class="x2" d="M236 58 C206 94 180 126 156 156 C130 188 102 220 70 250" fill="none" stroke="#B11C26" stroke-width="3.5" stroke-linecap="round" opacity=".28"/></g></svg><span class="note" aria-label="Dead?"><span class="w"><i style="--d:1.95s">D</i><i style="--d:2.06s">E</i><i style="--d:2.17s">A</i><i style="--d:2.28s">D</i><i style="--d:2.39s">?</i></span></span><span class="no">UDS-01</span><span class="ruler" aria-hidden="true"><i>10'0"</i><i>9'6"</i><i>9'0"</i></span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Abdullah</div><div class="role">Lead programmer and architect</div><div class="crime"><b>For:</b> building every system, then making five PCs agree on them</div><p>Leads programming on Shady Shipping: the core gameplay systems and the online multiplayer that keeps every player in sync.</p><div class="evidence"><div class="ev-head">Evidence</div><div class="plinks"><a class="plink" href="https://www.abdullahabduljabbar.com/" target="_blank" rel="noopener"><span class="ex">Exhibit A</span>Portfolio ↗</a><a class="plink" href="https://github.com/abdullahabduljabbarab" target="_blank" rel="noopener"><span class="ex">Exhibit B</span>GitHub ↗</a><a class="plink" href="https://www.linkedin.com/in/abdullah-abduljabbar-b06415374/" target="_blank" rel="noopener"><span class="ex">Exhibit C</span>LinkedIn ↗</a><a class="plink" href="https://www.youtube.com/@abdullahameedabduljabbar" target="_blank" rel="noopener"><span class="ex">Exhibit D</span>YouTube ↗</a></div></div><div class="contact"><span class="ex">Last known contact</span><button type="button" class="reveal" data-u="abdullaameedab" data-d="gmail.com">Reveal email</button></div></div></div>
-        <div class="person heir on-scroll pop"><div class="top-strip"><span><s>Boss</s> <em class="promo" aria-label="Kingpin?">Kingpin?</em></span><b>02</b></div><span class="sticky" aria-hidden="true">Suspect no.&nbsp;1:<br>last seen with<br>the Kingpin.</span><div class="mug booked"><img class="printed" src="media/mug-dafydd.jpg" alt="Dafydd"><svg class="crown" viewBox="0 0 200 110" aria-hidden="true"><path d="M22 92 L14 26 L58 60 L100 10 L142 58 L186 22 L176 92 Z M24 92 C70 100 132 100 176 92" fill="none" stroke="#E8B92E" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" filter="url(#marker)"/></svg><span class="no">UDS-02</span><span class="ruler" aria-hidden="true"><i>6'0"</i><i>5'9"</i><i>5'6"</i></span><span class="note note2" aria-label="New kingpin?"><span class="w"><i style="--d:1.90s">N</i><i style="--d:1.98s">E</i><i style="--d:2.06s">W</i><i class="sp"> </i><i style="--d:2.22s">K</i><i style="--d:2.30s">I</i><i style="--d:2.38s">N</i><i style="--d:2.46s">G</i><i style="--d:2.54s">P</i><i style="--d:2.62s">I</i><i style="--d:2.70s">N</i><i style="--d:2.78s">?</i></span></span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Dafydd</div><div class="role">Level designer and generalist</div><div class="crime"><b>For:</b> building a whole city for car chases</div><p>Designs the levels, owns every gameplay number, and jumps in wherever the game needs a hand.</p></div></div>
+        <div class="person heir on-scroll pop"><div class="top-strip"><span><s>Boss</s> <em class="promo" aria-label="Kingpin?">Kingpin?</em></span><b>02</b></div><span class="sticky" aria-hidden="true">Suspect no.&nbsp;1:<br>last seen with<br>the Kingpin.</span><div class="mug booked"><img class="printed" src="media/mug-dafydd.jpg" alt="Dafydd"><svg class="crown" viewBox="0 0 200 110" aria-hidden="true"><path d="M22 92 L14 26 L58 60 L100 10 L142 58 L186 22 L176 92 Z M24 92 C70 100 132 100 176 92" fill="none" stroke="#E8B92E" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" filter="url(#marker)"/></svg><span class="no">UDS-02</span><span class="ruler" aria-hidden="true"><i>6'0"</i><i>5'9"</i><i>5'6"</i></span><span class="note note2" aria-label="New kingpin?"><span class="w"><i style="--d:1.90s">N</i><i style="--d:1.98s">E</i><i style="--d:2.06s">W</i></span> <span class="w"><i style="--d:2.22s">K</i><i style="--d:2.30s">I</i><i style="--d:2.38s">N</i><i style="--d:2.46s">G</i><i style="--d:2.54s">P</i><i style="--d:2.62s">I</i><i style="--d:2.70s">N</i><i style="--d:2.78s">?</i></span></span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Dafydd</div><div class="role">Level designer and generalist</div><div class="crime"><b>For:</b> building a whole city for car chases</div><p>Designs the levels, owns every gameplay number, and jumps in wherever the game needs a hand.</p></div></div>
         <div class="person on-scroll pop"><div class="top-strip"><span>Boss</span><b>03</b></div><div class="mug unknown"><svg class="sil" viewBox="0 0 200 210" aria-hidden="true"><path d="M100 22c-24 0-40 18-40 44 0 20 9 36 21 44-30 8-55 26-63 60l-3 40h170l-3-40c-8-34-33-52-63-60 12-8 21-24 21-44 0-26-16-44-40-44z"/></svg><span class="no">UDS-03</span><span class="stamp">Gone rogue</span><span class="soon">Undercover &middot; file sealed</span></div><div class="inner"><div class="wanted">Wanted</div><div class="name">Ieuan</div><div class="role">UI and HUD</div><div class="crime"><b>For:</b> crimes against bad menus (he fixes them)</div><p>Designs the in-game HUD: the job panel, the radar frame, the alerts and the ability slots, so players can read the game at a glance.</p></div></div>
       </div>
       <p class="wider">The team runs the playtests together.</p>
@@ -678,8 +706,9 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
   function draw() {
     var r = box.getBoundingClientRect(), ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
     var stacked = rb.top > ra.bottom - 10;
-    var x1 = ra.left - r.left + ra.width * 0.66, y1 = ra.top - r.top + ra.height * 0.16;
-    var x2 = rb.left - r.left + rb.width * 0.2, y2 = rb.top - r.top + rb.height * 0.36;
+    var left = rb.right <= ra.left + 10;
+    var x1 = ra.left - r.left + ra.width * (left ? 0.3 : 0.66), y1 = ra.top - r.top + ra.height * 0.16;
+    var x2 = rb.left - r.left + rb.width * (left ? 0.8 : 0.2), y2 = rb.top - r.top + rb.height * 0.36;
     if (stacked) { x1 = ra.left - r.left + ra.width * 0.72; y1 = ra.bottom - r.top - 30; x2 = rb.left - r.left + rb.width * 0.3; y2 = rb.top - r.top + 40; }
     var mx = (x1 + x2) / 2, my = Math.max(y1, y2) + (stacked ? 0 : 70);
     path.setAttribute('d', 'M' + x1 + ' ' + y1 + ' Q' + mx + ' ' + my + ' ' + x2 + ' ' + y2);
@@ -688,9 +717,13 @@ if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').m
   }
   draw(); window.addEventListener('resize', draw); window.addEventListener('load', draw);
   if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { draw(); setTimeout(function () { box.classList.add('strung'); }, 900); io.disconnect(); } }, { threshold: 0.35 });
+    var last = box.querySelector('.booked-card .mug .note i:last-child'), fired = false;
+    function go() { if (fired) return; fired = true; draw(); box.classList.add('go'); }
+    if (last) last.addEventListener('animationend', go);
+    var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { draw(); setTimeout(go, 7000); io.disconnect(); } }, { threshold: 0.35 });
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) go();
     io.observe(box);
-  } else { box.classList.add('strung'); }
+  } else { box.classList.add('go'); }
 })();
 </script>
 
