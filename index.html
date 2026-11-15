@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@800;900&family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Permanent+Marker&family=Barlow+Condensed:ital,wght@0,300;1,800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@800;900&family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Permanent+Marker&family=Playfair+Display:wght@700;800;900&family=UnifrakturMaguntia&family=Libre+Baskerville:wght@400;700&family=Barlow+Condensed:ital,wght@0,300;1,800&display=swap">
 <script>
 // Open at the top unless the link asks for a section: hide the page until it is there, and jump without smooth scrolling
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -736,6 +736,69 @@ img, video { -webkit-user-drag: none; user-select: none; -webkit-touch-callout: 
 @media (max-width: 880px) {
   .people.inview .tray { position: fixed; left: 12px; right: 12px; bottom: 12px; height: 40px; border-radius: 10px; z-index: 60; box-shadow: 0 6px 18px rgba(0,0,0,.45); }
 }
+
+/* The Shady Gazette: a newspaper clipping among the real news */
+.clip-item:hover { background: none; padding-left: 0; }
+.clipping { position: relative; max-width: 760px; padding: 22px 26px 20px; background: #EFE8D6; color: #1d1a16; transform: rotate(-1.2deg); box-shadow: 8px 10px 0 rgba(0,0,0,.45);
+  clip-path: polygon(0 1%, 6% 0, 14% 1.2%, 25% .2%, 37% 1%, 50% 0, 63% 1.1%, 76% .3%, 88% 1.2%, 100% 0, 99.4% 22%, 100% 47%, 99.2% 73%, 100% 100%, 87% 99%, 74% 100%, 61% 98.9%, 48% 100%, 34% 99.1%, 21% 100%, 9% 99%, 0 100%, .7% 74%, 0 50%, .6% 25%);
+  background-image: radial-gradient(rgba(120,100,60,.08) 1px, transparent 1px); background-size: 4px 4px; }
+.clipping .mast { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 3px double #1d1a16; padding-bottom: 6px; margin-bottom: 12px;
+  font: 400 11px/1 "Libre Baskerville", Georgia, serif; letter-spacing: .14em; text-transform: uppercase; }
+.clipping .mast span:first-child { font: 900 22px/1 "Playfair Display", Georgia, serif; letter-spacing: .02em; text-transform: none; }
+.clipping .headline { margin: 0; font: 900 clamp(34px, 4.6vw, 58px)/.95 "Playfair Display", Georgia, serif; text-transform: uppercase; color: #121010; letter-spacing: -.01em; }
+.clipping .stand { margin: 10px 0 14px; max-width: none; color: #2b2620; font: 700 italic 16px/1.35 "Libre Baskerville", Georgia, serif; }
+.clipping .news-pic { margin: 0 0 14px; }
+.clipping .news-pic img { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; display: block; filter: grayscale(1) contrast(1.35) brightness(1.05); mix-blend-mode: multiply; }
+.clipping .news-pic { position: relative; }
+.clipping .news-pic::after { content: ""; position: absolute; left: 0; right: 0; top: 0; bottom: 34px; pointer-events: none; background: radial-gradient(rgba(0,0,0,.28) 1px, transparent 1.4px) 0 0 / 3px 3px; mix-blend-mode: multiply; }
+.clipping .news-pic figcaption { margin-top: 6px; font: italic 400 12px/1.35 "Libre Baskerville", Georgia, serif; color: #4a443b; }
+.clipping .cols { columns: 2 240px; column-gap: 26px; column-rule: 1px solid rgba(29,26,22,.35); }
+.clipping .cols p { margin: 0 0 10px; max-width: none; color: #1d1a16; font: 400 14px/1.55 "Libre Baskerville", Georgia, serif; break-inside: avoid; }
+.clipping .cols p:first-child::first-letter { float: left; font: 900 46px/.8 "Playfair Display", Georgia, serif; margin: 4px 6px 0 0; }
+.clipping .cont { display: inline-block; margin-top: 4px; font: 700 italic 13px/1 "Libre Baskerville", Georgia, serif; color: #121010; text-decoration: underline; }
+.clipping .cont:hover { color: var(--crimson); }
+.clipping::before, .clipping::after { content: ""; position: absolute; top: -2px; width: 90px; height: 24px; background: rgba(236,230,216,.7); box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.clipping::before { left: 30px; transform: rotate(-6deg); } .clipping::after { right: 30px; transform: rotate(5deg); }
+@media (max-width: 700px) { .clipping { padding: 18px 16px 16px; transform: rotate(-.6deg); } .clipping .cols { columns: 1; } }
+
+/* Studio news as a newspaper front page */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.gz { margin-top: 26px; padding: 26px clamp(16px, 3vw, 40px) 34px; color: #1d1a16; transform: rotate(-.4deg); box-shadow: 10px 12px 0 rgba(0,0,0,.45);
+  background: radial-gradient(rgba(120,100,60,.08) 1px, transparent 1px) 0 0 / 4px 4px, linear-gradient(180deg, #F1EBDA, #E8DFC8); }
+.gz-ears { display: flex; justify-content: space-between; gap: 12px; font: 400 12px/1.2 "Libre Baskerville", Georgia, serif; letter-spacing: .14em; text-transform: uppercase; }
+.gz-title { text-align: center; font: 400 clamp(46px, 8.4vw, 112px)/1 "UnifrakturMaguntia", "Old English Text MT", Georgia, serif; margin: 6px 0 10px; color: #121010; }
+.gz-dateline { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; padding: 7px 0; border-top: 1px solid #1d1a16; border-bottom: 4px double #1d1a16;
+  font: 700 11px/1.2 "Libre Baskerville", Georgia, serif; letter-spacing: .12em; text-transform: uppercase; }
+.gz-lead { padding: 22px 0 24px; border-bottom: 4px double #1d1a16; }
+.gz-lead h3 { margin: 0; text-align: center; font: 900 clamp(40px, 6.6vw, 92px)/.92 "Playfair Display", Georgia, serif; text-transform: uppercase; letter-spacing: -.01em; color: #121010; }
+.gz-stand { margin: 12px auto 20px; max-width: 46ch; text-align: center; color: #2b2620; font: 700 italic clamp(16px, 1.6vw, 20px)/1.35 "Libre Baskerville", Georgia, serif; }
+.gz-lead-body { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 26px; }
+.gz-pic { margin: 0; position: relative; }
+.gz-pic img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; filter: saturate(.8) contrast(1.08) sepia(.18) brightness(1.04); mix-blend-mode: multiply; }
+.gz-pic::after { content: ""; position: absolute; left: 0; right: 0; top: 0; aspect-ratio: 16 / 10; pointer-events: none; background: radial-gradient(rgba(0,0,0,.14) 1px, transparent 1.4px) 0 0 / 3px 3px; mix-blend-mode: multiply; }
+.gz-pic figcaption { margin-top: 7px; font: italic 400 12.5px/1.4 "Libre Baskerville", Georgia, serif; color: #4a443b; }
+.gz-cols { columns: 2 200px; column-gap: 22px; column-rule: 1px solid rgba(29,26,22,.35); }
+.gz-cols p, .gz-story p { margin: 0 0 10px; max-width: none; color: #1d1a16; font: 400 14px/1.55 "Libre Baskerville", Georgia, serif; }
+.gz-cols p:first-child::first-letter { float: left; font: 900 52px/.8 "Playfair Display", Georgia, serif; margin: 5px 7px 0 0; }
+.gz-cont { display: inline-block; font: 700 italic 13px/1 "Libre Baskerville", Georgia, serif; color: #121010; text-decoration: underline; }
+
+.gz-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.gz-story { padding: 20px 20px 6px; border-bottom: 1px solid rgba(29,26,22,.35); }
+.gz-story:nth-child(3n+1) { padding-left: 0; } .gz-story:nth-child(3n) { padding-right: 0; }
+.gz-story:not(:nth-child(3n+1)) { border-left: 1px solid rgba(29,26,22,.35); }
+.gz-story:nth-last-child(-n+3) { border-bottom: 0; }
+.gz-kick { display: block; font: 700 10.5px/1 "Libre Baskerville", Georgia, serif; letter-spacing: .14em; text-transform: uppercase; color: #8E1018; margin-bottom: 8px; }
+.gz-story h4 { margin: 0 0 9px; font: 800 clamp(20px, 1.9vw, 26px)/1.05 "Playfair Display", Georgia, serif; color: #121010; }
+.gz-story:first-child h4 { font-size: clamp(24px, 2.3vw, 32px); }
+@media (max-width: 880px) {
+  .gz { transform: none; }
+  .gz-ears span:last-child { text-align: right; }
+  .gz-dateline span:last-child { display: none; }
+  .gz-lead-body { grid-template-columns: 1fr; }
+  .gz-grid { grid-template-columns: 1fr; }
+  .gz-story, .gz-story:nth-child(n) { padding: 18px 0 6px; border-left: 0; border-bottom: 1px solid rgba(29,26,22,.35); }
+  .gz-story:last-child { border-bottom: 0; }
+}
 </style>
 
 </head>
@@ -855,38 +918,35 @@ img, video { -webkit-user-drag: none; user-select: none; -webkit-touch-callout: 
   <section class="band dark news" id="news" aria-label="Studio news">
     <div class="wrap">
       <span class="label">News</span>
-      <h2 class="on-scroll stamp-in">Studio news</h2>
-      <div class="items">
-        <article class="item on-scroll slide-l">
-          <div class="date">10 Nov 2026</div>
-          <div class="txt"><h3>Our uni test setup goes wired</h3>
-          <p>We've played online at uni since October over a phone hotspot. This time we wired it through a five-port switch for a steadier connection, and worked out what a fully local setup on campus needs.</p></div>
+      <h2 class="sr-only">Studio news</h2>
+      <div class="gz on-scroll pop">
+        <div class="gz-ears"><span>Est. 2026 &middot; Cardiff</span><span>Late edition &middot; 50p</span></div>
+        <div class="gz-title" aria-hidden="true">The Shady Gazette</div>
+        <div class="gz-dateline"><span>Vol. 1 &middot; No. 7</span><span>Saturday 14 November 2026</span><span>All the news from Underdog Studios</span></div>
+        <article class="gz-lead">
+          <h3>Smuggling kingpin &ldquo;dies&rdquo; in van blaze</h3>
+          <p class="gz-stand">Head of the city&rsquo;s biggest parcel smuggling ring was, police say, personally driving a delivery van at 2am. Nobody can explain why. No body found either.</p>
+          <div class="gz-lead-body">
+            <figure class="gz-pic"><img src="media/gz-blaze.jpg" alt="A police car watches the courier van burn further down the street"><figcaption>Police at the scene on Tuesday night. Officers called the fire &ldquo;a bit too perfect&rdquo;.</figcaption></figure>
+            <div class="gz-cols">
+              <p>The man police call &ldquo;the Kingpin&rdquo; runs, by most accounts, the largest &ldquo;no questions asked&rdquo; parcel operation in the city. On Tuesday night he was apparently driving one of its vans himself. At 2am. On a route he had never driven before.</p>
+              <p>&ldquo;Kingpins don&rsquo;t do deliveries,&rdquo; one detective told the Gazette. &ldquo;That&rsquo;s the whole point of being a kingpin.&rdquo;</p>
+              <p>The van was found burning on an empty street. Fire crews say nobody was inside. Witnesses say the fire started &ldquo;right on cue&rdquo;.</p>
+              <p>A funeral was held within a day. Mourners described the coffin as &ldquo;surprisingly light&rdquo;. The bill was paid in cash and signed only &ldquo;I.&rdquo;</p>
+              <p>Fellow boss Dafydd is understood to have already ordered a crown.</p>
+              <p>The studio says work on Shady Shipping carries on as normal. &ldquo;He&rsquo;d have wanted us to keep shipping,&rdquo; said a spokesperson, who then asked if the Gazette knew any cheap flights.</p>
+              <span class="gz-cont">Continued on page 404</span>
+            </div>
+          </div>
         </article>
-        <article class="item on-scroll slide-l">
-          <div class="date">19 Oct 2026</div>
-          <div class="txt"><h3>All change for production</h3>
-          <p>Two of our pitch team moved on to another project just as production started, and three new faces joined: Xabi on audio, Lynnisha on art and Betsy on effects. Dafydd took on level design.</p></div>
-        </article>
-        <article class="item on-scroll slide-l">
-          <div class="date">16 Oct 2026</div>
-          <div class="txt"><h3>Shady Shipping wins the pitch</h3>
-          <p>We pitched two games to the panel: DEADLOAD, a 1v1 tactical thriller, and Shady Shipping. The courier won, and went into full production.</p></div>
-        </article>
-        <article class="item on-scroll slide-l">
-          <div class="date">11 Oct 2026</div>
-          <div class="txt"><h3>Two prototypes in two weeks</h3>
-          <p>Before the pitch we built both games for real: DEADLOAD's helmet cam and shootable pillars, then Shady's chases, bumper net, collapsing scaffolds and balloon-popping pedestrians.</p></div>
-        </article>
-        <article class="item on-scroll slide-l">
-          <div class="date">2 Oct 2026</div>
-          <div class="txt"><h3>Four uni PCs, one online game</h3>
-          <p>We hosted our game server off campus and got four uni PCs into one online game for the first time. Then we wrote the whole setup up as a guide for future students.</p></div>
-        </article>
-        <article class="item on-scroll slide-l">
-          <div class="date">21 Sept 2026</div>
-          <div class="txt"><h3>Four ideas in, two out</h3>
-          <p>An oil rig survival horror, a soul-extraction hunt, DEADLOAD and a parcel chase. Two made the shortlist, and the parcel chase became Shady Shipping.</p></div>
-        </article>
+        <div class="gz-grid">
+          <article class="gz-story"><span class="gz-kick">Cardiff &middot; 10 Nov 2026</span><h4>Our uni test setup goes wired</h4><p>We've played online at uni since October over a phone hotspot. This time we wired it through a five-port switch for a steadier connection, and worked out what a fully local setup on campus needs.</p></article>
+          <article class="gz-story"><span class="gz-kick">Cardiff &middot; 19 Oct 2026</span><h4>All change for production</h4><p>Two of our pitch team moved on to another project just as production started, and three new faces joined: Xabi on audio, Lynnisha on art and Betsy on effects. Dafydd took on level design.</p></article>
+          <article class="gz-story"><span class="gz-kick">Cardiff &middot; 16 Oct 2026</span><h4>Shady Shipping wins the pitch</h4><p>We pitched two games to the panel: DEADLOAD, a 1v1 tactical thriller, and Shady Shipping. The courier won, and went into full production.</p></article>
+          <article class="gz-story"><span class="gz-kick">Cardiff &middot; 11 Oct 2026</span><h4>Two prototypes in two weeks</h4><p>Before the pitch we built both games for real: DEADLOAD's helmet cam and shootable pillars, then Shady's chases, bumper net, collapsing scaffolds and balloon-popping pedestrians.</p></article>
+          <article class="gz-story"><span class="gz-kick">Cardiff &middot; 2 Oct 2026</span><h4>Four uni PCs, one online game</h4><p>We hosted our game server off campus and got four uni PCs into one online game for the first time. Then we wrote the whole setup up as a guide for future students.</p></article>
+          <article class="gz-story"><span class="gz-kick">Cardiff &middot; 21 Sept 2026</span><h4>Four ideas in, two out</h4><p>An oil rig survival horror, a soul-extraction hunt, DEADLOAD and a parcel chase. Two made the shortlist, and the parcel chase became Shady Shipping.</p></article>
+        </div>
       </div>
     </div>
   </section>
