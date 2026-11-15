@@ -1,0 +1,39 @@
+SHADY SHIPPING: PRESS FACT SHEET
+
+Developer: Underdog Studios, Cardiff, UK
+Status: In development
+Platform: PC (Windows)
+Engine: Unreal Engine 5
+Players: 2 to 5, online: 1 courier against 1 to 4 police
+Genre: Arcade driving, asymmetric online multiplayer
+Round length: About 4 to 6 minutes
+Website: underdogstudios.uk
+
+IN ONE LINE
+Shady Shipping is an online driving game for two to five players. One player drives a dodgy courier van and delivers parcels across a city. Everyone else is the police. The riskier the parcel, the more the police are told about where the van is.
+
+ABOUT
+Every job is a choice. Legal parcels are safe and the police get nothing. Illegal parcels pay more, but the police radar shows a search circle round the van. Hot parcels pay double, and every cop gets a live blip that follows the van round the city.
+
+The courier earns stars by delivering, and the first star opens exits at the edge of the map. Smash through one at speed to win. The police win by catching the van three times: box it in to arrest it, or wreck it.
+
+Each player picks two abilities before a round, from spike strips, nets, drones and EMPs for the police to nitro, smoke and a cloak for the courier, and every tool has a counter on the other side.
+
+FEATURES
+- Your cargo is your wanted level: what you carry decides what the police see
+- Real physics cars with dents where you hit, smoke, fire and wrecks
+- Arrest rings, three strikes and a cargo flyer that drops the van back in
+- Two abilities each, with a counter for every tool
+- Customise the van and the police car in your own garage
+- Built and playtested online every week
+
+TEAM
+Abdullah: Lead programmer and architect
+Dafydd: Level designer and generalist
+Ieuan: UI and HUD
+Xabi: Audio
+Lynnisha: Art
+Betsy: Effects
+
+CONTACT
+underdogstudios.uk  /  discord.com/invite/underdogstudios
